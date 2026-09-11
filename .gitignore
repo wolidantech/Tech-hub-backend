@@ -1,0 +1,14 @@
+node_modules/
+.env
+.env.local
+.env.*.local
+*.log
+logs/
+coverage/
+dist/
+.DS_Store
+tmp/
+uploads/
+.tmp-pg/
+supabase/.branches/
+supabase/.temp/
