@@ -171,6 +171,42 @@ npm run dev     # http://0.0.0.0:5000 with --watch
 curl http://localhost:5000/health
 ```
 
+### 5.1 Deploying to Railway (Render / Heroku / Fly work the same way)
+
+The `.env` file is **git-ignored on purpose** — it never reaches the host, so
+every variable below has to be entered in the host's dashboard. Missing ones
+make the API refuse to boot with a list of exactly what is absent.
+
+1. **Railway** → your project → the backend **service** → **Variables** →
+   **+ New Variable**, and add:
+
+   | Variable | Value |
+   | --- | --- |
+   | `SUPABASE_URL` | `https://<project-ref>.supabase.co` |
+   | `SUPABASE_ANON_KEY` | `anon` public key |
+   | `SUPABASE_SERVICE_ROLE_KEY` | `service_role` key (**secret**) |
+   | `NODE_ENV` | `production` |
+   | `FRONTEND_URL` | `https://<your-frontend-domain>` (comma-separated list) |
+   | `DATABASE_URL` | only if you run `npm run migrate` from Railway |
+
+   > Do **not** set `PORT` — Railway injects it and the API already honours it.
+
+2. Make sure the variables were added to the **service that is deployed**, on
+   the environment that is actually running (production vs. a preview
+   environment). Names are **case-sensitive** and must be uppercase.
+3. Adding a variable triggers a redeploy automatically. If it does not, hit
+   **Deploy → Redeploy**.
+4. Verify: open the generated domain with `/health` appended —
+
+   ```
+   https://<your-app>.up.railway.app/health
+   → {"status":"ok","service":"woli-dan-tech-hub-backend", ...}
+   ```
+
+`railway.json` at the repository root sets `/health` as the healthcheck and
+caps crash restarts at 5 attempts, so a misconfiguration shows up as a failed
+deploy instead of an endless wall of identical stack traces in the logs.
+
 ## 6. Creating the admin account
 
 The initial administrator is **wolidantech@gmail.com**:
