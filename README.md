@@ -147,9 +147,9 @@ npm start        # production
 
 | Variable | Required | Description |
 | --- | --- | --- |
-| `SUPABASE_URL` | ✅ | Project URL (Settings → API) |
-| `SUPABASE_ANON_KEY` | ✅ | Public anon key (safe for browser too) |
-| `SUPABASE_SERVICE_ROLE_KEY` | ✅ | **SECRET — server only.** Bypasses RLS for trusted operations |
+| `SUPABASE_URL` | ✅ | Project URL (Settings → API). Also accepted: `SUPABASE_PROJECT_URL`, `NEXT_PUBLIC_SUPABASE_URL` |
+| `SUPABASE_ANON_KEY` | ✅ | Public anon key (safe for browser too). Also accepted: `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_PUBLISHABLE_KEY` |
+| `SUPABASE_SERVICE_ROLE_KEY` | ✅ | **SECRET — server only.** Bypasses RLS for trusted operations. Also accepted: `SUPABASE_SERVICE_KEY`, `SUPABASE_SECRET_KEY` |
 | `PORT` | | API port (default `5000`) |
 | `NODE_ENV` | | `development` / `production` |
 | `FRONTEND_URL` | ✅ | Comma-separated allowed CORS origins of the frontend |
@@ -162,6 +162,20 @@ npm start        # production
 
 **Never** put the service role key in frontend code. Supabase stores
 passwords hashed — the database never contains plain-text passwords.
+
+### Verifying your configuration
+
+```bash
+npm run check:env
+```
+
+Prints every variable the API resolved (secrets masked), where each value came
+from, and exits non-zero with a full report if something is missing or wrong —
+for example when the anon key was pasted into the service-role slot. On
+Railway: `railway run npm run check:env`.
+
+Missing or invalid variables are reported **all at once** before the server
+starts, so one deploy log tells you everything that needs fixing.
 
 ## 5. Running the server
 
@@ -444,6 +458,60 @@ await api(`/learning/lessons/${lessonId}/progress`, {
 
 The frontend must always trust the API/database for access decisions:
 `has_access` / `enrollment_status` / progress come straight from PostgreSQL.
+
+---
+
+## 13. Deploying to Railway
+
+The service ships with [`railway.json`](./railway.json) (Nixpacks build,
+`npm start`, health check on `/health`, restart-on-failure capped at 10
+attempts so a bad config stops spamming the log instead of looping forever).
+
+### 13.1 The crash you will hit if variables are missing
+
+```
+Error: Missing required environment variable: SUPABASE_URL
+```
+
+That means the three Supabase variables were never set on the **service**.
+Fix: Railway → your backend service → **Variables** → add:
+
+| Variable | Value |
+| --- | --- |
+| `SUPABASE_URL` | `https://<project-ref>.supabase.co` |
+| `SUPABASE_ANON_KEY` | anon / publishable key |
+| `SUPABASE_SERVICE_ROLE_KEY` | service_role / secret key (**server only**) |
+| `FRONTEND_URL` | your deployed frontend origin, e.g. `https://hub.example.com` |
+| `NODE_ENV` | `production` |
+
+Railway redeploys on save. `PORT` is injected by Railway automatically — do
+**not** hard-code it.
+
+### 13.2 Common mistakes
+
+- **Variables set on the wrong thing.** They must be on the *backend service*
+  (or in Shared Variables), not only in the project settings or in a local
+  `.env` — `.env` is git-ignored and is **never** uploaded to Railway.
+- **Values pasted with quotes.** Use Railway's **Raw Editor**
+  (`KEY=value`, one per line) or the form without surrounding quotes; quotes
+  become part of the value. (The API now strips and warns about them.)
+- **`.env.example` placeholders shipped to production** (`your-project-ref`,
+  `your-anon-public-key`) — the API refuses to start and tells you which ones.
+- **Anon key in `SUPABASE_SERVICE_ROLE_KEY`.** The server boots but every
+  admin/payment/storage call fails on RLS. The key's JWT role is checked at
+  startup and reported.
+- **`FRONTEND_URL` left as `http://localhost:5173`.** The API starts, but the
+  browser gets `CORS_BLOCKED`. Set it to the real frontend origin(s).
+- **`npm warn config production`** in Railway's build log is harmless (it comes
+  from Nixpacks' `--omit=dev` install).
+
+### 13.3 Debugging a deployment
+
+```bash
+railway run npm run check:env   # masked config dump, exit 1 + report if broken
+railway logs                    # startup report now lists every problem at once
+curl https://<your-service>.up.railway.app/health
+```
 
 ---
 
