@@ -19,10 +19,12 @@
     "storage:setup": "node scripts/setup-storage.js",
     "check": "node scripts/check.js",
     "check:catalog": "node scripts/check-catalog.js",
-    "test": "npm run check && npm run test:gateway && npm run test:payments",
+    "test": "npm run check && npm run test:gateway && npm run test:payments && npm run test:ai-content",
     "test:gateway": "node scripts/test-gateway.mjs",
     "test:payments": "node scripts/test-payments.mjs",
-    "test:db": "node scripts/test-db.mjs"
+    "test:ai-content": "node scripts/test-ai-content.mjs",
+    "test:db": "node scripts/test-db.mjs",
+    "populate:ai": "node scripts/populate-ai-content.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.4",

@@ -16,6 +16,9 @@ import certificatesRoutes from './routes/certificates.routes.js';
 import notificationsRoutes from './routes/notifications.routes.js';
 import adminRoutes from './routes/admin.routes.js';
 import publicRoutes from './routes/public.routes.js';
+import aiContentRoutes from './routes/ai-content.routes.js';
+import adminContentRoutes from './routes/admin-content.routes.js';
+import courseContentRoutes from './routes/course-content.routes.js';
 
 const app = express();
 
@@ -67,12 +70,15 @@ app.get('/', (_req, res) => {
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/profiles', profileRoutes);
-app.use('/api', catalogRoutes); // /api/courses, /api/course-categories
-app.use('/api', paymentsRoutes); // /api/enrollments, /api/payments
+app.use('/api', catalogRoutes); // /api/courses, /api/course-categories, /api/catalog-status
+app.use('/api', paymentsRoutes); // /api/enrollments, /api/payments, /api/coupons
+app.use('/api', courseContentRoutes); // /api/courses/:courseId/content, /api/courses/:courseId/modules, /api/lessons/:lessonId
+app.use('/api/ai', aiContentRoutes); // /api/ai/courses/generate, /api/ai/lessons/generate, etc. (admin)
 app.use('/api/learning', learningRoutes);
 app.use('/api/certificates', certificatesRoutes);
 app.use('/api/notifications', notificationsRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/admin', adminContentRoutes); // /api/admin/content, /api/admin/resources (admin review pipeline)
 app.use('/api/public', publicRoutes);
 
 app.use(notFoundHandler);

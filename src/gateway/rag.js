@@ -1,5 +1,9 @@
 /**
  * Retrieval for DanTECH AI — PUBLISHED, non-archived course content only.
+ * Upgraded per spec sections 22-23 to be course-aware and RAG-ready:
+ * - Accepts studentId, courseId, moduleId, lessonId
+ * - Prefers approved WOLI DAN TECH HUB content (ai_generated_content + lesson_content) over general knowledge
+ * - Uses approved educational material for grounding
  *
  * Mirrors the scoring the frontend's offline engine uses (keyword hits with a
  * boost for the current lesson/course) so cloud and offline answers feel the
@@ -33,6 +37,10 @@ export function retrieve(docs, query, context = {}, topK = 3) {
       for (const key of keys) if (haystack.includes(key)) score += 2;
       if (context.lessonId && doc.lessonId === context.lessonId) score += 20;
       else if (context.courseId && doc.courseId === context.courseId) score += 8;
+      if (context.moduleId && doc.moduleId === context.moduleId) score += 12;
+      // Boost approved WOLI DAN TECH HUB content per spec 23
+      if (doc.isApprovedContent) score += 10;
+      if (doc.contentType === 'LESSON_TEXT' || doc.contentType === 'LESSON') score += 5;
       return { doc, score };
     })
     .filter((x) => x.score > 0)
@@ -49,9 +57,13 @@ export function retrieve(docs, query, context = {}, topK = 3) {
 /**
  * Fetch + rank the grounding documents for one chat turn.
  * Never throws: retrieval problems degrade to "no sources", never to a 500.
+ * Upgraded to include approved AI content and RAG chunks per spec 22-23
  */
 export async function buildContext({ supabase, message, context = {}, maxDocs = 6, maxCharsPerDoc = 2000, logger = console }) {
   let rows = [];
+  let aiRows = [];
+  let ragChunks = [];
+  
   try {
     if (context.courseId) {
       rows = await supabase.fetchLessonsByCourse(context.courseId);
@@ -59,13 +71,71 @@ export async function buildContext({ supabase, message, context = {}, maxDocs = 
     if ((!rows || rows.length === 0) && message) {
       rows = await supabase.searchLessons(keywords(message), maxDocs * 4);
     }
+
+    // Fetch approved AI generated content for this course/lesson per spec 22-23
+    try {
+      if (supabase.fetchApprovedAiContent) {
+        aiRows = await supabase.fetchApprovedAiContent({
+          courseId: context.courseId,
+          lessonId: context.lessonId,
+          moduleId: context.moduleId,
+          maxDocs: maxDocs * 2,
+        });
+      }
+    } catch (e) {
+      logger.warn?.('[rag] AI content retrieval failed', e.message);
+      aiRows = [];
+    }
+
+    // Fetch RAG chunks from lesson_content table (approved content)
+    try {
+      if (supabase.fetchRagChunks) {
+        ragChunks = await supabase.fetchRagChunks({
+          courseId: context.courseId,
+          lessonId: context.lessonId,
+          maxDocs: maxDocs,
+        });
+      }
+    } catch (e) {
+      logger.warn?.('[rag] RAG chunks retrieval failed', e.message);
+      ragChunks = [];
+    }
   } catch (error) {
     logger.warn?.('[rag] retrieval unavailable — answering without sources');
     rows = [];
   }
 
   const docs = (rows || []).map(toDoc);
-  const picked = retrieve(docs, message, context, maxDocs);
+  const aiDocs = (aiRows || []).map((row) => ({
+    courseId: row.course_id,
+    courseTitle: row.course_title || row.courseTitle || '',
+    moduleId: row.module_id,
+    moduleTitle: row.module_title || '',
+    lessonId: row.lesson_id,
+    lessonTitle: row.lesson_title || row.title || '',
+    text: typeof row.content === 'string' ? row.content : JSON.stringify(row.content).slice(0, maxCharsPerDoc),
+    category: '',
+    level: '',
+    isApprovedContent: true,
+    contentType: row.content_type || 'LESSON',
+  }));
+
+  const chunkDocs = (ragChunks || []).map((chunk) => ({
+    courseId: chunk.course_id,
+    courseTitle: '',
+    moduleId: chunk.module_id,
+    moduleTitle: '',
+    lessonId: chunk.lesson_id,
+    lessonTitle: '',
+    text: chunk.content || chunk.chunk || '',
+    category: '',
+    level: '',
+    isApprovedContent: true,
+    contentType: 'RAG_CHUNK',
+  }));
+
+  const allDocs = [...docs, ...aiDocs, ...chunkDocs];
+  const picked = retrieve(allDocs, message, context, maxDocs);
 
   return picked.map((doc) => ({
     ...doc,
@@ -85,6 +155,8 @@ export function toSources(docs) {
     lessonTitle: d.lessonTitle || '',
     category: d.category || '',
     level: d.level || '',
+    isApprovedContent: !!d.isApprovedContent,
+    contentType: d.contentType || '',
   }));
 }
 

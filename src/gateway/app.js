@@ -12,6 +12,7 @@ import cors from 'cors';
 import { createRateLimiter } from './ratelimit.js';
 import { createGenerateHandler } from './generate.controller.js';
 import { createChatHandler } from './chat.controller.js';
+import { createAiContentHandlers } from './ai-content.controller.js';
 import { DANTECH_NAME, PLATFORM } from './config.js';
 
 const asyncHandler = (fn) => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
@@ -75,9 +76,24 @@ export function createApp(deps) {
 
   app.get('/', (_req, res) => {
     res.json({
-      name: `${PLATFORM} — Secure AI Gateway`,
+      name: `${PLATFORM} — Secure AI Gateway + Course Content Engine`,
       assistant: DANTECH_NAME,
-      endpoints: ['GET /health', 'POST /api/ai/generate (admin)', 'POST /api/dantech/chat (authenticated)'],
+      endpoints: [
+        'GET /health',
+        'POST /api/ai/generate (admin) — legacy 10 kinds',
+        'POST /api/ai/courses/generate (admin) — full curriculum DRAFT',
+        'POST /api/ai/courses/:courseId/populate (admin)',
+        'POST /api/ai/lessons/generate (admin)',
+        'POST /api/ai/quizzes/generate (admin)',
+        'POST /api/ai/assignments/generate (admin)',
+        'POST /api/ai/practicals/generate (admin)',
+        'POST /api/ai/video/generate (admin) — QUEUED/PROCESSING/COMPLETED/FAILED',
+        'GET /api/ai/jobs/:jobId (admin/owner)',
+        'GET /api/ai/jobs (admin)',
+        'POST /api/ai/bulk/generate-missing (admin)',
+        'POST /api/dantech/chat (authenticated) — course-aware RAG',
+      ],
+      pipeline: 'GENERATE → DRAFT → REVIEW → APPROVE → PUBLISH (never auto-publish)',
     });
   });
 
@@ -95,8 +111,10 @@ export function createApp(deps) {
 
   const generate = createGenerateHandler({ provider, config, logger });
   const chat = createChatHandler({ provider, supabase, config, logger });
+  const aiContent = createAiContentHandlers({ logger });
 
   // ---- Routes ----
+  // Existing AI Studio + DanTECH
   app.post(
     '/api/ai/generate',
     auth.requireAuth(),
@@ -111,6 +129,19 @@ export function createApp(deps) {
     chatLimiter,
     asyncHandler(chat)
   );
+
+  // --- New production course content generation (spec sections 3, 6, 25-27, 30) ---
+  // All admin-only, all DRAFT, never auto-publish
+  app.post('/api/ai/courses/generate', auth.requireAuth(), auth.requireAdmin, generateLimiter, asyncHandler(aiContent.generateCourse));
+  app.post('/api/ai/courses/:courseId/populate', auth.requireAuth(), auth.requireAdmin, generateLimiter, asyncHandler(aiContent.populateCourse));
+  app.post('/api/ai/lessons/generate', auth.requireAuth(), auth.requireAdmin, generateLimiter, asyncHandler(aiContent.generateLesson));
+  app.post('/api/ai/quizzes/generate', auth.requireAuth(), auth.requireAdmin, generateLimiter, asyncHandler(aiContent.generateQuiz));
+  app.post('/api/ai/assignments/generate', auth.requireAuth(), auth.requireAdmin, generateLimiter, asyncHandler(aiContent.generateAssignment));
+  app.post('/api/ai/practicals/generate', auth.requireAuth(), auth.requireAdmin, generateLimiter, asyncHandler(aiContent.generatePractical));
+  app.post('/api/ai/video/generate', auth.requireAuth(), auth.requireAdmin, generateLimiter, asyncHandler(aiContent.generateVideo));
+  app.get('/api/ai/jobs/:jobId', auth.requireAuth(), asyncHandler(aiContent.getJob));
+  app.get('/api/ai/jobs', auth.requireAuth(), asyncHandler(aiContent.listJobs));
+  app.post('/api/ai/bulk/generate-missing', auth.requireAuth(), auth.requireAdmin, generateLimiter, asyncHandler(aiContent.bulkGenerateMissing));
 
   // ---- 404 + error handling (never leak internals) ----
   app.use((_req, res) => {

@@ -101,6 +101,103 @@ Scenes must cover hook, concept, demo, practice, recap. Narration is spoken-word
   "subtitles": string
 }
 Narration-first: write what the voice says, paced for a learner listening once.`,
+
+  // --- New production-grade prompts (spec sections 3-4, 13-16) ---
+  course_description: `Return:
+{
+  "title": string,
+  "description": string (3-5 sentences, benefit-led, what student will achieve),
+  "shortDescription": string (1 sentence),
+  "longDescription": string (150-250 words, includes target audience, outcomes, prerequisites),
+  "learningObjectives": string[] (6-8 outcomes, start with verb, measurable),
+  "prerequisites": string[] (2-4 items, what student should know),
+  "targetAudience": string (who this course is for),
+  "category": string,
+  "level": "Beginner" | "Intermediate" | "Advanced",
+  "duration": string (e.g. "8 weeks"),
+  "whatYouWillLearn": string[] (8-10 bullet points)
+}
+Must be beginner-friendly but progress to professional competency. Use simple language, explain jargon.`,
+
+  practical: `Return:
+{
+  "title": string,
+  "objective": string (what student will achieve),
+  "scenario": string (real-world scenario, e.g. "A small business in Lagos needs..."),
+  "instructions": string (numbered steps, 4-8 steps, imperative),
+  "requirements": string (tools, skills, files needed),
+  "expectedOutput": string (exact deliverable),
+  "difficulty": "Beginner" | "Intermediate" | "Advanced",
+  "estimatedTime": number (minutes),
+  "submissionType": string (e.g. "PNG", "PDF", "GitHub link"),
+  "evaluationCriteria": string[] (4-6 criteria: design hierarchy, creativity, technical execution, etc.)
+}
+Practical must require student to APPLY lesson, not repeat text. Include real-world context.`,
+
+  project: `Return:
+{
+  "title": string,
+  "scenario": string (real client/business scenario),
+  "objective": string,
+  "requirements": string[] (5-8 requirements),
+  "deliverables": string[] (3-5 deliverables),
+  "evaluationCriteria": string[] (5-7 criteria),
+  "submissionFormat": string,
+  "recommendedTools": string[] (tools),
+  "difficulty": "Beginner" | "Intermediate" | "Advanced",
+  "estimatedDuration": string (e.g. "2 weeks")
+}
+Final project must be portfolio-ready, professional standard.`,
+
+  resource: `Return:
+{
+  "title": string,
+  "description": string (why useful, what student will learn),
+  "url": string (valid URL to open educational resource — prioritize official docs, university, Creative Commons, public domain),
+  "source": string (e.g. "MDN Web Docs", "Figma Official Docs"),
+  "license": string (e.g. "CC BY 4.0", "MIT", "Public Domain", "Official Docs"),
+  "resourceType": "VIDEO" | "PDF" | "ARTICLE" | "DOCUMENTATION" | "DATASET" | "CODE" | "TEMPLATE" | "WEBSITE" | "BOOK" | "EXERCISE",
+  "isExternal": boolean (true for URL, false if should be stored)
+}
+Only suggest legally reusable/open resources: official docs, university open-course, government edu, Creative Commons, public domain. Never suggest pirated PDFs or paid courses. Include attribution.`,
+
+  lesson_content: `Return:
+{
+  "title": string,
+  "description": string (1-2 sentences),
+  "learningObjectives": string[] (3-5),
+  "estimatedDuration": string (e.g. "20 minutes"),
+  "lessonType": "VIDEO" | "TEXT" | "PRACTICAL" | "QUIZ",
+  "content": string (markdown, 800-2000 words, MUST follow 13-step professional teaching standard below),
+  "examples": [ { "title": string, "description": string, "code": string (optional code block) } ] (2-3 examples),
+  "practicalExercise": { "title": string, "instructions": string, "expectedOutput": string } (optional),
+  "quiz": { "title": string, "questions": [ { "type": "multiple_choice", "question": string, "options": string[], "correctAnswer": number, "explanation": string } ] } (optional, 2-3 questions),
+  "assignment": { "title": string, "description": string, "instructions": string, "requiredOutput": string } (optional),
+  "resources": [ { "title": string, "url": string, "type": string } ] (2-3 open resources),
+  "summary": string (3-5 bullets),
+  "prerequisites": string[] (1-3)
+}
+
+PROFESSIONAL TEACHING STANDARD — MUST follow this 13-step structure in "content" markdown:
+1. What students will learn (H2)
+2. Why the topic matters (real-world relevance)
+3. Prerequisites
+4. Simple explanation (plain language, explain jargon)
+5. Step-by-step teaching (numbered steps, H3 per step)
+6. Real-world examples (2-3, with context)
+7. Demonstration (code/design/business walkthrough)
+8. Common mistakes (bullet list)
+9. Best practices (bullet list)
+10. Practical exercise (hands-on task)
+11. Knowledge check (2-3 quick questions)
+12. Summary (key takeaways)
+13. Further practice (what to try next)
+
+For programming: Concept → Syntax → Example → Explanation → Exercise → Common errors → Best practices → Mini-project
+For design: Concept → Demonstration → Technique → Example → Practice → Project
+For business/marketing: Concept → Strategy → Real-world example → Implementation → Exercise → Case study
+
+Content must be substantial (800-2000 words), beginner-friendly but professional, no repetitive filler, include at least one table and one code block or visual description. Use simple language for difficult concepts.`,
 };
 
 SHAPES.lesson_script = SHAPES.video_script;

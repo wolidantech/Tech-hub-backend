@@ -22,6 +22,8 @@ const requestSchema = z.object({
     .object({
       courseId: z.string().optional(),
       lessonId: z.string().optional(),
+      moduleId: z.string().optional(),
+      studentId: z.string().optional(),
       level: z.string().optional(),
     })
     .default({}),

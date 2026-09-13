@@ -136,6 +136,78 @@ export const KIND_SCHEMAS = {
   video_script: script,
   voiceover: script,
   lesson_script: script,
+  // --- New production course content kinds (spec section 3, 13-16) ---
+  course_description: z
+    .object({
+      title: nonEmptyString,
+      description: nonEmptyString,
+      shortDescription: str.optional(),
+      longDescription: str.optional(),
+      learningObjectives: z.array(nonEmptyString).min(3),
+      prerequisites: z.array(nonEmptyString).default([]),
+      targetAudience: str.optional(),
+      category: str.optional(),
+      level: str.optional(),
+      duration: str.optional(),
+      whatYouWillLearn: z.array(nonEmptyString).min(3),
+    })
+    .passthrough(),
+  practical: z
+    .object({
+      title: nonEmptyString,
+      objective: nonEmptyString,
+      scenario: str.optional(),
+      instructions: nonEmptyString,
+      requirements: str.optional(),
+      expectedOutput: nonEmptyString,
+      difficulty: str.optional(),
+      estimatedTime: z.number().int().min(1).optional(),
+      submissionType: str.optional(),
+      evaluationCriteria: z.array(nonEmptyString).default([]),
+    })
+    .passthrough(),
+  project: z
+    .object({
+      title: nonEmptyString,
+      scenario: str.optional(),
+      objective: nonEmptyString,
+      requirements: z.array(nonEmptyString).min(1),
+      deliverables: z.array(nonEmptyString).min(1),
+      evaluationCriteria: z.array(nonEmptyString).default([]),
+      submissionFormat: str.optional(),
+      recommendedTools: z.array(str).default([]),
+      difficulty: str.optional(),
+      estimatedDuration: str.optional(),
+    })
+    .passthrough(),
+  resource: z
+    .object({
+      title: nonEmptyString,
+      description: str.optional(),
+      url: z.string().url().optional(),
+      source: str.optional(),
+      license: str.optional(),
+      resourceType: z.enum(['VIDEO', 'PDF', 'ARTICLE', 'DOCUMENTATION', 'DATASET', 'CODE', 'TEMPLATE', 'WEBSITE', 'BOOK', 'EXERCISE']).optional(),
+      isExternal: z.boolean().optional(),
+    })
+    .passthrough(),
+  lesson_content: z
+    .object({
+      title: nonEmptyString,
+      description: str.optional(),
+      learningObjectives: z.array(nonEmptyString).min(1),
+      estimatedDuration: str.optional(),
+      lessonType: str.optional(),
+      content: nonEmptyString, // markdown following 13-step teaching structure
+      examples: z.array(z.object({ title: str.optional(), description: nonEmptyString, code: str.optional() }).passthrough()).default([]),
+      practicalExercise: z.object({ title: str.optional(), instructions: nonEmptyString, expectedOutput: str.optional() }).passthrough().optional(),
+      quiz: quiz.optional(),
+      assignment: assignment.optional(),
+      resources: z.array(z.object({ title: nonEmptyString, url: str.optional(), type: str.optional() }).passthrough()).default([]),
+      summary: str.optional(),
+      prerequisites: z.array(nonEmptyString).default([]),
+    })
+    .passthrough(),
 };
 
 export const AI_KINDS = [
@@ -149,6 +221,12 @@ export const AI_KINDS = [
   'notes',
   'flashcards',
   'summary',
+  // new
+  'course_description',
+  'practical',
+  'project',
+  'resource',
+  'lesson_content',
 ];
 
 export function isKnownKind(kind) {
