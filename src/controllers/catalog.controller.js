@@ -31,6 +31,38 @@ async function withInstructors(courses) {
   return Array.isArray(courses) ? courses.map(attach) : attach(courses);
 }
 
+/** GET /api/catalog-status — public, student-safe (no admin instructions) */
+export const getCatalogStatus = asyncHandler(async (_req, res) => {
+  const { count: publishedCount, error } = await supabaseAnon
+    .from('courses')
+    .select('id', { count: 'exact', head: true })
+    .eq('is_published', true);
+
+  if (error) {
+    // Don't leak error details to students
+    return res.json({
+      success: true,
+      data: {
+        has_published_courses: false,
+        total_published: 0,
+        message: 'Catalog temporarily unavailable',
+      },
+    });
+  }
+
+  res.json({
+    success: true,
+    data: {
+      has_published_courses: (publishedCount || 0) > 0,
+      total_published: publishedCount || 0,
+      message:
+        (publishedCount || 0) > 0
+          ? `${publishedCount} courses available`
+          : 'No courses published yet — check back soon',
+    },
+  });
+});
+
 /** GET /api/course-categories — public */
 export const listCategories = asyncHandler(async (_req, res) => {
   const { data, error } = await supabaseAnon

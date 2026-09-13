@@ -44,6 +44,34 @@ const REQUIRED = [
     ],
   },
   {
+    id: 'course-videos',
+    public: false,
+    fileSizeLimit: 500 * 1024 * 1024,
+    allowedMimeTypes: ['video/mp4', 'video/webm', 'video/quicktime', 'video/x-msvideo'],
+  },
+  {
+    id: 'course-resources',
+    public: false,
+    fileSizeLimit: 50 * 1024 * 1024,
+    allowedMimeTypes: [
+      'application/pdf',
+      'image/jpeg',
+      'image/png',
+      'application/zip',
+      'text/plain',
+      'text/csv',
+      'application/json',
+      'application/msword',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    ],
+  },
+  {
+    id: 'lesson-thumbnails',
+    public: true,
+    fileSizeLimit: 5 * 1024 * 1024,
+    allowedMimeTypes: ['image/jpeg', 'image/png', 'image/webp'],
+  },
+  {
     id: 'avatars',
     public: true,
     fileSizeLimit: 2 * 1024 * 1024,
@@ -54,6 +82,33 @@ const REQUIRED = [
     public: true,
     fileSizeLimit: 5 * 1024 * 1024,
     allowedMimeTypes: ['image/jpeg', 'image/png', 'image/webp'],
+  },
+  {
+    id: 'cv-exports',
+    public: false,
+    fileSizeLimit: 10 * 1024 * 1024,
+    allowedMimeTypes: ['application/pdf'],
+  },
+  {
+    id: 'cv-photos',
+    public: true,
+    fileSizeLimit: 5 * 1024 * 1024,
+    allowedMimeTypes: ['image/jpeg', 'image/png', 'image/webp'],
+  },
+  {
+    id: 'ai-uploads',
+    public: false,
+    fileSizeLimit: 20 * 1024 * 1024,
+    allowedMimeTypes: [
+      'application/pdf',
+      'text/plain',
+      'text/csv',
+      'application/msword',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      'image/jpeg',
+      'image/png',
+      'text/markdown',
+    ],
   },
 ];
 

@@ -67,7 +67,54 @@ export function createSupabase({ url, serviceKey, fetchImpl = globalThis.fetch, 
     });
   }
 
-  return { rest, getProfile, fetchLessonsByCourse, searchLessons, baseUrl: base };
+  /** Fetch approved AI generated content for RAG (spec 22-23) — prefers WOLI DAN TECH HUB content */
+  async function fetchApprovedAiContent({ courseId, lessonId, moduleId, maxDocs = 10 } = {}) {
+    try {
+      const query = {
+        select: 'id,course_id,module_id,lesson_id,content_type,content,status,created_at',
+        status: 'in.(APPROVED,PUBLISHED)',
+        order: 'created_at.desc',
+        limit: String(maxDocs),
+      };
+      if (courseId) query.course_id = `eq.${courseId}`;
+      if (lessonId) query.lesson_id = `eq.${lessonId}`;
+      if (moduleId) query.module_id = `eq.${moduleId}`;
+
+      const rows = await rest('ai_generated_content', query);
+      // Normalize content to text
+      return (rows || []).map(row => ({
+        ...row,
+        course_title: '',
+        lesson_title: row.content?.title || '',
+        module_title: '',
+        title: row.content?.title || '',
+      }));
+    } catch (e) {
+      // Table may not exist yet in some envs — degrade gracefully
+      return [];
+    }
+  }
+
+  /** Fetch RAG chunks from lesson_content table (approved content) */
+  async function fetchRagChunks({ courseId, lessonId, maxDocs = 6 } = {}) {
+    try {
+      const query = {
+        select: 'id,course_id,module_id,lesson_id,content,content_type,chunk_index,is_approved',
+        is_approved: 'eq.true',
+        order: 'created_at.desc',
+        limit: String(maxDocs),
+      };
+      if (courseId) query.course_id = `eq.${courseId}`;
+      if (lessonId) query.lesson_id = `eq.${lessonId}`;
+
+      const rows = await rest('lesson_content', query);
+      return rows || [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  return { rest, getProfile, fetchLessonsByCourse, searchLessons, fetchApprovedAiContent, fetchRagChunks, baseUrl: base };
 }
 
 /** Normalise a PostgREST lesson row into a RAG document. */

@@ -7,6 +7,7 @@ import { listCoursesQuery, courseParams } from '../validation/schemas.js';
 const router = Router();
 
 router.get('/course-categories', catalog.listCategories);
+router.get('/catalog-status', catalog.getCatalogStatus);
 
 router.get('/courses', validate({ query: listCoursesQuery }), catalog.listCourses);
 router.get('/courses/:idOrSlug', optionalAuth, validate({ params: courseParams }), catalog.getCourse);

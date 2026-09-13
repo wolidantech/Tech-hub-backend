@@ -117,6 +117,14 @@ export const updateLessonSchema = createLessonSchema.partial();
 // ---------------- enrollment / payments ----------------
 export const enrollSchema = z.object({
   course_id: uuid,
+  coupon_code: z
+    .string()
+    .trim()
+    .min(3)
+    .max(50)
+    .regex(/^[A-Z0-9_-]+$/i, 'Invalid coupon format')
+    .optional()
+    .transform((v) => (v ? v.toUpperCase() : undefined)),
 });
 
 export const submitPaymentSchema = z.object({
@@ -133,6 +141,14 @@ export const submitPaymentSchema = z.object({
   // Amount is validated server-side against the actual course price;
   // the client may send it for UX consistency but it is never trusted.
   amount: z.coerce.number().nonnegative().optional(),
+  coupon_code: z
+    .string()
+    .trim()
+    .min(3)
+    .max(50)
+    .regex(/^[A-Z0-9_-]+$/i, 'Invalid coupon format')
+    .optional()
+    .transform((v) => (v ? v.toUpperCase() : undefined)),
 });
 
 export const rejectPaymentSchema = z.object({
@@ -143,9 +159,47 @@ export const adminPaymentsQuery = z.object({
   status: z.enum(['PENDING', 'APPROVED', 'REJECTED']).optional(),
   search: z.string().trim().max(200).optional(),
   course_id: uuid.optional(),
+  student_id: uuid.optional(),
+  payment_method: z.enum(['MANUAL_BANK_TRANSFER', 'FREE']).optional(),
+  from_date: z.coerce.date().optional(),
+  to_date: z.coerce.date().optional(),
   page: z.coerce.number().int().positive().optional(),
   limit: z.coerce.number().int().positive().max(100).optional(),
 });
+
+// ---------------- coupons ----------------
+export const couponCodeSchema = z.object({
+  code: z
+    .string()
+    .trim()
+    .min(3)
+    .max(50)
+    .regex(/^[A-Z0-9_-]+$/i, 'Coupon code must be alphanumeric with dashes/underscores')
+    .transform((v) => v.toUpperCase()),
+  course_id: uuid,
+});
+
+export const createCouponSchema = z.object({
+  code: z
+    .string()
+    .trim()
+    .min(3)
+    .max(50)
+    .regex(/^[A-Z0-9_-]+$/i, 'Coupon code must be alphanumeric')
+    .transform((v) => v.toUpperCase()),
+  description: z.string().trim().max(500).optional(),
+  discount_type: z.enum(['PERCENTAGE', 'FIXED']).default('PERCENTAGE'),
+  discount_value: z.coerce.number().positive().max(1000000),
+  max_uses: z.coerce.number().int().positive().optional().nullable(),
+  min_amount: z.coerce.number().nonnegative().optional(),
+  applicable_course_ids: z.array(uuid).optional().nullable(),
+  is_active: z.boolean().optional(),
+  valid_from: z.coerce.date().optional(),
+  valid_until: z.coerce.date().optional(),
+});
+
+export const updateCouponSchema = createCouponSchema.partial();
+
 
 // ---------------- learning ----------------
 export const lessonProgressSchema = z.object({

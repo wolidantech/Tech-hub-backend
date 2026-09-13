@@ -54,6 +54,36 @@ function openaiProvider(opts) {
     if (!text) throw new ProviderError('OpenAI returned an empty completion', 502);
     return text;
   }
+  async function* streamCall(body, signal) {
+    const res = await opts.fetchImpl(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${opts.apiKey}` },
+      body: JSON.stringify({ ...body, stream: true }),
+      signal: signal || opts.signal,
+    });
+    if (!res.ok) await readError(res, 'OpenAI');
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split('\n');
+      buffer = lines.pop() || '';
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (!trimmed || !trimmed.startsWith('data:')) continue;
+        const data = trimmed.replace(/^data:\s*/, '');
+        if (data === '[DONE]') return;
+        try {
+          const json = JSON.parse(data);
+          const token = json.choices?.[0]?.delta?.content;
+          if (token) yield token;
+        } catch {}
+      }
+    }
+  }
   return {
     name: 'openai',
     model: opts.model,
@@ -74,6 +104,17 @@ function openaiProvider(opts) {
     },
     chat({ system, messages, signal }) {
       return call(
+        {
+          model: opts.model,
+          temperature: opts.temperature,
+          max_tokens: opts.maxTokens,
+          messages: [{ role: 'system', content: system }, ...messages],
+        },
+        signal
+      );
+    },
+    chatStream({ system, messages, signal }) {
+      return streamCall(
         {
           model: opts.model,
           temperature: opts.temperature,

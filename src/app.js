@@ -16,6 +16,15 @@ import certificatesRoutes from './routes/certificates.routes.js';
 import notificationsRoutes from './routes/notifications.routes.js';
 import adminRoutes from './routes/admin.routes.js';
 import publicRoutes from './routes/public.routes.js';
+import aiContentRoutes from './routes/ai-content.routes.js';
+import adminContentRoutes from './routes/admin-content.routes.js';
+import courseContentRoutes from './routes/course-content.routes.js';
+import cvRoutes from './routes/cv.routes.js';
+import subjectsRoutes from './routes/subjects.routes.js';
+import occupationsRoutes from './routes/occupations.routes.js';
+import aiChatRoutes from './routes/ai-chat.routes.js';
+import mobileRoutes from './routes/mobile.routes.js';
+import mobileUploadsRoutes from './routes/mobile-uploads.routes.js';
 
 const app = express();
 
@@ -67,12 +76,22 @@ app.get('/', (_req, res) => {
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/profiles', profileRoutes);
-app.use('/api', catalogRoutes); // /api/courses, /api/course-categories
-app.use('/api', paymentsRoutes); // /api/enrollments, /api/payments
+app.use('/api', catalogRoutes); // /api/courses, /api/course-categories, /api/catalog-status
+app.use('/api', paymentsRoutes); // /api/enrollments, /api/payments, /api/coupons
+app.use('/api', courseContentRoutes); // /api/courses/:courseId/content, /api/courses/:courseId/modules, /api/lessons/:lessonId
+app.use('/api/ai', aiContentRoutes); // /api/ai/courses/generate, /api/ai/lessons/generate, etc. (admin)
+app.use('/api/cv', cvRoutes); // /api/cv/create, /api/cv/preview, /api/cv/export, /api/cv/ai/improve, /api/cv/templates, /api/cv/occupations/search (public + optionalAuth)
+app.use('/api/subjects', subjectsRoutes); // /api/subjects/fields, /api/subjects/taxonomy (public)
+app.use('/api/occupations', occupationsRoutes); // /api/occupations/search, /api/occupations/categories (public)
+app.use('/api/dantech', aiChatRoutes); // /api/dantech/chat, /api/dantech/chat/stream, /api/dantech/conversations, /api/dantech/files, /api/dantech/research (authenticated)
+app.use('/api/mobile', mobileRoutes); // /api/mobile/courses, /api/mobile/courses/:id/modules, /api/mobile/lessons/:id/video (mobile-optimized pagination, field selection, lazy loading)
+app.use('/api/mobile/uploads', mobileUploadsRoutes); // /api/mobile/uploads/single, /init, /chunk, /session/:id (resumable, progress, retry, timeout handling)
 app.use('/api/learning', learningRoutes);
 app.use('/api/certificates', certificatesRoutes);
 app.use('/api/notifications', notificationsRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/admin', adminContentRoutes); // /api/admin/content, /api/admin/resources (admin review pipeline)
+app.use('/api/admin/subjects', subjectsRoutes); // admin subjects management re-uses same router with auth
 app.use('/api/public', publicRoutes);
 
 app.use(notFoundHandler);

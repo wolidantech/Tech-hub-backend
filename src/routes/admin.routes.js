@@ -7,6 +7,7 @@ import * as adminPayments from '../controllers/admin-payments.controller.js';
 import * as adminCourses from '../controllers/admin-courses.controller.js';
 import * as adminStudents from '../controllers/admin-students.controller.js';
 import * as adminDashboard from '../controllers/admin-dashboard.controller.js';
+import * as coupons from '../controllers/coupons.controller.js';
 import {
   adminPaymentsQuery,
   rejectPaymentSchema,
@@ -25,6 +26,8 @@ import {
   updateSettingSchema,
   updateCertificateSchema,
   uuidParams,
+  createCouponSchema,
+  updateCouponSchema,
 } from '../validation/schemas.js';
 
 const router = Router();
@@ -38,16 +41,26 @@ const settingKeyParams = z.object({ key: z.string().trim().min(1).max(80) });
 // ---------------- dashboard & statistics ----------------
 router.get('/statistics', adminDashboard.getStatistics);
 router.get('/audit-logs', adminDashboard.getAuditLogs);
+router.get('/diagnostics', adminDashboard.getDiagnostics);
 
 // ---------------- payments review ----------------
 router.get('/payments', validate({ query: adminPaymentsQuery }), adminPayments.adminListPayments);
 router.get('/payments/:id', validate({ params: uuidParams }), adminPayments.adminGetPayment);
+router.get('/payments/:id/receipt', validate({ params: uuidParams }), adminPayments.adminGetReceipt);
 router.post('/payments/:id/approve', validate({ params: uuidParams }), adminPayments.approvePayment);
 router.post(
   '/payments/:id/reject',
   validate({ params: uuidParams, body: rejectPaymentSchema }),
   adminPayments.rejectPayment
 );
+
+// ---------------- coupons ----------------
+router.get('/coupons', coupons.adminListCoupons);
+router.post('/coupons', validate({ body: createCouponSchema }), coupons.adminCreateCoupon);
+router.get('/coupons/:id', validate({ params: uuidParams }), coupons.adminGetCoupon);
+router.patch('/coupons/:id', validate({ params: uuidParams, body: updateCouponSchema }), coupons.adminUpdateCoupon);
+router.delete('/coupons/:id', validate({ params: uuidParams }), coupons.adminDeleteCoupon);
+router.get('/coupon-redemptions', coupons.adminListRedemptions);
 
 // ---------------- courses ----------------
 router.get('/courses', adminCourses.adminListCourses);
