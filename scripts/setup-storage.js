@@ -83,6 +83,33 @@ const REQUIRED = [
     fileSizeLimit: 5 * 1024 * 1024,
     allowedMimeTypes: ['image/jpeg', 'image/png', 'image/webp'],
   },
+  {
+    id: 'cv-exports',
+    public: false,
+    fileSizeLimit: 10 * 1024 * 1024,
+    allowedMimeTypes: ['application/pdf'],
+  },
+  {
+    id: 'cv-photos',
+    public: true,
+    fileSizeLimit: 5 * 1024 * 1024,
+    allowedMimeTypes: ['image/jpeg', 'image/png', 'image/webp'],
+  },
+  {
+    id: 'ai-uploads',
+    public: false,
+    fileSizeLimit: 20 * 1024 * 1024,
+    allowedMimeTypes: [
+      'application/pdf',
+      'text/plain',
+      'text/csv',
+      'application/msword',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      'image/jpeg',
+      'image/png',
+      'text/markdown',
+    ],
+  },
 ];
 
 async function main() {

@@ -11,7 +11,7 @@ import express from 'express';
 import cors from 'cors';
 import { createRateLimiter } from './ratelimit.js';
 import { createGenerateHandler } from './generate.controller.js';
-import { createChatHandler } from './chat.controller.js';
+import { createChatHandler, createChatStreamHandler } from './chat.controller.js';
 import { createAiContentHandlers } from './ai-content.controller.js';
 import { DANTECH_NAME, PLATFORM } from './config.js';
 
@@ -76,7 +76,7 @@ export function createApp(deps) {
 
   app.get('/', (_req, res) => {
     res.json({
-      name: `${PLATFORM} — Secure AI Gateway + Course Content Engine`,
+      name: `${PLATFORM} — Secure AI Gateway + Course Content Engine + CV Builder + Advanced DanTECH AI`,
       assistant: DANTECH_NAME,
       endpoints: [
         'GET /health',
@@ -91,9 +91,11 @@ export function createApp(deps) {
         'GET /api/ai/jobs/:jobId (admin/owner)',
         'GET /api/ai/jobs (admin)',
         'POST /api/ai/bulk/generate-missing (admin)',
-        'POST /api/dantech/chat (authenticated) — course-aware RAG',
+        'POST /api/dantech/chat (authenticated) — course-aware RAG, modes GENERAL/STUDY/CODING/RESEARCH/CAREER/DEEP_EXPLANATION',
+        'POST /api/dantech/chat/stream (authenticated) — SSE streaming',
       ],
       pipeline: 'GENERATE → DRAFT → REVIEW → APPROVE → PUBLISH (never auto-publish)',
+      modes: ['GENERAL', 'STUDY', 'CODING', 'RESEARCH', 'CAREER', 'DEEP_EXPLANATION'],
     });
   });
 
@@ -111,6 +113,7 @@ export function createApp(deps) {
 
   const generate = createGenerateHandler({ provider, config, logger });
   const chat = createChatHandler({ provider, supabase, config, logger });
+  const chatStream = createChatStreamHandler({ provider, supabase, config, logger });
   const aiContent = createAiContentHandlers({ logger });
 
   // ---- Routes ----
@@ -128,6 +131,14 @@ export function createApp(deps) {
     auth.requireAuth(),
     chatLimiter,
     asyncHandler(chat)
+  );
+
+  // Advanced DanTECH AI — streaming, modes, course-aware
+  app.post(
+    '/api/dantech/chat/stream',
+    auth.requireAuth(),
+    chatLimiter,
+    asyncHandler(chatStream)
   );
 
   // --- New production course content generation (spec sections 3, 6, 25-27, 30) ---
