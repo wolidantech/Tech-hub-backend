@@ -29,9 +29,16 @@ RAILWAY  ── this service ─────────────────
 
 ## 1. Quick start (local)
 
+Requires **Node.js 22+** (`engines.node` in `package.json`, `.nvmrc` = `22`).
+`@supabase/supabase-js` ≥ 2.110 declares `engines: node >= 22`; the service
+still runs on Node 18/20 thanks to the WebSocket shim in
+`src/config/websocket.js`, but those runtimes are EOL — see
+[§ 10 Troubleshooting](#10-troubleshooting) if you hit the WebSocket crash.
+
 ```bash
 git clone https://github.com/wolidantech/Tech-hub-backend.git
 cd Tech-hub-backend
+nvm use                   # Node 22 (see .nvmrc)
 npm install
 cp .env.example .env      # then fill in the real values
 
@@ -280,6 +287,10 @@ adding one factory that implements `complete()` (strict JSON) and `chat()`
 ## 9. Repository layout
 
 ```
+src/config/
+  websocket.js          WebSocket transport shim for Supabase Realtime
+  supabase.js           admin / anon / per-user Supabase clients
+  env.js                LMS-side env validation
 src/gateway/            the deployed service
   server.js             entry point (npm start)
   app.js                Express app, CORS, logging, routes, error handling
@@ -296,6 +307,7 @@ src/gateway/            the deployed service
 scripts/
   test-gateway.mjs      64 offline end-to-end checks (npm run test:gateway)
   check.js              parse + assemble sanity check (npm run check)
+  check-runtime.mjs     Supabase clients construct without a native WebSocket
   test-db.mjs           legacy LMS schema test (embedded Postgres)
 docs/
   legacy-lms-backend.md documentation for the dormant LMS backend
@@ -316,3 +328,45 @@ kept for reference and still parse-checked by `npm run check`. Do not point
 Railway at it: its endpoints do not match the live tables. Its docs live in
 [`docs/legacy-lms-backend.md`](docs/legacy-lms-backend.md) and it can still be
 run locally with `npm run start:lms`.
+
+## 10. Troubleshooting
+
+### `Error: Node.js detected but native WebSocket not found` (deploy crash loop)
+
+Symptom — every boot dies before the port is bound, Railway restarts, repeat:
+
+```
+⚠️  Node.js 20 and below are deprecated ... @supabase/supabase-js
+Error: Node.js detected but native WebSocket not found.
+Suggested solution: Ensure you are running Node.js 22+ or provide a
+WebSocket implementation via the transport option.
+    at WebSocketFactory.getWebSocketConstructor (.../websocket-factory.js:86)
+    at RealtimeClient._initializeOptions (.../RealtimeClient.js:652)
+    at new SupabaseClient (.../supabase-js/dist/index.mjs:674)
+    at file:///app/src/config/supabase.js:10:30
+```
+
+Cause — `package.json` asked for `@supabase/supabase-js: ^2.45.4`, and the
+caret range resolved to **2.116.0**, which declares `engines: node >= 22`.
+`@supabase/realtime-js` resolves its WebSocket constructor **eagerly** inside
+`createClient()`, so on Node 18/20 (this deploy was on v18.20.8) the process
+throws while importing `src/config/supabase.js`. Nothing in this app uses
+Realtime — it just has to exist.
+
+Fixes, in order of preference:
+
+1. **Run Node.js 22+** — the supported runtime. `.nvmrc` (`22`) and
+   `engines.node` (`>=22`) are already in the repo; Railway's builder reads
+   both. If a redeploy still logs an old version, set the service variable
+   `NIXPACKS_NODE_VERSION=22` and redeploy, then confirm the build log.
+   This also silences the "Node.js 20 and below are deprecated" warning.
+2. **Already fixed in code** — `src/config/websocket.js` hands realtime-js
+   the `ws` implementation via the documented `transport` option whenever the
+   runtime has no global `WebSocket`. Node 22+ keeps using the native one.
+   So an old runtime now degrades to a warning instead of a crash loop.
+3. **Don't** "fix" it by pinning to `2.78.0`; that only hides the fact that
+   the deploy image is on an EOL runtime.
+
+`npm run check` now guards this: it re-imports the Supabase clients in a child
+process started with `--no-experimental-websocket` (i.e. no global WebSocket,
+exactly like Node 18/20) and fails if they cannot be constructed.

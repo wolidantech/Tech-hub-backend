@@ -1,5 +1,20 @@
 import { createClient } from '@supabase/supabase-js';
+import { realtimeOptions } from './websocket.js';
 import { env } from './env.js';
+
+/**
+ * Realtime needs a WebSocket constructor at CONSTRUCTION time, which throws
+ * on Node.js < 22 unless one is supplied. `realtimeOptions()` returns the
+ * `ws` transport there and nothing on Node.js 22+ (native WebSocket).
+ * See src/config/websocket.js for the full crash history.
+ */
+const realtime = () => realtimeOptions();
+
+const authOptions = {
+  persistSession: false,
+  autoRefreshToken: false,
+  detectSessionInUrl: false,
+};
 
 /**
  * Service-role client — SERVER ONLY.
@@ -8,11 +23,8 @@ import { env } from './env.js';
  * writes). NEVER expose this client or its key to the frontend.
  */
 export const supabaseAdmin = createClient(env.supabaseUrl, env.supabaseServiceRoleKey, {
-  auth: {
-    persistSession: false,
-    autoRefreshToken: false,
-    detectSessionInUrl: false,
-  },
+  auth: { ...authOptions },
+  ...realtime(),
 });
 
 /**
@@ -20,11 +32,8 @@ export const supabaseAdmin = createClient(env.supabaseUrl, env.supabaseServiceRo
  * Used for public catalog reads and auth flows (login/password reset).
  */
 export const supabaseAnon = createClient(env.supabaseUrl, env.supabaseAnonKey, {
-  auth: {
-    persistSession: false,
-    autoRefreshToken: false,
-    detectSessionInUrl: false,
-  },
+  auth: { ...authOptions },
+  ...realtime(),
 });
 
 /**
@@ -34,11 +43,8 @@ export const supabaseAnon = createClient(env.supabaseUrl, env.supabaseAnonKey, {
  */
 export function supabaseForUser(accessToken) {
   return createClient(env.supabaseUrl, env.supabaseAnonKey, {
-    auth: {
-      persistSession: false,
-      autoRefreshToken: false,
-      detectSessionInUrl: false,
-    },
+    auth: { ...authOptions },
+    ...realtime(),
     global: {
       headers: { Authorization: `Bearer ${accessToken}` },
     },

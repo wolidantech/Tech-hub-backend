@@ -13,6 +13,7 @@
 import readline from 'node:readline/promises';
 import dotenv from 'dotenv';
 import { createClient } from '@supabase/supabase-js';
+import { realtimeOptions } from '../src/config/websocket.js';
 
 dotenv.config();
 
@@ -49,6 +50,7 @@ async function main() {
 
   const supabase = createClient(SUPABASE_URL, SERVICE_ROLE_KEY, {
     auth: { persistSession: false, autoRefreshToken: false },
+    ...realtimeOptions(),
   });
 
   // Try to create the user; if the email already exists, promote that user.
