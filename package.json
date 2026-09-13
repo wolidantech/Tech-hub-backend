@@ -19,11 +19,12 @@
     "storage:setup": "node scripts/setup-storage.js",
     "check": "node scripts/check.js",
     "check:catalog": "node scripts/check-catalog.js",
-    "test": "npm run check && npm run test:gateway && npm run test:payments && npm run test:ai-content && npm run test:cv",
+    "test": "npm run check && npm run test:gateway && npm run test:payments && npm run test:ai-content && npm run test:cv && npm run test:mobile",
     "test:gateway": "node scripts/test-gateway.mjs",
     "test:payments": "node scripts/test-payments.mjs",
     "test:ai-content": "node scripts/test-ai-content.mjs",
     "test:cv": "node scripts/test-cv.mjs",
+    "test:mobile": "node scripts/test-mobile.mjs",
     "test:db": "node scripts/test-db.mjs",
     "populate:ai": "node scripts/populate-ai-content.mjs"
   },

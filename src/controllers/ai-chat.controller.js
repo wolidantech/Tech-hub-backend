@@ -121,6 +121,13 @@ export const chat = asyncHandler(async (req, res) => {
   }
 
   try {
+    // Mobile: request cancellation via AbortController, timeout 30s
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 30000);
+    req.on('close', () => {
+      if (!res.writableFinished) controller.abort();
+    });
+
     const aiRes = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: { Authorization: `Bearer ${openaiKey}`, 'Content-Type': 'application/json' },
@@ -133,7 +140,9 @@ export const chat = asyncHandler(async (req, res) => {
         max_tokens: 1500,
         temperature: mode === 'CODING' ? 0.2 : mode === 'RESEARCH' ? 0.4 : 0.7,
       }),
+      signal: controller.signal,
     });
+    clearTimeout(timeout);
 
     if (!aiRes.ok) {
       const txt = await aiRes.text();
@@ -199,6 +208,15 @@ export const chatStream = asyncHandler(async (req, res) => {
   }
 
   try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 30000);
+    req.on('close', () => {
+      if (!res.writableFinished) {
+        controller.abort();
+        // Do not corrupt conversation on interruption — user message saved, assistant not yet
+      }
+    });
+
     const aiRes = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: { Authorization: `Bearer ${openaiKey}`, 'Content-Type': 'application/json' },
@@ -212,7 +230,9 @@ export const chatStream = asyncHandler(async (req, res) => {
         temperature: 0.7,
         stream: true,
       }),
+      signal: controller.signal,
     });
+    clearTimeout(timeout);
 
     if (!aiRes.ok || !aiRes.body) {
       const txt = await aiRes.text();

@@ -23,6 +23,8 @@ import cvRoutes from './routes/cv.routes.js';
 import subjectsRoutes from './routes/subjects.routes.js';
 import occupationsRoutes from './routes/occupations.routes.js';
 import aiChatRoutes from './routes/ai-chat.routes.js';
+import mobileRoutes from './routes/mobile.routes.js';
+import mobileUploadsRoutes from './routes/mobile-uploads.routes.js';
 
 const app = express();
 
@@ -82,6 +84,8 @@ app.use('/api/cv', cvRoutes); // /api/cv/create, /api/cv/preview, /api/cv/export
 app.use('/api/subjects', subjectsRoutes); // /api/subjects/fields, /api/subjects/taxonomy (public)
 app.use('/api/occupations', occupationsRoutes); // /api/occupations/search, /api/occupations/categories (public)
 app.use('/api/dantech', aiChatRoutes); // /api/dantech/chat, /api/dantech/chat/stream, /api/dantech/conversations, /api/dantech/files, /api/dantech/research (authenticated)
+app.use('/api/mobile', mobileRoutes); // /api/mobile/courses, /api/mobile/courses/:id/modules, /api/mobile/lessons/:id/video (mobile-optimized pagination, field selection, lazy loading)
+app.use('/api/mobile/uploads', mobileUploadsRoutes); // /api/mobile/uploads/single, /init, /chunk, /session/:id (resumable, progress, retry, timeout handling)
 app.use('/api/learning', learningRoutes);
 app.use('/api/certificates', certificatesRoutes);
 app.use('/api/notifications', notificationsRoutes);

@@ -52,19 +52,45 @@ export function createApp(deps) {
     })
   );
 
-  app.use(express.json({ limit: '256kb' }));
+  app.use(express.json({ limit: '1mb' }));
+  app.use(express.urlencoded({ extended: false, limit: '1mb' }));
 
   // ---- Request log: method, path, status, duration. No bodies, no tokens. ----
   app.use((req, res, next) => {
     const started = Date.now();
+    // Mobile detection
+    const ua = req.headers['user-agent'] || '';
+    req.isMobile = /Mobile|Android|iPhone|iPad/i.test(ua) || req.headers['x-mobile'] === 'true';
+    req.requestId = req.headers['x-request-id'] || req.headers['x-idempotency-key'] || null;
+
+    // Timeout handling for mobile slow connections — 30s
+    const timeout = setTimeout(() => {
+      if (!res.headersSent) {
+        res.status(504).json({
+          success: false,
+          error: { code: 'REQUEST_TIMEOUT', message: 'Request timed out, please retry' },
+        });
+      }
+    }, 30000);
+
     res.on('finish', () => {
+      clearTimeout(timeout);
       logger.info?.({
         method: req.method,
         path: req.path,
         status: res.statusCode,
         ms: Date.now() - started,
         uid: logId(req.userId),
+        mobile: req.isMobile,
+        requestId: req.requestId,
       });
+    });
+    res.on('close', () => {
+      clearTimeout(timeout);
+      // Connection interrupted — do not corrupt conversation, log only
+      if (!res.writableFinished) {
+        logger.warn?.({ route: req.path, outcome: 'connection_interrupted', mobile: req.isMobile });
+      }
     });
     next();
   });
@@ -154,9 +180,12 @@ export function createApp(deps) {
   app.get('/api/ai/jobs', auth.requireAuth(), asyncHandler(aiContent.listJobs));
   app.post('/api/ai/bulk/generate-missing', auth.requireAuth(), auth.requireAdmin, generateLimiter, asyncHandler(aiContent.bulkGenerateMissing));
 
-  // ---- 404 + error handling (never leak internals) ----
+  // ---- 404 + error handling (never leak internals) — consistent machine-readable format for mobile ----
   app.use((_req, res) => {
-    res.status(404).json({ error: 'Not found', message: 'That endpoint does not exist on the AI gateway.' });
+    res.status(404).json({
+      success: false,
+      error: { code: 'ROUTE_NOT_FOUND', message: 'That endpoint does not exist on the AI gateway.' },
+    });
   });
 
   // eslint-disable-next-line no-unused-vars
@@ -164,9 +193,11 @@ export function createApp(deps) {
     const status = err?.status || 500;
     if (status >= 500) logger.error?.({ error: err?.message, code: err?.code });
     res.status(status).json({
-      error: status === 403 ? 'Forbidden' : status >= 500 ? 'Internal error' : 'Bad request',
-      message: status >= 500 ? 'Something went wrong on our side. Please try again.' : err?.message || 'Invalid request.',
-      code: err?.code || 'ERROR',
+      success: false,
+      error: {
+        code: err?.code || (status === 403 ? 'FORBIDDEN' : status >= 500 ? 'INTERNAL_ERROR' : 'BAD_REQUEST'),
+        message: status >= 500 ? 'Something went wrong on our side. Please try again.' : err?.message || 'Invalid request.',
+      },
     });
   });
 
