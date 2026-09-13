@@ -18,6 +18,7 @@
     "create:admin": "node scripts/create-admin.js",
     "storage:setup": "node scripts/setup-storage.js",
     "check": "node scripts/check.js",
+    "check:catalog": "node scripts/check-catalog.js",
     "test": "npm run check && npm run test:gateway",
     "test:gateway": "node scripts/test-gateway.mjs",
     "test:db": "node scripts/test-db.mjs"

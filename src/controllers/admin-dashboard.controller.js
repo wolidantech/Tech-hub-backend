@@ -117,6 +117,55 @@ export const updateSetting = asyncHandler(async (req, res) => {
   res.json({ success: true, message: `Setting "${key}" saved`, data: { setting: data } });
 });
 
+/** GET /api/admin/diagnostics — admin-only backend health (replaces frontend anon diagnostics) */
+export const getDiagnostics = asyncHandler(async (_req, res) => {
+  const [{ count: totalCourses }, { count: publishedCourses }, { count: draftCourses }, { count: totalCategories }, { count: totalAdmins }, { count: totalStudents }, { count: pendingPayments }] =
+    await Promise.all([
+      supabaseAdmin.from('courses').select('id', { count: 'exact', head: true }),
+      supabaseAdmin.from('courses').select('id', { count: 'exact', head: true }).eq('is_published', true),
+      supabaseAdmin.from('courses').select('id', { count: 'exact', head: true }).eq('is_published', false),
+      supabaseAdmin.from('course_categories').select('id', { count: 'exact', head: true }),
+      supabaseAdmin.from('profiles').select('id', { count: 'exact', head: true }).eq('role', 'admin'),
+      supabaseAdmin.from('profiles').select('id', { count: 'exact', head: true }).eq('role', 'student'),
+      supabaseAdmin.from('payments').select('id', { count: 'exact', head: true }).eq('status', 'PENDING'),
+    ]);
+
+  const catalogStatus = publishedCourses > 0 ? 'PASS' : totalCourses > 0 ? 'FAIL_DRAFTS_ONLY' : 'FAIL_EMPTY';
+  const adminStatus = totalAdmins > 0 ? 'PASS' : 'FAIL_NO_ADMIN';
+
+  res.json({
+    success: true,
+    data: {
+      checked_at: new Date().toISOString(),
+      catalog: {
+        status: catalogStatus,
+        total: totalCourses || 0,
+        published: publishedCourses || 0,
+        drafts: draftCourses || 0,
+        categories: totalCategories || 0,
+        message:
+          catalogStatus === 'PASS'
+            ? `Catalog OK — ${publishedCourses} published courses visible to students`
+            : catalogStatus === 'FAIL_DRAFTS_ONLY'
+              ? `Catalog hidden — ${draftCourses} courses exist but all are drafts (is_published=false). Run supabase/seed/publish_courses.sql`
+              : 'Catalog empty — no courses in database. Run supabase/seed/seed_12_courses.sql then publish_courses.sql',
+        fix: catalogStatus === 'PASS' ? null : 'Run supabase/seed/seed_12_courses.sql then supabase/seed/publish_courses.sql in Supabase SQL Editor, or npm run migrate',
+      },
+      admin: {
+        status: adminStatus,
+        total_admins: totalAdmins || 0,
+        total_students: totalStudents || 0,
+        pending_payments: pendingPayments || 0,
+        message:
+          adminStatus === 'PASS'
+            ? `${totalAdmins} admin account(s) exist`
+            : 'No admin account — signup creates student role only. Run supabase/seed/make_admin.sql with your email after registering',
+        fix: adminStatus === 'PASS' ? null : 'Register on site first, then run supabase/seed/make_admin.sql with your email',
+      },
+    },
+  });
+});
+
 /** GET /api/admin/enrollments */
 export const adminListEnrollments = asyncHandler(async (req, res) => {
   const { from, to, page, limit } = parsePagination(req.query);
