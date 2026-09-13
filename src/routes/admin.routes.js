@@ -38,6 +38,7 @@ const settingKeyParams = z.object({ key: z.string().trim().min(1).max(80) });
 // ---------------- dashboard & statistics ----------------
 router.get('/statistics', adminDashboard.getStatistics);
 router.get('/audit-logs', adminDashboard.getAuditLogs);
+router.get('/diagnostics', adminDashboard.getDiagnostics);
 
 // ---------------- payments review ----------------
 router.get('/payments', validate({ query: adminPaymentsQuery }), adminPayments.adminListPayments);
