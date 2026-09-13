@@ -1,7 +1,8 @@
 /**
- * Lightweight sanity check: verifies every source file parses and the
- * Express app can be constructed (without network calls to Supabase).
- * Usage: SKIP_ENV_VALIDATION=true npm run check
+ * Lightweight sanity check: verifies every source file parses and both
+ * Express apps can be constructed (without network calls to Supabase or an
+ * LLM provider).
+ * Usage: npm run check
  */
 import { readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
@@ -35,10 +36,51 @@ if (failed > 0) {
   process.exit(1);
 }
 
-const { default: app } = await import('../src/app.js');
-if (typeof app !== 'function') {
-  console.error('Express app failed to load.');
+// ---- the deployed service: the Secure AI Gateway ----
+const { createApp } = await import('../src/gateway/app.js');
+const { createProvider } = await import('../src/gateway/providers/index.js');
+const { createSupabase } = await import('../src/gateway/supabase.js');
+const { createAuth } = await import('../src/gateway/auth.js');
+
+const stubConfig = {
+  provider: 'openai',
+  model: 'gpt-4o-mini',
+  apiKey: 'check',
+  baseUrl: '',
+  maxTokens: 100,
+  temperature: 0.7,
+  aiTimeoutMs: 5000,
+  maxRetries: 2,
+  supabaseUrl: 'https://check.invalid',
+  supabaseServiceRoleKey: 'check',
+  allowedOrigins: ['https://check.invalid'],
+  chatRateLimit: 30,
+  generateRateLimit: 10,
+  rateWindowMs: 60000,
+  maxMessageChars: 4000,
+  maxHistory: 12,
+  ragMaxDocs: 6,
+  ragMaxCharsPerDoc: 2000,
+};
+const stubFetch = async () => ({ ok: false, status: 500, json: async () => ({}), text: async () => '' });
+const supabase = createSupabase({ url: stubConfig.supabaseUrl, serviceKey: 'check', fetchImpl: stubFetch });
+const gateway = createApp({
+  config: stubConfig,
+  provider: createProvider(stubConfig, { fetchImpl: stubFetch }),
+  supabase,
+  auth: createAuth({ supabaseUrl: stubConfig.supabaseUrl, serviceKey: 'check', supabase, fetchImpl: stubFetch }),
+  logger: { info() {}, warn() {}, error() {} },
+});
+if (typeof gateway !== 'function') {
+  console.error('Secure AI Gateway app failed to load.');
   process.exit(1);
 }
 
-console.log(`✓ ${files.length} files parsed successfully and the app assembles.`);
+// ---- the legacy LMS backend (kept for reference, not deployed) ----
+const { default: lmsApp } = await import('../src/app.js');
+if (typeof lmsApp !== 'function') {
+  console.error('Legacy LMS app failed to load.');
+  process.exit(1);
+}
+
+console.log(`✓ ${files.length} files parsed successfully; AI gateway + legacy LMS app both assemble.`);

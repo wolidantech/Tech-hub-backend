@@ -1,486 +1,318 @@
-# WOLI DAN TECH HUB — Backend API
+# WOLI DAN TECH HUB — Secure AI Gateway (Railway backend)
 
-**LEARN • BUILD • GROW**
+The backend service behind **AI Studio** and **DanTECH AI** for the WOLI DAN
+TECH HUB LMS. It holds every AI API key server-side, verifies Supabase
+sessions, grounds the student assistant in published course content, and
+enforces academic integrity where the frontend cannot.
 
-Production-ready backend for the WOLI DAN TECH HUB online learning platform.
+```
+WOLI DAN TECH HUB FRONTEND (Vite / React, talks to Supabase directly for LMS data)
+        │  HTTPS  +  Authorization: Bearer <supabase access token>
+        ▼
+RAILWAY  ── this service ──────────────────────────────
+   GET  /health              public, Railway healthcheck
+   POST /api/ai/generate     admin only      → AI Studio "Generate"
+   POST /api/dantech/chat    authenticated   → DanTECH AI assistant
+        │
+        ├──► LLM provider (OpenAI | Anthropic | Gemini)
+        └──► SUPABASE (service role, server-side only)
+               ├── Auth        verifies the caller's JWT + profiles.role
+               ├── PostgreSQL  published lessons for RAG
+               └── Storage     untouched by this service
+```
 
-- **Supabase PostgreSQL** — the real database (tables, constraints, triggers, functions)
-- **Supabase Auth** — email/password authentication (no plain-text passwords anywhere)
-- **Supabase Storage** — private buckets for receipts, certificates & lesson resources (signed URLs)
-- **Row Level Security (RLS)** — enforced in PostgreSQL on every user table
-- **Express API** — secure server-side operations, role-based access control (student / admin / instructor)
-- **Manual bank-transfer payments** — students pay to a bank account, upload a receipt, an admin approves/rejects, and course access activates **automatically and atomically**
+> The service **never writes to Supabase**. Every AI result goes back to the
+> frontend, which stores it as a `draft` row in `ai_generated_content` for
+> admin review.
 
 ---
 
-## Table of Contents
-
-1. [Architecture](#1-architecture)
-2. [Project structure](#2-project-structure)
-3. [Setup guide (from zero)](#3-setup-guide-from-zero)
-4. [Environment variables](#4-environment-variables)
-5. [Running the server](#5-running-the-server)
-6. [Creating the admin account](#6-creating-the-admin-account)
-7. [Security model](#7-security-model)
-8. [API reference](#8-api-reference)
-9. [Payment flow (bank transfer)](#9-payment-flow-bank-transfer)
-10. [Certificates](#10-certificates)
-11. [Error codes](#11-error-codes)
-12. [Frontend integration](#12-frontend-integration)
-
----
-
-## 1. Architecture
-
-```
-┌────────────────┐        HTTPS + Bearer JWT         ┌───────────────────────────┐
-│  WDTH Frontend │  ───────────────────────────────► │  Express API (this repo)  │
-│  (React etc.)  │                                   │  • auth/role middleware   │
-└────────────────┘                                   │  • validation (zod)       │
-                                                     │  • uploads (multer)       │
-                                                     └───────┬───────────────────┘
-                                                             │ @supabase/supabase-js
-                             ┌───────────────────────────────┼─────────────────────────────────┐
-                             ▼                               ▼                                 ▼
-                    ┌─────────────────┐          ┌────────────────────┐           ┌────────────────────┐
-                    │  Supabase Auth  │          │  PostgreSQL + RLS  │           │  Supabase Storage  │
-                    │  (students,     │          │  tables, triggers, │           │  • payment-receipts│ (private)
-                    │   admin,        │          │  functions         │           │  • certificates    │ (private)
-                    │   instructors)  │          │  approve_payment() │           │  • lesson-resources│ (private)
-                    └─────────────────┘          │  atomic + auditable│           │  • avatars         │ (public)
-                                                 └────────────────────┘           │  • thumbnails      │ (public)
-                                                                                  └────────────────────┘
-```
-
-**The database is the source of truth.** The frontend never decides whether a
-payment is approved or a course unlocked — enrollment only flips to `ACTIVE`
-inside the `approve_payment()` database function, after an admin decision.
-
-## 2. Project structure
-
-```
-.
-├── supabase/
-│   └── migrations/
-│       ├── 20260910000001_initial_schema.sql        — enums, tables, constraints, indexes
-│       ├── 20260910000002_functions_and_triggers.sql — auth sync, atomic payment
-│       │                                                approval/rejection, course
-│       │                                                completion, certificates
-│       ├── 20260910000003_rls_policies.sql          — Row Level Security everywhere
-│       ├── 20260910000004_storage.sql               — private/public buckets + policies
-│       └── 20260910000005_seed.sql                  — categories, bank details, 12 courses
-├── src/
-│   ├── config/          env.js, supabase.js (anon / service-role / per-user clients)
-│   ├── middleware/      auth+roles, zod validate, multer uploads, rate limiters, errors
-│   ├── controllers/     auth, catalog, payments, learning, certificates, notifications,
-│   │                    admin-payments, admin-courses, admin-students, admin-dashboard
-│   ├── services/        storage (signed URLs), audit log, learning progress, PDF certificates
-│   ├── routes/          REST route definitions
-│   ├── validation/      zod schemas for every endpoint
-│   ├── app.js           express app assembly
-│   └── server.js        entrypoint
-├── scripts/
-│   ├── migrate.js       applies supabase/migrations/*.sql via DATABASE_URL
-│   ├── create-admin.js  creates the initial admin (wolidantech@gmail.com)
-│   ├── setup-storage.js idempotent bucket (re)creation helper
-│   ├── check.js         syntax/assembly sanity check
-│   └── validate-sql.mjs PostgreSQL grammar check for the SQL files (dev)
-└── .env.example
-```
-
-## 3. Setup guide (from zero)
-
-### 3.1 Create the Supabase project
-
-1. Go to [supabase.com](https://supabase.com) → **New project** (choose a region close to your users, set a strong DB password).
-2. When the project is ready, open **Project Settings → API** and copy:
-   - Project URL
-   - `anon public` key
-   - `service_role` key *(secret — server only)*
-3. Open **Project Settings → Database → Connection string** and copy the **URI** (this is your `DATABASE_URL`).
-
-### 3.2 Configure the environment
+## 1. Quick start (local)
 
 ```bash
-cp .env.example .env
-# then fill in SUPABASE_URL, SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY,
-# DATABASE_URL, FRONTEND_URL, ADMIN_INITIAL_PASSWORD
-```
-
-### 3.3 Install dependencies & apply the database migrations
-
-```bash
+git clone https://github.com/wolidantech/Tech-hub-backend.git
+cd Tech-hub-backend
 npm install
-npm run migrate
-```
+cp .env.example .env      # then fill in the real values
 
-The migration script creates **all tables, constraints, indexes, functions,
-triggers, RLS policies, storage buckets, storage policies** and seeds the
-categories, platform settings (bank details) and the 12 initial courses
-at **₦5,000.00** each.
-
-> Prefer the Supabase CLI? `supabase link --project-ref <ref>` then
-> `supabase db push` applies the same files.
-
-### 3.4 (Optional, only if not using migrate.js) create buckets manually
-
-```bash
-npm run storage:setup
-```
-
-### 3.5 Create the administrator
-
-```bash
-npm run create:admin
-# uses ADMIN_EMAIL (default wolidantech@gmail.com) and ADMIN_INITIAL_PASSWORD
-# from .env — or asks interactively if the password is not set.
-```
-
-### 3.6 Start the API
-
-```bash
-npm run dev      # development (auto-reload)
-npm start        # production
-```
-
-# 4. Environment variables
-
-| Variable | Required | Description |
-| --- | --- | --- |
-| `SUPABASE_URL` | ✅ | Project URL (Settings → API) |
-| `SUPABASE_ANON_KEY` | ✅ | Public anon key (safe for browser too) |
-| `SUPABASE_SERVICE_ROLE_KEY` | ✅ | **SECRET — server only.** Bypasses RLS for trusted operations |
-| `PORT` | | API port (default `5000`) |
-| `NODE_ENV` | | `development` / `production` |
-| `FRONTEND_URL` | ✅ | Comma-separated allowed CORS origins of the frontend |
-| `DATABASE_URL` | scripts | Postgres URI used by `npm run migrate` only |
-| `ADMIN_EMAIL` | | Default `wolidantech@gmail.com` |
-| `ADMIN_INITIAL_PASSWORD` | scripts | Initial admin password (server-side secret, used once) |
-| `AUTO_CONFIRM_EMAIL` | | `true` to skip email confirmation during development |
-| `MAX_RECEIPT_SIZE_MB` | | Receipt upload cap (default `5`) |
-| `MAX_RESOURCE_SIZE_MB` | | Lesson resource upload cap (default `20`) |
-
-**Never** put the service role key in frontend code. Supabase stores
-passwords hashed — the database never contains plain-text passwords.
-
-## 5. Running the server
-
-```bash
-npm run check   # parse + assemble sanity check
-npm run dev     # http://0.0.0.0:5000 with --watch
+npm start                 # http://localhost:5000
+npm run check             # parse + assemble sanity check
+npm run test:gateway      # 64 offline end-to-end checks
 curl http://localhost:5000/health
 ```
 
-### 5.1 Deploying to Railway (Render / Heroku / Fly work the same way)
+`npm run dev` runs the same service with `--watch`.
 
-The `.env` file is **git-ignored on purpose** — it never reaches the host, so
-every variable below has to be entered in the host's dashboard. Missing ones
-make the API refuse to boot with a list of exactly what is absent.
+## 2. Environment variables
 
-1. **Railway** → your project → the backend **service** → **Variables** →
-   **+ New Variable**, and add:
+Secrets live **only** in Railway Variables (or your local `.env`, which is
+git-ignored). Nothing here is ever returned to a client or written to a log.
 
-   | Variable | Value |
-   | --- | --- |
-   | `SUPABASE_URL` | `https://<project-ref>.supabase.co` |
-   | `SUPABASE_ANON_KEY` | `anon` public key |
-   | `SUPABASE_SERVICE_ROLE_KEY` | `service_role` key (**secret**) |
-   | `NODE_ENV` | `production` |
-   | `FRONTEND_URL` | `https://<your-frontend-domain>` (comma-separated list) |
-   | `DATABASE_URL` | only if you run `npm run migrate` from Railway |
+| Variable | Required | Default | Description |
+| --- | --- | --- | --- |
+| `AI_PROVIDER` | ✅ | — | `openai` \| `anthropic` \| `gemini` |
+| `AI_MODEL` | | per provider | e.g. `gpt-4o-mini`, `claude-3-5-haiku-latest`, `gemini-1.5-flash` |
+| `OPENAI_API_KEY` | ✅¹ | — | Required when `AI_PROVIDER=openai` |
+| `ANTHROPIC_API_KEY` | ✅¹ | — | Required when `AI_PROVIDER=anthropic` |
+| `GEMINI_API_KEY` | ✅¹ | — | Required when `AI_PROVIDER=gemini` |
+| `AI_BASE_URL` | | provider default | OpenAI-compatible base URL (proxies) |
+| `AI_MAX_TOKENS` | | `4000` | Completion budget |
+| `AI_TEMPERATURE` | | `0.7` | Sampling temperature |
+| `AI_TIMEOUT_MS` | | `25000` | **Must stay < 30000** — the frontend aborts at 30s |
+| `AI_MAX_RETRIES` | | `2` | Repairs/retries before returning 502 |
+| `SUPABASE_URL` | ✅ | — | Project URL (Settings → API) |
+| `SUPABASE_SERVICE_ROLE_KEY` | ✅ | — | **SECRET.** Server-side only, bypasses RLS for reads |
+| `ALLOWED_ORIGINS` | ✅ | — | Comma-separated CORS allow-list of frontend origins |
+| `PORT` | Railway-set | `5000` | Injected by Railway — do not set it there |
+| `NODE_ENV` | | `development` | `production` on Railway |
+| `CHAT_RATE_LIMIT` | | `30` | DanTECH requests per user per window |
+| `GENERATE_RATE_LIMIT` | | `10` | AI Studio generations per admin per window |
+| `RATE_WINDOW_MS` | | `60000` | Rate-limit window |
+| `MAX_MESSAGE_CHARS` | | `4000` | Chat message cap |
+| `MAX_HISTORY` | | `12` | Chat history turns accepted |
+| `RAG_MAX_DOCS` | | `6` | Lessons retrieved per chat turn |
+| `RAG_MAX_CHARS_PER_DOC` | | `2000` | Per-lesson context budget |
 
-   > Do **not** set `PORT` — Railway injects it and the API already honours it.
+¹ Only the key for the selected `AI_PROVIDER` is required.
 
-2. Make sure the variables were added to the **service that is deployed**, on
-   the environment that is actually running (production vs. a preview
-   environment). Names are **case-sensitive** and must be uppercase.
-3. Adding a variable triggers a redeploy automatically. If it does not, hit
-   **Deploy → Redeploy**.
-4. Verify: open the generated domain with `/health` appended —
+## 3. Deploy to Railway
 
+1. **New Project → Deploy from GitHub repo** → `wolidantech/Tech-hub-backend`,
+   branch `main`. Region: **Europe West** (closest to Nigeria).
+2. **Variables** → add every required variable from the table above.
+   Adding a variable triggers a redeploy automatically.
+3. `railway.json` already sets the start command (`npm start`), the
+   `/health` healthcheck, and caps crash restarts at 5 so a
+   misconfiguration fails the deploy instead of looping.
+4. **Settings → Networking → Generate Domain** to get the public URL.
+5. Verify:
+
+   ```bash
+   curl https://<your-app>.up.railway.app/health
+   # {"ok":true,"service":"woli-dan-tech-hub-ai-gateway", ...}
    ```
-   https://<your-app>.up.railway.app/health
-   → {"status":"ok","service":"woli-dan-tech-hub-backend", ...}
-   ```
+6. Put the public origin into `ALLOWED_ORIGINS` (comma-separated with any
+   other frontend domain), then redeploy.
 
-`railway.json` at the repository root sets `/health` as the healthcheck and
-caps crash restarts at 5 attempts, so a misconfiguration shows up as a failed
-deploy instead of an endless wall of identical stack traces in the logs.
+## 4. Point the frontend at it
 
-## 6. Creating the admin account
+Two variables in the **frontend** project:
 
-The initial administrator is **wolidantech@gmail.com**:
-
-```bash
-ADMIN_INITIAL_PASSWORD='choose-a-strong-password' npm run create:admin
+```
+VITE_AI_ENDPOINT=https://<your-app>.up.railway.app/api/ai/generate
+VITE_DANTECH_ENDPOINT=https://<your-app>.up.railway.app/api/dantech/chat
 ```
 
-- The password is passed through a **server-side environment variable** — it is
-  never hard-coded and never reaches the frontend.
-- Re-running the script promotes the existing account back to `admin` and resets
-  its password — a safe recovery path.
-- Additional admins/instructors are created later from the admin dashboard
-  (`POST /api/admin/instructors`, `POST /api/admin/users/:id/role`).
-- Admins change their own password via `POST /api/auth/change-password`.
+Until they are set, the frontend keeps using its offline template provider
+and on-device DanTECH tutor — nothing breaks in the meantime.
+
+### Required frontend change (auth header)
+
+`src/lib/ai.js` already forwards `opts.headers`, but `src/lib/dantech.js`
+currently sends only `Content-Type`. Both calls must include the caller's
+Supabase session token:
+
+```
+Authorization: Bearer <supabase access token>
+```
+
+Without it every request returns **401**. This is the only frontend change
+needed — the response shapes are already what the frontend parses.
+
+## 5. API contract
+
+### `POST /api/ai/generate` — admin only
+
+```jsonc
+// request
+{ "kind": "quiz", "input": { "topic": "useState", "numQuestions": 5 }, "options": {} }
+
+// response
+{ "output": { /* kind-shaped data */ }, "provider": "openai" }
+```
+
+Supported `kind` values (all 10 the AI Studio offers):
+
+| kind | `output` shape |
+| --- | --- |
+| `course_outline` | `{ title, description, category?, duration?, level?, learningObjectives[], modules[{ title, summary?, practical?, lessons[{ title, description?, duration?, keyConcepts[] }], quiz?{ passingScore? } }], finalProject? }` |
+| `quiz` | `{ title?, passingScore?, questions[{ type, question, options[], correctAnswer?, correctAnswers?, acceptedAnswers?, explanation? }] }` |
+| `assignment` | `{ title, description, instructions, requiredOutput }` |
+| `lesson_text` / `summary` / `notes` | `{ markdown }` |
+| `exercise` | `{ title, steps[], deliverable, estimatedMinutes?, level? }` |
+| `flashcards` | `{ title, cards[{ front, back }] }` |
+| `video_script` / `voiceover` | `{ title, voice?{ gender, language, speed, style }, estimatedWords?, scenes[{ time, visual, narration }], subtitles? }` |
+
+`lesson_script` is accepted as an alias of `video_script`. Output is validated
+against these shapes with zod and repaired/retried up to `AI_MAX_RETRIES`
+times; a persistent failure returns **502** with a friendly message.
+
+### `POST /api/dantech/chat` — any authenticated user
+
+```jsonc
+// request
+{ "message": "Explain useEffect", "context": { "courseId": "…", "lessonId": "…", "level": "Beginner" },
+  "history": [{ "role": "user", "text": "…" }, { "role": "assistant", "text": "…" }] }
+
+// response
+{ "reply": "## useEffect\n\n…markdown…", "sources": [{ "courseTitle": "…", "lessonTitle": "…", "moduleTitle": "…", "courseId": "…", "lessonId": "…" }], "provider": "openai" }
+```
+
+- Grounded in **published, non-archived** lessons only, retrieved server-side
+  with the service-role key (`courses.published = true AND courses.archived = false`).
+- With `context.courseId` it retrieves that course's lessons; otherwise it
+  keyword-searches published lessons.
+- `sources` never contains lesson bodies — only titles/ids for citation.
+- Replies are markdown, beginner-friendly and cite the course.
+
+### Status codes
+
+| Code | Meaning |
+| --- | --- |
+| `200` | Success (an academic-integrity refusal is also a `200` with a helpful `reply`) |
+| `400` | Unknown `kind`, malformed body, empty or over-long message |
+| `401` | Missing/invalid/expired Supabase token |
+| `403` | Valid token but `profiles.role !== 'admin'` on `/api/ai/generate`, or blocked CORS origin |
+| `429` | Rate limit exceeded (`Retry-After` header is set) |
+| `502` | Provider error or unusable output after retries |
+| `503` | Supabase Auth unreachable |
+
+## 6. curl examples
+
+`TOKEN` is a Supabase access token (`supabase.auth.getSession()`); the admin
+account must have `profiles.role = 'admin'`.
+
+```bash
+API=https://<your-app>.up.railway.app
+
+# health — no auth
+curl -s $API/health
+# {"ok":true,"service":"woli-dan-tech-hub-ai-gateway","time":"…","provider":"openai"}
+
+# 401 without a token
+curl -s -o /dev/null -w "%{http_code}\n" -X POST $API/api/ai/generate \
+  -H 'Content-Type: application/json' -d '{"kind":"quiz","input":{}}'
+# 401
+
+# 403 for a signed-in student (role checked server-side, never trusted from the client)
+curl -s -X POST $API/api/ai/generate -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer $STUDENT_TOKEN" -d '{"kind":"quiz","input":{"topic":"useState"}}'
+# {"error":"Forbidden","message":"AI Studio generation is restricted to administrators."}
+
+# admin generation — course_outline
+curl -s -X POST $API/api/ai/generate -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer $ADMIN_TOKEN" \
+  -d '{"kind":"course_outline","input":{"courseName":"React for Nigerian Freelancers","category":"Web Development","level":"Beginner","duration":"8 weeks","numModules":6},"options":{}}'
+# {"output":{"title":"…","learningObjectives":[…],"modules":[{"title":"…","lessons":[…]}]},"provider":"openai"}
+
+# admin generation — quiz
+curl -s -X POST $API/api/ai/generate -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer $ADMIN_TOKEN" \
+  -d '{"kind":"quiz","input":{"topic":"useState","numQuestions":5},"options":{}}'
+# {"output":{"passingScore":70,"questions":[{"type":"multiple_choice","question":"…","options":[…],"correctAnswer":0,"explanation":"…"}]},"provider":"openai"}
+
+# admin generation — lesson_text
+curl -s -X POST $API/api/ai/generate -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer $ADMIN_TOKEN" \
+  -d '{"kind":"lesson_text","input":{"topic":"useState","objective":"Use state safely","level":"Beginner"},"options":{}}'
+# {"output":{"markdown":"# useState\n\n…"},"provider":"openai"}
+
+# DanTECH AI chat turn with sources
+curl -s -X POST $API/api/dantech/chat -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer $STUDENT_TOKEN" \
+  -d '{"message":"Explain useState like I am a beginner","context":{"courseId":"<uuid>","lessonId":"<uuid>","level":"Beginner"},"history":[]}'
+# {"reply":"## Understanding useState\n\n…\n\n📚 Based on your course: **Understanding useState**",
+#  "sources":[{"courseTitle":"React for Nigerian Freelancers","lessonTitle":"Understanding useState","moduleTitle":"Module 1: React Foundations"}],"provider":"openai"}
+
+# academic-integrity refusal (200, not an error)
+curl -s -X POST $API/api/dantech/chat -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer $STUDENT_TOKEN" \
+  -d '{"message":"write my assignment for me","context":{},"history":[]}'
+# {"reply":"I can't complete assessed work *for* you — … I can help you finish it strong: …","sources":[],"provider":"guardrail"}
+
+# 429 after 30 chat requests in a minute
+curl -s -i -X POST $API/api/dantech/chat -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer $STUDENT_TOKEN" -d '{"message":"explain props"}'
+# HTTP/1.1 429 … Retry-After: 41
+```
+
+> Every one of these behaviours — health, 401, 403, CORS, 400s, all 10 kinds,
+> 502 handling, sources, the integrity refusal and both 429 limits — is
+> asserted by `npm run test:gateway` (64 checks) against the real code with
+> only the network stubbed. Run it before deploying.
 
 ## 7. Security model
 
-### Roles
+- **Secrets**: `OPENAI_API_KEY` / `ANTHROPIC_API_KEY` / `GEMINI_API_KEY` and
+  `SUPABASE_SERVICE_ROLE_KEY` exist only as Railway Variables. They are never
+  committed, logged, proxied or returned. Error responses never contain stack
+  traces or upstream bodies.
+- **Auth**: tokens are verified against the **Supabase Auth API**
+  (`/auth/v1/user`) — no hand-rolled JWT parsing, so key rotation and
+  revocation are handled by Supabase. Verified results are cached for 60s.
+- **Authorisation**: `profiles.role` is read from Postgres on every
+  `/api/ai/generate` call. Claims inside the token are never trusted.
+- **CORS**: only origins listed in `ALLOWED_ORIGINS`; everything else (including
+  preflight) is rejected with 403.
+- **Rate limiting**: per **authenticated user id**, not IP (Railway sits behind
+  a proxy). 30/min chat, 10/min generation by default, `Retry-After` set.
+- **Academic integrity**: enforced server-side *before* any model call
+  (`src/gateway/integrity.js`) and repeated in the chat system prompt. A
+  client-side check alone would be trivially bypassed.
+- **RLS**: never disabled, never bypassed for user-facing reads. The service
+  role is used only to read published content for grounding.
+- **Logging**: method, path, status, duration and a hashed user id. No bodies,
+  tokens, keys or PII.
 
-| Role | How it is assigned |
-| --- | --- |
-| `student` | Default on every public registration (DB trigger hard-codes it) |
-| `admin` | Only by `scripts/create-admin.js` or an existing admin |
-| `instructor` | Only by an admin |
+## 8. Provider swapping
 
-The `profiles` table is the role source of truth. A database **trigger**
-(`trg_profiles_role_guard`) makes role changes by non-admins impossible — even
-if the frontend is tampered with.
+Change `AI_PROVIDER` (and `AI_MODEL`) and redeploy — no code change. The
+abstraction lives in `src/gateway/providers/index.js`; adding a vendor means
+adding one factory that implements `complete()` (strict JSON) and `chat()`
+(markdown).
 
-### Row Level Security (enabled on every table)
-
-| Table | Students | Admins |
+| `AI_PROVIDER` | Endpoint used | JSON mode |
 | --- | --- | --- |
-| `profiles` | read/update **only their own** row (role immutable) | full |
-| `course_categories`, `courses` | read **published** only | full CRUD |
-| `course_modules` | read published-course outlines | full CRUD |
-| `lessons` | read **only when enrolled & course paid (ACTIVE/COMPLETED)** | full CRUD |
-| `payments` | insert `PENDING` for themselves; read own | full — approve/reject |
-| `payment_receipts` | insert for their **own PENDING** payment; read own | full |
-| `enrollments` | read own (mutations are service-role only) | read |
-| `lesson_progress` | read/upsert own, only for enrolled courses | read |
-| `certificates` | read own | read/revoke |
-| `notifications` | read own + mark read | read |
-| `audit_logs` | — | read |
-| `platform_settings` | read `is_public` rows (bank details) | full |
+| `openai` | `POST /v1/chat/completions` | `response_format: json_object` |
+| `anthropic` | `POST /v1/messages` | system prompt + JSON instruction |
+| `gemini` | `POST /v1beta/models/{model}:generateContent` | `responseMimeType: application/json` |
 
-### Storage buckets
-
-| Bucket | Privacy | Access |
-| --- | --- | --- |
-| `payment-receipts` | **private** | Owner + admin only, via short-lived **signed URLs** (10 min student / 60 min admin) |
-| `certificates` | **private** | Owner + admin, signed URLs |
-| `lesson-resources` | **private** | Enrolled students, signed URLs issued by the API |
-| `avatars` | public read | owner writes to their own folder only |
-| `course-thumbnails` | public read | admin writes only |
-
-### Server-side safeguards
-
-- JWT verified on every request; role checked **from the DB**, not the token payload.
-- **Atomicity**: `approve_payment()` / `reject_payment()` run as a single
-  PostgreSQL transaction (payment status + enrollment + notifications + audit).
-  If any step fails, everything rolls back — no inconsistent states.
-- Only **one PENDING payment per student/course** (partial unique index);
-  transaction references are globally unique.
-- File uploads: MIME allowlist + size cap in multer, bucket-level MIME/size
-  enforcement, and **magic-byte verification** for receipts.
-- Rate limiting on auth (`30/15min`) and payment submission (`20/10min`) endpoints.
-- Helmet security headers, strict CORS whitelist, 1 MB JSON body cap.
-- Errors never expose SQL, stack traces or server internals.
-
-## 8. API reference
-
-Base URL: `/api` — all responses are JSON: `{ success, message?, data? }` or
-`{ success: false, error: { code, message } }`.
-
-Protected endpoints need `Authorization: Bearer <access_token>`.
-
-### Auth & profile
-
-| Method | Endpoint | Role | Description |
-| --- | --- | --- | --- |
-| POST | `/auth/register` | public | Register student (JSON or multipart with `photo`) |
-| POST | `/auth/login` | public | Login → `{ profile, session }` |
-| POST | `/auth/logout` | user | Logout |
-| POST | `/auth/forgot-password` | public | Email a reset link |
-| POST | `/auth/reset-password` | recovery token | Set new password from reset link |
-| POST | `/auth/change-password` | user | Change password (requires current password) |
-| GET | `/profiles/me` | user | `get-profile` |
-| PUT | `/profiles/me` | user | `update-profile` (multipart `photo` optional) |
-
-### Catalog (public)
-
-| Method | Endpoint | Note |
-| --- | --- | --- |
-| GET | `/course-categories` | all categories |
-| GET | `/courses?category=&search=&difficulty=&page=&limit=` | published courses |
-| GET | `/courses/:idOrSlug` | detail + curriculum **outline** (no gated content) |
-| GET | `/courses/:idOrSlug/lessons` | 🔒 students: only when enrolled & paid |
-
-### Enrollment & payments (student)
-
-| Method | Endpoint | Description |
-| --- | --- | --- |
-| POST | `/enrollments` `{course_id}` | `enroll-course` → returns bank details + exact amount |
-| POST | `/payments` | `submit-payment` — multipart: `receipt` file + `course_id`, `transaction_reference`, `transaction_date` |
-| GET | `/payments/me` | `get-my-payments` + summary (Total Paid counts APPROVED only) |
-| GET | `/payments/:id/receipt-url` | signed URL for own receipt |
-| GET | `/enrollments/me` | `get-my-courses` with progress & continue-learning |
-
-### Learning (student, enrollment-gated)
-
-| Method | Endpoint | Description |
-| --- | --- | --- |
-| GET | `/learning/my-courses` | My Courses dashboard data |
-| GET | `/learning/courses/:id` | Full course player payload (🔒 access server-verified) |
-| GET | `/learning/courses/:id/progress` | `get-course-progress` (e.g. 13/20 → 65%) |
-| GET | `/learning/lessons/:lessonId` | Single gated lesson + signed resource URL |
-| POST | `/learning/lessons/:lessonId/progress` | `mark-lesson-complete` / save `last_position` (continue learning) |
-
-### Certificates
-
-| Method | Endpoint | Description |
-| --- | --- | --- |
-| GET | `/certificates/me` | my certificates |
-| GET | `/certificates/:id` | metadata + signed PDF download URL |
-| GET | `/public/verify-certificate/:identifier` | **public** verification (cert number `WDTH-2026-000001` or code) |
-
-### Notifications
-
-| Method | Endpoint | Description |
-| --- | --- | --- |
-| GET | `/notifications` | my notifications + unread count |
-| POST | `/notifications/read-all` | mark all read |
-| POST | `/notifications/:id/read` | mark one read |
-
-### Admin (all require `role = admin`)
-
-| Method | Endpoint | Description |
-| --- | --- | --- |
-| GET | `/admin/statistics` | students, courses, enrollments, payments & revenue (APPROVED only) |
-| GET | `/admin/payments?status=PENDING` | `get-pending-payments` review queue |
-| GET | `/admin/payments/:id` | detail + signed receipt URL + history |
-| POST | `/admin/payments/:id/approve` | **atomic** approve → enrollment ACTIVE + notifications |
-| POST | `/admin/payments/:id/reject` `{rejection_reason}` | atomic reject + notification |
-| GET/POST | `/admin/courses` | list all / `create-course` |
-| GET/PATCH/DELETE | `/admin/courses/:idOrSlug` | read / `update-course` (incl. **price**) / delete-or-unpublish |
-| POST | `/admin/courses/:idOrSlug/thumbnail` | upload thumbnail (multipart `file`) |
-| POST/PATCH/DELETE | `/admin/categories…` | manage categories |
-| POST | `/admin/courses/:idOrSlug/modules` | create module |
-| POST | `/admin/courses/:idOrSlug/modules/reorder` | `{ids:[...]}` atomic reorder |
-| PATCH/DELETE | `/admin/modules/:id` | edit / delete module |
-| POST | `/admin/modules/:id/lessons` + `/reorder` | create / reorder lessons |
-| PATCH/DELETE | `/admin/lessons/:id` | edit (publish/unpublish, video_url…) / delete |
-| POST | `/admin/lessons/:id/resource` | upload lesson file (private bucket) |
-| GET | `/admin/enrollments?status=` | all enrollments |
-| PATCH | `/admin/enrollments/:id` | cancel/activate enrollment (audited) |
-| GET | `/admin/students?search=` | search students (never passwords) |
-| GET | `/admin/students/:id` | profile + courses + payments + progress + certificates |
-| PATCH | `/admin/students/:id` | update student (audited) |
-| GET/POST | `/admin/instructors` | list / create instructor accounts |
-| POST | `/admin/users/:id/role` | change role (`student`/`admin`/`instructor`) |
-| GET/PATCH | `/admin/certificates…` | list / revoke / reactivate |
-| GET/PUT | `/admin/settings` | view / update settings (e.g. `bank_details`) |
-| GET | `/admin/audit-logs` | full admin action history |
-
-## 9. Payment flow (bank transfer)
+## 9. Repository layout
 
 ```
-STUDENT                                   ADMIN
-  │                                         │
-  │ POST /api/enrollments ─► bank details:  │
-  │   MONIEPOINT                            │
-  │   69852663361                           │
-  │   LUNA ENTRY SERVICES- WOLI DAN TECH HUB│
-  │                                         │
-  │── transfers NGN 5,000.00 ──────────────►│
-  │                                         │
-  │ POST /api/payments (receipt + ref)      │
-  │   → payment.status = PENDING            │
-  │   → enrollment NOT activated            │
-  │   "Payment submitted successfully       │
-  │    and is awaiting admin verification." │
-  │                                         │
-  │                              GET /api/admin/payments
-  │                              POST .../approve or .../reject
-  │                                         │
-  │ ◄── APPROVED  → enrollment ACTIVE       │
-  │     notifications + audit log           │
-  │     course appears in "My Courses"      │
-  │                                         │
-  │ ◄── REJECTED (reason)  → notified,      │
-  │     may submit a new payment            │
+src/gateway/            the deployed service
+  server.js             entry point (npm start)
+  app.js                Express app, CORS, logging, routes, error handling
+  config.js             env validation (fails fast with an actionable message)
+  auth.js               Supabase Auth API verification + admin role check
+  supabase.js           PostgREST access (service role)
+  rag.js                retrieval over published lessons
+  integrity.js          server-side academic-integrity guard
+  kinds.js              zod contracts for all 10 AI kinds
+  prompts.js            per-kind system prompts + DanTECH chat prompt
+  json.js               JSON extract/repair + validate-and-retry loop
+  ratelimit.js          per-user fixed-window limiter
+  providers/index.js    OpenAI | Anthropic | Gemini abstraction
+scripts/
+  test-gateway.mjs      64 offline end-to-end checks (npm run test:gateway)
+  check.js              parse + assemble sanity check (npm run check)
+  test-db.mjs           legacy LMS schema test (embedded Postgres)
+docs/
+  legacy-lms-backend.md documentation for the dormant LMS backend
 ```
 
-Bank details live in `platform_settings.bank_details` — the admin changes them
-from the dashboard (`PUT /api/admin/settings/bank_details`), no code changes.
+### About the dormant LMS backend
 
-## 10. Certificates
+This repository previously contained a full Express LMS API (`src/app.js`,
+controllers, routes) written against an **earlier, different schema** — its
+migrations define `lessons`, `payments`, `payment_receipts` and
+`certificates`, whereas the live Supabase project (created from
+`wolidantech/Tech-hub-frontend`'s `supabase/migrations/001–005`) uses
+`course_lessons`, `course_content`, `manual_payments` and
+`certificate_issues`.
 
-- Issued automatically by the database trigger when **all published lessons**
-  of a course are completed (`13/20 → 65%` … `20/20 → 100%`).
-- Number format: `WDTH-YYYY-NNNNNN` (sequential per year).
-- A branded PDF is generated on first view and stored in the **private**
-  `certificates` bucket; students download via a signed URL.
-- Public verification at `/api/public/verify-certificate/:identifier` returns
-  only: validity, student name, course name, dates, certificate ID and
-  `WOLI DAN TECH HUB`. No emails, phones or other private data.
-
-## 11. Error codes
-
-| Code | HTTP | Meaning |
-| --- | --- | --- |
-| `VALIDATION_ERROR` | 400 | missing/invalid input (field list included) |
-| `INVALID_FILE_TYPE` / `FILE_TOO_LARGE` | 400 | upload rejected |
-| `RECEIPT_REQUIRED` / `INVALID_RECEIPT` | 400 | missing/corrupt receipt |
-| `AMOUNT_MISMATCH` | 400 | paid amount ≠ course price |
-| `MISSING_TOKEN` / `INVALID_TOKEN` / `INVALID_CREDENTIALS` | 401 | authentication problems |
-| `FORBIDDEN` / `UNAUTHORIZED_ADMIN_ACTION` / `COURSE_ACCESS_DENIED` | 403 | authorization problems |
-| `COURSE_NOT_FOUND` / `PAYMENT_NOT_FOUND` / … | 404 | not found |
-| `EMAIL_TAKEN` / `ALREADY_ENROLLED` / `PAYMENT_ALREADY_PENDING` | 409 | conflicts |
-| `DUPLICATE_TRANSACTION_REFERENCE` | 409 | reference already submitted |
-| `PAYMENT_ALREADY_REVIEWED` | 409 | approve/reject ran twice |
-| `RATE_LIMITED` | 429 | slow down |
-| `INTERNAL_ERROR` | 500 | generic, sanitized server error |
-
-## 12. Frontend integration
-
-```js
-const API = 'https://your-api.example.com/api';
-let token = null; // access_token from login – keep in memory, not localStorage
-
-async function api(path, { method = 'GET', body, formData } = {}) {
-  const res = await fetch(`${API}${path}`, {
-    method,
-    headers: {
-      ...(body ? { 'Content-Type': 'application/json' } : {}),
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-    },
-    body: formData ? formData : body ? JSON.stringify(body) : undefined,
-  });
-  const json = await res.json();
-  if (!res.ok) throw new Error(json.error?.message || 'Request failed');
-  return json.data;
-}
-
-// Register / login
-await api('/auth/register', { method: 'POST', body: { full_name, email, phone, password } });
-const { session } = await api('/auth/login', { method: 'POST', body: { email, password } });
-token = session.access_token;
-
-// Catalog + enrollment
-const { courses } = await api('/courses');
-await api('/enrollments', { method: 'POST', body: { course_id } }); // → bank details
-
-// Submit payment with receipt
-const fd = new FormData();
-fd.append('course_id', courseId);
-fd.append('transaction_reference', ref);
-fd.append('transaction_date', '2026-09-10');
-fd.append('receipt', fileInput.files[0]);
-await api('/payments', { method: 'POST', formData: fd });
-
-// My courses + progress
-const { enrollments } = await api('/learning/my-courses');
-await api(`/learning/lessons/${lessonId}/progress`, {
-  method: 'POST',
-  body: { completed: true, last_position: 245 },
-});
-```
-
-The frontend must always trust the API/database for access decisions:
-`has_access` / `enrollment_status` / progress come straight from PostgreSQL.
-
----
-
-© WOLI DAN TECH HUB — LEARN • BUILD • GROW
+That code is **not deployed** and is not reachable from `npm start`. It is
+kept for reference and still parse-checked by `npm run check`. Do not point
+Railway at it: its endpoints do not match the live tables. Its docs live in
+[`docs/legacy-lms-backend.md`](docs/legacy-lms-backend.md) and it can still be
+run locally with `npm run start:lms`.
