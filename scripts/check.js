@@ -83,4 +83,20 @@ if (typeof lmsApp !== 'function') {
   process.exit(1);
 }
 
+// ---- runtime compatibility: Supabase clients must construct WITHOUT a native WebSocket ----
+// Node.js 21+ ships a global WebSocket; `--no-experimental-websocket` removes
+// it so this machine reproduces Node.js 18/20, where realtime-js throws
+// inside createClient() and killed the deploy. Node.js <= 20 needs no flag.
+const nodeMajor = Number(process.versions.node.split('.')[0]);
+const runtimeFlags = nodeMajor >= 21 ? ['--no-experimental-websocket'] : [];
+const runtimeCheck = spawnSync(process.execPath, [...runtimeFlags, join('scripts', 'check-runtime.mjs')], {
+  encoding: 'utf8',
+});
+if (runtimeCheck.status !== 0) {
+  console.error('✗ Supabase clients fail to construct on a runtime without a native WebSocket (Node.js < 22).');
+  console.error((runtimeCheck.stdout || '') + (runtimeCheck.stderr || ''));
+  process.exit(1);
+}
+process.stdout.write(runtimeCheck.stdout || '');
+
 console.log(`✓ ${files.length} files parsed successfully; AI gateway + legacy LMS app both assemble.`);

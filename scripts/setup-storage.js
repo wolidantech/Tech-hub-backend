@@ -10,6 +10,7 @@
  */
 import dotenv from 'dotenv';
 import { createClient } from '@supabase/supabase-js';
+import { realtimeOptions } from '../src/config/websocket.js';
 
 dotenv.config();
 
@@ -120,7 +121,7 @@ async function main() {
     process.exit(1);
   }
 
-  const supabase = createClient(url, key, { auth: { persistSession: false } });
+  const supabase = createClient(url, key, { auth: { persistSession: false }, ...realtimeOptions() });
 
   for (const bucket of REQUIRED) {
     const { error: createError } = await supabase.storage.createBucket(bucket.id, {
