@@ -11,7 +11,7 @@ WOLI DAN TECH HUB FRONTEND (Vite / React, talks to Supabase directly for LMS dat
         ▼
 RAILWAY  ── this service ──────────────────────────────
    GET  /health              public, Railway healthcheck
-   POST /api/ai/generate     admin only      → AI Studio "Generate"
+   POST /api/ai/generate     Study Tools: students, rest: admin → AI generation
    POST /api/dantech/chat    authenticated   → DanTECH AI assistant
         │
         ├──► LLM provider (OpenAI | Anthropic | Gemini)
@@ -44,7 +44,7 @@ cp .env.example .env      # then fill in the real values
 
 npm start                 # http://localhost:5000
 npm run check             # parse + assemble sanity check
-npm run test:gateway      # 64 offline end-to-end checks
+npm run test:gateway      # 75 offline end-to-end checks
 curl http://localhost:5000/health
 ```
 
@@ -128,7 +128,12 @@ needed — the response shapes are already what the frontend parses.
 
 ## 5. API contract
 
-### `POST /api/ai/generate` — admin only
+### `POST /api/ai/generate` — Study Tools for students, everything else admin-only
+
+Students (any authenticated user) may generate the four **Study Tools** kinds —
+`flashcards`, `notes`, `summary`, `exercise` — which power the frontend's Study Tools
+panel (flashcards, study notes, summary, practice). All other kinds require
+`profiles.role = 'admin'`, checked server-side on every call.
 
 ```jsonc
 // request
@@ -179,7 +184,7 @@ times; a persistent failure returns **502** with a friendly message.
 | `200` | Success (an academic-integrity refusal is also a `200` with a helpful `reply`) |
 | `400` | Unknown `kind`, malformed body, empty or over-long message |
 | `401` | Missing/invalid/expired Supabase token |
-| `403` | Valid token but `profiles.role !== 'admin'` on `/api/ai/generate`, or blocked CORS origin |
+| `403` | Valid token but `profiles.role !== 'admin'` on a protected `/api/ai/generate` kind, or blocked CORS origin |
 | `429` | Rate limit exceeded (`Retry-After` header is set) |
 | `502` | Provider error or unusable output after retries |
 | `503` | Supabase Auth unreachable |
@@ -201,7 +206,7 @@ curl -s -o /dev/null -w "%{http_code}\n" -X POST $API/api/ai/generate \
   -H 'Content-Type: application/json' -d '{"kind":"quiz","input":{}}'
 # 401
 
-# 403 for a signed-in student (role checked server-side, never trusted from the client)
+# 403 for a signed-in student on a protected kind (quiz is admin-only; Study Tools kinds are allowed)
 curl -s -X POST $API/api/ai/generate -H 'Content-Type: application/json' \
   -H "Authorization: Bearer $STUDENT_TOKEN" -d '{"kind":"quiz","input":{"topic":"useState"}}'
 # {"error":"Forbidden","message":"AI Studio generation is restricted to administrators."}
@@ -217,6 +222,12 @@ curl -s -X POST $API/api/ai/generate -H 'Content-Type: application/json' \
   -H "Authorization: Bearer $ADMIN_TOKEN" \
   -d '{"kind":"quiz","input":{"topic":"useState","numQuestions":5},"options":{}}'
 # {"output":{"passingScore":70,"questions":[{"type":"multiple_choice","question":"…","options":[…],"correctAnswer":0,"explanation":"…"}]},"provider":"openai"}
+
+# student Study Tools — flashcards (allowed for any authenticated user)
+curl -s -X POST $API/api/ai/generate -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer $STUDENT_TOKEN" \
+  -d '{"kind":"flashcards","input":{"topic":"useState"}}'
+# {"output":{"title":"…","cards":[{"front":"…","back":"…"}]},"provider":"openai"}
 
 # admin generation — lesson_text
 curl -s -X POST $API/api/ai/generate -H 'Content-Type: application/json' \
@@ -245,7 +256,7 @@ curl -s -i -X POST $API/api/dantech/chat -H 'Content-Type: application/json' \
 
 > Every one of these behaviours — health, 401, 403, CORS, 400s, all 10 kinds,
 > 502 handling, sources, the integrity refusal and both 429 limits — is
-> asserted by `npm run test:gateway` (64 checks) against the real code with
+> asserted by `npm run test:gateway` (75 checks) against the real code with
 > only the network stubbed. Run it before deploying.
 
 ## 7. Security model
@@ -258,7 +269,9 @@ curl -s -i -X POST $API/api/dantech/chat -H 'Content-Type: application/json' \
   (`/auth/v1/user`) — no hand-rolled JWT parsing, so key rotation and
   revocation are handled by Supabase. Verified results are cached for 60s.
 - **Authorisation**: `profiles.role` is read from Postgres on every
-  `/api/ai/generate` call. Claims inside the token are never trusted.
+  `/api/ai/generate` call. Claims inside the token are never trusted. The four Study
+  Tools kinds (`flashcards`, `notes`, `summary`, `exercise`) are open to any
+  authenticated user; all other kinds require `admin`.
 - **CORS**: only origins listed in `ALLOWED_ORIGINS`; everything else (including
   preflight) is rejected with 403.
 - **Rate limiting**: per **authenticated user id**, not IP (Railway sits behind
@@ -305,7 +318,7 @@ src/gateway/            the deployed service
   ratelimit.js          per-user fixed-window limiter
   providers/index.js    OpenAI | Anthropic | Gemini abstraction
 scripts/
-  test-gateway.mjs      64 offline end-to-end checks (npm run test:gateway)
+  test-gateway.mjs      75 offline end-to-end checks (npm run test:gateway)
   check.js              parse + assemble sanity check (npm run check)
   check-runtime.mjs     Supabase clients construct without a native WebSocket
   test-db.mjs           legacy LMS schema test (embedded Postgres)
