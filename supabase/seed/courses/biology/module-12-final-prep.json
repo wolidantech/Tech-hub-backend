@@ -1,0 +1,403 @@
+{
+  "key": "mod12",
+  "order": 12,
+  "title": "Final Revision and Assessment",
+  "description": "Last-mile checklists, the mock examination, and entry to the final exam, completion and certification.",
+  "objectives": [
+    "Verify mastery with final checklists",
+    "Pass the mock examination under real conditions",
+    "Enter the final examination ready and calm"
+  ],
+  "duration_text": "1 week",
+  "topics": [
+    {
+      "key": "top01",
+      "order": 1,
+      "title": "Final Checklists",
+      "description": "Every must-know definition, equation and diagram in one place.",
+      "objectives": ["Recite all key definitions", "Reproduce key diagrams"],
+      "lessons": [
+        {
+          "key": "les01",
+          "title": "Definitions and Equations Master List",
+          "description": "The 20 definitions and 4 equations no candidate may fumble.",
+          "duration": 40,
+          "objectives": [
+            "Write all 20 definitions word-perfect from memory",
+            "Write all 4 equations with correct direction",
+            "Self-test with cover-and-recall cycles"
+          ],
+          "introduction": "Examiners cannot mark what they cannot recognise. These definitions and equations are the currency of every biology paper — mint them now.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "Twenty definitions",
+              "body": "Cover the right column; recall; check. (1) Diffusion — net movement of particles from high to low concentration down a gradient. (2) Osmosis — net movement of water from high to low water concentration across a partially permeable membrane. (3) Active transport — movement against a gradient using ATP and carriers. (4) Enzyme — specific protein catalyst with an active site, unchanged by reaction. (5) Denaturation — irreversible loss of 3D shape (heat/extreme pH) destroying function. (6) Photosynthesis — CO2 + water → glucose + oxygen using light and chlorophyll. (7) Aerobic respiration — glucose + oxygen → CO2 + water + large energy. (8) Gene — DNA section coding one trait. (9) Allele — one version of a gene. (10) Genotype — allele pair carried; phenotype — trait expressed. (11) Mitosis — one division → 2 identical diploid cells (growth/repair). (12) Meiosis — two divisions → 4 unique haploid cells (gametes). (13) Natural selection — variation + competition + differential survival + inheritance shifting allele frequencies. (14) Species — interbreeding group producing fertile offspring. (15) Ecosystem — community plus non-living environment. (16) Trophic level — feeding step from producers. (17) Homeostasis — maintaining constant internal conditions by negative feedback. (18) Reflex — fast involuntary response via receptor→sensory→relay→motor→effector. (19) Transpiration — water loss from leaves driving xylem pull. (20) Germination — sprouting requiring water + oxygen + warmth."
+            },
+            {
+              "block": "THEORY",
+              "title": "Four equations, zero confusion",
+              "body": "PHOTOSYNTHESIS: 6CO2 + 6H2O →(light/chlorophyll) C6H12O6 + 6O2. AEROBIC RESPIRATION: C6H12O6 + 6O2 → 6CO2 + 6H2O + energy (~30 ATP). ANAEROBIC (muscle): glucose → lactic acid + small energy. ANAEROBIC (yeast): glucose → ethanol + CO2 + small energy. Direction discipline: photosynthesis BUILDS glucose (needs input); respiration BREAKS it (releases output). Common swap: writing respiration's arrow for photosynthesis — check every equation's direction before moving on. Word equations earn full marks where symbols are not demanded; add symbols only when confident."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: the 10-minute self-test",
+              "body": "Method: fold paper in half. Left: numbers 1–20. Without notes, write each definition from the titles alone (diffusion, osmosis, ...). Time: 10 minutes. Marking: exact = tick; close = half; missing/wrong = cross. Score under 16: re-learn crosses using Module 11's chain technique, sleep, re-test tomorrow (spaced repetition beats cramming). Score 16+: attempt the 4 equations blind, then diagrams (next lesson). Repeat daily until 20/20 twice running — mastery is consecutive perfection, not one lucky pass."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "20 definitions + 4 equations = the paper's currency.\nOsmosis names the membrane; active transport names ATP; enzymes name the active site.\nPhotosynthesis builds; respiration breaks — never swap arrows.\nMastery = 20/20 twice running, spaced over days."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Definitions decide marks: precise terms, named structures, stated conditions. Drill them spaced and blind until perfect is routine."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Recall blind, mark harshly", "Name the membrane/ATP/site", "Space the drills"],
+          "references": ["OpenStax Biology 2e — glossary (verify every definition)"]
+        },
+        {
+          "key": "les02",
+          "title": "Diagrams You Must Draw",
+          "description": "The six most-examined diagrams and how to reproduce each for full marks.",
+          "duration": 40,
+          "objectives": [
+            "Draw and label six key diagrams from memory",
+            "Apply biological drawing rules automatically",
+            "Annotate diagrams with functions, not just names"
+          ],
+          "introduction": "A perfect diagram can earn 6 marks in 3 minutes — the best rate in the paper. These six appear year after year.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "The six diagrams",
+              "body": "(1) PLANT CELL: wall, membrane, cytoplasm, nucleus, vacuole, chloroplast, mitochondrion — rectangular with even walls. (2) ANIMAL CELL: membrane, cytoplasm, nucleus, mitochondrion — rounded, NO wall/vacuole/chloroplasts. (3) HEART (double circulation): four chambers, aorta/vena cava/pulmonary vessels, valves, arrows showing flow + O2 colours. (4) LEAF SECTION: cuticle, upper epidermis, palisade, spongy + air spaces, lower epidermis with stomata/guard cells, vein (xylem above, phloem below). (5) FLOWER (half-section): sepals, petals, anther/filament, stigma/style/ovary/ovule. (6) REFLEX ARC: receptor → sensory → spinal cord relay → motor → muscle, with CNS box and direction arrows. RULES (Module 10): large, sharp pencil, single lines, no shading, ruled touching labels, title + magnification. Annotate ONE function per label where space allows ('xylem — carries water up')."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: the heart in 3 minutes",
+              "body": "Drill: draw the heart from memory, timed. Minute 1 — outline: two atria (top, thin walls), two ventricles (bottom, left wall THICK), septum dividing. Minute 2 — vessels: aorta arching from left ventricle, vena cava entering right atrium, pulmonary artery leaving right ventricle, pulmonary veins entering left atrium. Minute 3 — valves (dots + labels: bicuspid, tricuspid, semilunars) + flow arrows + title 'Vertical section of the mammalian heart'. Self-mark: 1 per correct chamber, vessel pair, valve set, arrows, title. Under 5: redraw immediately — motor memory builds through repetition, not reading."
+            },
+            {
+              "block": "VIDEO",
+              "title": "Watch: Cell Organelles Review (rapid self-test)",
+              "url": "https://www.youtube.com/watch?v=6mgkoqcm6Sg",
+              "body": "Replay 'Cell Organelles and Structures Review' by the Amoeba Sisters (official channel stream) — shout each structure's name BEFORE the reveal, then sketch the cell it belongs to."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Six diagrams: plant cell, animal cell, heart, leaf section, flower, reflex arc.\nDraw timed (3 min each); self-mark against label checklists.\nAnnotate functions, not just names, where space allows.\nMotor memory comes from redrawing, never from rereading."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Six diagrams, three minutes each, drawn blind and marked harshly. Diagrams are the fastest marks in biology — bank them."
+            }
+          ],
+          "videos": [
+            {
+              "title": "Cell Organelles and Structures Review",
+              "url": "https://www.youtube.com/watch?v=6mgkoqcm6Sg",
+              "source": "Amoeba Sisters",
+              "license": "Standard YouTube License (official stream — no copy made)",
+              "attribution": "© Amoeba Sisters — streamed from the official channel https://www.youtube.com/@AmoebaSisters",
+              "description": "Rapid-fire organelle drill — name each structure before the reveal."
+            }
+          ],
+          "resources": [],
+          "key_points": ["Six diagrams cold", "Timed redraws", "Function annotations"],
+          "references": ["OpenStax Biology 2e — figures in Chapters 4, 30, 32, 34, 39"]
+        }
+      ]
+    },
+    {
+      "key": "top02",
+      "order": 2,
+      "title": "Mock Examination",
+      "description": "Sit the full mock under real conditions, review it ruthlessly, then enter the final.",
+      "objectives": ["Complete the mock honestly", "Convert mock misses into final-exam readiness"],
+      "lessons": [
+        {
+          "key": "les01",
+          "title": "Sitting the Mock",
+          "description": "Exam-day simulation: conditions, conduct and the module mock examination.",
+          "duration": 60,
+          "objectives": [
+            "Reproduce real exam conditions for the mock",
+            "Apply timing and command-word discipline throughout",
+            "Score at least 60% to unlock final-exam entry confidence"
+          ],
+          "introduction": "This is the dress rehearsal: 10 questions, 40 minutes, no notes, no pauses. Treat it as the final and the final will feel familiar.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "Mock protocol",
+              "body": "CONDITIONS: quiet room, clear desk, timer set to 40 minutes, phone OFF and away, water only. CONDUCT: attempt the module assessment below in ONE sitting, in order, showing working for calculations; mark-and-move past 3-minute stalls; use remaining time to review flagged questions only. FORBIDDEN: notes, videos, re-reading lessons mid-mock, extra time ('just 5 more minutes' invalidates the rehearsal). SCORING: 60%+ = proceed to the final exam (Topic 2, Lesson 2); 50–59% = repair misses (assignment) then re-sit once; below 50% = return to weakest modules (Module 11 clinic) before re-sitting. HONESTY WARNING: inflating a mock score only relocates failure to the final — the mock is a measuring instrument, and cheating breaks the instrument."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: post-mock triage",
+              "body": "A student scores 7/10, missing Q3 (nitrogen bacteria), Q6 (heart trace), Q9 (leaf starch logic). TRIAGE: Q3 = knowledge gap → re-study Module 7 Lesson 2.1 (bacteria names) + flashcards. Q6 = retrieval gap → redraw the heart 3x timed (Lesson 2 drill). Q9 = reasoning gap → re-read Module 9's destarch logic + write the conclusion pattern 5x. REPAIR TIME: 45 minutes total, weakest first. RE-TEST: re-attempt all three blind tomorrow. RULE: every miss gets a named repair within 24 hours — misses without repairs repeat in the final."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Mock = 40 min, one sitting, no notes, no extra time.\n60%+ proceeds; below repairs first, then re-sits.\nEvery miss gets a named 24-hour repair.\nHonest mocks measure; dishonest mocks deceive their maker."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Simulate reality, score honestly, triage misses within a day. The mock's job is diagnosis — let it diagnose."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Real conditions, real timing", "60% gate with repair paths", "24-hour miss repairs"],
+          "references": ["WOLI DAN TECH HUB original — mock protocol"]
+        },
+        {
+          "key": "les02",
+          "title": "Entering the Final Examination",
+          "description": "What the final demands, how completion and certification work, and staying calm.",
+          "duration": 25,
+          "objectives": [
+            "State the final exam rules and completion requirements",
+            "Explain how certificates are issued and verified",
+            "Apply calm-day tactics for peak performance"
+          ],
+          "introduction": "Twelve modules behind you; one examination ahead. Know the rules, trust the preparation, and walk in calm.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "Final rules and certification",
+              "body": "THE FINAL EXAMINATION: 30 questions, 90 minutes, 3 attempts (best counts), 60% pass mark — covering all 12 modules (see the course final exam for the full instructions). COMPLETION requires ALL of: 80%+ lessons finished, 60%+ quiz average, every assignment submitted AND passed, and the final exam passed at 60%+. Certificates are issued AUTOMATICALLY when the system verifies completion — each carries a unique certificate number verifiable on the platform; there is no manual step and no fee beyond the course itself. RESULTS: attempts are graded instantly with explanations for review; after passing, download your certificate from the Certificates page and verify its number. If an attempt fails, the miss-triage from Lesson 1 applies: repair within 24 hours, then use the next attempt — three attempts reward steady improvers."
+            },
+            {
+              "block": "THEORY",
+              "title": "Calm-day tactics",
+              "body": "NIGHT BEFORE: light review of checklists only (no new material), pack requirements, sleep 7+ hours — sleep consolidates memory; all-night cramming deletes it. EXAM TIME: arrive early, breathe slowly (4 counts in, 6 out) to settle nerves, read ALL instructions first, execute Module 11's two-pass strategy, and trust first instincts on MCQs unless new reasoning emerges (changed answers are wrong more often than right). AFTER: do not post-mortem with friends (it only seeds doubt); review the official explanations when released; celebrate effort whatever the outcome — then repair and re-attempt if needed. You have revised systematically for 12 modules. The final is familiar ground."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: the 60% maths",
+              "body": "Question: 'I scored 55% on attempt 1. What must change for attempt 2?' Step 1 — Count: 30 questions × 55% ≈ 16–17 correct; passing needs 18+. Step 2 — Triage the ~13 misses by module (e.g. 4 genetics, 3 ecology, 2 practicals, 4 scattered). Step 3 — Repair the CLUSTERS first: 4 genetics misses → 45-minute Module 5 repair (ratios + sex-linkage) converts up to 4 marks; ecology 3 → 30-minute cycles review. Step 4 — Re-attempt after 24 hours: fixing two clusters typically adds 5–7 marks → 70%+. Moral: clustered misses are concentrated gold — mine them first."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Final: 30 Qs, 90 min, 3 attempts, 60% pass. Completion: 80% lessons + 60% quiz avg + assignments passed + final passed.\nCertificates auto-issue with verifiable unique numbers.\nSleep beats cramming; two passes beat one; clustered misses repair first."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Know the thresholds, earn them systematically, and let the system certify real achievement. Calm, sleep and triage carry you the last mile. Good luck — you are ready."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["All four completion gates", "Auto-issued verifiable certificates", "Calm-day routine"],
+          "references": ["WOLI DAN TECH HUB — completion and certification policy (this course)"]
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "type": "BOOK",
+      "title": "OpenStax Biology 2e — full textbook (free PDF + web)",
+      "url": "https://openstax.org/details/books/biology-2e",
+      "description": "Module 12 reading: final targeted review — use the OpenStax end-of-chapter questions for your weakest chapters. Download the free PDF from the publisher page.",
+      "source": "OpenStax, Rice University",
+      "license": "CC BY-NC-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "attribution": "Biology 2e by Mary Ann Clark, Matthew Douglas and Jung Choi (OpenStax, Rice University), licensed CC BY-NC-SA 4.0."
+    }
+  ],
+  "practical": {
+    "title": "Exam-Day Simulation",
+    "objective": "Rehearse the complete final-exam experience: setup, sitting, review and recovery.",
+    "scenario": "Tomorrow is the final. Today you run the full simulation and fix the last gaps.",
+    "instructions": "1. PREPARE the room exactly as Lesson 1 specifies (desk, timer 40 min, water, phone off). 2. SIT the module mock examination below in one go — no pauses, no notes. 3. MARK immediately and harshly; log every miss (question | concept | reason). 4. REPAIR each miss with a 10-minute targeted re-study (open the named module lesson, write the concept in own words). 5. RE-ATTEMPT all missed questions blind and confirm 100% on the re-attempt. 6. Write a 5-line readiness statement: score, misses, repairs done, re-attempt score, one-line confidence note. SAFETY: take a 10-minute walk between marking and repair — fresh eyes learn faster.",
+    "requirements": "Timer, quiet room, notebook.",
+    "expected_output": "Mock score + miss log + repair notes + 100% re-attempt + readiness statement.",
+    "difficulty": "INTERMEDIATE",
+    "estimated_time": 120,
+    "submission_type": "TEXT",
+    "evaluation_criteria": ["Real simulated conditions with honest timing", "Every miss logged with concept and reason", "Repairs completed with confirmed 100% re-attempt"]
+  },
+  "assignment": {
+    "title": "Readiness Declaration",
+    "description": "Declare final-exam readiness with evidence: scores, repairs and a calm-day plan.",
+    "instructions": "Submit: (1) Your mock score with the miss log (question | concept | reason). (2) For EACH miss: the corrected concept in your own words (50+ words each) plus re-attempt result. (3) Your completion checklist status: lessons % done, quiz average, assignments submitted/passed (copy from your dashboard). (4) Your calm-day plan: sleep time, arrival, materials, first-5-minutes routine (100 words). (5) One paragraph on what you will do if attempt 1 fails (triage plan, not panic). 400–500 words plus tables.",
+    "requirements": "Evidence must match real dashboard data; declarations without evidence score zero.",
+    "expected_output": "Miss repairs + completion status + calm-day plan + contingency paragraph.",
+    "difficulty": "INTERMEDIATE",
+    "estimated_time": 90,
+    "submission_type": "TEXT",
+    "evaluation_criteria": ["Every mock miss repaired accurately in own words", "Completion status honestly reported against all four gates", "Calm-day and contingency plans specific and realistic"],
+    "max_score": 100,
+    "pass_score": 50
+  },
+  "quiz": {
+    "title": "Module 12 Quiz — Final Warmup",
+    "description": "Five rapid questions across the whole course.",
+    "passing_score": 70,
+    "time_limit": 10,
+    "attempt_limit": 3,
+    "questions": [
+      {
+        "type": "multiple_choice",
+        "question": "Which row correctly matches test to nutrient?",
+        "options": ["Iodine → protein; Biuret → starch", "Iodine → starch; Benedict's → reducing sugar; Biuret → protein", "Benedict's → starch; Iodine → sugar", "Emulsion → protein; Biuret → fat"],
+        "correct": [1],
+        "explanation": "Iodine blackens starch, Benedict's (heated) reddens reducing sugars, biuret purples protein, ethanol emulsifies fats.",
+        "points": 1,
+        "topic": "Warmup"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Meiosis produces:",
+        "options": ["2 identical diploid cells", "4 genetically unique haploid cells", "4 identical diploid cells", "2 unique haploid cells"],
+        "correct": [1],
+        "explanation": "Two divisions with one replication: four unique haploid gametes.",
+        "points": 1,
+        "topic": "Warmup"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "The main nitrogen-fixing partner of beans is:",
+        "options": ["Nitrobacter", "Rhizobium", "Mushrooms", "Earthworms"],
+        "correct": [1],
+        "explanation": "Rhizobium in root nodules fixes N2 to ammonia in exchange for sugars (mutualism).",
+        "points": 1,
+        "topic": "Warmup"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Insulin is released when blood glucose is:",
+        "options": ["Low, to raise it", "High, to lower it by promoting uptake and storage", "Normal, to maintain it", "Never — glucagon does everything"],
+        "correct": [1],
+        "explanation": "High glucose triggers insulin (beta cells): cells absorb glucose, liver stores glycogen. Glucagon reverses lows.",
+        "points": 1,
+        "topic": "Warmup"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "A fair test changes:",
+        "options": ["All variables at once", "Exactly one independent variable, holding the rest constant", "Only the dependent variable", "Nothing — observation suffices"],
+        "correct": [1],
+        "explanation": "One IV, fixed controls, measured DV — plus repeats and a control setup for validity.",
+        "points": 1,
+        "topic": "Warmup"
+      }
+    ]
+  },
+  "assessment": {
+    "key": "exam",
+    "title": "Module 12 Mock Examination",
+    "description": "Full mock examination under real conditions — 10 questions, 40 minutes.",
+    "instructions": "ONE sitting, 40 minutes, no notes. Pass mark 60%. This mock simulates the final: same style, same pressure. Triage every miss within 24 hours (see Lesson 1).",
+    "passing_score": 60,
+    "time_limit_minutes": 40,
+    "max_attempts": 3,
+    "time_limit": 40,
+    "attempt_limit": 2,
+    "questions": [
+      {
+        "type": "multiple_choice",
+        "question": "A dry seed shows no metabolism yet is alive because:",
+        "options": ["It is actually dead until planted", "It is dormant — all seven characteristics are potentially present on germination", "Seeds are non-living by definition", "Only animals are alive"],
+        "correct": [1],
+        "explanation": "Dormancy pauses metabolism; given water/warmth/air, the seed respires, grows and reproduces — alive but waiting.",
+        "points": 1,
+        "topic": "Mock"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Red blood cells burst in pure water because:",
+        "options": ["Water leaves by osmosis", "Water enters by osmosis and there is no wall to resist pressure", "Active transport pumps them full", "They photosynthesise"],
+        "correct": [1],
+        "explanation": "Osmosis drives water in down its gradient; animal cells lack walls, so they lyse (plant cells would go turgid).",
+        "points": 1,
+        "topic": "Mock"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "The temperature-rate curve for enzymes falls steeply after the optimum due to:",
+        "options": ["Substrate exhaustion", "Denaturation of the active site", "Increased collisions stopping", "pH rising automatically"],
+        "correct": [1],
+        "explanation": "Heat breaks the weak bonds holding tertiary structure; the active site deforms irreversibly and complexes stop forming.",
+        "points": 1,
+        "topic": "Mock"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "In anaphase I of meiosis:",
+        "options": ["Sister chromatids separate", "Homologous chromosomes separate, halving the number", "DNA replicates", "The nuclear membrane forms"],
+        "correct": [1],
+        "explanation": "Whole homologues part (reduction division). Chromatids part later in anaphase II.",
+        "points": 1,
+        "topic": "Mock"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Two brown-eyed carriers (Bb × Bb) have a blue-eyed child with probability:",
+        "options": ["0", "1/4", "1/2", "3/4"],
+        "correct": [1],
+        "explanation": "Bb × Bb → BB, Bb, Bb, bb: 1 in 4 homozygous recessive (blue).",
+        "points": 1,
+        "topic": "Mock"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Pesticide resistance in cockroaches evolves because:",
+        "options": ["The pesticide teaches individuals to resist", "Pre-existing resistant variants survive and breed", "Cockroaches choose to mutate", "Pesticides weaken over time only"],
+        "correct": [1],
+        "explanation": "Selection sorts existing variation: resistant survivors pass alleles on until resistance dominates the population.",
+        "points": 1,
+        "topic": "Mock"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Eutrophication kills fish mainly through:",
+        "options": ["Algae eating fish directly", "Decomposer bacteria stripping dissolved oxygen", "Fertiliser poisoning fish instantly", "Fish starving from too much food"],
+        "correct": [1],
+        "explanation": "Bloom → die-off → bacterial decay → deoxygenation → suffocation. Oxygen loss is the killer.",
+        "points": 1,
+        "topic": "Mock"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "During inhalation, the diaphragm:",
+        "options": ["Relaxes and domes upward", "Contracts and flattens, expanding chest volume", "Stops moving entirely", "Pushes air out of the lungs"],
+        "correct": [1],
+        "explanation": "Active inhalation: diaphragm flattens + ribs rise → volume up → pressure down → air in.",
+        "points": 1,
+        "topic": "Mock"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Sugars made in leaves reach the roots via:",
+        "options": ["Xylem, upward only", "Phloem translocation from source to sink", "Stomata directly", "Root hairs absorbing them from soil"],
+        "correct": [1],
+        "explanation": "Phloem mass flow carries sugars any direction from sources (leaves) to sinks (roots, fruits, tips).",
+        "points": 1,
+        "topic": "Mock"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "A valid investigation of fertiliser on growth must:",
+        "options": ["Vary fertiliser, water and light together", "Vary only fertiliser dose, with repeats, controls and fixed water/light", "Use one plant per dose with no repeats", "Skip the no-fertiliser control"],
+        "correct": [1],
+        "explanation": "One IV (dose), fixed controls (water, light, species), repeats + means, and a zero-dose control for comparison.",
+        "points": 1,
+        "topic": "Mock"
+      }
+    ]
+  }
+}

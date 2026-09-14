@@ -1,0 +1,440 @@
+{
+  "key": "mod07",
+  "order": 7,
+  "title": "Ecology",
+  "description": "How organisms live together: ecosystems, food chains, nutrient cycles, relationships and human impact.",
+  "objectives": [
+    "Use ecological vocabulary precisely",
+    "Construct food chains and explain energy loss",
+    "Describe carbon and nitrogen cycles",
+    "Evaluate human impact and conservation"
+  ],
+  "duration_text": "1 week",
+  "topics": [
+    {
+      "key": "top01",
+      "order": 1,
+      "title": "Ecosystems and Feeding",
+      "description": "Habitats, populations and communities; food chains, webs and pyramids.",
+      "objectives": ["Define ecological terms", "Explain energy flow"],
+      "lessons": [
+        {
+          "key": "les01",
+          "title": "Habitats and Populations",
+          "description": "The ecological address system: habitat, population, community, ecosystem, biome.",
+          "duration": 25,
+          "objectives": [
+            "Define habitat, population, community, ecosystem and niche",
+            "Distinguish biotic from abiotic factors with examples",
+            "Explain how one abiotic factor limits a named population"
+          ],
+          "introduction": "A tilapia's world is water temperature, dissolved oxygen, algae to eat and fishermen to avoid. Ecology maps these worlds — and what happens when they change.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "The address system",
+              "body": "HABITAT: where an organism lives (a fishpond, a mango canopy). POPULATION: all members of ONE species in a habitat (all tilapia in the pond). COMMUNITY: ALL populations sharing the habitat (tilapia + catfish + algae + water insects). ECOSYSTEM: community PLUS non-living surroundings (water, mud, sunlight, dissolved oxygen). BIOME: a continental-scale ecosystem type (tropical rainforest, savanna, desert). NICHE: an organism's ROLE — what it eats, what eats it, when it is active (no two species hold identical niches for long — competition excludes one). Factors splitting the world: BIOTIC (living: predation, competition, disease, food supply) and ABIOTIC (non-living: light, temperature, water, pH, salinity, oxygen). Examination habit: always classify factors before explaining effects."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: why did the fish die?",
+              "body": "Question: After hot harmattan weeks, fish die in a shallow pond though no poison is found. Explain using abiotic factors. Step 1 — Identify the factor: high temperature LOWERS dissolved oxygen in water (warm water holds less gas) while fish metabolism (oxygen demand) RISES. Step 2 — Link: demand exceeds supply, especially at night when algae also respire. Step 3 — Conclude: fish suffocate — an abiotic (temperature/oxygen) population crash with no disease needed. Management moral: shade, aeration or deeper ponds buffer the factor. Examiners award the gas-solubility link specifically — memorise it."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Habitat (address) → population (one species) → community (all species) → ecosystem (+ non-living) → biome (continental).\nNiche = role; competitive exclusion forbids identical niches.\nBiotic = living pressures; abiotic = physical/chemical conditions.\nWarm water holds less oxygen while raising demand — classic fish-kill mechanism."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Ecology's vocabulary maps where organisms live and what constrains them. Populations answer to both living neighbours and non-living conditions — and a single abiotic shift can crash a pond."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Five address levels in order", "Biotic vs abiotic classification first", "Temperature-oxygen solubility link"],
+          "references": ["OpenStax Biology 2e — Chapter 42, Ecosystems (levels of ecology)"]
+        },
+        {
+          "key": "les02",
+          "title": "Food Chains and Energy Flow",
+          "description": "Producers to top predators: why energy pyramids narrow and chains stay short.",
+          "duration": 35,
+          "objectives": [
+            "Construct food chains with correct trophic levels and arrows",
+            "Explain the ~10% energy transfer rule",
+            "Interpret pyramids of number, biomass and energy"
+          ],
+          "introduction": "It takes roughly 10 kg of grain to make 1 kg of beef. Follow the energy and you will understand farming, famine and why there are no six-metre spiders.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "Trophic levels",
+              "body": "PRODUCERS (autotrophs — grass, algae) capture sunlight. PRIMARY CONSUMERS (herbivores — grasshopper, tilapia fry) eat producers. SECONDARY CONSUMERS (small carnivores — frog, catfish) eat herbivores. TERTIARY CONSUMERS (top predators — hawk, crocodile) eat carnivores. DECOMPOSERS (bacteria, fungi) digest dead matter and waste at EVERY level, recycling nutrients. Arrows point IN THE DIRECTION OF ENERGY FLOW (food → feeder): grass → grasshopper → frog → snake → hawk. Real feeding is a WEB (owls eat both mice and frogs), but chains isolate one path for analysis. TROPHIC LEVEL = feeding step counted from producers (level 1)."
+            },
+            {
+              "block": "THEORY",
+              "title": "Why pyramids narrow",
+              "body": "Only ~10% of energy transfers between levels: most is lost to RESPIRATION (movement, warmth, metabolism), UNEATEN parts (roots, bones), INEDIBLE parts (bark, fur) and EXCRETION (urine, faeces, egested fibre). Consequences: (1) food chains rarely exceed 4–5 levels — too little energy remains; (2) top predators are few (one lion needs thousands of kg of grass via zebras); (3) eating lower (grains, beans) feeds more people per hectare than beef — a food-security arithmetic every policymaker should know. PYRAMIDS: energy pyramids ALWAYS narrow upward; biomass pyramids usually narrow (but can invert — e.g. tiny fast-reproducing phytoplankton supporting heavier zooplankton); number pyramids can invert (one tree feeding thousands of insects). Biomagnification runs opposite: persistent toxins (mercury, some pesticides) CONCENTRATE upward, poisoning top predators most."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: the missing energy",
+              "body": "Question: A grassland fixes 20,000 kJ/m²/year. Zebras gain 1,800 kJ; lions gain 160 kJ. Calculate both transfer efficiencies and account for the losses. Step 1 — Efficiencies: zebra 1800/20000 = 9%; lion 160/1800 ≈ 9%. Step 2 — Losses: grass respiration + uneaten roots + zebra respiration/movement/dung + lion respiration/movement/indigestible parts. Step 3 — Conclude: ~9% matches the 10% rule; each level keeps roughly one-tenth. Examination format: show the division, convert to %, then name at least THREE loss routes — respiration is compulsory in the list."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Arrows show ENERGY flow: food → feeder. Decomposers recycle at every level.\n~10% transfers; the rest respires, uneaten, indigestible or excreted.\nChains stay short; top predators stay few; low eating feeds more.\nToxins biomagnify upward — opposite to energy."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Energy enters through producers and leaks ~90% at every step, shaping short chains, rare predators and the arithmetic of feeding humanity. Toxins, perversely, concentrate where energy fades."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Arrow direction = energy direction", "Four loss routes (respiration first)", "Biomagnification vs energy loss contrast"],
+          "references": ["OpenStax Biology 2e — Chapter 42 (energy flow, trophic levels)"]
+        }
+      ]
+    },
+    {
+      "key": "top02",
+      "order": 2,
+      "title": "Cycles and Relationships",
+      "description": "Carbon and nitrogen cycles; predation, competition and symbiosis.",
+      "objectives": ["Trace both nutrient cycles", "Classify species relationships"],
+      "lessons": [
+        {
+          "key": "les01",
+          "title": "Carbon and Nitrogen Cycles",
+          "description": "How the same atoms circulate through air, life and soil forever.",
+          "duration": 40,
+          "objectives": [
+            "Trace carbon through photosynthesis, respiration, feeding and combustion",
+            "Explain nitrogen fixation, nitrification, denitrification and the role of bacteria",
+            "Link fertiliser overuse to eutrophication"
+          ],
+          "introduction": "The carbon in your body was once dinosaur breath, ancient forest and ocean limestone. Atoms recycle endlessly — today's cycles are tomorrow's dinner.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "The carbon cycle",
+              "body": "Atmospheric CO2 enters life through PHOTOSYNTHESIS (producers). Carbon then moves through FEEDING (herbivores → carnivores), returns to air via RESPIRATION (all living cells), DECOMPOSITION (decomposers respiring dead matter), and COMBUSTION (burning wood, fossil fuels, bush fires). Oceans exchange CO2 at the surface; long-term stores (limestone, fossil fuels, peat) lock carbon for millennia. Humans unbalance the cycle by burning fossil stores millions of times faster than they formed — raising CO2, trapping heat (greenhouse effect) and acidifying oceans. Planting trees and protecting forests re-lock carbon; burning bush and flaring gas accelerate the imbalance."
+            },
+            {
+              "block": "THEORY",
+              "title": "The nitrogen cycle",
+              "body": "Nitrogen gas (78% of air) is unusable directly — the triple bond defeats most life. Bacteria run the cycle: (1) NITROGEN FIXATION — Rhizobium in legume root nodules (beans, soya, groundnuts) and free-living Azotobacter convert N2 to ammonia; lightning fixes some too. (2) NITRIFICATION — Nitrosomonas convert ammonia → nitrites, then Nitrobacter convert nitrites → NITRATES, which plants absorb. (3) ASSIMILATION — plants build nitrates into amino acids and proteins; animals gain nitrogen by eating plants. (4) AMMONIFICATION/DECOMPOSITION — decomposers return nitrogen from dead matter, urine and faeces as ammonia. (5) DENITRIFICATION — anaerobic Pseudomonas convert nitrates BACK to N2 gas in waterlogged soils (a fertility loss farmers dread). Crop rotation with beans exploits fixation free of charge — traditional wisdom validated by microbiology."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: the green, stinking lake",
+              "body": "Question: Fertiliser runoff enters a lake. Within weeks the water turns green, smells, and fish die. Explain (eutrophication). Step 1 — Nitrates/phosphates fertilise ALGAE → algal bloom (green water) blocking light; submerged plants die. Step 2 — Dead algae and plants feed DECOMPOSER bacteria, which multiply and RESPIRE heavily. Step 3 — Bacterial respiration strips dissolved OXYGEN (especially at night) → fish suffocate; anaerobic decay releases stinking gases (hydrogen sulphide). Step 4 — Conclude: nutrient enrichment → bloom → decomposition → deoxygenation → death. Prevention: buffer strips, precise fertiliser dosing, and treating sewage before discharge."
+            },
+            {
+              "block": "VIDEO",
+              "title": "Watch: Carbon and Nitrogen Cycles",
+              "url": "https://www.youtube.com/watch?v=NHqEthRCqQ4",
+              "body": "Watch 'Carbon and Nitrogen Cycles' by the Amoeba Sisters (official channel stream). Draw both cycles from memory afterwards, naming the bacteria in the nitrogen cycle."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Carbon: photosynthesis in; respiration, decomposition, combustion out.\nNitrogen: fixation (Rhizobium) → nitrification (Nitrosomonas/Nitrobacter) → assimilation → decomposition → denitrification.\nLegumes fertilise for free via root-nodule bacteria.\nEutrophication: nutrients → bloom → decay → deoxygenation → fish kill."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Carbon cycles through air and life in years; nitrogen cycles through bacterial middlemen in soils. Both cycles feed us — and both punish careless fertiliser and fuel use."
+            }
+          ],
+          "videos": [
+            {
+              "title": "Carbon and Nitrogen Cycles",
+              "url": "https://www.youtube.com/watch?v=NHqEthRCqQ4",
+              "source": "Amoeba Sisters",
+              "license": "Standard YouTube License (official stream — no copy made)",
+              "attribution": "© Amoeba Sisters — streamed from the official channel https://www.youtube.com/@AmoebaSisters",
+              "description": "Both nutrient cycles with reservoirs, bacteria and human disruptions."
+            }
+          ],
+          "resources": [],
+          "key_points": ["Four carbon exits from living matter", "Five nitrogen steps + named bacteria", "Eutrophication chain in order"],
+          "references": ["OpenStax Biology 2e — Chapter 42 (biogeochemical cycles)"]
+        },
+        {
+          "key": "les02",
+          "title": "How Species Relate",
+          "description": "Predation, competition and the three symbioses — mutualism, commensalism, parasitism.",
+          "duration": 30,
+          "objectives": [
+            "Define predation, competition and the three symbioses",
+            "Give two Nigerian examples of each relationship",
+            "Explain predator-prey population cycles"
+          ],
+          "introduction": "Oxpeckers ride cattle eating ticks; mistletoe strangles orange trees; lions and leopards hunt the same antelope. Every ecosystem is a web of deals, thefts and wars.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "Five relationships",
+              "body": "PREDATION (+/−): hunter kills prey (lion/antelope, praying mantis/housefly) — drives cycles and natural selection. COMPETITION (−/−): both sides lose fitness fighting for the same resource — intraspecific (two yam seedlings crowding) is fiercest since needs match exactly; interspecific (goats vs cattle on grass) can exclude one species. MUTUALISM (+/+): both benefit — Rhizobium fixes nitrogen for beans while beans feed it sugars; oxpeckers clean cattle of ticks; gut bacteria digest fibre for us. COMMENSALISM (+/0): one benefits, the other unaffected — epiphytic ferns perch on trees for light; cattle egrets eat insects flushed by grazing herds. PARASITISM (+/−): parasite benefits, host suffers — Plasmodium (malaria), tapeworms, ticks, mistletoe on citrus. Grade relationships by FITNESS EFFECTS (+/−), not feelings."
+            },
+            {
+              "block": "THEORY",
+              "title": "Predator-prey cycles",
+              "body": "Predator and prey populations oscillate in linked waves: many prey → predators feast and breed → many predators over-eat prey → prey crash → predators starve → few predators let prey recover — the cycle repeats with predators LAGGING behind prey (classic lynx-hare graphs). Human interference (pesticides killing predators, overfishing prey) breaks cycles and triggers plagues or collapses. Biological control EXPLOITS predation deliberately: ladybirds vs aphids, Bacillus thuringiensis vs mosquito larvae — pest control with minimal chemicals when done scientifically."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: classifying relationships",
+              "body": "Question: Classify: (a) tapeworm in a child's gut, (b) egret following cattle, (c) lichen (fungus + alga). Step 1 — Score fitness effects: (a) worm gains food/shelter, child loses nutrients → (+/−) PARASITISM. (b) Egret gains flushed insects; cattle unaffected → (+/0) COMMENSALISM. (c) Fungus shelters algae; algae photosynthesise sugars for both → (+/+) MUTUALISM. Step 2 — Justify each with the benefit/harm mechanism. Examination trap: mutualism needs PROVEN two-way benefit — 'living together' alone is just symbiosis in the broad sense."
+            },
+            {
+              "block": "VIDEO",
+              "title": "Watch: Ecological Relationships",
+              "url": "https://www.youtube.com/watch?v=rNjPI84sApQ",
+              "body": "Watch 'Ecological Relationships' by the Amoeba Sisters (official channel stream). Afterwards, classify five relationships you have personally observed at home or in the market."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Predation +/−, competition −/−, mutualism +/+, commensalism +/0, parasitism +/−.\nIntraspecific competition is fiercest (identical needs).\nPredator peaks lag prey peaks in population cycles.\nBiological control weaponises predation against pests."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Species deal in five currencies from mutual profit to outright theft. Predator-prey cycles breathe through ecosystems, and wise farmers and doctors turn these relationships into tools."
+            }
+          ],
+          "videos": [
+            {
+              "title": "Ecological Relationships",
+              "url": "https://www.youtube.com/watch?v=rNjPI84sApQ",
+              "source": "Amoeba Sisters",
+              "license": "Standard YouTube License (official stream — no copy made)",
+              "attribution": "© Amoeba Sisters — streamed from the official channel https://www.youtube.com/@AmoebaSisters",
+              "description": "Predation, competition and symbiotic relationships with animated examples."
+            }
+          ],
+          "resources": [],
+          "key_points": ["Score relationships +/−", "Predator lags prey", "Mutualism needs two-way proof"],
+          "references": ["OpenStax Biology 2e — Chapter 43 (community ecology)"]
+        }
+      ]
+    },
+    {
+      "key": "top03",
+      "order": 3,
+      "title": "Humans and the Environment",
+      "description": "Pollution, habitat loss and climate change — and what conservation can do.",
+      "objectives": ["Assess major human impacts", "Propose conservation actions"],
+      "lessons": [
+        {
+          "key": "les01",
+          "title": "Impact and Conservation",
+          "description": "Deforestation, pollution, overharvesting and climate change — causes, effects and solutions.",
+          "duration": 35,
+          "objectives": [
+            "Explain four human impacts with mechanisms and effects",
+            "Distinguish conservation from preservation",
+            "Propose three realistic local conservation actions"
+          ],
+          "introduction": "Nigeria loses hundreds of thousands of hectares of forest yearly; Lagos traffic chokes the air; the Sahel creeps south. Ecology without action is just watching — this lesson demands solutions.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "Four impacts",
+              "body": "(1) DEFORESTATION: logging, farming and fuelwood remove forests → biodiversity loss, soil erosion (no roots to hold soil), flooding, and CO2 release (fewer absorbers + burning). (2) POLLUTION: oil spills smother mangroves and fisheries (Niger Delta); plastic chokes drains and livestock; industrial effluent poisons rivers; vehicle exhaust harms lungs. (3) OVERHARVESTING: taking faster than replacement — overfishing collapses stocks (smaller catches yearly), bushmeat hunting empties forests ('empty forest syndrome'). (4) CLIMATE CHANGE: fossil-fuel CO2 traps heat → rising temperatures, erratic rainfall, sea-level rise threatening Lagos and the Delta, and shifting disease zones (malaria climbing to highlands). Each impact hits the poorest first — environmental damage is a justice issue."
+            },
+            {
+              "block": "THEORY",
+              "title": "Conservation that works",
+              "body": "PRESERVATION locks nature away untouched; CONSERVATION manages use sustainably (harvest below replacement rate). Working tools: PROTECTED AREAS (Yankari, Cross River parks) guard biodiversity cores; REFORESTATION and agroforestry rebuild cover and income; SUSTAINABLE FISHING (size limits, closed seasons, no dynamite) lets stocks recover; WASTE MANAGEMENT (reduce, reuse, recycle; proper dumps, not drains); CLEAN ENERGY (solar leapfrogs grids); and EDUCATION — the multiplier of all the rest. Conservation succeeds when locals benefit: ecotourism jobs, beekeeping buffers, community forests. Your assignment investigates one local issue and proposes exactly such a plan."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: the disappearing forest",
+              "body": "Question: A village clears riverside forest for yam mounds. Two years later: yam yields fall, the stream floods yearly, and fish vanish. Explain and propose fixes. Step 1 — Diagnose: no tree roots → soil ERODES into the stream (silt smothers fish eggs); no canopy → rain hits soil directly (flooding); no leaf litter → soil fertility CRASHES (yields fall). Step 2 — Prescribe: replant riverbank buffer trees (roots + shade), practise alley cropping (yam between nitrogen-fixing hedges), and ban farming within 10 m of the stream. Step 3 — Generalise: every symptom traces to removing the forest's free services — conservation is enlightened self-interest."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Deforestation → erosion + floods + CO2. Pollution → dead zones + disease. Overharvesting → collapse. Climate change → heat + erratic rain + rising seas.\nConservation = sustainable use; preservation = no use.\nSolutions must pay locals: ecotourism, agroforestry, closed seasons.\nForest services (soil, water, climate) are free until destroyed."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Human impacts share one root: consuming natural capital faster than it renews. Conservation — protected areas, sustainable harvests, clean energy, educated citizens — is how civilisation pays its ecological bills."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Four impacts with mechanisms", "Conservation vs preservation", "Solutions must benefit locals"],
+          "references": ["OpenStax Biology 2e — Chapter 44 (conservation biology)"]
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "type": "BOOK",
+      "title": "OpenStax Biology 2e — full textbook (free PDF + web)",
+      "url": "https://openstax.org/details/books/biology-2e",
+      "description": "Module 7 reading: Chapters 42–44 (Ecosystems, Populations, Conservation). Download the free PDF from the publisher page.",
+      "source": "OpenStax, Rice University",
+      "license": "CC BY-NC-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "attribution": "Biology 2e by Mary Ann Clark, Matthew Douglas and Jung Choi (OpenStax, Rice University), licensed CC BY-NC-SA 4.0."
+    }
+  ],
+  "practical": {
+    "title": "Compound Biodiversity Audit",
+    "objective": "Estimate plant populations with quadrats and compare biodiversity between two areas.",
+    "scenario": "You are an ecologist comparing a trampled path edge with an undisturbed corner.",
+    "instructions": "1. Make a quadrat: 4 sticks + string forming a 50 cm × 50 cm square. 2. Throw it RANDOMLY (over your shoulder, no choosing) 5 times in AREA A (disturbed: path/football edge) and 5 times in AREA B (undisturbed: garden corner/bush edge). 3. In each throw, count every plant species (grass, weed types — name or sketch) and individuals per species. 4. Record: throw | species | counts. Calculate mean plants per quadrat and species count per area. 5. Conclude: which area is more diverse/abundant, and link to trampling, light or soil (abiotic factors). SAFETY: watch for thorns, ants and broken glass; wear closed shoes; wash hands.",
+    "requirements": "4 sticks, string, notebook, closed shoes.",
+    "expected_output": "Two 5-throw data tables with means + conclusion naming the likely causal factors.",
+    "difficulty": "BEGINNER",
+    "estimated_time": 75,
+    "submission_type": "TEXT",
+    "evaluation_criteria": ["Random placement honestly done (no cherry-picking)", "Complete tables with means calculated", "Conclusion links differences to specific biotic/abiotic factors"]
+  },
+  "assignment": {
+    "title": "My Environment, My Plan",
+    "description": "Investigate one real local environmental problem and write a costed, realistic action plan.",
+    "instructions": "1. Choose ONE issue near you: blocked drains, refuse dumps, tree loss, stream pollution, erosion, smoke, or overfishing. 2. EVIDENCE: describe what you observe (photos described, locations, who is affected, since when) — 150 words. 3. ECOLOGY: explain the biological mechanism (eutrophication? erosion? biomagnification? habitat loss?) — 150 words. 4. PLAN: propose 3 actions with WHO does WHAT, rough COST (free/cheap/expensive), and how success is MEASURED — 200 words. 5. Submit 500–600 words total. Real places and real numbers score highest.",
+    "requirements": "Must be a real place you have visited; invented issues score zero.",
+    "expected_output": "Evidence + mechanism + 3-action plan (500–600 words).",
+    "difficulty": "INTERMEDIATE",
+    "estimated_time": 120,
+    "submission_type": "TEXT",
+    "evaluation_criteria": ["Concrete local evidence (place, observations, affected people)", "Correct ecological mechanism explained", "Three realistic actions with owners, costs and success measures"],
+    "max_score": 100,
+    "pass_score": 50
+  },
+  "quiz": {
+    "title": "Module 7 Quiz — Ecology",
+    "description": "Quick check on ecosystems, energy flow, cycles and relationships.",
+    "passing_score": 70,
+    "time_limit": 15,
+    "attempt_limit": 3,
+    "questions": [
+      {
+        "type": "multiple_choice",
+        "question": "In a food chain, arrows point:",
+        "options": ["From feeder to food", "From food to feeder (energy flow)", "From predator to prey", "Randomly"],
+        "correct": [1],
+        "explanation": "Arrows follow ENERGY: grass → grasshopper means energy flows from grass into the grasshopper. (Predator-to-prey points backwards.)",
+        "points": 1,
+        "topic": "Food chains"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Only ~10% of energy transfers between trophic levels mainly because energy is lost through:",
+        "options": ["Photosynthesis speeding up", "Respiration, movement, uneaten and indigestible parts, excretion", "Decomposers creating energy", "Herbivores eating too little"],
+        "correct": [1],
+        "explanation": "Respiration burns most energy; plus uneaten roots/bones, indigestible fibre and excreted waste never become the next level's food.",
+        "points": 1,
+        "topic": "Energy flow"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Rhizobium bacteria in bean root nodules perform:",
+        "options": ["Denitrification", "Nitrogen fixation (N2 → ammonia)", "Nitrification (ammonia → nitrates)", "Photosynthesis"],
+        "correct": [1],
+        "explanation": "Rhizobium FIX nitrogen gas into ammonia for the plant (mutualism). Nitrosomonas/Nitrobacter nitrify; Pseudomonas denitrify.",
+        "points": 1,
+        "topic": "Nitrogen cycle"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Oxpeckers eating ticks off cattle is:",
+        "options": ["Parasitism", "Commensalism", "Mutualism", "Competition"],
+        "correct": [2],
+        "explanation": "Both benefit: birds get food, cattle lose parasites (+/+). One-sided benefit would be commensalism; harm would be parasitism.",
+        "points": 1,
+        "topic": "Relationships"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Fish die after fertiliser runoff causes an algal bloom because:",
+        "options": ["Algae eat the fish", "Decomposer bacteria multiply on dead algae and strip dissolved oxygen", "Fertiliser makes water too clear", "Fish dislike green water"],
+        "correct": [1],
+        "explanation": "Eutrophication: bloom → die-off → bacterial decomposition → deoxygenation → suffocation. The killer is oxygen loss, not the algae directly.",
+        "points": 1,
+        "topic": "Eutrophication"
+      }
+    ]
+  },
+  "assessment": {
+    "key": "exam",
+    "title": "Module 7 Examination — Ecology",
+    "description": "End-of-module examination covering ecosystems, cycles, relationships and conservation.",
+    "instructions": "Answer ALL 6 questions in 25 minutes. Pass mark is 60%. Counts toward your final assessment gate.",
+    "passing_score": 60,
+    "time_limit_minutes": 25,
+    "max_attempts": 3,
+    "time_limit": 25,
+    "attempt_limit": 2,
+    "questions": [
+      {
+        "type": "multiple_choice",
+        "question": "A hawk accumulates more pesticide than the grasshoppers it eats because of:",
+        "options": ["Photosynthesis", "Biomagnification up the food chain", "The hawk's larger stomach acid", "Grasshoppers excreting all toxins"],
+        "correct": [1],
+        "explanation": "Persistent toxins concentrate at each level, so top predators carry the highest load — the reverse pattern to energy flow.",
+        "points": 1,
+        "topic": "Biomagnification"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Which process RETURNS carbon dioxide to the atmosphere? (best single answer)",
+        "options": ["Photosynthesis", "Respiration, decomposition and combustion", "Nitrogen fixation", "Condensation"],
+        "correct": [1],
+        "explanation": "All living respiration, decomposer decay and burning release CO2. Photosynthesis removes it; fixation concerns nitrogen.",
+        "points": 1,
+        "topic": "Carbon cycle"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Waterlogged soils lose fertility partly because denitrifying bacteria:",
+        "options": ["Fix extra nitrogen", "Convert nitrates back to nitrogen gas in anaerobic conditions", "Produce oxygen for roots", "Eat plant roots"],
+        "correct": [1],
+        "explanation": "Without oxygen, denitrifiers (Pseudomonas) use nitrates for respiration, releasing N2 gas — nitrogen escapes back to the air.",
+        "points": 1,
+        "topic": "Nitrogen cycle"
+      },
+      {
+        "type": "true_false",
+        "question": "True or False: In predator-prey cycles, the predator population peak lags behind the prey peak.",
+        "options": ["True", "False"],
+        "correct": [0],
+        "explanation": "True. Prey must first become abundant to feed predator breeding; predators then over-eat prey and crash after them.",
+        "points": 1,
+        "topic": "Populations"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Conservation differs from preservation in that conservation:",
+        "options": ["Bans all human use of nature", "Manages sustainable use below replacement rates", "Only protects animals, never plants", "Requires no science"],
+        "correct": [1],
+        "explanation": "Conservation = wise sustainable use (fishing quotas, selective logging); preservation = locking away untouched.",
+        "points": 1,
+        "topic": "Conservation"
+      },
+      {
+        "type": "multiple_answer",
+        "question": "Which are abiotic factors? (Select ALL that apply)",
+        "options": ["Light intensity", "Soil pH", "Predation by hawks", "Water availability"],
+        "correct": [0, 1, 3],
+        "explanation": "Light, pH and water are non-living (abiotic). Predation is a living (biotic) pressure.",
+        "points": 2,
+        "topic": "Ecosystems"
+      }
+    ]
+  }
+}

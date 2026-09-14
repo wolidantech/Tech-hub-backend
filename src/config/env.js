@@ -120,8 +120,12 @@ export const BUCKETS = {
   receipts: 'payment-receipts', // private - signed URLs only
   certificates: 'certificates', // private - signed URLs only
   lessonResources: 'lesson-resources', // private - signed URLs only
+  courseVideos: 'course-videos', // private - signed URLs only
+  courseResources: 'course-resources', // private - signed URLs only
+  submissions: 'assignment-submissions', // private - signed URLs only
   avatars: 'avatars', // public
   courseThumbnails: 'course-thumbnails', // public
+  lessonThumbnails: 'lesson-thumbnails', // public
 };
 
 export const RECEIPT_MIME_TYPES = ['image/jpeg', 'image/png', 'application/pdf'];

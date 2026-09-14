@@ -1,0 +1,424 @@
+{
+  "key": "mod03",
+  "order": 3,
+  "title": "Biological Molecules",
+  "description": "The molecules of life: carbohydrates, lipids, proteins and nucleic acids — plus enzymes and the classic food tests.",
+  "objectives": [
+    "Describe the structure and roles of carbohydrates, lipids and proteins",
+    "Explain how enzymes work and what affects them",
+    "Carry out and interpret the four main food tests"
+  ],
+  "duration_text": "1 week",
+  "topics": [
+    {
+      "key": "top01",
+      "order": 1,
+      "title": "Carbohydrates and Lipids",
+      "description": "Sugars, starch and cellulose; fats and oils — built from C, H and O.",
+      "objectives": ["Classify carbohydrates", "Compare fats and oils"],
+      "lessons": [
+        {
+          "key": "les01",
+          "title": "Sugars, Starch and Cellulose",
+          "description": "From glucose to glycogen: how simple sugars link into energy stores and structural fibres.",
+          "duration": 35,
+          "objectives": [
+            "Distinguish monosaccharides, disaccharides and polysaccharides",
+            "State the roles of glucose, starch, glycogen and cellulose",
+            "Explain condensation and hydrolysis in plain words"
+          ],
+          "introduction": "Every marathon runner's energy gel, every grain of rice, and the paper of your notebook are all carbohydrates — one family of molecules wearing many uniforms.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "The carbohydrate family",
+              "body": "Carbohydrates contain carbon, hydrogen and oxygen (roughly 1 C : 2 H : 1 O). Monosaccharides are single sugars: glucose (blood sugar, the fuel of respiration), fructose (fruit sugar) and galactose. Disaccharides join two monosaccharides with a glycosidic bond, releasing water (condensation): maltose (glucose + glucose), sucrose (glucose + fructose, table sugar), lactose (glucose + galactose, milk sugar). Polysaccharides chain hundreds together: starch (energy store in plants — amylose + amylopectin in yam, rice, cassava), glycogen (energy store in animals, packed in liver and muscles, more branched for fast release), and cellulose (structural walls of plant cells — long straight chains bundled into tough fibres). Digestion reverses building: hydrolysis ADDS water to split big molecules back into sugars your blood can carry."
+            },
+            {
+              "block": "THEORY",
+              "title": "Why structure fits function",
+              "body": "Starch is ideal for storage: compact, coiled, insoluble (so it does not leak out of cells or distort osmosis) yet easily hydrolysed back to glucose on demand. Glycogen's extra branches give animals rapid glucose release during a sprint. Cellulose is built for strength: straight chains hydrogen-bonded into microfibrils with enormous tensile strength — a tree is a cellulose skyscraper. This pattern — structure determining function — repeats for every molecule in this module and is an examination favourite: always link a structural feature to the job it performs."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: condensation vs hydrolysis",
+              "body": "Question: (a) Two glucose molecules join to form maltose. (b) Starch is digested to glucose in the gut. Name each reaction type and state what happens to water. Step 1 — Recall: joining monomers RELEASES water (condensation); splitting polymers CONSUMES water (hydrolysis). Step 2 — Apply: (a) glucose + glucose → maltose + water is CONDENSATION. (b) Starch + water → glucose units is HYDROLYSIS, catalysed by amylase then maltase. Step 3 — Memory hook: CONdensation CONstructs and water Comes out; HYdrolysis HYDRates (uses water) to break. Examiners award the water detail separately — never omit it."
+            },
+            {
+              "block": "VIDEO",
+              "title": "Watch: Biomolecules (Updated 2023)",
+              "url": "https://www.youtube.com/watch?v=1Dx7LDwINLU",
+              "body": "Watch 'Biomolecules (Updated 2023)' by the Amoeba Sisters (official channel stream). Focus on the carbohydrate section now; you will revisit this video for lipids, proteins and nucleic acids in the next lessons."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Carbohydrates = C, H, O: monosaccharides (glucose), disaccharides (sucrose, maltose, lactose), polysaccharides (starch, glycogen, cellulose).\nCondensation builds (releases water); hydrolysis breaks (uses water).\nStarch = plant store; glycogen = animal store; cellulose = plant structure.\nStructure always fits function — link features to jobs in answers."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Glucose is the hub of carbohydrate biology: linked by condensation into stores (starch, glycogen) and structures (cellulose), freed again by hydrolysis during digestion. Learn the family tree and the water rule, and carbohydrate questions become free marks."
+            }
+          ],
+          "videos": [
+            {
+              "title": "Biomolecules (Updated 2023)",
+              "url": "https://www.youtube.com/watch?v=1Dx7LDwINLU",
+              "source": "Amoeba Sisters",
+              "license": "Standard YouTube License (official stream — no copy made)",
+              "attribution": "© Amoeba Sisters — streamed from the official channel https://www.youtube.com/@AmoebaSisters",
+              "description": "All four biomolecule families with structures, food sources and memory tricks."
+            }
+          ],
+          "resources": [],
+          "key_points": ["Mono/di/poly = 1/2/many sugars", "Condensation out, hydrolysis in (water)", "Starch stores, glycogen sprints, cellulose builds"],
+          "references": ["OpenStax Biology 2e — Chapter 3, Biological Macromolecules (carbohydrates)"]
+        },
+        {
+          "key": "les02",
+          "title": "Fats and Oils",
+          "description": "Triglycerides and phospholipids: concentrated energy, insulation and membranes.",
+          "duration": 25,
+          "objectives": [
+            "Describe triglyceride structure",
+            "State four roles of lipids",
+            "Explain why lipids store twice the energy of carbohydrates"
+          ],
+          "introduction": "A groundnut is small but keeps you full for hours. Lipids pack more than twice the energy per gram of any sugar — and build every membrane in your body.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "Triglycerides and phospholipids",
+              "body": "A triglyceride joins ONE glycerol to THREE fatty acids by condensation (three ester bonds, three waters released). Fatty acids may be saturated (no double bonds — straight chains that pack tightly, solid at room temperature: butter, palm oil, animal fat) or unsaturated (one or more double bonds kink the chain so it cannot pack — liquid oils: groundnut, soya, olive oil). Roles of lipids: (1) concentrated energy store (9 kcal/g vs 4 for carbohydrate — seeds and adipose tissue); (2) insulation — blubber, subcutaneous fat and myelin sheaths slow heat loss and speed nerve impulses; (3) protection — fat cushions kidneys and eyes; (4) membranes — phospholipids (glycerol + 2 fatty acids + phosphate head) form the bilayer of every cell membrane, with waterproof cuticles and waxes protecting leaves and skin. Steroids (cholesterol, sex hormones) are lipids too, built from rings rather than fatty acids."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: why do marathoners hit the wall?",
+              "body": "Question: Runners store ~2000 kcal as glycogen but ~50,000+ kcal as fat, yet they 'hit the wall' when glycogen runs out. Why can't fat take over instantly? Step 1 — Recall: fat releases energy SLOWLY (needs abundant oxygen and many breakdown steps); glycogen releases it FAST. Step 2 — Apply: at race pace, muscles demand ATP faster than fat oxidation can supply, so pace must drop to the fat-burning rate — the 'wall'. Step 3 — Generalise: biology trades speed against capacity — glycogen is the wallet (fast, small), fat is the bank vault (slow, huge). Examination link: this is why both stores exist; neither alone is optimal."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Triglyceride = glycerol + 3 fatty acids (condensation, 3 waters out).\nSaturated = solid fats; unsaturated = liquid oils (double-bond kinks).\nLipid jobs: energy store, insulation, protection, membranes.\nPhospholipid bilayers make all cell membranes."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Lipids are energy-dense, waterproof multitaskers: fuel tanks, insulation, cushions and the fabric of membranes. Saturated versus unsaturated explains butter versus oil, and speed-versus-capacity explains why bodies keep both glycogen and fat."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Glycerol + 3 fatty acids = triglyceride", "Double bonds kink chains → oils stay liquid", "Fat = slow vault; glycogen = fast wallet"],
+          "references": ["OpenStax Biology 2e — Chapter 3 (lipids)"]
+        }
+      ]
+    },
+    {
+      "key": "top02",
+      "order": 2,
+      "title": "Proteins and Enzymes",
+      "description": "Amino acids, protein shapes, and the biological catalysts that run every cell.",
+      "objectives": ["Describe protein structure levels", "Explain enzyme action and factors"],
+      "lessons": [
+        {
+          "key": "les01",
+          "title": "Amino Acids and Protein Structure",
+          "description": "Twenty building blocks, four levels of folding, and jobs from muscle to antibodies.",
+          "duration": 35,
+          "objectives": [
+            "State that proteins are chains of amino acids joined by peptide bonds",
+            "Describe the four levels of protein structure simply",
+            "Give five roles of proteins with one example each"
+          ],
+          "introduction": "Hair, enzymes, antibodies, haemoglobin and spider silk are all proteins — one construction kit producing endless machines. The secret is shape.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "From amino acids to proteins",
+              "body": "Proteins contain C, H, O plus NITROGEN (and sometimes sulphur). Their monomers are 20 amino acids, joined by peptide bonds through condensation into polypeptides. Structure has four levels: PRIMARY — the exact amino-acid sequence (dictated by DNA; one wrong swap causes sickle-cell disease); SECONDARY — local folding into alpha-helices or beta-pleated sheets, held by hydrogen bonds; TERTIARY — the full 3D shape of one chain (this shape IS the function — an enzyme's active site, an antibody's binding site); QUATERNARY — several chains assembled (haemoglobin's four subunits). Heat, strong acids/alkalis and heavy metals disrupt the weak bonds, unfolding the protein — DENATURATION — which destroys function permanently. This is why a boiled egg never un-boils: its albumin proteins are denatured."
+            },
+            {
+              "block": "THEORY",
+              "title": "Protein jobs",
+              "body": "Learn five roles with examples: (1) CATALYSIS — enzymes (amylase, catalase); (2) TRANSPORT — haemoglobin carries oxygen, membrane carriers move ions; (3) DEFENCE — antibodies tag germs, fibrinogen clots blood; (4) STRUCTURE — collagen in skin and bone, keratin in hair and nails, actin/myosin in muscle; (5) CONTROL — hormones such as insulin, and receptor proteins that receive signals. Kwashiorkor — the swollen-belly protein deficiency seen in malnourished children — shows what happens when the body cannot build these: stunted growth, weak immunity and fluid imbalance. Beans, soya, groundnuts, eggs, fish and milk are affordable complete-protein sources."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: one swap, one disease",
+              "body": "Question: In sickle-cell disease, glutamic acid is replaced by valine at ONE position in haemoglobin. Explain why this small change has huge effects. Step 1 — Recall: primary sequence determines tertiary shape; valine is hydrophobic while glutamic acid is hydrophilic. Step 2 — Apply: under low oxygen, the mutant haemoglobin molecules stick together into stiff fibres that distort red cells into sickles. Step 3 — Conclude: sickled cells block capillaries (pain crises) and break down fast (anaemia) — a single amino-acid swap reshapes the protein and cripples its function. This is the sharpest proof that SEQUENCE → SHAPE → FUNCTION."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Proteins = amino-acid chains (peptide bonds); elements C, H, O, N.\nFour levels: sequence → local folds → 3D shape → multi-chain assembly.\nShape = function; denaturation (heat, extremes of pH) destroys both.\nFive jobs: catalysis, transport, defence, structure, control."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Twenty amino acids, folded into precise 3D machines, do most of the cell's work. DNA writes the sequence, shape delivers the function, and anything that unfolds the shape — heat, acid, alkali — breaks the machine."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Sequence → shape → function", "Denaturation is usually irreversible", "Kwashiorkor = protein deficiency disease"],
+          "references": ["OpenStax Biology 2e — Chapter 3 (proteins)"]
+        },
+        {
+          "key": "les02",
+          "title": "How Enzymes Work",
+          "description": "Lock-and-key and induced-fit models, and how temperature, pH and concentration change reaction rates.",
+          "duration": 40,
+          "objectives": [
+            "Define enzymes and explain the active site",
+            "Compare lock-and-key and induced-fit models",
+            "Predict and explain rate curves for temperature, pH and substrate concentration"
+          ],
+          "introduction": "Without enzymes, digesting lunch would take years instead of hours. These protein catalysts accelerate reactions millions of times — and this lesson's graphs appear in almost every biology examination.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "The active site",
+              "body": "Enzymes are globular proteins that speed up (catalyse) specific reactions without being used up. Each enzyme has an ACTIVE SITE — a pocket whose shape fits its SUBSTRATE exactly. The lock-and-key model says the fit is rigid and perfect; the newer induced-fit model says the active site moulds slightly around the substrate, like a glove tightening on a hand — induced fit is the accepted refinement. After binding, the enzyme stresses bonds (or brings reactants together), products leave, and the enzyme is free again. Specificity is absolute: amylase digests starch but ignores protein; each enzyme fits one substrate type. The enzyme-substrate complex is temporary; the enzyme emerges unchanged and ready for the next reaction."
+            },
+            {
+              "block": "THEORY",
+              "title": "Factors affecting rate",
+              "body": "Three graphs to master. (1) TEMPERATURE: rate rises with kinetic energy (more successful collisions) to an OPTIMUM (about 37°C for human enzymes), then CRASHES as heat denatures the enzyme — the curve is asymmetric (gentle rise, cliff fall). (2) pH: each enzyme has an optimum pH (pepsin ~pH 2 in the stomach; amylase ~pH 7) with rate falling both sides as charges change shape; extremes denature. (3) SUBSTRATE CONCENTRATION: rate rises then LEVELS OFF (plateau) when every active site is occupied — the enzyme is saturated; only adding more enzyme raises the plateau. Inhibitors: competitive blockers fit the active site (beaten by adding substrate); non-competitive binders distort the enzyme elsewhere (cannot be beaten by substrate). Many drugs and poisons (cyanide, snake venom components) are enzyme inhibitors."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: reading an enzyme graph",
+              "body": "Question: A student plots amylase activity against temperature and gets a peak at 37°C with zero activity at 80°C. Explain the shape. Step 1 — Describe: rate climbs from 0°C to 37°C, then falls steeply to zero by 80°C. Step 2 — Explain the rise: higher temperature → faster-moving particles → more frequent enzyme-substrate collisions → more complexes per second. Step 3 — Explain the fall: above the optimum, vibrations break the weak bonds holding the active site's shape — the enzyme DENATURES, substrate no longer fits, rate collapses irreversibly. Examination rule: describe the pattern FIRST, then explain each section separately — description and explanation earn separate marks."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Enzymes = specific protein catalysts with an active site; unchanged by the reaction.\nInduced fit refines lock-and-key: the site moulds around the substrate.\nTemperature: rise to optimum, then denaturation cliff. pH: optimum with falls both sides. Substrate: rise to saturation plateau.\nDescribe graphs first, then explain each section."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Enzymes work by fit: substrate docks, reaction happens, enzyme repeats. Temperature, pH and substrate concentration sculpt predictable rate curves — learn to describe and explain all three, and enzyme questions become routine."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Active-site fit gives absolute specificity", "Denaturation cliff makes the temperature curve asymmetric", "Saturation plateaus are about occupied sites"],
+          "references": ["OpenStax Biology 2e — Chapter 6 (energy and enzymes)"]
+        }
+      ]
+    },
+    {
+      "key": "top03",
+      "order": 3,
+      "title": "Testing Foods",
+      "description": "The four classic food tests: starch, reducing sugars, protein and fats.",
+      "objectives": ["Perform the four food tests safely", "Interpret positive and negative results"],
+      "lessons": [
+        {
+          "key": "les01",
+          "title": "The Four Food Tests",
+          "description": "Iodine, Benedict's, biuret and emulsion tests — procedure, colours and safety.",
+          "duration": 35,
+          "objectives": [
+            "State the reagent, method and positive result for each test",
+            "Explain the safety precautions for heating tests",
+            "Interpret combined results on unknown samples"
+          ],
+          "introduction": "A white powder could be starch, sugar, protein or salt. Four colour-change tests identify it in minutes — and food-test questions are guaranteed marks if you memorise the colours.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "Procedures and colours",
+              "body": "STARCH — Iodine test: add yellow-brown iodine solution to the sample. Positive: BLUE-BLACK. Negative: stays brown-yellow. (No heating needed.) REDUCING SUGARS (glucose, maltose — NOT sucrose) — Benedict's test: add blue Benedict's solution, then heat in a water bath (never a bare flame). Positive: GREEN → YELLOW → ORANGE → BRICK-RED precipitate as sugar concentration rises. PROTEIN — Biuret test: add sodium hydroxide solution, then a few drops of dilute copper sulphate. Positive: PURPLE/VIOLET. Negative: stays blue. FATS — Emulsion test: shake the sample with ethanol, then pour into water. Positive: MILKY-WHITE EMULSION. (Alternative grease-spot: rub on paper — translucent spot that stays.) Non-reducing sugars (sucrose): boil first with dilute acid, neutralise, THEN Benedict's — a two-step test examiners love."
+            },
+            {
+              "block": "THEORY",
+              "title": "Safety and fair testing",
+              "body": "Benedict's test needs heat: wear eye protection, use a water bath (no open flame near ethanol — it is flammable), point test tubes away from people, and use tongs. Biuret's sodium hydroxide is corrosive — rinse spills with plenty of water and report them. Fair-test rules: same sample size, same reagent volumes, same heating time, and a CONTROL (e.g. distilled water) to prove the reagents alone give negatives. Record results in a table with OBSERVATION (colour seen) and INFERENCE (nutrient present) as separate columns — mixing them loses marks."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: mystery powder",
+              "body": "Question: Powder P gives: iodine → stays brown; Benedict's (heated) → brick-red; biuret → stays blue. Identify P's nutrients. Step 1 — Read each test independently: iodine negative = NO starch; Benedict's brick-red = HIGH reducing sugar; biuret negative = NO protein. Step 2 — Combine: P contains abundant reducing sugar (likely glucose) and neither starch nor protein. Step 3 — Present as examiners expect: a three-row table of test/observation/inference, then one concluding sentence. Trap avoided: brick-red proves SUGAR, not starch — starch needs iodine, never Benedict's."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Iodine → blue-black = STARCH. Benedict's (heated) → green-to-brick-red = REDUCING SUGAR.\nBiuret → purple = PROTEIN. Ethanol-then-water → milky emulsion = FAT.\nSucrose needs acid-boil before Benedict's (non-reducing sugar).\nHeat tests: goggles, water bath, tubes pointed away, controls included."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Four tests, four colour stories: iodine blackens starch, Benedict's reddens sugars, biuret purples protein, ethanol milks fats. Memorise reagent + method + colour triples, heat safely, and always run controls."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Colour triples: reagent + method + result", "Sucrose is non-reducing — acid first", "Observation and inference are separate columns"],
+          "references": ["OpenStax Biology 2e — Chapter 3 (macromolecule detection principles)"]
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "type": "BOOK",
+      "title": "OpenStax Biology 2e — full textbook (free PDF + web)",
+      "url": "https://openstax.org/details/books/biology-2e",
+      "description": "Module 3 reading: Chapter 3 (Biological Macromolecules) and Chapter 6 (energy, enzymes). Download the free PDF from the publisher page.",
+      "source": "OpenStax, Rice University",
+      "license": "CC BY-NC-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "attribution": "Biology 2e by Mary Ann Clark, Matthew Douglas and Jung Choi (OpenStax, Rice University), licensed CC BY-NC-SA 4.0."
+    }
+  ],
+  "practical": {
+    "title": "Food Tests in the Kitchen Laboratory",
+    "objective": "Test at least four foods for starch, sugar, protein or fat and record observations and inferences separately.",
+    "scenario": "Your kitchen is the lab. Iodine (from a pharmacy/drugstore antiseptic — povidone-iodine diluted) tests starch; the grease-spot test finds fats; and label-reading plus Benedict's logic covers the rest.",
+    "instructions": "1. Choose 4 foods (e.g. boiled yam, egg white, groundnut oil, glucose drink). 2. STARCH: place a drop of diluted iodine on a small piece of each — record the exact colour. 3. FAT: rub each food on plain paper, let dry, hold to light — a translucent remaining spot means fat. 4. SUGAR/PROTEIN: read the nutrition labels and copy the sugar and protein grams per 100 g; state which lab test (Benedict's/biuret) would confirm each. 5. Build a table: food | iodine observation | inference | grease-spot | label sugar/protein. 6. Write a conclusion naming the main nutrient of each food. SAFETY: iodine stains skin and clothes (wear gloves/apron); do NOT eat tested samples; keep iodine away from eyes; school-lab students doing real Benedict's/biuret must wear goggles and heat only in a water bath.",
+    "requirements": "4 foods, diluted povidone-iodine, plain paper, notebook. (School lab option: Benedict's solution, biuret reagents, water bath, goggles.)",
+    "expected_output": "A complete results table plus a conclusion naming each food's main nutrient with evidence.",
+    "difficulty": "BEGINNER",
+    "estimated_time": 60,
+    "submission_type": "TEXT",
+    "evaluation_criteria": ["All four foods tested with honest colour/spot observations", "Observations and inferences kept in separate columns", "Conclusion matches the evidence (e.g. yam = starch, oil = fat)"]
+  },
+  "assignment": {
+    "title": "Analyse a Day of Eating",
+    "description": "Record everything one person eats in a day, classify the nutrients, and judge the balance of the diet.",
+    "instructions": "1. Record every food and drink one person (you or a volunteer) consumes in 24 hours, with rough quantities. 2. Classify each item's MAIN nutrient (carbohydrate, protein, fat) plus notable vitamins/minerals/fibre/water contributions. 3. Judge the diet against balance rules: energy vs activity, protein for growth/repair, fibre + water, excess sugar/salt/fat risks. 4. Recommend THREE specific, affordable improvements (e.g. 'replace one soft drink with water and groundnuts'). 5. Submit the food diary, classification table and recommendations (350–450 words total).",
+    "requirements": "Real data from a real day; invented diaries are easy to spot and score zero.",
+    "expected_output": "Food diary + nutrient table + three justified improvements.",
+    "difficulty": "BEGINNER",
+    "estimated_time": 90,
+    "submission_type": "TEXT",
+    "evaluation_criteria": ["Complete honest diary with quantities", "Correct main-nutrient classification for every item", "Three specific, affordable, biologically justified improvements"],
+    "max_score": 100,
+    "pass_score": 50
+  },
+  "quiz": {
+    "title": "Module 3 Quiz — Molecules and Enzymes",
+    "description": "Quick check on food molecules, enzymes and food tests.",
+    "passing_score": 70,
+    "time_limit": 15,
+    "attempt_limit": 3,
+    "questions": [
+      {
+        "type": "multiple_choice",
+        "question": "Which row is correct?",
+        "options": ["Starch: plant energy store; Glycogen: animal energy store; Cellulose: plant structure", "Starch: animal store; Glycogen: plant store; Cellulose: animal structure", "All three are proteins", "All three are found only in animals"],
+        "correct": [0],
+        "explanation": "Plants store starch and build with cellulose; animals store glycogen. All three are polysaccharides of glucose.",
+        "points": 1,
+        "topic": "Carbohydrates"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "A triglyceride is formed from:",
+        "options": ["One glycerol + three fatty acids, releasing three waters", "Three glycerols + one fatty acid, using three waters", "Amino acids joined by peptide bonds", "Glucose units joined by glycosidic bonds"],
+        "correct": [0],
+        "explanation": "Condensation joins glycerol to three fatty acids (three ester bonds, three waters out). Amino acids make proteins; glucose chains make polysaccharides.",
+        "points": 1,
+        "topic": "Lipids"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Why does boiling an enzyme permanently destroy its activity?",
+        "options": ["The substrate evaporates", "Heat denatures the protein: the active site loses its shape", "Boiling adds extra active sites", "Enzymes melt into sugars"],
+        "correct": [1],
+        "explanation": "Excess heat breaks the weak bonds maintaining tertiary structure, so the active site no longer fits the substrate — irreversible denaturation.",
+        "points": 1,
+        "topic": "Enzymes"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Benedict's solution heated with a sample turns brick-red. The sample contains:",
+        "options": ["Starch", "A high concentration of reducing sugar", "Protein", "Pure water"],
+        "correct": [1],
+        "explanation": "Benedict's (heated) detects reducing sugars: blue → green → yellow → orange → brick-red with rising concentration. Starch needs iodine; protein needs biuret.",
+        "points": 1,
+        "topic": "Food tests"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "At high substrate concentration, enzyme reaction rate plateaus because:",
+        "options": ["All enzymes are denatured", "Every active site is occupied — the enzyme is saturated", "The product poisons the enzyme", "Temperature always falls"],
+        "correct": [1],
+        "explanation": "Saturation: with no free active sites, extra substrate must queue. Only adding more enzyme lifts the plateau.",
+        "points": 1,
+        "topic": "Enzymes"
+      }
+    ]
+  },
+  "assessment": {
+    "key": "exam",
+    "title": "Module 3 Examination — Biological Molecules",
+    "description": "End-of-module examination covering food molecules, enzymes and food tests.",
+    "instructions": "Answer ALL 6 questions in 25 minutes. Pass mark is 60%. Counts toward your final assessment gate.",
+    "passing_score": 60,
+    "time_limit_minutes": 25,
+    "max_attempts": 3,
+    "time_limit": 25,
+    "attempt_limit": 2,
+    "questions": [
+      {
+        "type": "multiple_choice",
+        "question": "Sucrose gives a negative Benedict's test but a positive one after boiling with acid. The best explanation is:",
+        "options": ["Sucrose is not a carbohydrate", "Sucrose is a non-reducing sugar; acid hydrolysis splits it into glucose + fructose, which are reducing", "The acid destroys all sugar", "Benedict's only works in acid"],
+        "correct": [1],
+        "explanation": "Sucrose's glycosidic bond locks both reactive groups (non-reducing). Acid hydrolysis frees glucose and fructose, which then reduce Benedict's.",
+        "points": 1,
+        "topic": "Carbohydrates"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Which combination is an emulsion-test positive for fats?",
+        "options": ["Sample + iodine → blue-black", "Sample shaken with ethanol, poured into water → milky-white emulsion", "Sample + biuret → purple", "Sample heated with Benedict's → orange"],
+        "correct": [1],
+        "explanation": "Fats dissolve in ethanol then form a milky emulsion when poured into water. The other results indicate starch, protein and reducing sugar.",
+        "points": 1,
+        "topic": "Food tests"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Pepsin works best at pH 2 and amylase at pH 7. This shows that:",
+        "options": ["All enzymes share one optimum pH", "Each enzyme has an optimum pH matching its location; extremes change charges and denature the active site", "pH never affects enzymes", "Acid always destroys enzymes"],
+        "correct": [1],
+        "explanation": "Enzyme optima match their working environment (stomach acid vs mouth/gut). Wrong pH alters charges and shape, cutting the rate; extremes denature.",
+        "points": 1,
+        "topic": "Enzymes"
+      },
+      {
+        "type": "true_false",
+        "question": "True or False: A competitive inhibitor can be overcome by adding more substrate, because substrate and inhibitor compete for the same active site.",
+        "options": ["True", "False"],
+        "correct": [0],
+        "explanation": "True. Flooding the active site with substrate out-competes a competitive blocker; non-competitive inhibition (distortion from elsewhere) cannot be beaten this way.",
+        "points": 1,
+        "topic": "Enzymes"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Kwashiorkor (protein-energy malnutrition) causes stunted growth and weak immunity because proteins are needed for:",
+        "options": ["Structure, enzymes, antibodies and transport — growth and defence fail without them", "Colouring the skin", "Making bones heavier only", "Nothing essential in children"],
+        "correct": [0],
+        "explanation": "Proteins build tissue, catalyse reactions, fight infection and carry molecules — deficiency cripples growth, immunity and fluid balance.",
+        "points": 1,
+        "topic": "Proteins"
+      },
+      {
+        "type": "multiple_answer",
+        "question": "Which statements about lipids are TRUE? (Select ALL that apply)",
+        "options": ["Triglycerides store about twice the energy per gram of carbohydrates", "Unsaturated fatty acids have double bonds that kink the chain", "All lipids dissolve easily in water", "Phospholipids form cell membranes"],
+        "correct": [0, 1, 3],
+        "explanation": "Lipids are energy-dense, kinked when unsaturated, and membrane-forming as phospholipids — but they are hydrophobic, NOT water-soluble.",
+        "points": 2,
+        "topic": "Lipids"
+      }
+    ]
+  }
+}

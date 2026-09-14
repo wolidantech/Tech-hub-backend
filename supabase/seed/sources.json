@@ -1,0 +1,84 @@
+{
+  "_comment": "WOLI DAN TECH HUB — verified source/license registry. EVERY external URL in course seeds MUST appear here (exact match) or the seed gate fails. Verification: OpenStax pages fetched 2026-09-14 (license CC BY-NC-SA 4.0 confirmed on-page); every YouTube video confirmed live via YouTube oEmbed (exact title + author recorded). Nothing here is invented.",
+  "sources": [
+    {
+      "name": "OpenStax Biology 2e",
+      "publisher": "OpenStax, Rice University",
+      "authors": ["Mary Ann Clark (Texas Wesleyan University)", "Matthew Douglas (Grand Rapids Community College)", "Jung Choi (Georgia Institute of Technology)"],
+      "base_url": "https://openstax.org",
+      "type": "OPEN_EDU",
+      "description": "Complete peer-reviewed biology textbook (scope: two-semester majors biology). Free web + PDF from publisher.",
+      "urls": [
+        {
+          "url": "https://openstax.org/details/books/biology-2e",
+          "title": "Biology 2e — OpenStax (book details, free web view + PDF download)",
+          "license": "CC BY-NC-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+          "attribution": "Biology 2e by Mary Ann Clark, Matthew Douglas and Jung Choi (OpenStax, Rice University), licensed CC BY-NC-SA 4.0. Accessed via the official OpenStax book page; PDF downloaded from publisher."
+        }
+      ]
+    },
+    {
+      "name": "OpenStax College Algebra 2e",
+      "publisher": "OpenStax, Rice University",
+      "authors": ["Jay Abramson (Arizona State University)", "Valeree Falduto", "Rachael Gross", "David Lippman", "Melonie Rasmussen", "Rick Norwood", "Nicholas Belloit", "Harold Whipple", "Jean-Marie Magnier", "Christina Fernandez"],
+      "base_url": "https://openstax.org",
+      "type": "OPEN_EDU",
+      "description": "Complete peer-reviewed college algebra textbook. Free web + PDF from publisher.",
+      "urls": [
+        {
+          "url": "https://openstax.org/details/books/college-algebra-2e",
+          "title": "College Algebra 2e — OpenStax (book details, free web view + PDF download)",
+          "license": "CC BY-NC-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+          "attribution": "College Algebra 2e by Jay Abramson et al. (OpenStax, Rice University), licensed CC BY-NC-SA 4.0. Accessed via the official OpenStax book page; PDF downloaded from publisher."
+        }
+      ]
+    },
+    {
+      "name": "Amoeba Sisters",
+      "publisher": "Amoeba Sisters (official YouTube channel)",
+      "base_url": "https://www.youtube.com/@AmoebaSisters",
+      "type": "VIDEO",
+      "description": "Free biology explainer videos by a US high-school biology teacher. Used ONLY as official YouTube embeds/streams — no copy is made or stored by WOLI DAN TECH HUB.",
+      "license_note": "Standard YouTube License — streamed from the creator's official channel via youtube.com/watch or embed. No download, copy, or redistribution.",
+      "urls": [
+        { "url": "https://www.youtube.com/watch?v=cQPVXrV0GNA", "title": "Characteristics of Life", "license": "Standard YouTube License (official stream — no copy made)", "attribution": "© Amoeba Sisters — streamed from the official channel https://www.youtube.com/@AmoebaSisters" },
+        { "url": "https://www.youtube.com/watch?v=6mgkoqcm6Sg", "title": "Cell Organelles and Structures Review", "license": "Standard YouTube License (official stream — no copy made)", "attribution": "© Amoeba Sisters — streamed from the official channel https://www.youtube.com/@AmoebaSisters" },
+        { "url": "https://www.youtube.com/watch?v=1Dx7LDwINLU", "title": "Biomolecules (Updated 2023)", "license": "Standard YouTube License (official stream — no copy made)", "attribution": "© Amoeba Sisters — streamed from the official channel https://www.youtube.com/@AmoebaSisters" },
+        { "url": "https://www.youtube.com/watch?v=zrKdz93WlVk", "title": "Mitosis vs. Meiosis: Side by Side Comparison", "license": "Standard YouTube License (official stream — no copy made)", "attribution": "© Amoeba Sisters — streamed from the official channel https://www.youtube.com/@AmoebaSisters" },
+        { "url": "https://www.youtube.com/watch?v=VzDMG7ke69g", "title": "Meiosis (Updated)", "license": "Standard YouTube License (official stream — no copy made)", "attribution": "© Amoeba Sisters — streamed from the official channel https://www.youtube.com/@AmoebaSisters" },
+        { "url": "https://www.youtube.com/watch?v=QVCjdNxJreE", "title": "The Cell Cycle (and cancer) [Updated]", "license": "Standard YouTube License (official stream — no copy made)", "attribution": "© Amoeba Sisters — streamed from the official channel https://www.youtube.com/@AmoebaSisters" },
+        { "url": "https://www.youtube.com/watch?v=pv3Kj0UjiLE", "title": "Alleles and Genes", "license": "Standard YouTube License (official stream — no copy made)", "attribution": "© Amoeba Sisters — streamed from the official channel https://www.youtube.com/@AmoebaSisters" },
+        { "url": "https://www.youtube.com/watch?v=jLmoJPxihjA", "title": "Mega Genetics Review: Mendelian and non-Mendelian Genetics", "license": "Standard YouTube License (official stream — no copy made)", "attribution": "© Amoeba Sisters — streamed from the official channel https://www.youtube.com/@AmoebaSisters" },
+        { "url": "https://www.youtube.com/watch?v=7VM9YxmULuo", "title": "Natural Selection", "license": "Standard YouTube License (official stream — no copy made)", "attribution": "© Amoeba Sisters — streamed from the official channel https://www.youtube.com/@AmoebaSisters" },
+        { "url": "https://www.youtube.com/watch?v=rNjPI84sApQ", "title": "Ecological Relationships", "license": "Standard YouTube License (official stream — no copy made)", "attribution": "© Amoeba Sisters — streamed from the official channel https://www.youtube.com/@AmoebaSisters" },
+        { "url": "https://www.youtube.com/watch?v=NHqEthRCqQ4", "title": "Carbon and Nitrogen Cycles", "license": "Standard YouTube License (official stream — no copy made)", "attribution": "© Amoeba Sisters — streamed from the official channel https://www.youtube.com/@AmoebaSisters" },
+        { "url": "https://www.youtube.com/watch?v=eJ9Zjc-jdys", "title": "Cellular Respiration (UPDATED)", "license": "Standard YouTube License (official stream — no copy made)", "attribution": "© Amoeba Sisters — streamed from the official channel https://www.youtube.com/@AmoebaSisters" },
+        { "url": "https://www.youtube.com/watch?v=1UvuBYUbFk0", "title": "Digestive System", "license": "Standard YouTube License (official stream — no copy made)", "attribution": "© Amoeba Sisters — streamed from the official channel https://www.youtube.com/@AmoebaSisters" },
+        { "url": "https://www.youtube.com/watch?v=CMiPYHNNg28", "title": "Photosynthesis (UPDATED)", "license": "Standard YouTube License (official stream — no copy made)", "attribution": "© Amoeba Sisters — streamed from the official channel https://www.youtube.com/@AmoebaSisters" },
+        { "url": "https://www.youtube.com/watch?v=MEIXRLcC6RA", "title": "General Lab Safety", "license": "Standard YouTube License (official stream — no copy made)", "attribution": "© Amoeba Sisters — streamed from the official channel https://www.youtube.com/@AmoebaSisters" }
+      ]
+    },
+    {
+      "name": "ScienceProfOnline",
+      "publisher": "Tami Guy, MS, CPPS (ScienceProfOnline, official YouTube channel)",
+      "base_url": "https://www.youtube.com/@ScienceProfOnline",
+      "type": "VIDEO",
+      "description": "Biology lab tutorial by a US biology instructor. Used ONLY as an official YouTube embed/stream — no copy made or stored.",
+      "urls": [
+        { "url": "https://www.youtube.com/watch?v=lo2aC_m2vyo", "title": "How To Use a Compound Light Microscope: Biology Lab Tutorial", "license": "Standard YouTube License (official stream — no copy made)", "attribution": "© Tami Guy / ScienceProfOnline — streamed from the official channel https://www.youtube.com/@ScienceProfOnline" }
+      ]
+    },
+    {
+      "name": "CUNY Kingsborough Biology",
+      "publisher": "Kingsborough Community College, CUNY (official YouTube account kingsboroughbio)",
+      "base_url": "https://www.youtube.com/@kingsboroughbio",
+      "type": "UNIVERSITY",
+      "description": "Microscope focusing demonstration from a CUNY community-college biology department. Official YouTube stream only — no copy made or stored.",
+      "urls": [
+        { "url": "https://www.youtube.com/watch?v=rt5zbf0UEFI", "title": "Focusing a compound microscope", "license": "Standard YouTube License (official stream — no copy made)", "attribution": "© Kingsborough Community College (CUNY) Biology — streamed from the official account https://www.youtube.com/@kingsboroughbio" }
+      ]
+    }
+  ]
+}

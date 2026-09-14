@@ -1,0 +1,407 @@
+{
+  "key": "mod04",
+  "order": 4,
+  "title": "Cell Division",
+  "description": "How cells copy themselves: the cell cycle, mitosis for growth and repair, and meiosis for gametes and variation.",
+  "objectives": [
+    "Describe the stages of the cell cycle and mitosis",
+    "Explain the roles of mitosis in growth, repair and asexual reproduction",
+    "Describe meiosis and explain how it creates genetic variation"
+  ],
+  "duration_text": "1 week",
+  "topics": [
+    {
+      "key": "top01",
+      "order": 1,
+      "title": "The Cell Cycle and Mitosis",
+      "description": "Interphase plus the four stages of mitosis: how one cell becomes two identical cells.",
+      "objectives": ["Order the cell-cycle stages", "Explain mitosis roles"],
+      "lessons": [
+        {
+          "key": "les01",
+          "title": "Stages of Mitosis",
+          "description": "Interphase, prophase, metaphase, anaphase, telophase and cytokinesis — PMAT in full.",
+          "duration": 40,
+          "objectives": [
+            "State what happens in interphase and each stage of mitosis",
+            "Identify PMAT stages from diagrams or micrographs",
+            "Explain why chromosome copies must separate exactly"
+          ],
+          "introduction": "You began as one cell and now hold about 30 trillion. Every one came from mitosis — the most important dance in biology, performed identically billions of times a day.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "Interphase and PMAT",
+              "body": "The cell cycle is mostly INTERPHASE (growth + DNA replication): the cell grows (G1), copies every chromosome into two sister chromatids (S phase), then grows and prepares to divide (G2). Mitosis itself has four stages — remember PMAT. PROPHASE: chromosomes condense (become visible), the nuclear membrane breaks down, and spindle fibres form. METAPHASE: chromosomes line up singly along the cell equator, attached to spindle fibres at their centromeres. ANAPHASE: sister chromatids are pulled to opposite poles (V-shapes trailing) — the defining moment of exact separation. TELOPHASE: nuclear membranes reform around each set, chromosomes uncoil. CYTOKINESIS then splits the cytoplasm: animal cells pinch inward (cleavage furrow); plant cells build a cell plate outward. Result: TWO genetically IDENTICAL diploid cells, each with the full chromosome number (46 in humans)."
+            },
+            {
+              "block": "THEORY",
+              "title": "Why exactness matters",
+              "body": "Every chromatid separation must be perfect: lose or gain one chromosome and the daughter cell usually dies or malfunctions (Down syndrome comes from an extra chromosome 21 after a separation error). Spindle checkpoints pause division until every chromosome is attached — the cell proofreads itself. When checkpoints fail and division runs wild, the result is a tumour: cancer is fundamentally a cell-cycle disease. This is why Module 4 matters beyond examinations — chemotherapy drugs target rapidly dividing cells precisely because they exploit mitosis."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: identifying stages",
+              "body": "Question: Three cells are drawn: A shows chromosomes scattered and condensing with no nuclear membrane; B shows V-shaped chromatids moving apart; C shows two new nuclei with a cell plate. Name each stage. Step 1 — Match diagnostics: scattered condensing chromosomes + no membrane = PROPHASE (A). Chromatids separating toward poles = ANAPHASE (B). Two nuclei + cell plate = TELOPHASE + CYTOKINESIS in a plant cell (C). Step 2 — Justify each with ONE feature (condensing, separating, reforming). Examination tip: anaphase is the only stage with chromatids moving apart — if you see V-shapes travelling, it is anaphase, always."
+            },
+            {
+              "block": "VIDEO",
+              "title": "Watch: The Cell Cycle (and cancer) [Updated]",
+              "url": "https://www.youtube.com/watch?v=QVCjdNxJreE",
+              "body": "Watch 'The Cell Cycle (and cancer) [Updated]' by the Amoeba Sisters (official channel stream). Note how checkpoints guard each transition — and what happens when they fail."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Interphase (G1-S-G2): growth and DNA copying — most of the cycle.\nPMAT: Prophase (condense), Metaphase (line up), Anaphase (separate), Telophase (reform) + cytokinesis.\nMitosis yields 2 identical diploid cells.\nCheckpoints prevent errors; failed checkpoints can lead to cancer."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Interphase prepares, PMAT divides, cytokinesis splits — producing two exact copies. Precision is enforced by checkpoints because chromosome errors kill cells or cause disease. Learn to recognise each stage from a single diagnostic feature."
+            }
+          ],
+          "videos": [
+            {
+              "title": "The Cell Cycle (and cancer) [Updated]",
+              "url": "https://www.youtube.com/watch?v=QVCjdNxJreE",
+              "source": "Amoeba Sisters",
+              "license": "Standard YouTube License (official stream — no copy made)",
+              "attribution": "© Amoeba Sisters — streamed from the official channel https://www.youtube.com/@AmoebaSisters",
+              "description": "The cell cycle, checkpoints and the link to cancer."
+            }
+          ],
+          "resources": [],
+          "key_points": ["PMAT order and one diagnostic feature each", "DNA replicates in S phase, before mitosis", "Mitosis = identical diploid daughters"],
+          "references": ["OpenStax Biology 2e — Chapter 10, Cell Reproduction (the cell cycle, mitosis)"]
+        },
+        {
+          "key": "les02",
+          "title": "Why Mitosis Matters",
+          "description": "Growth, repair, replacement and asexual reproduction — plus what happens when control is lost.",
+          "duration": 25,
+          "objectives": [
+            "Give four roles of mitosis with examples",
+            "Explain cancer as uncontrolled mitosis",
+            "Contrast mitosis with meiosis outcomes"
+          ],
+          "introduction": "A cut on your finger closes in days; a broken bone knits in weeks; your gut lining renews itself constantly. All of it is mitosis — until control breaks.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "Roles of mitosis",
+              "body": "Mitosis serves four roles. (1) GROWTH: multicellular organisms grow by cell multiplication — a fertilised egg becomes a baby by repeated mitosis plus cell enlargement. (2) REPAIR: damaged tissues (skin, bone, liver) replace lost cells with identical copies. (3) REPLACEMENT: short-lived cells are renewed continuously — red blood cells (120-day life), gut lining (days), skin surface. (4) ASEXUAL REPRODUCTION: one parent produces genetically identical offspring fast with no mate — binary fission in bacteria, budding in yeast and Hydra, runners in strawberry plants, artificial cloning (cuttings, tissue culture). Advantage: speed and no mate needed; every offspring is proven-suited to a stable environment. Disadvantage: zero variation — one disease can wipe out a whole clone population (the Cavendish banana's crisis)."
+            },
+            {
+              "block": "THEORY",
+              "title": "Cancer: mitosis out of control",
+              "body": "Proto-oncogenes normally promote division and tumour-suppressor genes restrain it; mutations can jam the accelerator or cut the brakes, producing cells that divide endlessly, ignore death signals and invade tissues (malignant tumours). Carcinogens that raise mutation risk include tobacco smoke, excessive alcohol, certain viruses (HPV, Hepatitis B), UV radiation and some industrial chemicals. Treatments exploit rapid division: surgery removes, radiotherapy damages, and chemotherapy poisons dividing cells (which is why hair and gut — naturally fast-dividing — suffer side effects). Prevention (no smoking, vaccination, safe sun) beats cure — a public-health message worth spreading in your community."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: clone crisis",
+              "body": "Question: A farmer plants a whole field with yam setts cut from ONE parent tuber. A new virus arrives. Explain the risk using mitosis. Step 1 — Recall: vegetative propagation is mitosis-based, so all plants are genetically IDENTICAL clones. Step 2 — Apply: resistance genes are the same in every plant — if one plant is vulnerable, ALL are. Step 3 — Conclude: the virus can destroy the entire field, whereas seed-grown (sexual) crops vary and some would survive. Examination link: this contrasts asexual speed/uniformity against sexual variation/resilience — a guaranteed compare question."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Mitosis = growth, repair, replacement, asexual reproduction.\nAsexual pros: fast, no mate, proven genotype. Cons: no variation, shared vulnerability.\nCancer = mutated cell-cycle controls → uncontrolled mitosis.\nPrevention (vaccines, no tobacco, safe sun) is the best treatment."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Mitosis builds, heals and renews you, and clones organisms at speed — but identical copies share identical weaknesses. When division controls mutate, cancer follows. Variation, the subject of meiosis next, is evolution's answer."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Four roles with one example each", "Clones share vulnerabilities", "Cancer is a cell-cycle control failure"],
+          "references": ["OpenStax Biology 2e — Chapter 10 (control of the cell cycle, cancer)"]
+        }
+      ]
+    },
+    {
+      "key": "top02",
+      "order": 2,
+      "title": "Meiosis and Variation",
+      "description": "How gametes halve the chromosome number and shuffle genes to make every individual unique.",
+      "objectives": ["Describe meiosis simply", "Explain the two sources of variation"],
+      "lessons": [
+        {
+          "key": "les01",
+          "title": "Meiosis Halves the Number",
+          "description": "One DNA replication, two divisions: from diploid to four unique haploid gametes.",
+          "duration": 40,
+          "objectives": [
+            "State that meiosis produces four haploid, genetically different cells",
+            "Describe the key events of meiosis I and II simply",
+            "Explain why fertilisation restores the diploid number"
+          ],
+          "introduction": "If sperm and eggs each carried 46 chromosomes, every generation would double the count until cells burst. Meiosis solves this by halving — with a creative bonus: no two gametes are ever alike.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "Two divisions, one copying",
+              "body": "Meiosis starts like mitosis: DNA replicates ONCE in interphase. Then come TWO divisions. MEIOSIS I (reduction division): homologous chromosome PAIRS (one from each parent) line up together; in anaphase I, whole HOMOLOGUES separate (not chromatids) — this HALVES the number (46 → 23 in humans). MEIOSIS II: the two cells divide again like mitosis — chromatids separate — giving FOUR haploid cells. In males all four become sperm; in females usually ONE becomes the egg (the rest form polar bodies). Key vocabulary: DIPLOID (2n, paired chromosomes — body cells), HAPLOID (n, single set — gametes), HOMOLOGOUS PAIR (matching chromosomes, one maternal one paternal, same genes in the same order). Fertilisation (n + n) restores 2n — which is why children resemble BOTH parents."
+            },
+            {
+              "block": "THEORY",
+              "title": "Mitosis versus meiosis",
+              "body": "Memorise this comparison — it is examined constantly. DIVISIONS: mitosis 1, meiosis 2. CELLS PRODUCED: 2 vs 4. CHROMOSOME NUMBER: stays diploid vs halved to haploid. GENETIC IDENTITY: identical copies vs all different. LOCATION: body cells (growth/repair) vs reproductive organs (gametes). SEPARATION EVENT: chromatids separate (anaphase) vs homologues separate first (anaphase I), then chromatids. Both begin with DNA replication and share PMAT-like machinery — meiosis is essentially 'mitosis twice with pairing first'. One-line summary: mitosis CLONES, meiosis SHUFFLES AND HALVES."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: counting chromosomes",
+              "body": "Question: A fruit-fly body cell has 8 chromosomes. How many chromosomes and chromatids are in: (a) a gamete, (b) a cell in metaphase II? Step 1 — Gamete: meiosis halves 8 → 4 chromosomes, each single-chromatid. Step 2 — Metaphase II: the cell is haploid (4 chromosomes) but each still has TWO chromatids (they separate in anaphase II) → 4 chromosomes, 8 chromatids. Step 3 — State the rule: count CENTROMERES for chromosomes; count DNA strands for chromatids. Trap avoided: chromosomes and chromatids are different counts after replication."
+            },
+            {
+              "block": "VIDEO",
+              "title": "Watch: Mitosis vs. Meiosis — Side by Side Comparison",
+              "url": "https://www.youtube.com/watch?v=zrKdz93WlVk",
+              "body": "Watch 'Mitosis vs. Meiosis: Side by Side Comparison' by the Amoeba Sisters (official channel stream). Pause at the end and write the 6-row comparison table from memory."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Meiosis = 1 replication + 2 divisions → 4 unique haploid cells.\nHomologues separate in meiosis I (halving); chromatids separate in meiosis II.\nFertilisation restores diploidy: n + n = 2n.\nMitosis clones; meiosis shuffles and halves."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Meiosis halves the chromosome number through two divisions so fertilisation can restore it. Homologues part in meiosis I, chromatids in meiosis II — and every gamete leaves genetically unique, as the next lesson explains."
+            }
+          ],
+          "videos": [
+            {
+              "title": "Mitosis vs. Meiosis: Side by Side Comparison",
+              "url": "https://www.youtube.com/watch?v=zrKdz93WlVk",
+              "source": "Amoeba Sisters",
+              "license": "Standard YouTube License (official stream — no copy made)",
+              "attribution": "© Amoeba Sisters — streamed from the official channel https://www.youtube.com/@AmoebaSisters",
+              "description": "Direct visual comparison of both divisions — perfect for the classic compare question."
+            }
+          ],
+          "resources": [],
+          "key_points": ["Diploid body cells, haploid gametes", "Homologues separate in anaphase I", "Count centromeres for chromosomes"],
+          "references": ["OpenStax Biology 2e — Chapter 11, Meiosis and Sexual Reproduction"]
+        },
+        {
+          "key": "les02",
+          "title": "Where Variation Comes From",
+          "description": "Crossing over, independent assortment and random fertilisation — why siblings differ.",
+          "duration": 30,
+          "objectives": [
+            "Explain crossing over and independent assortment",
+            "Show why siblings (except identical twins) are genetically unique",
+            "Link variation to survival and evolution"
+          ],
+          "introduction": "Your parents' genes could combine in trillions of ways — and you are exactly one of them. Meiosis is the shuffling machine behind your uniqueness.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "Two shuffles in meiosis",
+              "body": "Variation source 1 — CROSSING OVER (prophase I): homologous chromosomes press together and swap matching segments, creating chromatids that mix maternal and paternal alleles — brand-new gene combinations on single chromosomes. Variation source 2 — INDEPENDENT ASSORTMENT (metaphase I): each homologous pair lines up randomly, maternal-left or maternal-right, INDEPENDENTLY of other pairs. With 23 pairs, humans produce 2^23 (over 8 MILLION) gamete combinations per person — before crossing over multiplies it further. Then RANDOM FERTILISATION picks one sperm from millions for one egg. Combined, the odds of two identical siblings (excluding identical twins, who split from ONE zygote) are effectively zero. Mutations add brand-new alleles occasionally — the ultimate source of all variation."
+            },
+            {
+              "block": "THEORY",
+              "title": "Why variation matters",
+              "body": "Variation is evolution's raw material: when environments change (new disease, drought, antibiotic), SOME variants survive and breed — natural selection needs differences to select. Low-variation populations (cheetahs, cloned bananas) face extinction from single threats; high-variation ones adapt. This links Module 4 directly to Module 6 (evolution): meiosis GENERATES the differences that selection SORTS. Sexual reproduction's cost (finding mates, halving gene transmission) is repaid in adaptability — which is why nearly all complex life kept it despite the cost."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: counting combinations",
+              "body": "Question: An organism has 3 chromosome pairs. How many gamete types can independent assortment alone produce? Step 1 — Formula: 2^n where n = haploid number (pairs). Step 2 — Substitute: 2^3 = 8 combinations. Step 3 — Interpret: even with 3 pairs there are 8 gamete types; humans with 23 pairs exceed 8 million — and crossing over expands this enormously. Examination note: questions give small numbers (2–4 pairs) for this calculation; state the formula for the method mark."
+            },
+            {
+              "block": "VIDEO",
+              "title": "Watch: Meiosis (Updated)",
+              "url": "https://www.youtube.com/watch?v=VzDMG7ke69g",
+              "body": "Watch 'Meiosis (Updated)' by the Amoeba Sisters (official channel stream) to see crossing over and assortment animated step by step."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Crossing over swaps segments between homologues (prophase I) — new allele mixes.\nIndependent assortment lines pairs up randomly (metaphase I) — 2^n combinations.\nRandom fertilisation + occasional mutation complete uniqueness.\nVariation is the raw material of natural selection."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Meiosis shuffles twice — swapping segments, then assorting pairs independently — and fertilisation shuffles a third time. The result: unique individuals, adaptable populations, and the fuel of evolution."
+            }
+          ],
+          "videos": [
+            {
+              "title": "Meiosis (Updated)",
+              "url": "https://www.youtube.com/watch?v=VzDMG7ke69g",
+              "source": "Amoeba Sisters",
+              "license": "Standard YouTube License (official stream — no copy made)",
+              "attribution": "© Amoeba Sisters — streamed from the official channel https://www.youtube.com/@AmoebaSisters",
+              "description": "Full meiosis walkthrough with crossing over and chromosome counting."
+            }
+          ],
+          "resources": [],
+          "key_points": ["Crossing over = segment swaps", "Assortment = 2^n combinations", "Uniqueness needs all three shuffles"],
+          "references": ["OpenStax Biology 2e — Chapter 11 (variation from meiosis)"]
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "type": "BOOK",
+      "title": "OpenStax Biology 2e — full textbook (free PDF + web)",
+      "url": "https://openstax.org/details/books/biology-2e",
+      "description": "Module 4 reading: Chapter 10 (Cell Reproduction: mitosis) and Chapter 11 (Meiosis and Sexual Reproduction). Download the free PDF from the publisher page.",
+      "source": "OpenStax, Rice University",
+      "license": "CC BY-NC-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "attribution": "Biology 2e by Mary Ann Clark, Matthew Douglas and Jung Choi (OpenStax, Rice University), licensed CC BY-NC-SA 4.0."
+    }
+  ],
+  "practical": {
+    "title": "Modelling Mitosis and Meiosis",
+    "objective": "Build physical chromosome models and photograph every stage of mitosis and meiosis in order.",
+    "scenario": "School-lab students may prepare real onion root-tip slides; home students build the divisions from craft materials. Both produce a stage-by-stage record.",
+    "instructions": "SCHOOL-LAB OPTION: 1. Soften an onion root tip in warm dilute acid, stain with acetic orcein/carmine, squash under a coverslip. 2. Find dividing cells under high power and sketch one cell each for prophase, metaphase, anaphase, telophase. HOME OPTION: 1. Make 4 chromosomes from pipe cleaners or coloured paper strips (2 long, 2 short; one of each pair red = maternal, blue = paternal; use clips for centromeres). 2. Arrange and photograph: interphase, P, M, A, T for mitosis — then prophase I (show crossing over by swapping tips), metaphase I, anaphase I, metaphase II, anaphase II and the 4 gametes for meiosis. 3. Label each photo with the stage and ONE sentence of what is happening. SAFETY: acids and stains need goggles and teacher supervision; wash hands; home modellers keep small parts from young children.",
+    "requirements": "Lab: onion root tips, stain, microscope. Home: pipe cleaners/paper, clips, phone camera.",
+    "expected_output": "5 labelled mitosis stages + 6 labelled meiosis stages (sketches or photos) with one-sentence captions.",
+    "difficulty": "INTERMEDIATE",
+    "estimated_time": 90,
+    "submission_type": "TEXT",
+    "evaluation_criteria": ["Correct stage order with accurate chromosome positions", "Crossing over and halving clearly shown in meiosis", "Captions use correct terms (homologues, chromatids, haploid)"]
+  },
+  "assignment": {
+    "title": "Mitosis vs Meiosis — The Definitive Comparison",
+    "description": "Write a structured comparison of the two divisions and explain why the body needs both.",
+    "instructions": "1. Draw a comparison table with at least 8 rows (divisions, cells produced, chromosome number, genetic identity, location, separation event, purpose, variation). 2. Write 350–450 words explaining: (a) why growth and healing need mitosis, (b) why reproduction needs meiosis, (c) what would go wrong if gametes were made by mitosis instead (trace two generations of chromosome doubling). 3. End with a 3-sentence summary a JSS student could memorise. Submit the table plus essay as text.",
+    "requirements": "Your own words; copied tables score zero.",
+    "expected_output": "8-row comparison table + 350–450 word explanation + JSS-level summary.",
+    "difficulty": "INTERMEDIATE",
+    "estimated_time": 90,
+    "submission_type": "TEXT",
+    "evaluation_criteria": ["Table accurate on all 8 rows", "Chromosome-doubling consequence traced correctly over generations", "Clear JSS summary showing real understanding"],
+    "max_score": 100,
+    "pass_score": 50
+  },
+  "quiz": {
+    "title": "Module 4 Quiz — Cell Division",
+    "description": "Quick check on mitosis stages, meiosis outcomes and variation.",
+    "passing_score": 70,
+    "time_limit": 15,
+    "attempt_limit": 3,
+    "questions": [
+      {
+        "type": "multiple_choice",
+        "question": "During which mitotic phase do sister chromatids separate?",
+        "options": ["Prophase", "Metaphase", "Anaphase", "Telophase"],
+        "correct": [2],
+        "explanation": "Anaphase: spindle fibres pull sister chromatids to opposite poles. Metaphase lines them up; telophase reforms nuclei.",
+        "points": 1,
+        "topic": "Mitosis"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Mitosis produces:",
+        "options": ["4 unique haploid cells", "2 genetically identical diploid cells", "2 unique haploid cells", "4 identical diploid cells"],
+        "correct": [1],
+        "explanation": "One division, no pairing or halving: two diploid clones. (Meiosis gives four unique haploid cells.)",
+        "points": 1,
+        "topic": "Mitosis"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Homologous chromosomes separate during:",
+        "options": ["Mitosis anaphase", "Meiosis anaphase I", "Meiosis anaphase II", "Cytokinesis"],
+        "correct": [1],
+        "explanation": "Anaphase I parts whole homologues (halving the number); chromatids part in anaphase II and in mitotic anaphase.",
+        "points": 1,
+        "topic": "Meiosis"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Crossing over occurs in:",
+        "options": ["Prophase I, swapping segments between homologues", "Metaphase II, lining up single chromosomes", "Interphase, copying DNA", "Fertilisation, joining gametes"],
+        "correct": [0],
+        "explanation": "In prophase I, homologues pair (synapsis) and exchange matching segments — creating brand-new allele combinations.",
+        "points": 1,
+        "topic": "Variation"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "An organism has 4 chromosome pairs. Independent assortment alone can produce how many gamete types?",
+        "options": ["4", "8", "16", "32"],
+        "correct": [2],
+        "explanation": "2^n = 2^4 = 16 combinations. (Crossing over multiplies this far beyond 16.)",
+        "points": 1,
+        "topic": "Variation"
+      }
+    ]
+  },
+  "assessment": {
+    "key": "exam",
+    "title": "Module 4 Examination — Cell Division",
+    "description": "End-of-module examination covering the cell cycle, mitosis, meiosis and variation.",
+    "instructions": "Answer ALL 6 questions in 25 minutes. Pass mark is 60%. Counts toward your final assessment gate.",
+    "passing_score": 60,
+    "time_limit_minutes": 25,
+    "max_attempts": 3,
+    "time_limit": 25,
+    "attempt_limit": 2,
+    "questions": [
+      {
+        "type": "multiple_choice",
+        "question": "DNA replication occurs during:",
+        "options": ["Prophase", "S phase of interphase", "Metaphase", "Cytokinesis"],
+        "correct": [1],
+        "explanation": "The S (synthesis) phase copies every chromosome before any division begins — in both mitosis and meiosis.",
+        "points": 1,
+        "topic": "Cell cycle"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "A cell in metaphase II of meiosis contains 5 chromosomes. The organism's body cells contain:",
+        "options": ["5 chromosomes", "10 chromosomes", "20 chromosomes", "2 or 3 chromosomes"],
+        "correct": [1],
+        "explanation": "Metaphase II cells are haploid (n=5), so diploid body cells hold 2n=10.",
+        "points": 1,
+        "topic": "Meiosis"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Which is NOT a role of mitosis?",
+        "options": ["Growth of a seedling", "Healing a wound", "Producing sperm cells", "Replacing gut lining cells"],
+        "correct": [2],
+        "explanation": "Gametes (sperm/eggs) are made by meiosis. Growth, repair and replacement use mitosis.",
+        "points": 1,
+        "topic": "Mitosis"
+      },
+      {
+        "type": "true_false",
+        "question": "True or False: Identical twins are genetically identical because they develop from one zygote that split, undergoing mitosis thereafter.",
+        "options": ["True", "False"],
+        "correct": [0],
+        "explanation": "True. One fertilised egg splits; both halves grow by mitosis (cloning), so their DNA matches — unlike fraternal twins from two separate fertilisations.",
+        "points": 1,
+        "topic": "Variation"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Cancer chemotherapy often causes hair loss because:",
+        "options": ["The drugs target all dividing cells, including fast-dividing hair follicle cells", "The drugs only work on hair", "Hair cells are cancerous", "Patients stop eating protein"],
+        "correct": [0],
+        "explanation": "Chemo poisons rapidly dividing cells. Tumours divide fastest, but hair, gut and bone marrow also divide quickly and suffer collateral damage.",
+        "points": 1,
+        "topic": "Cell cycle"
+      },
+      {
+        "type": "multiple_answer",
+        "question": "Which events occur in meiosis but NEVER in mitosis? (Select ALL that apply)",
+        "options": ["Pairing of homologous chromosomes (synapsis)", "Crossing over between homologues", "Separation of sister chromatids", "Production of haploid cells"],
+        "correct": [0, 1, 3],
+        "explanation": "Synapsis, crossing over and halving are meiosis-only. Sister chromatids separate in BOTH (mitotic anaphase and anaphase II).",
+        "points": 2,
+        "topic": "Comparison"
+      }
+    ]
+  }
+}

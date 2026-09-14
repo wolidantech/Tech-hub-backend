@@ -3,6 +3,7 @@ import { BUCKETS } from '../config/env.js';
 import { ApiError, asyncHandler } from '../utils/errors.js';
 import { createSignedUrl } from '../services/storage.service.js';
 import { getCourseProgress, getContinueLearning } from '../services/learning.service.js';
+import { getClassroom } from '../services/curriculum.service.js';
 
 /**
  * Authoritative course-access check. A student may open a course
@@ -62,84 +63,35 @@ async function decorateLessons(lessons) {
   );
 }
 
-/** GET /api/learning/courses/:id — full course player payload */
+/**
+ * GET /api/learning/courses/:id — full course player payload.
+ * Delegates to the shared curriculum service so the classroom always
+ * carries the complete chain (topics → contents → videos → resources →
+ * practicals → assignments → quizzes → assessments). Legacy response
+ * keys are preserved; new keys are purely additive.
+ */
 export const getLearningCourse = asyncHandler(async (req, res) => {
   const courseId = req.validatedParams.id;
-  const { enrollment, roleOverride } = await requireCourseAccess(req, courseId);
-
-  const [{ data: course }, { data: modules }] = await Promise.all([
-    supabaseAdmin
-      .from('courses')
-      .select(
-        `id, title, slug, description, thumbnail_url, price, duration, difficulty_level,
-         course_categories ( id, name ),
-         instructor:profiles!courses_instructor_id_fkey ( id, full_name, profile_photo_url )`
-      )
-      .eq('id', courseId)
-      .single(),
-    supabaseAdmin
-      .from('course_modules')
-      .select('id, title, description, order_number')
-      .eq('course_id', courseId)
-      .order('order_number', { ascending: true }),
-  ]);
-
-  if (!course) throw ApiError.notFound('Course not found', 'COURSE_NOT_FOUND');
-
-  const moduleIds = (modules || []).map((m) => m.id);
-  let lessons = [];
-  if (moduleIds.length > 0) {
-    const { data } = await supabaseAdmin
-      .from('lessons')
-      .select('id, module_id, title, description, lesson_type, video_url, content, resource_url, duration, order_number, is_published')
-      .in('module_id', moduleIds)
-      .order('order_number', { ascending: true });
-    lessons = roleOverride ? data || [] : (data || []).filter((l) => l.is_published);
-  }
-
-  lessons = await decorateLessons(lessons);
-
-  // Student's progress map
-  let progressRows = [];
-  if (!roleOverride) {
-    const { data } = await supabaseAdmin
-      .from('lesson_progress')
-      .select('lesson_id, completed, last_position, updated_at')
-      .eq('student_id', req.profile.id)
-      .eq('course_id', courseId);
-    progressRows = data || [];
-  }
-
-  const [progress, continueLearning] = await Promise.all([
-    getCourseProgress(courseId, req.profile.id),
-    getContinueLearning(courseId, req.profile.id),
-  ]);
-
-  // Certificate (if earned)
-  const { data: certificate } = await supabaseAdmin
-    .from('certificates')
-    .select('id, certificate_number, issued_at, status')
-    .eq('course_id', courseId)
-    .eq('student_id', req.profile.id)
-    .maybeSingle();
+  const classroom = await getClassroom(courseId, req.profile);
 
   res.json({
     success: true,
     data: {
-      course,
-      enrollment,
-      modules: (modules || []).map((m) => ({
-        ...m,
-        lessons: lessons
-          .filter((l) => l.module_id === m.id)
-          .map((l) => ({
-            ...l,
-            progress: progressRows.find((p) => p.lesson_id === l.id) || null,
-          })),
-      })),
-      progress,
-      continue_learning: continueLearning,
-      certificate: certificate?.status === 'ACTIVE' ? certificate : null,
+      course: classroom.course,
+      enrollment: classroom.enrollment,
+      modules: classroom.modules,
+      progress: {
+        total_lessons: classroom.progress.total_lessons,
+        completed_lessons: classroom.progress.completed_lessons,
+        percentage: classroom.progress.percentage,
+      },
+      progress_detail: classroom.progress,
+      continue_learning: classroom.continue_learning,
+      certificate: classroom.certificate,
+      completion_rules: classroom.completion_rules,
+      assessments: classroom.assessments,
+      curriculum_complete: classroom.curriculum_complete,
+      curriculum_status: classroom.curriculum_status,
     },
   });
 });

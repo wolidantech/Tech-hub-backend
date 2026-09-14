@@ -1,0 +1,491 @@
+{
+  "key": "mod10",
+  "order": 10,
+  "title": "Practical Biology",
+  "description": "Hands-on science: microscopy, slide preparation, biological drawing, safety and how to plan a valid investigation.",
+  "objectives": [
+    "Use a light microscope correctly and safely",
+    "Prepare slides and draw to biological standards",
+    "Plan, record and evaluate investigations"
+  ],
+  "duration_text": "1 week",
+  "topics": [
+    {
+      "key": "top01",
+      "order": 1,
+      "title": "Microscopy Skills",
+      "description": "Parts of the microscope, focusing routine, magnification and slide preparation.",
+      "objectives": ["Name parts and focus correctly", "Make slides and drawings"],
+      "lessons": [
+        {
+          "key": "les01",
+          "title": "Using the Light Microscope",
+          "description": "Parts, the focusing routine, magnification maths and microscope care.",
+          "duration": 40,
+          "objectives": [
+            "Label 8 microscope parts and state each function",
+            "Focus from low to high power without breaking slides",
+            "Calculate total magnification and estimate cell sizes"
+          ],
+          "introduction": "A microscope turns a drop of pond water into a safari. But one wrong twist of the coarse knob cracks the slide — technique first, safari second.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "Parts and light path",
+              "body": "Follow light's journey: MIRROR/LAMP (source) → CONDENSER + IRIS DIAPHRAGM (focus and dose the light) → STAGE + CLIPS (hold the slide) → SPECIMEN → OBJECTIVE LENSES on the NOSEPIECE (x4 scanning, x10 low, x40 high — short lens = low power) → BODY TUBE → EYEPIECE (usually x10) → your eye. FOCUSING knobs: COARSE (big moves — LOW power ONLY) and FINE (small moves — all powers, the ONLY knob on high power). Total magnification = eyepiece × objective (x10 × x40 = x400). Resolution (seeing two points as separate, ~0.2 µm for light microscopes) matters more than raw magnification — empty magnification enlarges blur. Electron microscopes resolve far finer but kill specimens and cost fortunes; light microscopes show LIVING cells cheaply."
+            },
+            {
+              "block": "THEORY",
+              "title": "The safe routine",
+              "body": "Memorise this drill — practical examiners watch for it. (1) Carry with TWO hands (arm + base). (2) Start on the LOWEST objective (x4/x10) with the stage DOWN. (3) Place the slide, clip it, centre the specimen over the light hole. (4) Light on, diaphragm mid-open. (5) Looking from the SIDE, raise the stage nearly to the lens (avoids crashing). (6) Look through the eyepiece, LOWER the stage slowly with COARSE focus until sharp. (7) Centre the interesting area, switch to the next objective, sharpen with FINE focus ONLY. (8) Finish: lowest objective back, stage down, light off, cover on. Golden rules: coarse knob NEVER on high power; always start low and centre before switching up; never force anything — stiffness means something is wrong."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: field of view",
+              "body": "Question: At x40 total magnification, the field of view is 4 mm across. An organism spans one-quarter of the field. How big is it? Step 1 — Field width = 4 mm. Step 2 — Organism = 1/4 × 4 mm = 1 mm = 1000 µm. Step 3 — State the method: estimate fraction of field × known field diameter. Extension: switching to x400 shrinks the field 10x (0.4 mm) — which is why centring on LOW power first is compulsory; high power shows a tiny window and you will lose the specimen otherwise."
+            },
+            {
+              "block": "VIDEO",
+              "title": "Watch: How To Use a Compound Light Microscope",
+              "url": "https://www.youtube.com/watch?v=lo2aC_m2vyo",
+              "body": "Watch 'How To Use a Compound Light Microscope: Biology Lab Tutorial' by Tami Guy / ScienceProfOnline (official channel stream). Copy the focusing routine into your notebook as a numbered drill."
+            },
+            {
+              "block": "VIDEO",
+              "title": "Watch: Focusing a Compound Microscope",
+              "url": "https://www.youtube.com/watch?v=rt5zbf0UEFI",
+              "body": "Watch 'Focusing a compound microscope' by CUNY Kingsborough Biology (official account stream) — a short, precise demonstration of the low-to-high routine."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Light path: source → condenser/diaphragm → stage → objectives → eyepiece.\nMagnification = eyepiece × objective. Resolution (~0.2 µm) beats empty magnification.\nDrill: low objective → clip → light → side-view raise → coarse down → centre → up → FINE only.\nCoarse knob never on high power; two hands to carry."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Microscopy is a drill: start low, light well, focus down from the side, climb powers with fine focus only. Master the routine and living cells open up; rush it and slides crack."
+            }
+          ],
+          "videos": [
+            {
+              "title": "How To Use a Compound Light Microscope: Biology Lab Tutorial",
+              "url": "https://www.youtube.com/watch?v=lo2aC_m2vyo",
+              "source": "ScienceProfOnline",
+              "license": "Standard YouTube License (official stream — no copy made)",
+              "attribution": "© Tami Guy / ScienceProfOnline — streamed from the official channel https://www.youtube.com/@ScienceProfOnline",
+              "description": "Full microscope tutorial: parts, setup, focusing and storage."
+            },
+            {
+              "title": "Focusing a compound microscope",
+              "url": "https://www.youtube.com/watch?v=rt5zbf0UEFI",
+              "source": "CUNY Kingsborough Biology",
+              "license": "Standard YouTube License (official stream — no copy made)",
+              "attribution": "© Kingsborough Community College (CUNY) Biology — streamed from the official account https://www.youtube.com/@kingsboroughbio",
+              "description": "Short college demonstration of focusing a compound microscope."
+            }
+          ],
+          "resources": [],
+          "key_points": ["Light path order", "Low-to-high drill", "Magnification and field maths"],
+          "references": ["OpenStax Biology 2e — Chapter 4 (microscopy principles)"]
+        },
+        {
+          "key": "les02",
+          "title": "Slides and Biological Drawings",
+          "description": "Preparing wet mounts and staining, plus drawing rules that earn practical marks.",
+          "duration": 35,
+          "objectives": [
+            "Prepare a stained wet mount without air bubbles",
+            "Draw cells to the six biological rules",
+            "Calculate drawing magnification correctly"
+          ],
+          "introduction": "A great biologist draws what they see — no imagination, no artistry, just honest lines. Practical papers mark drawings harder than essays.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "Wet mounts",
+              "body": "ONION EPIDERMIS (classic): peel the thin inner skin of an onion scale, spread FLAT on a drop of water (wrinkles ruin everything), add ONE drop of iodine stain (stains nuclei and starch brown-yellow — plant walls stay pale), lower the coverslip at 45° with a pin (hinge it down slowly — this pushes air out ahead; dropped flat, bubbles trap). BLOT excess liquid, then observe low → high. CHEEK CELLS: gentle toothpick scrape inside the cheek (your own mouth only, dispose safely), smear thin, stain with methylene blue, coverslip as above — nuclei pop blue against pale cytoplasm. RULES: thin specimens only (light must pass through); stain sparingly (over-staining blacks everything out); seal large mounts with petroleum jelly if observing long; dispose of biological waste safely and disinfect the bench."
+            },
+            {
+              "block": "THEORY",
+              "title": "The six drawing rules",
+              "body": "Biological drawings are marked on: (1) SIZE — large (half a page), showing proportions; (2) LINES — sharp pencil, single continuous outlines, NO sketchy/feathered strokes, NO shading or colour (stipple dots only if texture is essential); (3) LABELS — straight ruled lines touching the structure exactly, label text at the end, never crossing lines; (4) TITLE + MAGNIFICATION — 'Onion epidermal cells (x100)' beneath, underlined; (5) HONESTY — draw ONLY what you see (no textbook additions — examiners compare with the real slide); (6) CELLS — adjacent cells share walls (single lines between, not double). Drawing magnification = drawing size ÷ real size — measure your drawn cell and divide by the known real size (or state the microscope magnification used)."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: marking a drawing",
+              "body": "Question: A student's onion drawing is small (5 cm), shaded with cross-hatching, labelled with wavy freehand lines, titled 'cells'. Award feedback. Step 1 — Size: too small (should fill half a page) — proportions unreadable. Step 2 — Lines: shading FORBIDDEN in biological drawing; cross-hatching loses the line mark. Step 3 — Labels: must be ruled straight and touching — wavy freehand fails. Step 4 — Title: needs specimen + magnification ('Onion epidermis, x100'), underlined. Verdict: 0–1 of 4 presentation marks despite possibly correct biology — presentation IS biology in practical papers. Redo large, clean, ruled and titled."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Wet mount: flat specimen + drop of water + drop of stain + 45° coverslip + blot.\nIodine stains nuclei/starch; methylene blue stains animal nuclei.\nDraw: large, single pencil lines, no shading, ruled touching labels, titled with magnification.\nHonesty rule: draw the slide you see, not the textbook you remember."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Good slides are thin, flat, lightly stained and bubble-free; good drawings are large, clean, ruled and honest. Both are motor skills — practise until the drill is automatic."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["45° coverslip technique", "Six drawing rules", "Drawing magnification formula"],
+          "references": ["OpenStax Biology 2e — Chapter 4 (studying cells)"]
+        }
+      ]
+    },
+    {
+      "key": "top02",
+      "order": 2,
+      "title": "Classic Investigations",
+      "description": "Osmosis, food tests and photosynthesis experiments — the practical canon.",
+      "objectives": ["Run osmosis and food-test practicals", "Present data properly"],
+      "lessons": [
+        {
+          "key": "les01",
+          "title": "Osmosis and Diffusion Labs",
+          "description": "Visking tubing, yam cylinders and what the numbers prove.",
+          "duration": 35,
+          "objectives": [
+            "Run a Visking-tubing model gut and interpret it",
+            "Measure osmosis by mass, length or bending",
+            "Present results in tables and graphs with full headings"
+          ],
+          "introduction": "A sausage skin of Visking tubing filled with starch models your entire small intestine. Dialysis machines are just this idea, scaled up to save lives.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "Model guts and potato cylinders",
+              "body": "VISKING TUBING: a partially permeable membrane. Fill a tube with starch + glucose solution, seal it, place in distilled water: after 20 minutes, test the OUTER water — Benedict's goes positive (small glucose diffused OUT) while iodine stays brown (large starch stayed IN) — proving selective permeability by size. Test the INNER solution with iodine (still blue-black — starch trapped). YAM/POTATO CYLINDERS: identical cores in a RANGE of salt/sugar concentrations (0, 5, 10, 20%) for fixed time; measure MASS or LENGTH change → plot % change vs concentration → the curve CROSSES ZERO at the tissue's own concentration (isotonic point — read it off the graph). Fair-test essentials: identical cores (same borer, blot before weighing), same volumes/temperatures/times, repeats + means. Controls: distilled water (maximum gain) anchors the scale."
+            },
+            {
+              "block": "THEORY",
+              "title": "Tables and graphs that score",
+              "body": "TABLES: ruled, with independent variable (concentration) in the LEFT column, dependent (mass change) next, units in HEADERS not cells ('Mass change / g'), repeats then a MEAN column, and a descriptive TITLE above. GRAPHS: independent variable on X, dependent on Y; labelled axes WITH units; even scales using 3/4+ of the paper; precise small plots (x or +); best-fit LINE (trends) or smooth CURVE (rates) — never dot-to-dot for continuous data; TITLE below. Calculate % change as (change ÷ original) × 100 — percentages allow fair comparison between different-sized cores. Read INTERCEPTS (zero-crossing = isotonic point) and GRADIENTS (steeper = faster osmosis) — graphs are arguments, not decorations."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: the isotonic point",
+              "body": "Question: Yam cores gained +8% (0% salt), +2% (5%), −5% (10%), −12% (20%). Estimate the yam's internal concentration. Step 1 — Plot % change (Y) vs salt % (X) with a best-fit curve. Step 2 — Find where the curve crosses ZERO change (no net osmosis = isotonic): between 5% (+2) and 10% (−5). Step 3 — Interpolate: zero sits about (2/7) of the way from 5 to 10 ≈ 6.4% salt equivalent. Step 4 — Conclude: yam cell sap ≈ 6–7% salt equivalent; below it cells gain water, above it they lose. This interpolation technique recurs in enzyme and photosynthesis graphs — master it once."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Visking tubing proves size-selective permeability (glucose out, starch in).\n% change vs concentration crosses zero at the isotonic point — interpolate it.\nTables: IV left, units in headers, repeats + means, titled.\nGraphs: labelled axes, best-fit lines/curves, title below."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Model guts and yam cores turn osmosis into numbers; tables organise them and graphs argue from them. The zero-crossing reads a tissue's inner concentration straight off the page."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Visking predictions both sides", "Isotonic interpolation", "Table/graph marking rules"],
+          "references": ["OpenStax Biology 2e — Chapter 5 (osmosis investigations)"]
+        },
+        {
+          "key": "les02",
+          "title": "Food Tests and Leaf Tests Roundup",
+          "description": "The complete practical canon: four food tests plus starch-in-leaf, in exam-ready form.",
+          "duration": 30,
+          "objectives": [
+            "Sequence every food test with safety steps",
+            "Sequence the leaf-starch test with its controls",
+            "Write methods that another student could follow"
+          ],
+          "introduction": "Practical examinations recycle the same dozen procedures yearly. This lesson compresses them into bulletproof sequences.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "Food-test sequences",
+              "body": "STARCH: sample + iodine → blue-black (no heat; brown-yellow = negative). REDUCING SUGAR: sample + Benedict's → HEAT in water bath 2–3 min → green/yellow/orange/brick-red by concentration (blue = negative). NON-REDUCING SUGAR: boil sample with dilute HCl → cool → neutralise with sodium hydrogencarbonate → Benedict's + heat → positive proves sucrose (the acid hydrolysed it). PROTEIN: sample + NaOH → few drops dilute CuSO4 → purple (blue = negative). FAT: shake with ethanol → pour into water → milky emulsion (or grease-spot on paper). SAFETY: goggles for heating/corrosives; water bath only (ethanol + flame = fire); tubes pointed away; tongs for hot tubes; rinse skin splashes immediately; controls (water) prove reagents are clean. Record OBSERVATION → INFERENCE separately for every tube."
+            },
+            {
+              "block": "THEORY",
+              "title": "Leaf-starch sequence",
+              "body": "QUESTION: is light (or CO2, or chlorophyll) needed for photosynthesis? METHOD: (1) DESTARCH 48 h dark. (2) Set conditions: foil pattern (light test) / KOH-absorbed CO2 vs normal air (CO2 test) / variegated leaf (chlorophyll test — green vs white areas). (3) Bright light 6+ h. (4) Pluck leaf → boil in WATER (kill/soften) → boil in ETHANOL in water bath (remove chlorophyll — pale/white) → rinse → iodine. (5) Map blue-black areas against the treatment. PREDICTIONS: starch ONLY where light reached / CO2 present / chlorophyll present. CONTROLS: destarching (no old starch), plus untreated comparison leaf. CONCLUSION pattern: 'Starch formed only in [condition], therefore [factor] is necessary for photosynthesis.'"
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: the variegated leaf",
+              "body": "Question: A variegated (green-and-white) leaf is destarched, lit 6 hours, then tested. Iodine turns ONLY green areas blue-black. Conclude. Step 1 — Compare: green areas (chlorophyll PRESENT) made starch; white areas (NO chlorophyll) made none — light, water and CO2 identical for both. Step 2 — Isolate the variable: the ONLY difference is chlorophyll. Step 3 — Conclude: chlorophyll is necessary for photosynthesis. Note the elegance: one leaf carries its own control (white areas) — internal controls beat separate setups. Examination phrase: 'the white areas act as a control, showing starch forms only where chlorophyll is present.'"
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Five food sequences with colours: iodine, Benedict's, acid-then-Benedict's, biuret, emulsion.\nLeaf sequence: destarch → treat → light → boil → ethanol bath → iodine → map.\nInternal controls (white leaf areas) are the gold standard.\nConclusions name the necessary factor from the starch map."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Food tests identify molecules by colour; leaf tests identify necessities by mapping starch. Sequence, safety, controls, observation-then-inference — the practical canon in four habits."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Colour triples for all five tests", "Ethanol always in a water bath", "Map-then-conclude pattern"],
+          "references": ["OpenStax Biology 2e — Chapters 3, 8 (detection and photosynthesis tests)"]
+        }
+      ]
+    },
+    {
+      "key": "top03",
+      "order": 3,
+      "title": "Safety and Method",
+      "description": "Laboratory safety, apparatus skills and designing valid investigations.",
+      "objectives": ["State lab safety rules", "Design fair, valid experiments"],
+      "lessons": [
+        {
+          "key": "les01",
+          "title": "Staying Safe in the Lab",
+          "description": "The rules that prevent the accidents — and what to do when they happen anyway.",
+          "duration": 25,
+          "objectives": [
+            "State 10 lab safety rules with reasons",
+            "Respond correctly to spills, burns, cuts and eye splashes",
+            "Read hazard symbols and choose precautions"
+          ],
+          "introduction": "Acids blind, ethanol ignites, broken glass infects. Every rule below was written in someone's injury — learn them before you touch a bench.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "Rules and responses",
+              "body": "TEN RULES: (1) Goggles for heating, acids, alkalis, stains. (2) Tie hair, tuck ties/scarves, closed shoes, lab coat fastened. (3) NEVER taste, eat, drink or sniff directly (waft vapours). (4) Point heated tubes AWAY from people; use tongs and water baths. (5) Know exits, extinguisher, eyewash/shower, first-aid box, teacher's emergency stop. (6) Report ALL spills/breakages immediately — never hide them. (7) Dispose biologically/chemically as instructed (sharps bins, waste bottles — never sinks for chemicals). (8) Wash hands before leaving. (9) No running, no bags in aisles, stools tucked. (10) Follow the METHOD — improvisation causes accidents. EMERGENCIES: acid/alkali on skin → flood with water 10+ min, tell teacher; in eyes → eyewash immediately, keep flushing; burns → cool under running water 10+ min, no creams; cuts → pressure, raise, first aid; fire → alert, smother small flames (damp cloth/sand), evacuate for large ones; fainting → fresh air, sit/lie down."
+            },
+            {
+              "block": "VIDEO",
+              "title": "Watch: General Lab Safety",
+              "url": "https://www.youtube.com/watch?v=MEIXRLcC6RA",
+              "body": "Watch 'General Lab Safety' by the Amoeba Sisters (official channel stream). Write your personal top-5 rules card afterwards and keep it in your notebook."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: the spill",
+              "body": "Question: A student knocks over dilute sodium hydroxide, splashing the bench and a sleeve. List the correct response order. Step 1 — Alert the teacher immediately (never silent). Step 2 — Remove the soaked sleeve carefully (avoid spreading to skin). Step 3 — Flood any skin contact with water for 10+ minutes. Step 4 — Let the teacher neutralise/clean the bench (students do not mop corrosives alone). Step 5 — Record the incident as required. Wrong answers examiners punish: wiping with bare hands, running to the toilet alone, or hiding it from fear. Safety culture rewards reporting — silence injures the next person."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Goggles, tied hair, no tasting, tubes away, know exits and eyewash.\nReport everything; flood splashes 10+ min; cool burns; smother small fires.\nDispose as instructed; wash hands out.\nReporting is rewarded — hiding endangers everyone."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Safety is choreography: dress right, handle right, know the exits, report everything. The best accident is the one your habits prevented."
+            }
+          ],
+          "videos": [
+            {
+              "title": "General Lab Safety",
+              "url": "https://www.youtube.com/watch?v=MEIXRLcC6RA",
+              "source": "Amoeba Sisters",
+              "license": "Standard YouTube License (official stream — no copy made)",
+              "attribution": "© Amoeba Sisters — streamed from the official channel https://www.youtube.com/@AmoebaSisters",
+              "description": "Core laboratory safety rules with memorable scenarios."
+            }
+          ],
+          "resources": [],
+          "key_points": ["Ten rules with reasons", "Splash/burn/cut/fire responses", "Report-always culture"],
+          "references": ["School laboratory safety codes (general practice); CLEAPSS-style guidance principles"]
+        },
+        {
+          "key": "les02",
+          "title": "Designing Valid Investigations",
+          "description": "Variables, fair tests, repeats, and judging validity like an examiner.",
+          "duration": 35,
+          "objectives": [
+            "Identify independent, dependent and control variables",
+            "Design a fair test with repeats and controls",
+            "Evaluate validity, reliability and suggest improvements"
+          ],
+          "introduction": "Anyone can do an experiment; scientists design ones whose answers can be TRUSTED. Validity is designed in — it cannot be added afterwards.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "The design toolkit",
+              "body": "VARIABLES: INDEPENDENT (what YOU change — e.g. light distance); DEPENDENT (what you MEASURE — bubbles per minute); CONTROL (what you HOLD CONSTANT — temperature, CO2, pondweed amount). FAIR TEST = one independent variable, all controls fixed. REPEATS (3+) + MEANS smooth random wobble; RANGES (5+ values of IV) reveal trends; CONTROLS (no-treatment setups) prove the IV caused the effect. VALIDITY (does it test the claim?) vs RELIABILITY (do repeats agree?): a valid method with tight repeats is trustworthy; valid-but-scattered needs more repeats; invalid-but-precise is precisely wrong. APPARATUS precision matters: measuring cylinders (±1 ml) beat beakers; thermometers beat 'warm to touch'; counting 60 seconds beats 10. SAMPLE SIZE: 30+ people for surveys, 10+ seeds per dish — small samples let chance dominate."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: critiquing a method",
+              "body": "Question: 'A student puts one seed in a warm cup and one in a cold cup, waters only the warm one, and concludes warmth aids germination.' Evaluate (4 marks). Step 1 — Praise (1): two conditions compared — the basic idea is right. Step 2 — Flaw 1: TWO variables changed (warmth AND water) — not a fair test; watering only the warm cup confounds the result. Step 3 — Flaw 2: n=1 per condition — no repeats, chance dominates (that seed might be dead). Step 4 — Improve: 10+ seeds per dish, water BOTH equally, vary ONLY temperature, repeat whole run. Evaluation formula: one strength + two flaws + two fixes = full evaluation marks on any method question."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "IV = changed; DV = measured; controls = fixed. One IV per fair test.\nRepeats + means (reliability); ranges (trends); controls (causality).\nValid = tests the claim. Reliable = repeats agree. Precise apparatus + big samples.\nEvaluate: strength + flaws + fixes."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Trustworthy experiments are built from variables controlled, repeats averaged, ranges explored and controls compared. Design validity in, then evaluate honestly — including your own work."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Variable trio", "Fair-test + repeats + controls", "Strength-flaws-fixes evaluation"],
+          "references": ["OpenStax Biology 2e — Chapter 1 (the scientific method)"]
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "type": "BOOK",
+      "title": "OpenStax Biology 2e — full textbook (free PDF + web)",
+      "url": "https://openstax.org/details/books/biology-2e",
+      "description": "Module 10 reading: Chapter 1 (scientific method) and Chapter 4 (studying cells, microscopy). Download the free PDF from the publisher page.",
+      "source": "OpenStax, Rice University",
+      "license": "CC BY-NC-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "attribution": "Biology 2e by Mary Ann Clark, Matthew Douglas and Jung Choi (OpenStax, Rice University), licensed CC BY-NC-SA 4.0."
+    }
+  ],
+  "practical": {
+    "title": "Onion Cells Under the Microscope",
+    "objective": "Prepare a stained onion wet mount, observe at two magnifications, and produce an exam-standard drawing.",
+    "scenario": "Your drawing will be marked exactly like a practical paper: presentation carries half the marks.",
+    "instructions": "1. Peel inner onion epidermis, spread flat on a water drop (no wrinkles). 2. Add ONE drop of iodine, hinge the coverslip down at 45° with a pin, blot excess. 3. Focus low power (x40–x100 total): find flat cells, centre them. 4. Switch to high power (x400): fine focus ONLY; observe walls, cytoplasm, nuclei, vacuoles. 5. Draw HALF A PAGE: single pencil outlines, shared walls, no shading; label wall, nucleus, cytoplasm, vacuole with ruled touching lines; title + magnification underlined below. 6. Measure one drawn cell (mm), compute drawing magnification vs an assumed 0.4 mm real width. NO-MICROSCOPE ALTERNATIVE: use the two module videos + an online onion-cell image (describe source) to produce the same drawing to the same rules, noting it as a dry practical. SAFETY: iodine stains; pins sharp — point away; glass slides disposed in sharps, never bins.",
+    "requirements": "Onion, slides/coverslips, iodine, microscope (or videos + image for dry option), sharp pencil, ruler.",
+    "expected_output": "Exam-standard half-page drawing with 4+ labels, title, magnification + calculation.",
+    "difficulty": "INTERMEDIATE",
+    "estimated_time": 90,
+    "submission_type": "TEXT",
+    "evaluation_criteria": ["Slide technique described correctly (flat, stained, 45° coverslip)", "Drawing obeys all six rules (size, lines, labels, title, honesty)", "Magnification calculation shown with units"]
+  },
+  "assignment": {
+    "title": "My Investigation — Plan and Report",
+    "description": "Design and run your own fair-test investigation on germination, osmosis or photosynthesis, then report it fully.",
+    "instructions": "Choose ONE question: (a) Does light colour affect seedling growth? (b) Does salt concentration affect yam mass? (c) Does leaf size affect transpiration (bag test)? Then submit: 1. HYPOTHESIS (one sentence, testable). 2. VARIABLES: IV, DV, and 4+ controls with HOW each is fixed. 3. METHOD: numbered steps another student could follow (apparatus + quantities). 4. RISK ASSESSMENT: 2 hazards + precautions. 5. RESULTS: table with repeats + means (real data you collected). 6. CONCLUSION linking results to the biology + 2 evaluation points (one strength, one improvement). 400–500 words plus tables.",
+    "requirements": "Real data collected by you; invented results score zero for the whole assignment.",
+    "expected_output": "Full investigation report: hypothesis → variables → method → risks → results → conclusion + evaluation.",
+    "difficulty": "INTERMEDIATE",
+    "estimated_time": 150,
+    "submission_type": "TEXT",
+    "evaluation_criteria": ["Single IV with 4+ controlled variables and real repeats", "Method reproducible with quantities; risks sensible", "Conclusion matches data with correct biology + honest evaluation"],
+    "max_score": 100,
+    "pass_score": 50
+  },
+  "quiz": {
+    "title": "Module 10 Quiz — Practical Skills",
+    "description": "Quick check on microscopy, slides, safety and experimental design.",
+    "passing_score": 70,
+    "time_limit": 15,
+    "attempt_limit": 3,
+    "questions": [
+      {
+        "type": "multiple_choice",
+        "question": "With a x10 eyepiece and x40 objective, total magnification is:",
+        "options": ["x40", "x50", "x400", "x4000"],
+        "correct": [2],
+        "explanation": "10 × 40 = x400. (Eyepiece × objective — always multiply.)",
+        "points": 1,
+        "topic": "Microscopy"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "The coarse focus knob must NEVER be used:",
+        "options": ["On low power", "On high power (it can crack the slide)", "When the light is on", "With stained slides"],
+        "correct": [1],
+        "explanation": "High power sits millimetres from the slide — coarse moves crash it. Fine focus only on high power.",
+        "points": 1,
+        "topic": "Microscopy"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Which drawing practice is CORRECT?",
+        "options": ["Small sketch with shading and wavy labels", "Large pencil outlines, no shading, ruled labels touching structures, titled with magnification", "Coloured pens with crossed label lines", "Drawing from memory of the textbook"],
+        "correct": [1],
+        "explanation": "Biological drawings: large, single pencil lines, no shading, straight touching labels, specimen + magnification title. Honesty to the slide is compulsory.",
+        "points": 1,
+        "topic": "Drawing"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Acid splashes on a student's hand. The FIRST actions are:",
+        "options": ["Wipe with bare hand and continue", "Alert the teacher and flood with water for 10+ minutes", "Run home immediately", "Apply cooking oil"],
+        "correct": [1],
+        "explanation": "Report + dilute: alert the teacher, remove contamination, flush under running water. Hiding or improvising worsens injuries.",
+        "points": 1,
+        "topic": "Safety"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "In a fair test of light distance on bubble rate, temperature is a:",
+        "options": ["Independent variable", "Dependent variable", "Control variable (held constant)", "Irrelevant distraction"],
+        "correct": [2],
+        "explanation": "Distance is the IV (changed), bubbles the DV (measured); temperature must be FIXED so only distance explains differences.",
+        "points": 1,
+        "topic": "Design"
+      }
+    ]
+  },
+  "assessment": {
+    "key": "exam",
+    "title": "Module 10 Examination — Practical Biology",
+    "description": "End-of-module examination covering microscopy, practicals, safety and design.",
+    "instructions": "Answer ALL 6 questions in 25 minutes. Pass mark is 60%. Counts toward your final assessment gate.",
+    "passing_score": 60,
+    "time_limit_minutes": 25,
+    "max_attempts": 3,
+    "time_limit": 25,
+    "attempt_limit": 2,
+    "questions": [
+      {
+        "type": "multiple_choice",
+        "question": "Visking tubing with starch + glucose inside is placed in water. Afterwards, the OUTER water tests positive with Benedict's but negative with iodine. This proves:",
+        "options": ["Starch diffused out", "Small glucose passed through but large starch could not — selective permeability", "Water cannot cross membranes", "Benedict's detects starch"],
+        "correct": [1],
+        "explanation": "Glucose (small) crossed; starch (large) stayed — membranes select by size. (Benedict's detects reducing sugar, not starch.)",
+        "points": 1,
+        "topic": "Osmosis lab"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "A coverslip is lowered at 45° using a pin to:",
+        "options": ["Break the specimen evenly", "Push air out ahead and avoid trapping bubbles", "Mix the stain faster", "Look professional"],
+        "correct": [1],
+        "explanation": "Hinging drives air out progressively. Dropped flat, coverslips trap bubbles that obscure cells.",
+        "points": 1,
+        "topic": "Slides"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Ethanol in the leaf-starch test must be heated:",
+        "options": ["Directly over a Bunsen flame for speed", "In a hot water bath — it is highly flammable", "Not at all; cold ethanol works", "Mixed with iodine first"],
+        "correct": [1],
+        "explanation": "Ethanol + naked flame = fire. Water baths heat it safely to dissolve chlorophyll.",
+        "points": 1,
+        "topic": "Safety"
+      },
+      {
+        "type": "true_false",
+        "question": "True or False: Repeats and means improve reliability, while controls and fair testing establish validity.",
+        "options": ["True", "False"],
+        "correct": [0],
+        "explanation": "True. Repeats tame random error (reliability); single-variable design with controls proves causation (validity).",
+        "points": 1,
+        "topic": "Design"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "On a graph, the independent variable belongs on the:",
+        "options": ["Y-axis always", "X-axis, with units in the label", "Title only", "Whichever axis looks nicer"],
+        "correct": [1],
+        "explanation": "Convention: IV on X, DV on Y, both labelled with units. Examiners dock swapped axes.",
+        "points": 1,
+        "topic": "Data"
+      },
+      {
+        "type": "multiple_answer",
+        "question": "Which are genuine microscope care rules? (Select ALL that apply)",
+        "options": ["Carry with two hands (arm + base)", "Start and finish on the lowest objective", "Use coarse focus on high power for speed", "Cover the microscope after use"],
+        "correct": [0, 1, 3],
+        "explanation": "Two-hand carry, low-power parking and covering protect the instrument. Coarse on high power cracks slides.",
+        "points": 2,
+        "topic": "Microscopy"
+      }
+    ]
+  }
+}

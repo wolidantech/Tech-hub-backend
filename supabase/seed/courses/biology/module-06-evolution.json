@@ -1,0 +1,377 @@
+{
+  "key": "mod06",
+  "order": 6,
+  "title": "Evolution",
+  "description": "How life changes over time: natural selection, the evidence for evolution, and the origin of species.",
+  "objectives": [
+    "Explain natural selection step by step",
+    "Evaluate four lines of evidence for evolution",
+    "Describe how new species form"
+  ],
+  "duration_text": "1 week",
+  "topics": [
+    {
+      "key": "top01",
+      "order": 1,
+      "title": "Natural Selection",
+      "description": "Darwin's mechanism: variation, competition, survival and inheritance.",
+      "objectives": ["State the four steps of selection", "Apply selection to resistance cases"],
+      "lessons": [
+        {
+          "key": "les01",
+          "title": "Darwin's Mechanism",
+          "description": "How differential survival reshapes populations generation after generation.",
+          "duration": 35,
+          "objectives": [
+            "List the four requirements for natural selection",
+            "Explain antibiotic resistance as selection in action",
+            "Correct common misconceptions (Lamarck, purpose, individuals)"
+          ],
+          "introduction": "In 1859 Darwin published an idea so powerful it united all of biology: species change because nature selects. No designer required — just variation, competition and time.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "The four steps",
+              "body": "Natural selection needs four ingredients. (1) VARIATION: individuals differ (Module 4's meiosis guarantees it) — beak sizes, fur shades, enzyme variants. (2) COMPETITION: more offspring are born than can survive (a fish lays millions of eggs; the pond feeds hundreds). (3) DIFFERENTIAL SURVIVAL (selection): individuals whose variants suit the environment survive and breed more — nature 'selects' without intent. (4) INHERITANCE: survivors pass their alleles on, so helpful variants spread and the population's gene pool shifts. Repeat for thousands of generations and populations ADAPT — accumulating traits that fit their world. Darwin inferred this from barnacles, pigeons and Galápagos finches; modern genetics supplied the mechanism he lacked (DNA, mutation, meiosis)."
+            },
+            {
+              "block": "THEORY",
+              "title": "Misconceptions to destroy",
+              "body": "Three errors lose marks and mislead thinking. (1) 'Individuals evolve' — FALSE: individuals live or die; POPULATIONS evolve as allele frequencies shift. (2) 'Lamarck was right that use and disuse inherits' — FALSE: a blacksmith's muscles do not alter his sperm's DNA; acquired characteristics are NOT inherited (but note: the environment selects among inherited variants). (3) 'Evolution has a purpose or goal' — FALSE: selection is blind, with no foresight — it keeps whatever works NOW. Also reject 'survival of the strongest': it is survival of the FITTEST-TO-THIS-ENVIRONMENT — the fittest bacterium is the one that survives antibiotics, not the biggest. Use allele-frequency language in examinations: 'the resistance allele increased in frequency' beats 'bacteria got stronger'."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: insecticide resistance",
+              "body": "Question: Mosquitoes in a district survived spraying that killed them five years ago. Explain using natural selection. Step 1 — Variation: a few mosquitoes already carried resistance alleles (from random mutation) BEFORE spraying. Step 2 — Selection pressure: insecticide killed susceptible mosquitoes; resistant ones survived. Step 3 — Inheritance: survivors bred, passing resistance alleles to offspring. Step 4 — Population shift: each generation raised the resistance allele's frequency until most mosquitoes survived. Note what did NOT happen: the spray did not CREATE mutants, and mosquitoes did not 'try' to adapt. This exact logic applies to antibiotic resistance, herbicide-tolerant weeds and pesticide-proof cockroaches."
+            },
+            {
+              "block": "VIDEO",
+              "title": "Watch: Natural Selection",
+              "url": "https://www.youtube.com/watch?v=7VM9YxmULuo",
+              "body": "Watch 'Natural Selection' by the Amoeba Sisters (official channel stream). List the four steps in your own words afterwards, using antibiotic resistance as your example."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Selection = variation + competition + differential survival + inheritance.\nPopulations evolve; individuals are selected.\nAcquired characteristics are not inherited; environments select inherited variants.\nResistance pre-exists as rare alleles — chemicals select, not create."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Natural selection turns random variation into adaptation through competition and inheritance. Populations evolve, individuals do not — and resistance cases in hospitals and farms prove the mechanism is running right now."
+            }
+          ],
+          "videos": [
+            {
+              "title": "Natural Selection",
+              "url": "https://www.youtube.com/watch?v=7VM9YxmULuo",
+              "source": "Amoeba Sisters",
+              "license": "Standard YouTube License (official stream — no copy made)",
+              "attribution": "© Amoeba Sisters — streamed from the official channel https://www.youtube.com/@AmoebaSisters",
+              "description": "Natural selection as a mechanism of evolution, with antibiotic-resistance examples."
+            }
+          ],
+          "resources": [],
+          "key_points": ["Four steps in order", "Allele-frequency language for exams", "Selection sorts; mutation creates"],
+          "references": ["OpenStax Biology 2e — Chapter 18, Evolution and the Origin of Species"]
+        },
+        {
+          "key": "les02",
+          "title": "Selection in Action Today",
+          "description": "Antibiotic resistance, sickle cell balance and artificial selection by humans.",
+          "duration": 30,
+          "objectives": [
+            "Explain why unfinished antibiotic courses breed resistance",
+            "Explain heterozygote advantage in sickle cell",
+            "Contrast natural and artificial selection"
+          ],
+          "introduction": "Evolution is not ancient history — it is happening in hospitals, farms and mosquito nets this year. Understanding it saves lives.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "The antibiotic crisis",
+              "body": "Bacteria evolve fast: huge populations, 20-minute generations, plus plasmid-swapped genes. Every antibiotic dose is a selection event killing susceptibles; any resistant mutant survives and multiplies. Stopping tablets early is catastrophic: you kill the weak majority but spare the toughest minority, which then recolonise — selecting for resistance with your own body as the laboratory. Hospitals fight back with stewardship (right drug, right dose, FULL course), hygiene (fewer infections = less selection), and combination therapy (multiple drugs = mutants must win several lotteries at once). Tuberculosis, malaria and gonorrhoea already show dangerous resistance in Nigeria and worldwide — completing YOUR prescriptions is a civic duty, not just personal medicine."
+            },
+            {
+              "block": "THEORY",
+              "title": "Balanced selection and artificial selection",
+              "body": "Sometimes selection favours BOTH alleles: in malaria zones, HbAHbS carriers resist malaria AND avoid sickle disease, so natural selection maintains the HbS allele despite its cost in homozygotes — BALANCED POLYMORPHISM (heterozygote advantage). Humans also select ARTIFICIALLY: choosing which plants and animals breed. All dogs descend from wolves; maize from teosinte grass; dairy cows give 10x the milk of wild aurochs. Artificial selection is fast and directed (humans choose the pressure), but it narrows gene pools — pedigree dogs inherit disorders, and monoculture crops risk clone crises (Module 4). Modern breeding plus genetic engineering now moves single genes across species (Bt cowpea resists pod borers), raising food-security hopes and biosafety debates."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: the unfinished course",
+              "body": "Question: A patient stops antibiotics on day 3 of 7 because she feels better. Two weeks later the infection returns, now untreatable with the same drug. Explain. Step 1 — The first 3 days killed susceptible bacteria (symptoms faded) but left partially resistant survivors. Step 2 — Without drug pressure, survivors multiplied — now the population is enriched for resistance alleles. Step 3 — The same drug fails because its selection already happened: the remaining bacteria are the selected winners. Lesson: full courses exist to kill even the toughest variants before they breed. (Always follow a doctor's actual prescription — some modern courses ARE short by design.)"
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Unfinished antibiotic courses select for resistance — always complete prescriptions.\nHeterozygote advantage maintains harmful alleles (sickle cell vs malaria).\nArtificial selection: humans choose breeders — fast, directed, narrowing.\nResistance management = stewardship + hygiene + combination therapy."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Selection never sleeps: it breeds superbugs in hospitals, balances sickle cell against malaria, and — directed by humans — created every crop and livestock breed. Knowing the mechanism makes you part of the solution."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Complete every antibiotic course", "Heterozygote advantage = balanced polymorphism", "Artificial selection trades diversity for productivity"],
+          "references": ["OpenStax Biology 2e — Chapter 19 (population evolution), WHO antibiotic-resistance guidance (general knowledge)"]
+        }
+      ]
+    },
+    {
+      "key": "top02",
+      "order": 2,
+      "title": "Evidence and Speciation",
+      "description": "Fossils, anatomy, embryos, DNA — and how one species becomes two.",
+      "objectives": ["Evaluate evolution's evidence", "Explain speciation simply"],
+      "lessons": [
+        {
+          "key": "les01",
+          "title": "Four Lines of Evidence",
+          "description": "Fossils, homologous structures, embryos and molecules converge on one conclusion.",
+          "duration": 35,
+          "objectives": [
+            "Describe fossil, anatomical, embryological and molecular evidence",
+            "Explain homologous vs analogous structures",
+            "Argue why converging evidence is powerful"
+          ],
+          "introduction": "A detective convicts with fingerprints, witnesses, CCTV and DNA together — not one clue. Evolution stands on four independent lines of evidence that all point the same way.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "Rocks, bodies and embryos",
+              "body": "(1) FOSSILS: sedimentary rock layers sequence life's history — simple cells deep and old, mammals and flowering plants shallow and young; transitional fossils (Tiktaalik: fish-to-tetrapod; Archaeopteryx: dinosaur-to-bird; Australopithecus: ape-to-human) capture change mid-flight. (2) HOMOLOGOUS STRUCTURES: the pentadactyl limb — human arm, bat wing, whale flipper, mole paw — shares bone-for-bone architecture despite wildly different jobs, proving common ancestry remodelled by selection. Contrast ANALOGOUS structures (bird wing vs insect wing): similar jobs, utterly different builds — convergent evolution, not shared ancestry. Vestigial structures (human appendix and tailbone, flightless birds' wings) are retired remnants. (3) EMBRYOS: vertebrate embryos (fish, chicken, human) all grow pharyngeal slits and tails early — ancestral blueprints revealed before specialisation."
+            },
+            {
+              "block": "THEORY",
+              "title": "Molecules seal the case",
+              "body": "(4) MOLECULAR EVIDENCE: DNA and protein sequences measure relatedness precisely — humans share ~99% of DNA with chimpanzees, ~60% with bananas (all life uses the same code). Cytochrome c (a respiration protein) differs by 0 amino acids between humans and chimps but ~45 between humans and yeast — exactly as ancestry predicts. Endogenous retroviruses (ancient viral DNA lodged at IDENTICAL genome positions in related species) are shared scars no designer would duplicate. Converging lines matter because they are INDEPENDENT: fossils could theoretically mislead, but fossils + anatomy + embryos + molecules agreeing by coincidence is inconceivable. This is consilience — science's strongest argument form."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: homology vs analogy",
+              "body": "Question: A student says bat wings and butterfly wings prove bats and butterflies are closely related. Evaluate. Step 1 — Inspect builds: bat wings are skin stretched over ARM BONES (mammalian pentadactyl limb); butterfly wings are chitin scales with NO bones. Step 2 — Classify: similar function + different structure = ANALOGOUS (convergent evolution for flight), not homologous. Step 3 — Conclude: flight evolved twice independently; DNA places bats with mammals and butterflies with insects — the wings argue nothing about relatedness. Examination rule: homology = same structure (common ancestry); analogy = same job (convergence). Never confuse them."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Fossils sequence life; transitions (Tiktaalik, Archaeopteryx) show change in progress.\nHomologous = same build, shared ancestor. Analogous = same job, separate origins.\nEmbryos replay ancestral stages; DNA quantifies relatedness.\nIndependent lines converging = consilience, the strongest proof."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Rocks date it, bodies show it, embryos replay it, molecules measure it. Four independent witnesses convict: species share common ancestors and change over time."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Pentadactyl limb = homology flagship", "Analogous structures mislead; DNA resolves", "Consilience beats any single clue"],
+          "references": ["OpenStax Biology 2e — Chapter 18 (evidence for evolution)"]
+        },
+        {
+          "key": "les02",
+          "title": "How Species Split",
+          "description": "Isolation, divergence and the moment one species becomes two.",
+          "duration": 30,
+          "objectives": [
+            "Define a species biologically",
+            "Explain allopatric speciation step by step",
+            "Outline human evolution in four landmarks"
+          ],
+          "introduction": "One finch flock reached two Galápagos islands. A million years later, their descendants cannot interbreed. What happened in between is speciation — evolution's creative climax.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "The speciation recipe",
+              "body": "The BIOLOGICAL SPECIES CONCEPT: a species is a group that interbreeds to produce FERTILE offspring (horses + donkeys make sterile mules — different species). ALLOPATRIC speciation (different-homeland) follows four steps: (1) ISOLATION — a barrier (river, mountain, island split) divides one population so gene flow STOPS; (2) DIVERGENCE — each side faces different mutations, selection pressures and drift, so allele frequencies drift apart; (3) ACCUMULATION — differences grow in mating calls, breeding seasons, genitalia, chromosome arrangements; (4) NO RETURN — even if the barrier vanishes, the populations cannot produce fertile offspring: TWO SPECIES. Sympatric speciation (same-homeland, no barrier — e.g. different host plants or breeding times) also occurs but is rarer. Time scales vary: cichlid fishes speciated in thousands of years; mammals usually need millions."
+            },
+            {
+              "block": "THEORY",
+              "title": "Our own story in four landmarks",
+              "body": "Human evolution in brief: (1) BIPEDALISM (~6 million years ago): Sahelanthropus and Ardipithecus walk upright in Africa — freeing hands, reshaping spines and pelvises. (2) TOOL CULTURE (~2.6 mya): Homo habilis ('handy man') knaps stone tools; brains expand with meat-eating and cooking. (3) FIRE AND MIGRATION (~1 mya–300 kya): Homo erectus masters fire, grows ~1000cc brains, and leaves Africa. (4) MODERN HUMANS (~300 kya): Homo sapiens evolve in Africa — language, art, agriculture — then spread worldwide, absorbing Neanderthal and Denisovan cousins (non-Africans carry 1–2% Neanderthal DNA). All humanity remains ONE species: any two humans can have fertile children, and our total genetic diversity is smaller than a single chimpanzee troop's."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: the river squirrels",
+              "body": "Question: A river changes course, splitting a squirrel population. 500,000 years later the two groups meet but produce no fertile young. Explain. Step 1 — Isolation: the river stopped gene flow (allopatric start). Step 2 — Divergence: north-side cold selected thick fur; south-side hawks selected camouflage; different mutations accumulated. Step 3 — Reproductive barriers: mating seasons shifted and chromosomes rearranged, so hybrids (if any) are sterile. Step 4 — Verdict: by the biological species concept, speciation is COMPLETE — one species became two. Examination tip: always name the isolation type and end with the fertility test."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Species = interbreeding group producing FERTILE offspring.\nAllopatric speciation: isolation → divergence → barriers → two species.\nHumans: bipedalism → tools → fire/migration → language — all in Africa first.\nHumanity is one young species with low genetic diversity."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Barriers stop gene flow, selection and drift reshape each side, and sterility seals the split. Humans walked this road from African apes to a single global species in six million years."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Fertility is the species test", "Isolation first, divergence second, barriers last", "Four human landmarks in order"],
+          "references": ["OpenStax Biology 2e — Chapters 18–19 (speciation)"]
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "type": "BOOK",
+      "title": "OpenStax Biology 2e — full textbook (free PDF + web)",
+      "url": "https://openstax.org/details/books/biology-2e",
+      "description": "Module 6 reading: Chapter 18 (Evolution and the Origin of Species) and Chapter 19 (Evolution of Populations). Download the free PDF from the publisher page.",
+      "source": "OpenStax, Rice University",
+      "license": "CC BY-NC-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "attribution": "Biology 2e by Mary Ann Clark, Matthew Douglas and Jung Choi (OpenStax, Rice University), licensed CC BY-NC-SA 4.0."
+    }
+  ],
+  "practical": {
+    "title": "Beaks of the Finches Simulation",
+    "objective": "Demonstrate natural selection by competing 'beak' tools for 'seeds' and tracking survivors over generations.",
+    "scenario": "Your table is an island; your tools are beaks; beans are seeds. Drought is coming.",
+    "instructions": "1. Gather 3 'beaks' (spoon, forceps/tweezers, toothpick) and 3 'seed' types (30+ each: large beans, rice grains, mixed) scattered on a tray. 2. GENERATION 1 (plenty): each beak feeds 30 seconds; count seeds collected. Any beak collecting fewer than 10 'starves' (eliminated); the winner 'reproduces' (add a second identical beak). 3. GENERATION 2 (drought — remove the easiest seed type): repeat with surviving beaks. 4. Record a table: generation | beak | seeds | survived? 5. Write a conclusion naming the variation, selection pressure, survivors and the allele-frequency shift your simulation models. SAFETY: no real beaks or animals; keep small seeds away from young children (choking hazard).",
+    "requirements": "3 tool types, 3 seed types, tray, timer, notebook.",
+    "expected_output": "Results table for 2 generations + conclusion using variation, selection pressure and inheritance.",
+    "difficulty": "BEGINNER",
+    "estimated_time": 60,
+    "submission_type": "TEXT",
+    "evaluation_criteria": ["Fair rounds: same time, same seed counts, honest tallies", "Table shows elimination and reproduction between generations", "Conclusion correctly maps simulation to the four selection steps"]
+  },
+  "assignment": {
+    "title": "The Case for Evolution",
+    "description": "Write a four-paragraph evidence brief that could convince a sceptical friend.",
+    "instructions": "Write 400–500 words in FOUR paragraphs: (1) Fossils — name one transitional fossil and what it shows; (2) Anatomy — explain the pentadactyl limb and one vestigial structure; (3) Molecules — explain how DNA similarity measures relatedness (use the human-chimpanzee figure); (4) Live evolution — describe ONE observed case (antibiotic resistance, peppered moths or Darwin's finch beaks) with the four selection steps. Rules: respectful tone throughout (many people reconcile faith and science — attack no belief); every claim needs its evidence; end with one sentence on why independent lines agreeing matters (consilience).",
+    "requirements": "Named examples only — vague 'scientists say' paragraphs score zero.",
+    "expected_output": "Four-paragraph evidence brief (400–500 words) with named examples.",
+    "difficulty": "INTERMEDIATE",
+    "estimated_time": 100,
+    "submission_type": "TEXT",
+    "evaluation_criteria": ["Four distinct evidence lines with correct named examples", "Selection steps applied accurately to the live case", "Respectful tone and a consilience closing sentence"],
+    "max_score": 100,
+    "pass_score": 50
+  },
+  "quiz": {
+    "title": "Module 6 Quiz — Evolution",
+    "description": "Quick check on selection, evidence and speciation.",
+    "passing_score": 70,
+    "time_limit": 15,
+    "attempt_limit": 3,
+    "questions": [
+      {
+        "type": "multiple_choice",
+        "question": "Which sequence correctly orders natural selection?",
+        "options": ["Inheritance → variation → competition → survival", "Variation → competition → differential survival → inheritance", "Competition → inheritance → variation → survival", "Survival → inheritance → competition → variation"],
+        "correct": [1],
+        "explanation": "Differences must exist first, then compete, then the suited survive and pass alleles on. Any other order breaks the logic.",
+        "points": 1,
+        "topic": "Selection"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Antibiotic resistance spreads mainly because:",
+        "options": ["Antibiotics mutate bacteria deliberately", "Pre-existing resistant variants survive treatment and reproduce", "Bacteria learn to digest antibiotics in one lifetime and teach offspring", "Doctors prescribe too little water"],
+        "correct": [1],
+        "explanation": "Rare resistance alleles pre-date treatment; antibiotics select them. Drugs select — they do not instruct or create.",
+        "points": 1,
+        "topic": "Resistance"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "The human arm, bat wing and whale flipper share bone-for-bone structure. They are:",
+        "options": ["Analogous structures proving separate origins", "Homologous structures evidencing common ancestry", "Vestigial structures with no function", "Fossils of extinct limbs"],
+        "correct": [1],
+        "explanation": "Same architecture, different jobs = homology from a shared ancestor, remodelled by selection. (Analogous = same job, different build.)",
+        "points": 1,
+        "topic": "Evidence"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Two populations are confirmed as separate species when:",
+        "options": ["They look slightly different", "They live on different islands", "They cannot interbreed to produce fertile offspring", "One eats different food"],
+        "correct": [2],
+        "explanation": "The biological species concept tests reproductive isolation: no fertile offspring = separate species (like horse × donkey = sterile mule).",
+        "points": 1,
+        "topic": "Speciation"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Sickle-cell allele persists in malaria regions because:",
+        "options": ["It is dominant and unstoppable", "Heterozygotes resist malaria and stay healthy — balanced polymorphism", "Mosquitoes prefer carriers", "Doctors spread it"],
+        "correct": [1],
+        "explanation": "Heterozygote advantage: carriers beat both homozygotes (malaria-vulnerable HbAHbA and sickling HbSHbS), so selection keeps both alleles.",
+        "points": 1,
+        "topic": "Selection"
+      }
+    ]
+  },
+  "assessment": {
+    "key": "exam",
+    "title": "Module 6 Examination — Evolution",
+    "description": "End-of-module examination covering selection, evidence and speciation.",
+    "instructions": "Answer ALL 6 questions in 25 minutes. Pass mark is 60%. Counts toward your final assessment gate.",
+    "passing_score": 60,
+    "time_limit_minutes": 25,
+    "max_attempts": 3,
+    "time_limit": 25,
+    "attempt_limit": 2,
+    "questions": [
+      {
+        "type": "multiple_choice",
+        "question": "A student says 'giraffes grew long necks by stretching, then passed stretching to calves.' This is wrong because:",
+        "options": ["Giraffes cannot stretch", "Acquired characteristics are not inherited; longer-necked variants survived and passed their alleles", "Necks cannot evolve", "Only plants evolve"],
+        "correct": [1],
+        "explanation": "Lamarckian use-inheritance is false: stretching changes no sperm/egg DNA. Selection among inherited variants explains long necks.",
+        "points": 1,
+        "topic": "Selection"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Which is an ANALOGOUS pair?",
+        "options": ["Human arm and bat wing", "Bird wing and insect wing", "Whale flipper and mole paw", "Cat leg and dog leg"],
+        "correct": [1],
+        "explanation": "Bird (bone) and insect (chitin) wings share only the job of flight — convergent evolution, separate origins. The rest are homologous pentadactyl limbs.",
+        "points": 1,
+        "topic": "Evidence"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Stopping antibiotics early encourages resistance because it:",
+        "options": ["Kills all bacteria too fast", "Kills susceptibles but lets the toughest survivors breed", "Strengthens the immune system excessively", "Has no effect on bacteria"],
+        "correct": [1],
+        "explanation": "Early stopping applies selection without finishing the job: survivors are enriched for resistance and recolonise.",
+        "points": 1,
+        "topic": "Resistance"
+      },
+      {
+        "type": "true_false",
+        "question": "True or False: Allopatric speciation begins with geographic isolation stopping gene flow between populations.",
+        "options": ["True", "False"],
+        "correct": [0],
+        "explanation": "True. Barriers first, divergence second, reproductive isolation last — the standard speciation sequence.",
+        "points": 1,
+        "topic": "Speciation"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Humans and chimpanzees share ~99% of DNA. The best conclusion is:",
+        "options": ["Humans descended from living chimpanzees", "Both share a recent common ancestor (molecular homology)", "DNA similarity is meaningless", "Chimpanzees will become human"],
+        "correct": [1],
+        "explanation": "Similarity measures relatedness through shared ancestry — cousins, not parent and child. No living species is another's ancestor.",
+        "points": 1,
+        "topic": "Evidence"
+      },
+      {
+        "type": "multiple_answer",
+        "question": "Which are valid lines of evidence for evolution? (Select ALL that apply)",
+        "options": ["Transitional fossils appearing in order through rock layers", "Identical early embryos across vertebrates", "Shared endogenous retroviruses at matching genome positions", "The fact that all species look identical"],
+        "correct": [0, 1, 2],
+        "explanation": "Ordered transitions, embryonic similarities and shared viral scars independently confirm common descent. Species plainly do NOT look identical.",
+        "points": 2,
+        "topic": "Evidence"
+      }
+    ]
+  }
+}

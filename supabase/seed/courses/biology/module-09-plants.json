@@ -1,0 +1,452 @@
+{
+  "key": "mod09",
+  "order": 9,
+  "title": "Plant Biology",
+  "description": "How plants feed themselves and reproduce: photosynthesis, transport, responses and the flowering-plant life cycle.",
+  "objectives": [
+    "Explain photosynthesis and its limiting factors",
+    "Describe water/mineral uptake and translocation",
+    "Trace pollination to germination in flowering plants"
+  ],
+  "duration_text": "1 week",
+  "topics": [
+    {
+      "key": "top01",
+      "order": 1,
+      "title": "Photosynthesis",
+      "description": "The equation that feeds the world, leaf design, and what limits the rate.",
+      "objectives": ["State the equation and leaf adaptations", "Explain limiting factors"],
+      "lessons": [
+        {
+          "key": "les01",
+          "title": "Leaves as Solar Factories",
+          "description": "Chlorophyll, the photosynthesis equation, and how leaves maximise production.",
+          "duration": 35,
+          "objectives": [
+            "Write the word and symbol equations for photosynthesis",
+            "Explain five leaf adaptations",
+            "State the uses of glucose in plants"
+          ],
+          "introduction": "A cassava leaf turns sunlight, air and water into the garri on your table. No factory on Earth matches it — and it runs silently, for free, while cleaning the air.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "The equation",
+              "body": "PHOTOSYNTHESIS: carbon dioxide + water → (light energy + chlorophyll) → glucose + oxygen. Symbol: 6CO2 + 6H2O → C6H12O6 + 6O2. It happens in CHLOROPLASTS: chlorophyll traps light, splitting water (photolysis — releasing the O2 we breathe) and fixing CO2 into glucose via the Calvin cycle. Glucose is then: RESPIRED for energy (plants respire day and night), CONVERTED to STARCH for storage (tubers, seeds), built into CELLULOSE for walls, combined with nitrates into AMINO ACIDS/PROTEINS, or stored as OILS (palm fruit, groundnut). Without photosynthesis there is no food chain, no oxygen atmosphere, no fossil fuel — every meal and every breath begins here."
+            },
+            {
+              "block": "THEORY",
+              "title": "Leaf adaptations",
+              "body": "Leaves are optimised on five fronts. (1) BROAD and THIN: huge area catches light; short diffusion paths move gases fast. (2) CHLOROPHYLL packed in palisade mesophyll near the upper surface — most light meets most pigment. (3) STOMATA (pores, mostly underneath) + AIR SPACES let CO2 diffuse in and O2 out; guard cells open/close them to balance gas entry against water loss. (4) VEINS (xylem + phloem) deliver water and export sugars while stiffening the blade. (5) WAXY CUTICLE cuts evaporation while staying transparent. Desert plants modify the plan (spines, sunken stomata, CAM night-photosynthesis); water plants float stomata on top. Examination pattern: adaptation → feature → benefit ('stomata allow CO2 entry for photosynthesis')."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: why destarch?",
+              "body": "Question: Before testing whether light is needed for photosynthesis, a plant is kept in darkness for 48 hours. Why? Step 1 — Recall: leaves STORE starch from earlier photosynthesis. Step 2 — Reason: old starch would give false positives everywhere — you could not tell NEW starch (made in your experiment) from OLD. Step 3 — Conclude: destarching empties the stores so any starch found later MUST have been made during the test — a control against prior conditions. Then the foil-star test (Module 8's final-exam question) proves light's necessity cleanly. Controls separate real causes from leftovers — the mark of valid experiments."
+            },
+            {
+              "block": "VIDEO",
+              "title": "Watch: Photosynthesis (UPDATED)",
+              "url": "https://www.youtube.com/watch?v=CMiPYHNNg28",
+              "body": "Watch 'Photosynthesis (UPDATED)' by the Amoeba Sisters (official channel stream). Sketch and label a leaf cross-section from memory afterwards."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "6CO2 + 6H2O →(light/chlorophyll) C6H12O6 + 6O2 in chloroplasts.\nGlucose fates: respire, starch, cellulose, protein (with nitrates), oils.\nLeaf wins: broad, chlorophyll-rich, stomata + air spaces, veins, cuticle.\nDestarch before starch tests — controls rule out old stores."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Leaves are solar factories tuned by five adaptations, running the equation that feeds and oxygenates the planet. Glucose then branches into energy, stores, walls and proteins."
+            }
+          ],
+          "videos": [
+            {
+              "title": "Photosynthesis (UPDATED)",
+              "url": "https://www.youtube.com/watch?v=CMiPYHNNg28",
+              "source": "Amoeba Sisters",
+              "license": "Standard YouTube License (official stream — no copy made)",
+              "attribution": "© Amoeba Sisters — streamed from the official channel https://www.youtube.com/@AmoebaSisters",
+              "description": "Light reactions, Calvin cycle and leaf adaptations with desert-plant examples."
+            }
+          ],
+          "resources": [],
+          "key_points": ["Both equations from memory", "Five adaptations as feature → benefit", "Glucose has five fates"],
+          "references": ["OpenStax Biology 2e — Chapter 8, Photosynthesis"]
+        },
+        {
+          "key": "les02",
+          "title": "Limiting Factors",
+          "description": "Light, CO2 and temperature — which factor caps the rate, and how farmers exploit the answer.",
+          "duration": 30,
+          "objectives": [
+            "Define limiting factor",
+            "Interpret rate graphs for light, CO2 and temperature",
+            "Explain two greenhouse techniques that raise yield"
+          ],
+          "introduction": "A greenhouse farmer pumps in extra CO2 and harvests 30% more tomatoes. Same seeds, same soil — just one bottleneck removed. Limiting factors are profit.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "Three graphs, one idea",
+              "body": "A LIMITING FACTOR is the variable holding back the rate — raising it (alone) raises the rate until something else limits. LIGHT INTENSITY: rate climbs then plateaus (light no longer limits — CO2 or temperature does). CARBON DIOXIDE: same shape — enrichment boosts glasshouse crops until light/temperature cap out (note: open-field CO2 (~0.04%) almost always limits). TEMPERATURE: rises to an optimum (~25–35°C for most crops) then FALLS as enzymes denature — the asymmetric enzyme curve from Module 3. WATER rarely limits rate directly (except drought closing stomata). Measuring rate: oxygen bubbles from pondweed per minute, or CO2 uptake via sensors — with temperature, light and CO2 controlled except the one under test."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: reading the plateau",
+              "body": "Question: A farmer doubles lamp brightness over lettuce but yield does not rise. CO2 is at outdoor levels, temperature 20°C. Advise her. Step 1 — Diagnose: the light curve has PLATEAUED — light no longer limits; CO2 (or temperature) does. Step 2 — Prescribe: enrich CO2 (burners, fermentation tanks, or simply ventilate less) and/or warm toward the optimum — THEN extra light pays. Step 3 — Generalise: always find the CURRENT bottleneck before spending on inputs — fertiliser cannot fix a light shortage, water cannot fix nitrogen lack. This is Liebig's Law of the Minimum: growth is capped by the scarcest resource."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Limiting factor = the variable currently capping the rate.\nLight and CO2 give rise-then-plateau; temperature gives optimum-then-denaturation fall.\nGreenhouses enrich CO2, warm air and extend light — removing bottlenecks in order.\nLiebig's Law: the scarcest resource sets the ceiling."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Photosynthesis obeys bottlenecks: light, CO2 and temperature each cap the rate in turn. Read the curve, find the ceiling, lift it — the logic behind greenhouses and fertiliser advice alike."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Three curve shapes", "Plateau = another factor limits", "Bottleneck-first spending"],
+          "references": ["OpenStax Biology 2e — Chapter 8 (factors affecting photosynthesis)"]
+        }
+      ]
+    },
+    {
+      "key": "top02",
+      "order": 2,
+      "title": "Transport and Responses",
+      "description": "Xylem and phloem, transpiration pull, and how plants sense light and gravity.",
+      "objectives": ["Contrast xylem and phloem", "Explain transpiration stream and tropisms"],
+      "lessons": [
+        {
+          "key": "les01",
+          "title": "Moving Water and Food",
+          "description": "Root uptake, the transpiration stream, and translocation of sugars.",
+          "duration": 35,
+          "objectives": [
+            "Trace water from soil to leaf",
+            "Explain how transpiration pulls the stream",
+            "State what phloem translocates and between which organs"
+          ],
+          "introduction": "A 30-metre iroko lifts hundreds of litres daily with no pump, no heart, no energy bill. It runs on evaporation — physics as plumbing.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "Xylem: the water lift",
+              "body": "ROOT HAIRS absorb soil water by OSMOSIS (Module 2) and minerals by ACTIVE TRANSPORT — their millions of extensions multiply area. Water crosses the root cortex to the XYLEM: dead, hollow, lignin-strengthened tubes running root → stem → leaf. The TRANSPIRATION STREAM pulls it up: (1) leaf cells lose water vapour through stomata (TRANSPIRATION — driven by heat, wind, dry air); (2) lost water is replaced from xylem; (3) water's COHESION (molecules gripping each other) + ADHESION (gripping walls) drags the whole column upward — one unbroken rope from roots to crown. Stomata regulate the trade: open for CO2 (photosynthesis) but losing water; closing in drought (abscisic acid triggers it) saves water but starves CO2. Wilting is lost turgor when loss beats uptake — recovered by watering, not by magic."
+            },
+            {
+              "block": "THEORY",
+              "title": "Phloem: the food network",
+              "body": "PHLOEM (sieve tubes + companion cells — living, no nuclei in sieve elements) TRANSLOCATES sugars and amino acids from SOURCES (photosynthesising leaves, or storage organs in spring) to SINKS (roots, fruits, growing tips, storage tubers) — in ANY direction, unlike xylem's one-way climb. Flow is driven by pressure gradients (mass flow): sources load sugar (water follows by osmosis, raising pressure), sinks unload it (pressure falls) — sap streams from high to low pressure. Farmers exploit both systems: ring-barking (removing phloem) swells fruits above the cut; grafting joins one plant's shoot to another's roots via aligned cambia. Mineral needs: nitrates (proteins — deficiency yellows old leaves first), phosphates (roots/DNA/ATP), potassium (enzymes/stomata), magnesium (chlorophyll — deficiency yellows between veins)."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: the bagged branch",
+              "body": "Question: A clear plastic bag tied over a leafy branch collects water droplets inside by evening; a bag over a leafless branch stays dry. Explain. Step 1 — Source: droplets condensed from vapour the LEAVES transpired (stomata → air → bag → cool plastic → condense). Step 2 — Control: the leafless bag proves leaves (not bark or air) are the water source. Step 3 — Conclude: visible proof of transpiration — and your module practical repeats exactly this. Extension: morning vs noon bags show the rate follows heat/light — transpiration's drivers made visible."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Root hairs (osmosis + active transport) → xylem (dead tubes) → transpiration pull (cohesion) → leaf.\nStomata trade CO2 entry against water loss.\nPhloem translocates sugars source → sink in any direction.\nDeficiency clues: yellow old leaves (nitrate), yellow between veins (magnesium)."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Xylem lifts by evaporation-pull through dead pipes; phloem delivers by pressure-flow through living ones. Stomata govern the water-carbon trade, and mineral shortages write their symptoms on leaves."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Cohesion pulls the column", "Xylem up, phloem any direction", "Read deficiencies from leaves"],
+          "references": ["OpenStax Biology 2e — Chapters 30–31 (plant transport, nutrition)"]
+        },
+        {
+          "key": "les02",
+          "title": "How Plants Respond",
+          "description": "Tropisms and hormones: auxin steering growth toward light and with gravity.",
+          "duration": 25,
+          "objectives": [
+            "Define phototropism and gravitropism (geotropism)",
+            "Explain auxin's role in bending",
+            "Give two agricultural uses of plant hormones"
+          ],
+          "introduction": "A seedling on your windowsill bends toward the light within days — with no eyes, muscles or brain. Hormones do the steering.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "Auxin steering",
+              "body": "TROPISM = directional growth response: PHOTOTROPISM (to light — shoots bend toward it) and GRAVITROPISM/GEOTROPISM (to gravity — roots grow down/positive, shoots grow up/negative). The hormone AUXIN (made in shoot tips) drives it: light makes auxin accumulate on the SHADED side; in SHOOTS, extra auxin SPEEDS cell elongation there — the shaded side outgrows the lit side, bending the shoot TOWARD light. In ROOTS the same extra auxin SLOWS elongation — the lower side grows less, bending the root DOWNWARD. One hormone, opposite effects by tissue — an examination favourite. Other hormones: GIBBERELLINS (stem elongation, seed germination — brewers sprout barley with them), CYTOKININS (cell division), ABSCISIC ACID (drought response — closes stomata, drops leaves), ETHENE (fruit ripening — traders ripen plantain with it)."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: the dark box",
+              "body": "Question: Two identical seedlings: A in a box with a side hole (light one-sided), B in a fully dark box. After 5 days A bends toward the hole; B grows tall, pale and straight. Explain both. Step 1 — A: one-sided light → auxin gathers on the shaded side → faster elongation there → bends TOWARD light (positive phototropism). Step 2 — B: no light → auxin spreads evenly → straight growth; paleness = no chlorophyll made (etiolation) and tallness = the seedling 'searching' for light. Step 3 — Conclude: light DIRECTION steers (A), light ABSENCE starves (B) — tropism needs a gradient, which darkness cannot provide."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Shoots: positive phototropism, negative gravitropism. Roots: positive gravitropism.\nAuxin gathers shaded/lower; speeds shoots, slows roots — bending both correctly.\nGibberellins germinate, ethene ripens, abscisic acid drought-proofs.\nTropisms need gradients; uniform conditions give straight growth."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Plants navigate with hormones: auxin gradients bend shoots to light and roots to earth. Farmers hijack the same signals to germinate, ripen and root crops on schedule."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Auxin's opposite tissue effects", "Bending logic step by step", "Hormone farm uses"],
+          "references": ["OpenStax Biology 2e — Chapter 30 (plant responses)"]
+        }
+      ]
+    },
+    {
+      "key": "top03",
+      "order": 3,
+      "title": "Reproduction in Flowering Plants",
+      "description": "Flower structure, pollination, fertilisation, seeds and germination.",
+      "objectives": ["Label flower parts", "Trace pollination to germination"],
+      "lessons": [
+        {
+          "key": "les01",
+          "title": "Flowers and Pollination",
+          "description": "Male and female parts, insect vs wind strategies, and fertilisation's double event.",
+          "duration": 35,
+          "objectives": [
+            "Label sepals, petals, stamens, carpels and their sub-parts",
+            "Contrast insect- and wind-pollinated flowers with four features each",
+            "Describe the pollen tube journey to the ovule"
+          ],
+          "introduction": "A flower is advertising, engineering and nursery in one: colours and scents bribe couriers, structures load and receive pollen, and ovaries become the fruits we eat.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "Structure and strategies",
+              "body": "Flower parts: SEPALS (green, protect the bud) → PETALS (often bright/scented, attract insects) → STAMENS (male: anther makes POLLEN, filament holds it) → CARPEL(s) (female: stigma catches pollen, style connects, ovary holds OVULES with egg cells). INSECT-pollinated flowers: large bright petals, scent, nectar guides, sticky/spiky pollen, sticky stigma. WIND-pollinated (maize, grasses): tiny dull petals, NO scent/nectar, HUGE pollen quantities, light smooth grains, large FEATHERY stigmas dangling to catch drifting pollen, anthers dangling outside. POLLINATION = pollen landing on stigma (self: same flower/plant — fast, no variation; cross: different plant — variation, needs couriers). FERTILISATION follows: pollen germinates, a tube grows down the style, male nuclei enter the ovule — one fuses with the EGG (zygote → embryo), one fuses with endosperm nuclei (food store) — flowering plants' unique DOUBLE fertilisation."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: maize tassels",
+              "body": "Question: Maize grows male tassels at the very top and female silks (stigmas) lower down. Explain how this arrangement suits wind pollination AND reduces self-pollination. Step 1 — Wind logic: top tassels release clouds of light pollen that drift DOWN onto the feathery silks below — gravity assists the wind. Step 2 — Outbreeding logic: tassels shed pollen BEFORE most local silks emerge (or wind carries it to neighbouring plants first), favouring CROSS-pollination and variation. Step 3 — Conclude: position + timing turn wind from a gamble into a system — engineering without engineers. (Farmers bag tassels/silks to force controlled crosses in breeding programmes.)"
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Stamen = anther + filament (male). Carpel = stigma + style + ovary (female).\nInsect: showy, scented, sticky. Wind: dull, huge pollen, feathery stigmas.\nPollination (transfer) precedes fertilisation (fusion) — never swap the terms.\nDouble fertilisation: zygote + endosperm food store."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Flowers match their couriers: insect flowers advertise, wind flowers mass-produce. Pollen's landing is pollination; the tube's delivery is fertilisation — and the ovary's reward is fruit."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Four flower whorls + sub-parts", "Insect vs wind feature tables", "Pollination ≠ fertilisation"],
+          "references": ["OpenStax Biology 2e — Chapter 32, Plant Reproduction"]
+        },
+        {
+          "key": "les02",
+          "title": "Seeds and Germination",
+          "description": "How fruits spread seeds, what seeds contain, and the three conditions for sprouting.",
+          "duration": 30,
+          "objectives": [
+            "Explain four seed-dispersal mechanisms with examples",
+            "Label a seed (testa, embryo, food store)",
+            "State germination requirements and how to test each"
+          ],
+          "introduction": "A mango seed cannot walk to a new clearing — so the fruit bribes you to carry it. Dispersal is the plant kingdom's travel industry.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "Dispersal and the seed",
+              "body": "After fertilisation, the OVARY wall becomes the FRUIT and OVULES become SEEDS (embryo + food store + protective TESTA). Dispersal methods: WIND — light, winged/plumed seeds (Tridax daisy fluff, mahogany wings); ANIMALS — tasty fruits eaten and dropped (mango, guava) or hooked burrs hitching fur/clothes (grasses); WATER — floating fibrous fruits (coconut husks ride oceans); EXPLOSIVE — pods flinging seeds (oil bean/pentaclethra, peas). Seeds contain the EMBRYO (plumule → shoot, radicle → root) plus food (endosperm or fat cotyledons — beans' fleshy halves). GERMINATION needs three conditions: WATER (activates enzymes, softens testa), OXYGEN (aerobic respiration for growth energy), and WARMTH (enzyme optimum) — light is NOT required (most seeds germinate underground; its absence even helps some)."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: testing germination needs",
+              "body": "Question: Design a test of whether water is needed for germination. Step 1 — Setup: two petri dishes (or plates with cotton wool), 10 bean seeds each, same warmth and air. DISH A: cotton wool DAMP. DISH B: cotton wool DRY (seeds present, everything else identical). Step 2 — Observe 5 days: A sprouts (radicles emerge), B stays hard. Step 3 — Conclude: water is necessary — the ONLY difference was water, so it caused the difference. Fair-test checklist: same seed type/number, same temperature, same air, only water varied. Repeat-logic gives the oxygen test (boiled-cooled water + oil layer excludes air) and warmth test (fridge vs room)."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Fruit = ripened ovary; seed = embryo + store + testa. Dispersal: wind, animal, water, explosive.\nGermination needs water + oxygen + warmth — NOT light.\nTest one condition at a time; everything else identical.\nRadicle (root) emerges first, then plumule (shoot)."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Fruits are travel agents, seeds are packed lunches with babies inside, and germination waits only for water, air and warmth. Test each requirement by varying one factor — fair tests again."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Four dispersal types + examples", "Three germination conditions", "One-variable fair tests"],
+          "references": ["OpenStax Biology 2e — Chapter 32 (seed development, germination)"]
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "type": "BOOK",
+      "title": "OpenStax Biology 2e — full textbook (free PDF + web)",
+      "url": "https://openstax.org/details/books/biology-2e",
+      "description": "Module 9 reading: Chapter 8 (Photosynthesis) and Chapters 30–32 (plant form, transport, reproduction). Download the free PDF from the publisher page.",
+      "source": "OpenStax, Rice University",
+      "license": "CC BY-NC-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "attribution": "Biology 2e by Mary Ann Clark, Matthew Douglas and Jung Choi (OpenStax, Rice University), licensed CC BY-NC-SA 4.0."
+    }
+  ],
+  "practical": {
+    "title": "Starch in Leaves + Transpiration Bags",
+    "objective": "Prove photosynthesis makes starch and make transpiration visible.",
+    "scenario": "Two classic experiments, one afternoon — a destarched plant and a leafy branch.",
+    "instructions": "PART A — STARCH TEST: 1. Destarch: keep a potted plant (or one branch covered) in darkness 48 hours. 2. Cover part of one leaf with foil (a shape), expose the plant to bright light 6+ hours. 3. Pluck the leaf: boil 2 min in water (soften, kill), then boil in ethanol in a HOT WATER BATH (no open flame — ethanol burns!) until pale, rinse, then add iodine. 4. Record: which areas turn blue-black? PART B — TRANSPIRATION: 5. Tie a clear dry bag over a leafy branch and another over a bare twig; leave 3 hours in sun. 6. Compare droplets. SAFETY: adult supervision for boiling; ethanol ONLY in a water bath away from flames; iodine stains; wash hands.",
+    "requirements": "Potted plant, foil, ethanol, iodine, water bath/kettle, 2 clear bags, string.",
+    "expected_output": "Starch-test sketch with labelled areas + bag comparison + two conclusions (light→starch; leaves transpire).",
+    "difficulty": "INTERMEDIATE",
+    "estimated_time": 120,
+    "submission_type": "TEXT",
+    "evaluation_criteria": ["Destarching + foil control correctly used", "Ethanol safety step stated and followed", "Both conclusions link evidence to photosynthesis/transpiration"]
+  },
+  "assignment": {
+    "title": "Design a School Garden",
+    "description": "Plan a productive 5 m × 5 m school garden applying photosynthesis, transport, soils and reproduction science.",
+    "instructions": "Your school grants a 5 m × 5 m plot. Submit: (1) CROPS: choose 4 crops (one legume compulsory — explain its nitrogen gift) with spacing and reasons (light needs, root depth, season). (2) LAYOUT: describe/draw (in words) bed positions — tall crops north/south? paths? compost corner? water source? Justify with light/shade and labour logic. (3) CALENDAR: month-by-month for one term — sowing, weeding, watering, harvest. (4) SCIENCE NOTES: 200 words linking THREE module concepts to your choices (e.g. limiting factors → spacing; transpiration → mulching; pollination → border flowers for bees). (5) BUDGET: rough costs (seeds, tools, water) under a sensible total. 500–600 words total.",
+    "requirements": "Must suit a real Nigerian school season and budget; fantasy tractors score zero.",
+    "expected_output": "Crop plan + layout + calendar + science notes + budget (500–600 words).",
+    "difficulty": "INTERMEDIATE",
+    "estimated_time": 120,
+    "submission_type": "TEXT",
+    "evaluation_criteria": ["Legume included with correct nitrogen-fixation reasoning", "Layout justified with light/water/labour logic", "Three module concepts applied correctly to real choices"],
+    "max_score": 100,
+    "pass_score": 50
+  },
+  "quiz": {
+    "title": "Module 9 Quiz — Plant Biology",
+    "description": "Quick check on photosynthesis, transport and reproduction.",
+    "passing_score": 70,
+    "time_limit": 15,
+    "attempt_limit": 3,
+    "questions": [
+      {
+        "type": "multiple_choice",
+        "question": "The correct photosynthesis equation is:",
+        "options": ["6CO2 + 6H2O →(light/chlorophyll) C6H12O6 + 6O2", "C6H12O6 + 6O2 → 6CO2 + 6H2O + energy", "6O2 + 6H2O → C6H12O6 + 6CO2", "CO2 + H2O → CH4 + O2"],
+        "correct": [0],
+        "explanation": "Photosynthesis builds glucose from CO2 + water using light (oxygen released). The second equation is respiration — the reverse.",
+        "points": 1,
+        "topic": "Photosynthesis"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Plants are destarched before photosynthesis experiments to:",
+        "options": ["Kill the plant painlessly", "Remove old starch so only newly made starch is detected", "Make leaves transparent", "Add extra chlorophyll"],
+        "correct": [1],
+        "explanation": "Old stores would false-positive every test. Destarching ensures detected starch was made DURING the experiment.",
+        "points": 1,
+        "topic": "Experiments"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Water rises in xylem mainly by:",
+        "options": ["Root pressure pushing alone", "Transpiration pull via cohesion of water molecules", "Phloem pumping it upward", "Capillarity in leaves only"],
+        "correct": [1],
+        "explanation": "Evaporation from leaves drags the cohesive water column up dead xylem tubes. Root pressure helps only short distances.",
+        "points": 1,
+        "topic": "Transport"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Shoots bend toward light because auxin:",
+        "options": ["Gathers on the lit side and stops all growth", "Gathers on the shaded side, speeding elongation there", "Is destroyed by darkness", "Turns into chlorophyll"],
+        "correct": [1],
+        "explanation": "Uneven auxin → uneven growth → bending toward light. (In roots the same extra auxin slows growth, bending them down.)",
+        "points": 1,
+        "topic": "Responses"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Germination of most seeds requires:",
+        "options": ["Light, soil and fertiliser", "Water, oxygen and warmth", "Darkness, cold and drought", "Pollination and fertilisation"],
+        "correct": [1],
+        "explanation": "Water activates enzymes, oxygen fuels respiration, warmth optimises it. Light is NOT needed (seeds sprout underground).",
+        "points": 1,
+        "topic": "Germination"
+      }
+    ]
+  },
+  "assessment": {
+    "key": "exam",
+    "title": "Module 9 Examination — Plant Biology",
+    "description": "End-of-module examination covering photosynthesis, transport, responses and reproduction.",
+    "instructions": "Answer ALL 6 questions in 25 minutes. Pass mark is 60%. Counts toward your final assessment gate.",
+    "passing_score": 60,
+    "time_limit_minutes": 25,
+    "max_attempts": 3,
+    "time_limit": 25,
+    "attempt_limit": 2,
+    "questions": [
+      {
+        "type": "multiple_choice",
+        "question": "Raising light intensity stops increasing photosynthesis rate at high levels because:",
+        "options": ["Chlorophyll is used up", "Another factor (CO2 or temperature) becomes limiting", "Plants get tired", "Oxygen poisons the leaf"],
+        "correct": [1],
+        "explanation": "Plateaus mean the raised factor no longer limits — the ceiling moved to CO2 supply or temperature/enzyme capacity.",
+        "points": 1,
+        "topic": "Limiting factors"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Phloem translocates sugars:",
+        "options": ["Upward only, like xylem", "From sources to sinks in any direction", "Only at night", "Only in roots"],
+        "correct": [1],
+        "explanation": "Pressure-driven mass flow follows source→sink gradients: leaves→roots in summer, stores→buds in spring — any direction needed.",
+        "points": 1,
+        "topic": "Transport"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Wind-pollinated flowers typically have:",
+        "options": ["Large bright petals and scent", "Small dull petals, huge light pollen, feathery stigmas", "Nectar guides and sticky pollen", "No stamens at all"],
+        "correct": [1],
+        "explanation": "Wind flowers mass-produce cheap pollen and maximise capture area — no advertising budget needed.",
+        "points": 1,
+        "topic": "Pollination"
+      },
+      {
+        "type": "true_false",
+        "question": "True or False: Double fertilisation in flowering plants produces both the zygote and the endosperm food store.",
+        "options": ["True", "False"],
+        "correct": [0],
+        "explanation": "True. One male nucleus fuses the egg (embryo), the second fuses endosperm nuclei (food) — unique to flowering plants.",
+        "points": 1,
+        "topic": "Fertilisation"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Old leaves yellowing first (chlorosis from the bottom up) most likely indicates deficiency of:",
+        "options": ["A mobile nutrient like nitrogen — the plant salvages it to young leaves", "Water only", "Sunlight only", "Carbon dioxide"],
+        "correct": [0],
+        "explanation": "Mobile nutrients (N, P, K, Mg) are withdrawn from old leaves to growing tips — so old leaves yellow first. Immobile deficiencies (Fe, Ca) strike young leaves.",
+        "points": 1,
+        "topic": "Nutrition"
+      },
+      {
+        "type": "multiple_answer",
+        "question": "Which are leaf adaptations for photosynthesis? (Select ALL that apply)",
+        "options": ["Broad thin shape with large surface area", "Chlorophyll-rich palisade layer near the top", "Stomata and air spaces for gas diffusion", "Thick opaque hairs blocking all light"],
+        "correct": [0, 1, 2],
+        "explanation": "Area, pigment placement and gas routes all boost photosynthesis. Blocking light would sabotage it (hairs reduce water loss, not boost photosynthesis).",
+        "points": 2,
+        "topic": "Leaf"
+      }
+    ]
+  }
+}

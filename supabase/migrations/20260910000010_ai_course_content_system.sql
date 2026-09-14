@@ -259,6 +259,17 @@ create table if not exists public.course_completion_rules (
 -- -----------------------------------------------------------------
 -- lesson_content — RAG-ready chunks for DanTECH AI
 -- -----------------------------------------------------------------
+-- pgvector is preinstalled on Supabase cloud but absent from plain
+-- Postgres (e.g. embedded test databases). Install it first when
+-- available; when it is not, the embedding column is skipped and RAG
+-- degrades to keyword search (the "handled gracefully" intent).
+do $$
+begin
+  create extension if not exists vector;
+exception when others then
+  raise notice 'pgvector not available — lesson_content.embedding will be skipped';
+end $$;
+
 create table if not exists public.lesson_content (
   id                uuid primary key default gen_random_uuid(),
   lesson_id         uuid not null,
@@ -268,13 +279,20 @@ create table if not exists public.lesson_content (
   content           text not null,
   chunk_index       integer not null default 0,
   metadata          jsonb default '{}'::jsonb,
-  embedding         vector, -- will be null if pgvector not installed, handled gracefully
   is_approved       boolean not null default false,
   created_at        timestamptz not null default now()
 );
 
--- Try to add vector extension if available (optional, for future RAG)
-create extension if not exists vector;
+do $$
+begin
+  if exists (select 1 from pg_extension where extname = 'vector') then
+    alter table public.lesson_content add column if not exists embedding vector;
+  else
+    raise notice 'pgvector not available — lesson_content.embedding skipped';
+  end if;
+exception when others then
+  raise notice 'lesson_content.embedding skipped: %', SQLERRM;
+end $$;
 
 create index if not exists idx_lesson_content_course on public.lesson_content (course_id);
 create index if not exists idx_lesson_content_lesson on public.lesson_content (lesson_id);

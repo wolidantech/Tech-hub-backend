@@ -1,0 +1,387 @@
+{
+  "key": "mod05",
+  "order": 5,
+  "title": "Genetics",
+  "description": "How traits pass from parents to children: Mendel's laws, Punnett squares, and inheritance beyond simple dominance.",
+  "objectives": [
+    "Use the vocabulary of inheritance correctly",
+    "Solve monohybrid crosses including sex-linked traits",
+    "Explain incomplete dominance, codominance and blood groups"
+  ],
+  "duration_text": "1 week",
+  "topics": [
+    {
+      "key": "top01",
+      "order": 1,
+      "title": "Mendel and Inheritance",
+      "description": "Genes, alleles and genotypes; Mendel's pea experiments and the 3:1 ratio.",
+      "objectives": ["Define genetic terms", "Solve monohybrid crosses"],
+      "lessons": [
+        {
+          "key": "les01",
+          "title": "Genes, Alleles and Genotypes",
+          "description": "The vocabulary of inheritance and how Mendel discovered its rules.",
+          "duration": 35,
+          "objectives": [
+            "Define gene, allele, genotype, phenotype, dominant, recessive, homozygous, heterozygous",
+            "Explain Mendel's method and why peas were ideal",
+            "State the 3:1 phenotypic ratio and what it proves"
+          ],
+          "introduction": "Why do you resemble your parents but match neither exactly? In a monastery garden in the 1860s, Gregor Mendel grew 29,000 pea plants and found the mathematical rules behind the answer.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "The vocabulary",
+              "body": "A GENE is a DNA section coding for one trait (e.g. seed shape). An ALLELE is one version of a gene (round R vs wrinkled r). GENOTYPE is the allele pair an organism carries (RR, Rr, rr); PHENOTYPE is the observable trait (round or wrinkled). DOMINANT alleles show in heterozygotes (Rr looks round); RECESSIVE alleles show only when homozygous (rr). HOMOZYGOUS = identical alleles (RR or rr); HETEROZYGOUS = different alleles (Rr). CARRIERS (e.g. HbAHbS) carry a recessive allele without showing it. Mendel's genius was METHOD: he used pure-breeding lines, crossed them, counted THOUSANDS of offspring, and tracked ONE trait at a time. Peas were perfect: fast-growing, self- or cross-pollinating, with sharply contrasting traits (tall/short, round/wrinkled, green/yellow)."
+            },
+            {
+              "block": "THEORY",
+              "title": "The 3:1 ratio",
+              "body": "Cross pure tall (TT) with pure short (tt): all F1 offspring are Tt (all tall — dominance hides t). Self-cross the F1 (Tt × Tt): the F2 generation averages 3 tall : 1 short. Mendel's explanation — the LAW OF SEGREGATION: allele pairs separate into different gametes during meiosis, so each gamete carries ONE allele, and pairs reunite randomly at fertilisation. The wrinkled trait never blended away — it was CARRIED invisibly and reappeared. This disproved blending inheritance and founded genetics. His second law — INDEPENDENT ASSORTMENT: different gene pairs assort independently (Module 4's metaphase I lottery) — holds for genes on different chromosomes."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: the F2 ratio",
+              "body": "Question: In tomatoes, red fruit (R) is dominant over yellow (r). Two heterozygous red plants are crossed. Predict the offspring ratio. Step 1 — Parent genotypes: Rr × Rr. Step 2 — Gametes: each parent makes R and r (segregation). Step 3 — Punnett square: rows R, r × columns R, r gives RR, Rr, Rr, rr. Step 4 — Phenotypes: 3 red : 1 yellow; genotypes 1 RR : 2 Rr : 1 rr. Examination format: ALWAYS show parents, gametes, square, then genotype AND phenotype ratios — each line earns marks. Use the correct case convention (dominant capital, recessive lowercase of the SAME letter)."
+            },
+            {
+              "block": "VIDEO",
+              "title": "Watch: Alleles and Genes",
+              "url": "https://www.youtube.com/watch?v=pv3Kj0UjiLE",
+              "body": "Watch 'Alleles and Genes' by the Amoeba Sisters (official channel stream). Pause and define all eight vocabulary terms from memory before continuing."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Gene = trait unit; allele = version; genotype = pair carried; phenotype = trait seen.\nDominant shows in heterozygotes; recessive needs homozygosity.\nSegregation: alleles part into gametes. Independent assortment: pairs assort freely.\nTt × Tt gives 3:1 phenotypes, 1:2:1 genotypes."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Mendel counted peas and discovered that inheritance comes in discrete units that segregate and reassort. Eight vocabulary terms and the 3:1 ratio are the keys to every genetics calculation ahead."
+            }
+          ],
+          "videos": [
+            {
+              "title": "Alleles and Genes",
+              "url": "https://www.youtube.com/watch?v=pv3Kj0UjiLE",
+              "source": "Amoeba Sisters",
+              "license": "Standard YouTube License (official stream — no copy made)",
+              "attribution": "© Amoeba Sisters — streamed from the official channel https://www.youtube.com/@AmoebaSisters",
+              "description": "Core inheritance vocabulary with clear visual examples."
+            }
+          ],
+          "resources": [],
+          "key_points": ["Eight terms must be word-perfect", "Mendel's method: pure lines, one trait, huge counts", "Segregation happens in meiosis"],
+          "references": ["OpenStax Biology 2e — Chapter 12, Mendel's Experiments and Heredity"]
+        },
+        {
+          "key": "les02",
+          "title": "Solving Monohybrid Crosses",
+          "description": "A five-step method for every single-trait cross, including test crosses and pedigrees.",
+          "duration": 40,
+          "objectives": [
+            "Apply the five-step cross method to any monohybrid problem",
+            "Use test crosses to reveal unknown genotypes",
+            "Read simple pedigrees for dominant and recessive traits"
+          ],
+          "introduction": "Genetics problems look frightening until you learn the method. With five disciplined steps, every monohybrid cross — in homework, WAEC or JAMB — surrenders.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "The five-step method",
+              "body": "STEP 1 — SYMBOLS: assign letters (dominant capital: A; recessive lowercase: a) and state what each means. STEP 2 — PARENTS: write both genotypes with phenotypes (e.g. Aa tall × aa short). STEP 3 — GAMETES: list each parent's possible gametes (Aa makes A and a; aa makes only a). STEP 4 — SQUARE: draw the Punnett grid, fill every box. STEP 5 — RATIOS: state genotype ratio AND phenotype ratio (or probabilities). TEST CROSS: to reveal an unknown dominant phenotype (A? ), cross with homozygous recessive (aa) — if ANY recessive offspring appear, the parent was heterozygous; if dozens of offspring are all dominant, it is almost certainly AA. PEDIGREES: dominant traits appear every generation (affected children always have an affected parent); recessive traits skip generations and appear from carrier parents; if two normal parents have an affected child, the trait MUST be recessive."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: the mystery bull",
+              "body": "Question: In cattle, hornless (H) is dominant over horned (h). A hornless bull is mated with horned cows (hh) and produces 12 calves — 6 hornless, 6 horned. What is the bull's genotype? Step 1 — Symbols: H hornless, h horned. Step 2 — Parents: bull H? × hh cows. Step 3 — Reason: horned calves (hh) must get h from EACH parent, so the bull carries h → the bull is Hh. Step 4 — Check: Hh × hh predicts 1:1, matching the observed 6:6. Step 5 — Conclude: heterozygous (Hh), proven by a test cross. Notice: the RECESSIVE offspring revealed the hidden allele — this logic cracks every 'find the genotype' question."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: pedigree reading",
+              "body": "Question: A pedigree shows normal parents with one affected son and one normal daughter. Is the trait dominant or recessive? Step 1 — Test dominant: a dominant trait needs an affected parent to pass the allele — but BOTH parents are normal, so dominant is IMPOSSIBLE. Step 2 — Test recessive: two carrier parents (Aa × Aa) can produce aa children — possible. Step 3 — Conclude: recessive; both parents are carriers, the son is aa, the daughter is AA or Aa. Golden rule: normal parents + affected child = RECESSIVE, always. (Affected parent + normal children in every generation suggests dominant.)"
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Five steps: symbols → parents → gametes → square → ratios.\nTest cross: unknown dominant × homozygous recessive reveals the genotype.\nNormal parents + affected child = recessive trait.\nRecessive offspring prove a parent carried the hidden allele."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Monohybrid crosses yield to method: symbols, parents, gametes, square, ratios. Test crosses expose hidden alleles, and pedigrees reveal dominance patterns — normal parents with an affected child always means recessive."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Never skip the gamete step", "Test crosses use homozygous recessive partners", "Pedigree rules beat pedigree guessing"],
+          "references": ["OpenStax Biology 2e — Chapter 12 (monohybrid crosses, pedigrees)"]
+        }
+      ]
+    },
+    {
+      "key": "top02",
+      "order": 2,
+      "title": "Beyond Simple Dominance",
+      "description": "Incomplete dominance, codominance, blood groups and sex-linked inheritance.",
+      "objectives": ["Explain non-Mendelian patterns", "Solve blood-group and sex-linked crosses"],
+      "lessons": [
+        {
+          "key": "les01",
+          "title": "Incomplete Dominance and Blood Groups",
+          "description": "When heterozygotes blend or show both alleles — snapdragons, sickle cell and ABO.",
+          "duration": 35,
+          "objectives": [
+            "Distinguish complete, incomplete and codominance",
+            "Explain ABO blood groups as multiple alleles + codominance",
+            "Predict safe blood transfusions from donor and recipient groups"
+          ],
+          "introduction": "Red snapdragon × white snapdragon gives... pink. Neither allele dominates — Mendel's rules still apply, but dominance itself has shades.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "Three dominance patterns",
+              "body": "COMPLETE DOMINANCE: heterozygote matches one parent (Tt peas are tall). INCOMPLETE DOMINANCE: heterozygote is INTERMEDIATE — red snapdragon (CRCR) × white (CWCW) gives all pink (CRCW); self-crossing pinks gives 1 red : 2 pink : 1 white (note: use SUPERSCRIPT letters, never Rr, to avoid implying dominance). CODOMINANCE: heterozygote shows BOTH traits fully — roan cattle (red + white hairs), and human AB blood (both A and B antigens). MULTIPLE ALLELES: more than two alleles exist in the population — ABO blood has THREE (IA, IB, i): IA and IB are codominant with each other, both dominant over i. Genotypes: group A = IAIA or IAi; B = IBIB or IBi; AB = IAIB; O = ii (universal donor — no antigens; AB is universal recipient — no antibodies)."
+            },
+            {
+              "block": "THEORY",
+              "title": "Sickle cell: dominance depends on the level",
+              "body": "Sickle-cell anaemia shows dominance beautifully: at the MOLECULAR level, HbAHbS carriers make both normal and sickle haemoglobin (codominance); at the ORGANISM level in normal air, carriers look healthy (recessive disease); under severe oxygen shortage, carriers can show symptoms (incomplete dominance). One gene, three answers — dominance describes RELATIONSHIPS, not alleles alone. In malaria regions, carriers survive best (heterozygote advantage — the final-exam favourite), keeping the HbS allele common despite the disease. Genetic counselling lets carrier couples understand their 1-in-4 risk per pregnancy."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: blood-group cross",
+              "body": "Question: A group-A mother (genotype IAi) and group-B father (IBi) have children. What blood groups are possible? Step 1 — Gametes: mother IA or i; father IB or i. Step 2 — Square: IAIB (AB), IAi (A), IBi (B), ii (O). Step 3 — Conclude: ALL FOUR groups possible — A, B, AB and O, each 1/4. Transfusion rule to memorise: give red cells lacking antigens the recipient's antibodies attack — O donates to all (no antigens); AB receives from all (no antibodies). Rh factor adds a second check in real medicine."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Incomplete = blended heterozygote (pink snapdragons, 1:2:1). Codominant = both shown (roan, AB blood).\nABO: IA, IB codominant; both beat i. O = universal donor; AB = universal recipient.\nSickle cell shows all three dominance patterns at different levels."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Dominance is a relationship, not a property: alleles can dominate, blend or share. ABO blood groups combine multiple alleles with codominance, and sickle cell proves that the same gene can show every pattern at once."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Superscripts for incomplete dominance (CRCW)", "ABO genotypes must be memorised", "O donates, AB receives"],
+          "references": ["OpenStax Biology 2e — Chapter 12 (extensions of Mendel)"]
+        },
+        {
+          "key": "les02",
+          "title": "Sex-Linked Inheritance",
+          "description": "Why haemophilia and colour blindness mostly affect males — genes on the X chromosome.",
+          "duration": 35,
+          "objectives": [
+            "Explain why X-linked recessive traits hit males harder",
+            "Solve haemophilia and colour-blindness crosses",
+            "Interpret sex-linked pedigrees"
+          ],
+          "introduction": "Queen Victoria's descendants carried haemophilia across Europe's royal families — through daughters who never bled, to sons who did. The X chromosome explains it all.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "X-linked recessive logic",
+              "body": "Females are XX, males XY. The X carries 1000+ genes (including blood-clotting factor VIII and colour-vision genes); the tiny Y carries few, mostly male-determining. An X-linked RECESSIVE allele (Xh) shows in females only when homozygous (XhXh) but in males with a SINGLE copy (XhY) — males have no second X to mask it. Hence: males affected far more often; affected fathers pass Xh to ALL daughters (making them carriers) but NEVER to sons (sons get Y from father); carrier mothers pass to HALF their sons (affected) and half their daughters (carriers). Colour blindness (red-green) follows identical logic and is the commonest example (~8% of males). Notation: always write XHXH, XHXh, XhXh, XHY, XhY — bare 'Hh' loses marks in sex-linked questions."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: the carrier mother",
+              "body": "Question: A normal-vision woman whose father was colour-blind marries a normal-vision man. What proportion of their sons will be colour-blind? Step 1 — Deduce her genotype: her father (XhY) gave her his ONLY X (Xh), so she is XHXh (carrier) — her normal vision proves the XH. Step 2 — Cross: XHXh × XHY. Step 3 — Sons: get Y from father, XH or Xh from mother → HALF the sons (XhY) colour-blind. Step 4 — Note daughters: all get XH from father, so all see normally (half carriers). Examination trap: 'father to son' transmission of X-linked traits is IMPOSSIBLE — any pedigree showing it rules out X-linkage."
+            },
+            {
+              "block": "VIDEO",
+              "title": "Watch: Mega Genetics Review",
+              "url": "https://www.youtube.com/watch?v=jLmoJPxihjA",
+              "body": "Watch 'Mega Genetics Review: Mendelian and non-Mendelian Genetics' by the Amoeba Sisters (official channel stream) — it revises this whole module with practice problems. Attempt each problem before the solution appears."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "X-linked recessive: females need two copies; males need one — males affected more.\nFathers give X to daughters only; mothers give X to both.\nAlways use XHXh/XHY notation for sex-linked crosses.\nFather-to-son transmission rules OUT X-linkage."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "The X chromosome's gene load, plus males' single copy, makes X-linked recessive traits a male-heavy pattern. Carrier mothers and affected fathers transmit predictably — trace the X's to solve any pedigree."
+            }
+          ],
+          "videos": [
+            {
+              "title": "Mega Genetics Review: Mendelian and non-Mendelian Genetics",
+              "url": "https://www.youtube.com/watch?v=jLmoJPxihjA",
+              "source": "Amoeba Sisters",
+              "license": "Standard YouTube License (official stream — no copy made)",
+              "attribution": "© Amoeba Sisters — streamed from the official channel https://www.youtube.com/@AmoebaSisters",
+              "description": "Full genetics review with monohybrid, dihybrid and sex-linked practice problems."
+            }
+          ],
+          "resources": [],
+          "key_points": ["Males show X-linked recessives with one copy", "Trace X's from parent to child", "Notation must show the chromosomes"],
+          "references": ["OpenStax Biology 2e — Chapter 13 (sex-linked inheritance)"]
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "type": "BOOK",
+      "title": "OpenStax Biology 2e — full textbook (free PDF + web)",
+      "url": "https://openstax.org/details/books/biology-2e",
+      "description": "Module 5 reading: Chapter 12 (Mendel's Experiments) and Chapter 13 (Modern Understandings of Inheritance: sex linkage). Download the free PDF from the publisher page.",
+      "source": "OpenStax, Rice University",
+      "license": "CC BY-NC-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "attribution": "Biology 2e by Mary Ann Clark, Matthew Douglas and Jung Choi (OpenStax, Rice University), licensed CC BY-NC-SA 4.0."
+    }
+  ],
+  "practical": {
+    "title": "Traits in Your Community Survey",
+    "objective": "Collect real inheritance data on observable traits and test whether ratios match genetic predictions.",
+    "scenario": "You are a field geneticist surveying at least 30 people (family, friends, classmates).",
+    "instructions": "1. Survey 30+ people for THREE traits: tongue rolling (roller/non-roller), earlobe attachment (free/attached), and right/left thumb dominance when clasping hands. 2. Record counts in a table and convert to percentages. 3. For tongue rolling (modelled as dominant R): use the Hardy-Weinberg idea qualitatively — if 75% roll, what does that suggest about allele frequencies? (No calculation required — just argue whether R looks common or rare.) 4. Interview one family: record a trait across two generations and draw a mini-pedigree. 5. Write a conclusion: do your ratios resemble 3:1? Why might small samples deviate? SAFETY & ETHICS: participation voluntary; no names recorded (Person 1, 2...); no tasting of any test papers (some schools use PTC — do NOT use chemicals without teacher supervision).",
+    "requirements": "Notebook, pen, willing volunteers.",
+    "expected_output": "Count tables with percentages, one mini-pedigree, and a 5-sentence conclusion on ratios and sample size.",
+    "difficulty": "BEGINNER",
+    "estimated_time": 75,
+    "submission_type": "TEXT",
+    "evaluation_criteria": ["At least 30 people surveyed across 3 traits with honest counts", "Percentages calculated correctly", "Conclusion links deviations to sample size and real-world complexity"]
+  },
+  "assignment": {
+    "title": "Genetics Problem Clinic",
+    "description": "Solve six structured genetics problems and explain one inheritance story in plain language.",
+    "instructions": "Solve ALL six with full five-step working (symbols, parents, gametes, square, ratios): 1. Tall (T) × short (tt), all offspring tall — deduce the tall parent's genotype. 2. Black coat (B) dominant in goats: Bb × Bb — ratios? 3. Pink snapdragons self-crossed — offspring phenotypes? 4. Group O mother × group AB father — possible children groups? 5. Carrier haemophilia mother (XHXh) × normal father — probability of affected daughter? 6. Normal parents, colour-blind son — explain with genotypes. Then write 150–200 words explaining to a friend why two brown-eyed parents can have a blue-eyed child (recessive alleles, carriers).",
+    "requirements": "Full working for every problem; answers alone earn half marks.",
+    "expected_output": "Six fully worked crosses + plain-language explanation paragraph.",
+    "difficulty": "INTERMEDIATE",
+    "estimated_time": 120,
+    "submission_type": "TEXT",
+    "evaluation_criteria": ["Correct genotypes/ratios with complete five-step working", "Q5/Q6 show correct X-linked reasoning", "Explanation uses carrier logic accurately in simple words"],
+    "max_score": 100,
+    "pass_score": 50
+  },
+  "quiz": {
+    "title": "Module 5 Quiz — Genetics",
+    "description": "Quick check on vocabulary, monohybrid crosses and sex linkage.",
+    "passing_score": 70,
+    "time_limit": 15,
+    "attempt_limit": 3,
+    "questions": [
+      {
+        "type": "multiple_choice",
+        "question": "An organism with genotype Tt is best described as:",
+        "options": ["Homozygous dominant", "Heterozygous", "Homozygous recessive", "Hemizygous"],
+        "correct": [1],
+        "explanation": "Tt carries two DIFFERENT alleles — the definition of heterozygous. (Hemizygous describes X-linked genes in males.)",
+        "points": 1,
+        "topic": "Vocabulary"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Tt × Tt is expected to produce:",
+        "options": ["All tall", "3 tall : 1 short", "1 tall : 3 short", "All short"],
+        "correct": [1],
+        "explanation": "The Punnett square gives TT, Tt, Tt, tt — three tall phenotypes to one short (genotypes 1:2:1).",
+        "points": 1,
+        "topic": "Monohybrid"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Pink snapdragons crossed together give red, pink and white offspring. This shows:",
+        "options": ["Complete dominance", "Incomplete dominance", "Codominance", "Sex linkage"],
+        "correct": [1],
+        "explanation": "The heterozygote is intermediate (pink) and the cross gives 1:2:1 — classic incomplete dominance.",
+        "points": 1,
+        "topic": "Dominance"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "A group AB person has genotype:",
+        "options": ["IAi", "IBi", "IAIB", "ii"],
+        "correct": [2],
+        "explanation": "AB expresses both codominant alleles IA and IB. (IAi is group A, IBi is group B, ii is group O.)",
+        "points": 1,
+        "topic": "Blood groups"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "X-linked recessive traits affect more males because:",
+        "options": ["Males have two X chromosomes", "Males need only one copy on their single X to show the trait", "The Y chromosome destroys dominant alleles", "Females cannot inherit X chromosomes"],
+        "correct": [1],
+        "explanation": "Males are hemizygous for X-linked genes — one Xh with no masking second copy means the trait shows.",
+        "points": 1,
+        "topic": "Sex linkage"
+      }
+    ]
+  },
+  "assessment": {
+    "key": "exam",
+    "title": "Module 5 Examination — Genetics",
+    "description": "End-of-module examination covering Mendel, crosses, blood groups and sex linkage.",
+    "instructions": "Answer ALL 6 questions in 25 minutes. Pass mark is 60%. Counts toward your final assessment gate.",
+    "passing_score": 60,
+    "time_limit_minutes": 25,
+    "max_attempts": 3,
+    "time_limit": 25,
+    "attempt_limit": 2,
+    "questions": [
+      {
+        "type": "multiple_choice",
+        "question": "In guinea pigs, rough coat (R) is dominant over smooth (r). A rough × smooth cross gives 50% rough, 50% smooth offspring. The rough parent's genotype is:",
+        "options": ["RR", "Rr", "rr", "Cannot be determined"],
+        "correct": [1],
+        "explanation": "Smooth (rr) offspring must receive r from the rough parent, so it is Rr — a test-cross pattern giving 1:1.",
+        "points": 1,
+        "topic": "Test cross"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Two normal parents have an albino child. The most likely explanation is:",
+        "options": ["Albinism is dominant", "Both parents are carriers of a recessive allele", "Mutation is impossible", "The child is adopted"],
+        "correct": [1],
+        "explanation": "Normal parents + affected child proves recessive inheritance: both parents are Aa carriers (each pregnancy carries 1/4 risk).",
+        "points": 1,
+        "topic": "Pedigree"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "A group O mother and group A father (genotype IAIA) can have children of group:",
+        "options": ["A only", "O only", "A or O", "AB only"],
+        "correct": [0],
+        "explanation": "Father gives IA to every child, mother gives i: all children IAi = group A. (An IAi father could also give O children.)",
+        "points": 1,
+        "topic": "Blood groups"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "A colour-blind man (XhY) and a normal homozygous woman (XHXH) have daughters who are:",
+        "options": ["All colour-blind", "All normal vision but all carriers", "Half colour-blind", "All normal and never carriers"],
+        "correct": [1],
+        "explanation": "Daughters get Xh from father and XH from mother: all XHXh — normal vision, obligate carriers.",
+        "points": 1,
+        "topic": "Sex linkage"
+      },
+      {
+        "type": "true_false",
+        "question": "True or False: A father can pass an X-linked gene directly to his son.",
+        "options": ["True", "False"],
+        "correct": [1],
+        "explanation": "False. Sons receive Y (not X) from their father; their X comes from their mother. Father-to-son transmission rules out X-linkage.",
+        "points": 1,
+        "topic": "Sex linkage"
+      },
+      {
+        "type": "multiple_answer",
+        "question": "Which crosses can produce a group O child? (Select ALL that apply)",
+        "options": ["Group A (IAi) × Group B (IBi)", "Group AB × Group O", "Group O × Group O", "Group A (IAIA) × Group B (IBIB)"],
+        "correct": [0, 2],
+        "explanation": "O children (ii) need an i from each parent: IAi × IBi can give ii, and O × O always gives ii. AB × O gives only A/B children; IAIA × IBIB gives only AB.",
+        "points": 2,
+        "topic": "Blood groups"
+      }
+    ]
+  }
+}

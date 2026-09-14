@@ -33,7 +33,14 @@ router.get(
   mobileCourses.listModulesMobile
 );
 
-// Lessons per module — paginated metadata only
+// Topics per module — paginated metadata only
+router.get(
+  '/courses/:idOrSlug/modules/:moduleId/topics',
+  authenticate,
+  mobileCourses.listTopicsMobile
+);
+
+// Lessons per module — paginated metadata only (optional ?topic_id filter)
 router.get(
   '/courses/:idOrSlug/modules/:moduleId/lessons',
   authenticate,
