@@ -1,13 +1,203 @@
 -- =====================================================================
--- STEP 0.5 (paste AFTER precheck, BEFORE Step 1): migration 014 + bookkeeping.
--- Only needed if the precheck showed MISSING tables. Creates the LMS
--- curriculum tables (course_topics, lessons, ...) and safely backfills
--- lessons from your existing course_lessons table (same IDs, per-row
--- guarded — your data is never modified, only copied).
---
--- Source of truth: supabase/migrations/20260910000014_lms_curriculum_engine.sql
--- (content below is byte-identical; only this header + bookkeeping added)
+-- STEP 0.5 (paste AFTER precheck, BEFORE Step 1): base tables + 014 + bookkeeping.
+-- Only needed if the precheck showed MISSING tables.
+--   PART A: creates any missing BASE tables (live-DB retrofit, safe no-op otherwise)
+--   PART B: migration 014 core (byte-identical to the migration file)
+--   PART C: bookkeeping + confirmation
+-- Your existing course_lessons table is only READ (backfilled from), never modified.
 -- Fully idempotent — safe to run more than once.
+-- =====================================================================
+
+-- =====================================================================
+-- PART A. ENSURE BASE TABLES (live-DB retrofit)
+-- Live production DBs predate the 001-015 migration set and may lack the
+-- base tables 014 builds on (lessons, course_resources, lesson_videos,
+-- lesson_practicals, lesson_content). Definitions below are VERBATIM
+-- extracts from 001/010 (all IF NOT EXISTS / duplicate_object guarded),
+-- so this is a safe no-op where the tables already exist.
+-- =====================================================================
+
+create extension if not exists pgcrypto;
+
+-- enum public.lesson_type (verbatim from 001)
+do $$ begin
+  create type public.lesson_type as enum ('VIDEO', 'TEXT', 'PDF', 'RESOURCE');
+exception when duplicate_object then null; end $$;
+
+-- enum public.difficulty_level (verbatim from 001)
+do $$ begin
+  create type public.difficulty_level as enum ('BEGINNER', 'INTERMEDIATE', 'ADVANCED');
+exception when duplicate_object then null; end $$;
+
+-- enum public.resource_type (verbatim from 010)
+do $$ begin
+  create type public.resource_type as enum (
+    'VIDEO', 'PDF', 'ARTICLE', 'DOCUMENTATION', 'DATASET',
+    'CODE', 'TEMPLATE', 'WEBSITE', 'BOOK', 'EXERCISE'
+  );
+exception when duplicate_object then null; end $$;
+
+-- enum public.video_job_status (verbatim from 010)
+do $$ begin
+  create type public.video_job_status as enum ('QUEUED', 'PROCESSING', 'COMPLETED', 'FAILED', 'CANCELLED');
+exception when duplicate_object then null; end $$;
+
+-- enum public.content_status (verbatim from 010)
+do $$ begin
+  create type public.content_status as enum ('DRAFT', 'IN_REVIEW', 'APPROVED', 'PUBLISHED', 'UNPUBLISHED', 'ARCHIVED');
+exception when duplicate_object then null; end $$;
+
+-- table public.lessons (verbatim from 001)
+create table if not exists public.lessons (
+  id           uuid primary key default gen_random_uuid(),
+  module_id    uuid not null references public.course_modules (id) on delete cascade,
+  title        text not null,
+  description  text,
+  lesson_type  public.lesson_type not null default 'VIDEO',
+  video_url    text,
+  content      text,
+  resource_url text,
+  duration     integer check (duration is null or duration >= 0), -- minutes
+  order_number integer not null default 1 check (order_number <> 0),
+  is_published boolean not null default false,
+  created_at   timestamptz not null default now(),
+  updated_at   timestamptz not null default now(),
+  constraint uq_lesson_order unique (module_id, order_number)
+);
+create index if not exists idx_lessons_published on public.lessons (is_published) where is_published = true;
+
+-- table public.course_resources (verbatim from 010)
+create table if not exists public.course_resources (
+  id                uuid primary key default gen_random_uuid(),
+  course_id         uuid references public.courses(id) on delete cascade,
+  module_id         uuid references public.course_modules(id) on delete cascade,
+  lesson_id         uuid,
+  title             text not null,
+  description       text,
+  url               text,
+  storage_path      text,
+  source            text,
+  license           text,
+  resource_type     public.resource_type not null default 'ARTICLE',
+  is_external       boolean not null default true,
+  access_date       date default current_date,
+  attribution       text,
+  quality_score     numeric(3,2),
+  is_approved       boolean not null default false,
+  created_by        uuid references public.profiles(id) on delete set null,
+  created_at        timestamptz not null default now(),
+  updated_at        timestamptz not null default now(),
+  constraint chk_resource_location check (
+    (is_external = true and url is not null) or
+    (is_external = false and storage_path is not null) or
+    (url is not null or storage_path is not null)
+  )
+);
+create index if not exists idx_course_resources_course on public.course_resources (course_id);
+create index if not exists idx_course_resources_module on public.course_resources (module_id);
+create index if not exists idx_course_resources_lesson on public.course_resources (lesson_id);
+create index if not exists idx_course_resources_type on public.course_resources (resource_type);
+create index if not exists idx_course_resources_approved on public.course_resources (is_approved) where is_approved = true;
+
+-- table public.lesson_videos (verbatim from 010)
+create table if not exists public.lesson_videos (
+  id                uuid primary key default gen_random_uuid(),
+  lesson_id         uuid not null,
+  course_id         uuid references public.courses(id) on delete cascade,
+  module_id         uuid references public.course_modules(id) on delete cascade,
+  title             text not null,
+  script            text,
+  video_url         text,
+  storage_path      text,
+  duration          integer check (duration is null or duration > 0),
+  thumbnail_url     text,
+  captions_url      text,
+  transcript        text,
+  status            public.video_job_status not null default 'QUEUED',
+  provider          text,
+  provider_metadata jsonb default '{}'::jsonb,
+  voice             text,
+  language          text default 'en',
+  teaching_style    text,
+  visual_style      text,
+  error             text,
+  created_by        uuid references public.profiles(id) on delete set null,
+  created_at        timestamptz not null default now(),
+  updated_at        timestamptz not null default now()
+);
+create index if not exists idx_lesson_videos_lesson on public.lesson_videos (lesson_id);
+create index if not exists idx_lesson_videos_course on public.lesson_videos (course_id);
+create index if not exists idx_lesson_videos_status on public.lesson_videos (status);
+
+-- table public.lesson_practicals (verbatim from 010)
+create table if not exists public.lesson_practicals (
+  id                uuid primary key default gen_random_uuid(),
+  lesson_id         uuid not null,
+  course_id         uuid references public.courses(id) on delete cascade,
+  module_id         uuid references public.course_modules(id) on delete cascade,
+  title             text not null,
+  objective         text not null,
+  scenario          text,
+  instructions      text not null,
+  requirements      text,
+  expected_output   text,
+  difficulty        public.difficulty_level not null default 'BEGINNER',
+  estimated_time    integer check (estimated_time is null or estimated_time > 0),
+  submission_type   text,
+  evaluation_criteria jsonb default '[]'::jsonb,
+  status            public.content_status not null default 'DRAFT',
+  created_by        uuid references public.profiles(id) on delete set null,
+  created_at        timestamptz not null default now(),
+  updated_at        timestamptz not null default now()
+);
+create index if not exists idx_practicals_lesson on public.lesson_practicals (lesson_id);
+create index if not exists idx_practicals_course on public.lesson_practicals (course_id);
+
+-- table public.lesson_content (verbatim from 010, incl. pgvector guards)
+-- pgvector is preinstalled on Supabase cloud but absent from plain
+-- Postgres (e.g. embedded test databases). Install it first when
+-- available; when it is not, the embedding column is skipped and RAG
+-- degrades to keyword search (the "handled gracefully" intent).
+do $$
+begin
+  create extension if not exists vector;
+exception when others then
+  raise notice 'pgvector not available — lesson_content.embedding will be skipped';
+end $$;
+
+create table if not exists public.lesson_content (
+  id                uuid primary key default gen_random_uuid(),
+  lesson_id         uuid not null,
+  course_id         uuid not null references public.courses(id) on delete cascade,
+  module_id         uuid references public.course_modules(id) on delete cascade,
+  content_type      text not null default 'TEXT',
+  content           text not null,
+  chunk_index       integer not null default 0,
+  metadata          jsonb default '{}'::jsonb,
+  is_approved       boolean not null default false,
+  created_at        timestamptz not null default now()
+);
+
+do $$
+begin
+  if exists (select 1 from pg_extension where extname = 'vector') then
+    alter table public.lesson_content add column if not exists embedding vector;
+  else
+    raise notice 'pgvector not available — lesson_content.embedding skipped';
+  end if;
+exception when others then
+  raise notice 'lesson_content.embedding skipped: %', SQLERRM;
+end $$;
+
+create index if not exists idx_lesson_content_course on public.lesson_content (course_id);
+create index if not exists idx_lesson_content_lesson on public.lesson_content (lesson_id);
+create index if not exists idx_lesson_content_approved on public.lesson_content (is_approved) where is_approved = true;
+
+-- -----------------------------------------------------------------
+
+
+-- =====================================================================
+-- PART B. MIGRATION 014 CORE (byte-identical to supabase/migrations/20260910000014_lms_curriculum_engine.sql)
 -- =====================================================================
 
 -- =====================================================================
@@ -2370,10 +2560,9 @@ grant execute on function public.admin_statistics() to service_role;
 -- =====================================================================
 
 -- ---------------------------------------------------------------------
--- Bookkeeping: record 014 as applied (same as scripts/migrate.js does)
+-- PART C. Bookkeeping: record 014 as applied (same as scripts/migrate.js does)
 -- ---------------------------------------------------------------------
 
--- Identical definition to scripts/migrate.js (name PK + executed_at).
 create table if not exists public._migrations (
   name        text primary key,
   executed_at timestamptz not null default now()
@@ -2386,10 +2575,12 @@ insert into public._migrations (name)
 values ('20260910000014_lms_curriculum_engine.sql')
 on conflict (name) do nothing;
 
--- Confirm: expect 8 (the new curriculum tables).
-select count(*) as curriculum_tables_present
-from information_schema.tables
-where table_schema = 'public'
-  and table_name in ('course_topics', 'lessons', 'lesson_contents',
-    'course_resources', 'lesson_videos', 'lesson_practicals',
-    'quiz_options', 'course_assessments');
+-- Confirm: expect base_tables = 5 AND curriculum_tables = 8.
+select
+  (select count(*) from information_schema.tables where table_schema = 'public'
+     and table_name in ('lessons', 'course_resources', 'lesson_videos',
+       'lesson_practicals', 'lesson_content')) as base_tables,
+  (select count(*) from information_schema.tables where table_schema = 'public'
+     and table_name in ('course_topics', 'lessons', 'lesson_contents',
+       'course_resources', 'lesson_videos', 'lesson_practicals',
+       'quiz_options', 'course_assessments')) as curriculum_tables;
