@@ -9,6 +9,7 @@ Wait for each step to finish ("Success") before pasting the next.
 | Step | File | Paste size | What it does | Expected result |
 |------|------|-----------|--------------|-----------------|
 | 0 | `precheck_014.sql` | ~1 KB | Read-only check: 014 tables exist? 015 applied? | 13 rows "present"; 015 "not applied" (first run) |
+| 0.5 | `apply_migration_014.sql` | ~100 KB | **Only if Step 0 showed MISSING tables.** Creates the 014 curriculum tables; backfills `lessons` from legacy `course_lessons` table (same IDs, source untouched) | Success; `curriculum_tables_present = 8`. Notices about skipped orphan rows are informational |
 | 1 | `apply_migration_015.sql` | ~7 KB | Adds `seed_key` + `metadata` columns, unique indexes, `_migrations` bookkeeping | Success; `seed_key_columns_added = 12` |
 | 2 | `science_courses_part1.sql` | ~360 KB | Biology seed part 1 of 4 (course, modules 1–3…) | Success, no errors |
 | 3 | `science_courses_part2.sql` | ~300 KB | Biology seed part 2 of 4 | Success, no errors |
