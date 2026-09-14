@@ -50,7 +50,9 @@ end $$;
 -- Payments table enhancements
 -- -----------------------------------------------------------------
 alter table public.payments add column if not exists currency text not null default 'NGN' check (currency in ('NGN', 'USD'));
-alter table public.payments add column if not exists coupon_id uuid references public.coupons(id) on delete set null;
+-- NOTE: payments.coupon_id is added AFTER the coupons table is created
+-- below (a REFERENCES clause cannot point at a table that does not exist
+-- yet — the previous ordering broke fresh `npm run migrate` runs).
 alter table public.payments add column if not exists discount_amount numeric(12,2) not null default 0 check (discount_amount >= 0);
 alter table public.payments add column if not exists original_amount numeric(12,2) check (original_amount is null or original_amount >= 0);
 -- For spec compatibility: payment_reference alias (we keep transaction_reference as canonical, but add payment_reference as generated or nullable)
@@ -67,7 +69,6 @@ update public.payments set original_amount = amount + discount_amount where orig
 create index if not exists idx_payments_payment_reference on public.payments (payment_reference);
 create index if not exists idx_payments_transaction_reference on public.payments (transaction_reference);
 create index if not exists idx_payments_created_at on public.payments (created_at desc);
-create index if not exists idx_payments_coupon_id on public.payments (coupon_id) where coupon_id is not null;
 create index if not exists idx_payments_currency on public.payments (currency);
 
 -- -----------------------------------------------------------------
@@ -103,6 +104,10 @@ create table if not exists public.coupons (
 create index if not exists idx_coupons_code on public.coupons (code);
 create index if not exists idx_coupons_is_active on public.coupons (is_active) where is_active = true;
 create index if not exists idx_coupons_valid_until on public.coupons (valid_until) where valid_until is not null;
+
+-- payments.coupon_id must be added AFTER coupons exists (see note above).
+alter table public.payments add column if not exists coupon_id uuid references public.coupons(id) on delete set null;
+create index if not exists idx_payments_coupon_id on public.payments (coupon_id) where coupon_id is not null;
 
 -- -----------------------------------------------------------------
 -- Coupon redemptions (audit trail)
@@ -359,7 +364,8 @@ create policy redemptions_admin_all on public.coupon_redemptions
   with check (public.is_admin());
 
 -- Grant execute
-revoke execute on function public.validate_coupon(uuid, uuid, uuid) from public, anon, authenticated;
+-- NOTE: no (uuid, uuid, uuid) overload of validate_coupon exists; the revoke
+-- below targets the real (text, uuid, uuid) signature only.
 revoke execute on function public.validate_coupon(text, uuid, uuid) from public, anon, authenticated;
 grant execute on function public.validate_coupon(text, uuid, uuid) to authenticated, service_role;
 

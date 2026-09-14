@@ -182,7 +182,7 @@ export const listModulesMobile = asyncHandler(async (req, res) => {
 // ------------------------------------------------------------------
 // GET /api/mobile/courses/:idOrSlug/modules/:moduleId/lessons — paginated lessons metadata
 // ------------------------------------------------------------------
-export const listLessonsMobile = asyncHandler(async (req, res) => {
+export const listTopicsMobile = asyncHandler(async (req, res) => {
   const { idOrSlug, moduleId } = req.params;
   const { page, limit, offset } = parseMobilePagination(req, 20, 50);
 
@@ -194,13 +194,84 @@ export const listLessonsMobile = asyncHandler(async (req, res) => {
   const { data: module } = await supabaseAdmin.from('course_modules').select('id, course_id').eq('id', moduleId).eq('course_id', course.id).maybeSingle();
   if (!module) throw ApiError.notFound('Module not found', 'MODULE_NOT_FOUND');
 
-  const { data: lessons, error, count } = await supabaseAdmin
+  const { data: topics, error, count } = await supabaseAdmin
+    .from('course_topics')
+    .select('id, module_id, title, description, order_number, is_published', { count: 'exact' })
+    .eq('module_id', moduleId)
+    .order('order_number', { ascending: true })
+    .range(offset, offset + limit - 1);
+
+  if (error) {
+    // Pre-migration-014 databases have no topics layer.
+    const msg = String(error.message || '').toLowerCase();
+    if (error.code === 'PGRST205' || error.code === '42P01' || msg.includes('does not exist') || msg.includes('schema cache')) {
+      return res.json({
+        success: true,
+        data: {
+          topics: [],
+          pagination: { page, limit, total: 0, total_pages: 0 },
+        },
+      });
+    }
+    throw ApiError.internal('Unable to load topics');
+  }
+
+  const visible = (topics || []).filter((t) => t.is_published !== false);
+  const { pagination } = buildCursorPagination({ data: visible, limit, offset, total: count });
+
+  res.json({
+    success: true,
+    data: {
+      topics: visible,
+      pagination: {
+        page,
+        limit,
+        total: count || 0,
+        total_pages: Math.ceil((count || 0) / limit),
+        ...pagination.pagination,
+      },
+    },
+  });
+});
+
+export const listLessonsMobile = asyncHandler(async (req, res) => {
+  const { idOrSlug, moduleId } = req.params;
+  const { topic_id } = req.query;
+  const { page, limit, offset } = parseMobilePagination(req, 20, 50);
+
+  let courseQuery = supabaseAnon.from('courses').select('id').eq('is_published', true);
+  courseQuery = isUuid(idOrSlug) ? courseQuery.eq('id', idOrSlug) : courseQuery.eq('slug', idOrSlug);
+  const { data: course } = await courseQuery.maybeSingle();
+  if (!course) throw ApiError.notFound('Course not found', 'COURSE_NOT_FOUND');
+
+  const { data: module } = await supabaseAdmin.from('course_modules').select('id, course_id').eq('id', moduleId).eq('course_id', course.id).maybeSingle();
+  if (!module) throw ApiError.notFound('Module not found', 'MODULE_NOT_FOUND');
+
+  let lessonsQuery = supabaseAdmin
     .from('lessons')
-    .select('id, module_id, title, description, lesson_type, duration, order_number, is_published, created_at', { count: 'exact' })
+    .select('id, module_id, topic_id, title, description, lesson_type, duration, order_number, is_published, is_free_preview, created_at', { count: 'exact' })
     .eq('module_id', moduleId)
     .eq('is_published', true)
     .order('order_number', { ascending: true })
     .range(offset, offset + limit - 1);
+
+  if (topic_id && isUuid(topic_id)) lessonsQuery = lessonsQuery.eq('topic_id', topic_id);
+
+  let { data: lessons, error, count } = await lessonsQuery;
+
+  if (error && (error.code === '42703' || String(error.message || '').toLowerCase().includes('topic_id'))) {
+    // Pre-migration-014 databases lack topic_id / is_free_preview.
+    const retry = await supabaseAdmin
+      .from('lessons')
+      .select('id, module_id, title, description, lesson_type, duration, order_number, is_published, created_at', { count: 'exact' })
+      .eq('module_id', moduleId)
+      .eq('is_published', true)
+      .order('order_number', { ascending: true })
+      .range(offset, offset + limit - 1);
+    lessons = retry.data;
+    error = retry.error;
+    count = retry.count;
+  }
 
   if (error) throw ApiError.internal('Unable to load lessons');
 
@@ -227,12 +298,24 @@ export const listLessonsMobile = asyncHandler(async (req, res) => {
 export const getLessonMobile = asyncHandler(async (req, res) => {
   const { lessonId } = req.params;
 
-  const { data: lesson, error } = await supabaseAdmin
+  let { data: lesson, error } = await supabaseAdmin
     .from('lessons')
-    .select('id, module_id, title, description, lesson_type, duration, order_number, is_published')
+    .select('id, module_id, topic_id, title, description, lesson_type, duration, order_number, is_published, is_free_preview')
     .eq('id', lessonId)
     .eq('is_published', true)
     .maybeSingle();
+
+  if (error && (error.code === '42703' || String(error.message || '').toLowerCase().includes('topic_id'))) {
+    // Pre-migration-014 databases lack topic_id / is_free_preview.
+    const retry = await supabaseAdmin
+      .from('lessons')
+      .select('id, module_id, title, description, lesson_type, duration, order_number, is_published')
+      .eq('id', lessonId)
+      .eq('is_published', true)
+      .maybeSingle();
+    lesson = retry.data;
+    error = retry.error;
+  }
 
   if (error || !lesson) throw ApiError.notFound('Lesson not found', 'LESSON_NOT_FOUND');
 

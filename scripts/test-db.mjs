@@ -140,7 +140,7 @@ async function main() {
   });
   await client.connect();
 
-  console.log('\n[1/6] Installing schema + stubbing Supabase platform...');
+  console.log('\n[1/7] Installing schema + stubbing Supabase platform...');
   await client.query(SUPABASE_STUB_SQL);
   for (const file of readdirSync(MIGRATIONS_DIR).filter((f) => f.endsWith('.sql')).sort()) {
     await client.query(readFileSync(join(MIGRATIONS_DIR, file), 'utf8'));
@@ -148,7 +148,7 @@ async function main() {
   }
 
   // ---------------- registration trigger ----------------
-  console.log('\n[2/6] Registration trigger & welcome notification');
+  console.log('\n[2/7] Registration trigger & welcome notification');
   const { rows: [studentAuth] } = await client.query(
     `insert into auth.users (email, raw_user_meta_data)
      values ('student1@example.com', '{"full_name":"Ada Student","phone":"+2348000000001"}') returning id`
@@ -189,7 +189,7 @@ async function main() {
   const { rows: [course] } = await client.query(`select * from courses where slug='video-editing-with-capcut'`);
 
   // ---------------- RLS isolation ----------------
-  console.log('\n[3/6] Row Level Security');
+  console.log('\n[3/7] Row Level Security');
   let r = await asUser(client, studentAuth.id, `select count(*)::int as n from profiles`);
   ok('student sees only own profile (RLS)', r.rows[0].n === 1);
 
@@ -206,7 +206,7 @@ async function main() {
   ok('unenrolled student sees 0 lesson rows via RLS', r.rows[0].n === 0);
 
   // ---------------- payment submission rules ----------------
-  console.log('\n[4/6] Manual payment flow');
+  console.log('\n[4/7] Manual payment flow');
   const payment = await asUser(client, studentAuth.id,
     `insert into payments (student_id, course_id, amount, transaction_reference, transaction_date)
      values ($1, $2, 5000, 'TRX-0001', '2026-09-10') returning *`,
@@ -261,7 +261,7 @@ async function main() {
   ok('owner can read own receipt row (RLS)', r.rows[0].n === 1);
 
   // ---------------- atomic approval ----------------
-  console.log('\n[5/6] Atomic APPROVE -> enrollment ACTIVE');
+  console.log('\n[5/7] Atomic APPROVE -> enrollment ACTIVE');
   const { rows: [approveRes] } = await client.query(
     `select approve_payment($1, $2) as r`, [payment.rows[0].id, admin.id]
   );
@@ -302,7 +302,7 @@ async function main() {
   ok('enrolled student sees lessons via RLS', r.rows[0].n === 1); // 1 seed lesson
 
   // ---------------- course completion -> certificate ----------------
-  console.log('\n[6/6] Completion, certificates, rejection, statistics');
+  console.log('\n[6/7] Completion, certificates, rejection, statistics');
   const { rows: seedLessons } = await client.query(
     `select l.id, m.course_id from lessons l join course_modules m on m.id=l.module_id where m.course_id=$1 and l.is_published`,
     [course.id]
@@ -381,6 +381,222 @@ async function main() {
     stats.s.approved_payments === 1 && stats.s.rejected_payments === 1 &&
     stats.s.pending_payments === 1 && stats.s.certificates_issued === 1 &&
     stats.s.completed_courses === 1);
+
+  // ---------------- curriculum engine (migration 014) ----------------
+  console.log('\n[7/7] Curriculum engine: topics, contents, quizzes, assignments, RPCs');
+
+  const { rows: [mod1] } = await client.query(
+    `select * from course_modules where course_id=$1 order by order_number limit 1`, [course.id]
+  );
+
+  // topics: integrity + ordering
+  const { rows: [topic1] } = await client.query(
+    `insert into course_topics (course_id, module_id, title, order_number, is_published)
+     values ($1, $2, 'Getting started', 1, true) returning *`,
+    [course.id, mod1.id]
+  );
+  ok('topic created under module', !!topic1 && topic1.published === true);
+  await expectError(
+    () => client.query(
+      `insert into course_topics (course_id, module_id, title) values ($1, $2, 'Bad link')`,
+      [excelCourse.id, mod1.id]
+    ),
+    'TOPIC_COURSE_MISMATCH',
+    'topic rejects module from another course'
+  );
+  const { rows: [topic2] } = await client.query(
+    `insert into course_topics (course_id, module_id, title, order_number, is_published)
+     values ($1, $2, 'Next steps', 2, true) returning *`,
+    [course.id, mod1.id]
+  );
+  await client.query(`select reorder_topics($1, $2)`, [mod1.id, [topic2.id, topic1.id]]);
+  const { rows: reordered } = await client.query(
+    `select id from course_topics where module_id=$1 order by order_number`, [mod1.id]
+  );
+  ok('reorder_topics swaps topic order', reordered[0].id === topic2.id && reordered[1].id === topic1.id);
+
+  // lessons: topic link, course denorm, flag mirror
+  const { rows: [lesson2] } = await client.query(
+    `insert into lessons (module_id, topic_id, title, lesson_type, content, order_number, is_published)
+     values ($1, $2, 'Your first edit', 'TEXT', 'Trim a clip.', 2, true) returning *`,
+    [mod1.id, topic1.id]
+  );
+  ok('lesson auto-fills course_id + published mirror',
+    lesson2.course_id === course.id && lesson2.published === true);
+  const { rows: [mod2] } = await client.query(
+    `select * from course_modules where course_id=$1 and id <> $2 order by order_number limit 1`,
+    [course.id, mod1.id]
+  );
+  const { rows: [otherTopic] } = await client.query(
+    `insert into course_topics (course_id, module_id, title, order_number)
+     values ($1, $2, 'Other module topic', 1) returning *`,
+    [course.id, mod2.id]
+  );
+  await expectError(
+    () => client.query(`update lessons set topic_id=$1 where id=$2`, [otherTopic.id, lesson2.id]),
+    'LESSON_TOPIC_MISMATCH',
+    'lesson rejects topic from another module'
+  );
+
+  // lesson contents: structured blocks + denorm
+  const { rows: [block] } = await client.query(
+    `insert into lesson_contents (lesson_id, block_type, title, body, order_number, is_published)
+     values ($1, 'THEORY', 'Trimming', 'Select the clip...', 1, true) returning *`,
+    [lesson2.id]
+  );
+  ok('lesson content denormalises course/module/topic',
+    block.course_id === course.id && block.module_id === mod1.id && block.topic_id === topic1.id);
+
+  // outline RPC: public, safe columns only
+  const { rows: [outline] } = await client.query(`select get_course_outline($1) as o`, [course.id]);
+  ok('get_course_outline returns modules + published lessons',
+    outline.o.curriculum_complete === true && outline.o.counts.lessons === 2);
+  ok('outline exposes no lesson bodies',
+    JSON.stringify(outline.o).includes('Trim a clip.') === false);
+
+  // compat views
+  r = await client.query(`select id, position, order_number from course_lessons where id=$1`, [lesson2.id]);
+  ok('course_lessons view mirrors lessons (position alias)', r.rows[0].position === r.rows[0].order_number);
+  r = await client.query(`select count(*)::int as n from student_progress where student_id=$1`, [student.id]);
+  ok('student_progress view exposes progress rows', r.rows[0].n === 1);
+
+  // quizzes: normalised options, stripped reads, server-side grading
+  const { rows: [quiz] } = await client.query(
+    `insert into quizzes (course_id, module_id, lesson_id, title, passing_score, status)
+     values ($1, $2, $3, 'Trimming quiz', 70, 'PUBLISHED') returning *`,
+    [course.id, mod1.id, lesson2.id]
+  );
+  const { rows: [question] } = await client.query(
+    `insert into quiz_questions (quiz_id, question, question_type, options, correct_answer)
+     values ($1, 'Which tool trims?', 'multiple_choice', '[]', '"Trim"') returning *`,
+    [quiz.id]
+  );
+  const { rows: [optA] } = await client.query(
+    `insert into quiz_options (question_id, option_text, is_correct, order_number)
+     values ($1, 'Trim', true, 1) returning *`, [question.id]
+  );
+  await client.query(
+    `insert into quiz_options (question_id, option_text, is_correct, order_number)
+     values ($1, 'Delete', false, 2)`, [question.id]
+  );
+  const { rows: [qAfter] } = await client.query(`select options from quiz_questions where id=$1`, [question.id]);
+  ok('options JSONB mirror carries no correctness flags',
+    JSON.stringify(qAfter.options).includes('is_correct') === false);
+
+  const { rows: [studentQuiz] } = await client.query(
+    `select get_quiz_for_student_for($1, $2) as q`, [quiz.id, student.id]
+  );
+  ok('student quiz strips answers',
+    studentQuiz.q.questions[0].correct_answer === undefined &&
+    studentQuiz.q.questions[0].options.length === 2);
+
+  const { rows: [pass] } = await client.query(
+    `select submit_quiz_attempt_for($1, $2, $3) as a`,
+    [quiz.id, student.id, JSON.stringify([{ question_id: question.id, answer: optA.id }])]
+  );
+  ok('correct answers pass the quiz', pass.a.passed === true && Number(pass.a.score) === 100);
+  const { rows: [fail] } = await client.query(
+    `select submit_quiz_attempt_for($1, $2, $3) as a`,
+    [quiz.id, student.id, JSON.stringify([{ question_id: question.id, answer: 'Delete' }])]
+  );
+  ok('wrong answers fail the quiz', fail.a.passed === false && Number(fail.a.score) === 0);
+
+  // assignments: student submits, cannot self-grade; admin grades
+  const { rows: [assignment] } = await client.query(
+    `insert into assignments (course_id, module_id, lesson_id, title, description, instructions, status, pass_score)
+     values ($1, $2, $3, 'Trim exercise', 'Trim.', 'Do it.', 'PUBLISHED', 50) returning *`,
+    [course.id, mod1.id, lesson2.id]
+  );
+  const sub = await asUser(client, studentAuth.id,
+    `insert into assignment_submissions (assignment_id, student_id, course_id, submission_text)
+     values ($1, $2, $3, 'My edit') returning *`,
+    [assignment.id, student.id, course.id]
+  );
+  ok('enrolled student can submit assignment', sub.rows[0].status === 'SUBMITTED');
+  await expectError(
+    () => asUser(client, studentAuth.id,
+      `update assignment_submissions set score=100 where id=$1`, [sub.rows[0].id]),
+    'FORBIDDEN',
+    'student cannot self-grade submission'
+  );
+  r = await asUser(client, adminAuth.id,
+    `update assignment_submissions set score=80, feedback='Good', status='GRADED', graded_by=$1, graded_at=now()
+     where id=$2 returning *`,
+    [admin.id, sub.rows[0].id]
+  );
+  ok('admin can grade submission', r.rows[0].status === 'GRADED' && Number(r.rows[0].score) === 80);
+
+  // second student: gated out of lessons + classroom, outline still public
+  const { rows: [student2Auth] } = await client.query(
+    `insert into auth.users (email, raw_user_meta_data)
+     values ('student2@example.com', '{"full_name":"Bola Fresh"}') returning id`
+  );
+  const { rows: [student2] } = await client.query(`select * from profiles where user_id=$1`, [student2Auth.id]);
+  r = await asUser(client, student2Auth.id, `select count(*)::int as n from lessons`);
+  ok('unenrolled student sees 0 lessons via RLS', r.rows[0].n === 0);
+  await expectError(
+    () => asUser(client, student2Auth.id, `select get_course_classroom($1)`, [course.id]),
+    'COURSE_ACCESS_DENIED',
+    'classroom RPC denies unenrolled student'
+  );
+  r = await asUser(client, student2Auth.id,
+    `select count(*)::int as n from assignment_submissions`);
+  ok('student cannot read other students submissions', r.rows[0].n === 0);
+
+  // assessments: live + enrolled-readable
+  const { rows: [assessment] } = await client.query(
+    `insert into course_assessments (course_id, title, assessment_type, status)
+     values ($1, 'CapCut final', 'FINAL_EXAM', 'PUBLISHED') returning *`, [course.id]
+  );
+  await client.query(`update quizzes set assessment_id=$1, scope='FINAL' where id=$2`, [assessment.id, quiz.id]);
+  r = await asUser(client, studentAuth.id,
+    `select count(*)::int as n from course_assessments where course_id=$1`, [course.id]);
+  ok('enrolled student reads live assessments', r.rows[0].n === 1);
+  r = await asUser(client, student2Auth.id,
+    `select count(*)::int as n from course_assessments where course_id=$1`, [course.id]);
+  ok('unenrolled student reads 0 assessments', r.rows[0].n === 0);
+
+  // publish cascade + completion check
+  const { rows: [unpub] } = await client.query(`select publish_course_content($1, false) as p`, [course.id]);
+  ok('unpublish cascade flips chain', unpub.p.published === false && unpub.p.lessons_updated >= 2);
+  const { rows: [outlineHidden] } = await client.query(`select get_course_outline($1) as o`, [course.id]);
+  ok('unpublished course has no public outline', outlineHidden.o === null);
+  await client.query(`select publish_course_content($1, true)`, [course.id]);
+  const { rows: [repub] } = await client.query(
+    `select is_published, published, archived from courses where id=$1`, [course.id]
+  );
+  ok('republish restores synced flags',
+    repub.is_published === true && repub.published === true && repub.archived === false);
+
+  // dual-flag sync: legacy writes propagate one way, canonical the other
+  await client.query(`update courses set published=false where id=$1`, [course.id]);
+  const { rows: [legacyOff] } = await client.query(
+    `select is_published, published from courses where id=$1`, [course.id]
+  );
+  ok('legacy published=false unpublishes canonically',
+    legacyOff.is_published === false && legacyOff.published === false);
+  await client.query(`update courses set is_published=true where id=$1`, [course.id]);
+  const { rows: [canonOn] } = await client.query(
+    `select is_published, published, archived from courses where id=$1`, [course.id]
+  );
+  ok('canonical is_published=true republishes mirror',
+    canonOn.is_published === true && canonOn.published === true && canonOn.archived === false);
+  await client.query(`update lessons set published=false where id=$1`, [lesson2.id]);
+  const { rows: [lessonOff] } = await client.query(
+    `select is_published, published from lessons where id=$1`, [lesson2.id]
+  );
+  ok('lesson flags stay mirrored both directions',
+    lessonOff.is_published === false && lessonOff.published === false);
+  await client.query(`update lessons set is_published=true where id=$1`, [lesson2.id]);
+
+  const { rows: [completion] } = await client.query(
+    `select check_course_completion($1, $2) as c`, [student.id, course.id]
+  );
+  ok('completion check reports COMPLETED enrollment', completion.c.completed === true);
+
+  const { rows: [stats2] } = await client.query(`select admin_statistics() as s`);
+  ok('admin_statistics includes curriculum keys',
+    stats2.s.total_topics >= 2 && stats2.s.live_quizzes >= 1 && stats2.s.live_assignments >= 1);
 
   console.log(`\nAll ${passed} database checks passed.`);
   await client.end();

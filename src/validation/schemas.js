@@ -109,6 +109,8 @@ export const createLessonSchema = z.object({
   resource_url: z.string().trim().max(1000).nullish(),
   duration: z.coerce.number().int().nonnegative().nullish(),
   order_number: z.coerce.number().int().positive().optional(),
+  topic_id: uuid.nullish(),
+  is_free_preview: z.coerce.boolean().default(false),
   is_published: z.coerce.boolean().default(false),
 });
 
@@ -247,3 +249,140 @@ export const updateSettingSchema = z.object({
 });
 
 export const uuidParams = z.object({ id: uuid });
+
+// ---------------- curriculum engine (topics → lessons → contents → assessments) ----------------
+export const createTopicSchema = z.object({
+  title: trimmed(2, 200),
+  description: z.string().trim().max(5000).nullish(),
+  summary: z.string().trim().max(5000).nullish(),
+  order_number: z.coerce.number().int().positive().optional(),
+  is_published: z.coerce.boolean().default(false),
+});
+
+export const updateTopicSchema = createTopicSchema.partial();
+
+export const createLessonContentSchema = z.object({
+  block_type: z.enum(['THEORY', 'TEXT', 'EXAMPLE', 'VIDEO', 'PDF', 'IMAGE', 'AUDIO', 'CODE', 'EMBED', 'SUMMARY', 'KEY_CONCEPTS', 'READING', 'DOWNLOAD']).default('THEORY'),
+  title: z.string().trim().max(300).nullish(),
+  body: z.string().trim().max(100000).nullish(),
+  url: z.string().trim().url('Enter a valid URL').max(2000).nullish(),
+  storage_path: z.string().trim().max(1000).nullish(),
+  duration_seconds: z.coerce.number().int().nonnegative().nullish(),
+  order_number: z.coerce.number().int().positive().optional(),
+  is_published: z.coerce.boolean().default(false),
+});
+
+export const updateLessonContentSchema = createLessonContentSchema.partial();
+
+export const createAssignmentSchema = z.object({
+  module_id: uuid.nullish(),
+  topic_id: uuid.nullish(),
+  lesson_id: uuid.nullish(),
+  title: trimmed(2, 300),
+  description: trimmed(2, 20000),
+  instructions: trimmed(2, 20000),
+  requirements: z.string().trim().max(20000).nullish(),
+  expected_output: z.string().trim().max(20000).nullish(),
+  difficulty: z.enum(['BEGINNER', 'INTERMEDIATE', 'ADVANCED']).default('BEGINNER'),
+  estimated_time: z.coerce.number().int().positive().nullish(),
+  submission_type: z.string().trim().max(120).nullish(),
+  evaluation_criteria: z.array(z.any()).nullish(),
+  max_score: z.coerce.number().positive().max(1000000).default(100),
+  pass_score: z.coerce.number().nonnegative().max(1000000).default(50),
+  due_date: z.coerce.date().nullish(),
+  status: z.enum(['DRAFT', 'IN_REVIEW', 'APPROVED', 'PUBLISHED', 'UNPUBLISHED', 'ARCHIVED']).default('DRAFT'),
+});
+
+export const updateAssignmentSchema = createAssignmentSchema.partial();
+
+export const createSubmissionSchema = z.object({
+  submission_text: z.string().trim().min(1).max(50000).optional(),
+});
+
+export const gradeSubmissionSchema = z.object({
+  score: z.coerce.number().min(0).max(100),
+  feedback: z.string().trim().max(20000).nullish(),
+  status: z.enum(['GRADED', 'RETURNED', 'UNDER_REVIEW']).default('GRADED'),
+});
+
+export const createQuizSchema = z.object({
+  module_id: uuid.nullish(),
+  topic_id: uuid.nullish(),
+  lesson_id: uuid.nullish(),
+  assessment_id: uuid.nullish(),
+  scope: z.enum(['LESSON', 'TOPIC', 'MODULE', 'FINAL']).default('LESSON'),
+  title: trimmed(2, 300),
+  description: z.string().trim().max(10000).nullish(),
+  passing_score: z.coerce.number().int().min(0).max(100).default(70),
+  time_limit: z.coerce.number().int().positive().nullish(),
+  order_number: z.coerce.number().int().positive().optional(),
+  status: z.enum(['DRAFT', 'IN_REVIEW', 'APPROVED', 'PUBLISHED', 'UNPUBLISHED', 'ARCHIVED']).default('DRAFT'),
+});
+
+export const updateQuizSchema = createQuizSchema.partial();
+
+export const createQuestionSchema = z.object({
+  question: trimmed(2, 10000),
+  question_type: z.enum(['multiple_choice', 'true_false', 'multiple_answer']).default('multiple_choice'),
+  options: z.array(z.any()).default([]),
+  correct_answer: z.any().nullish(),
+  explanation: z.string().trim().max(10000).nullish(),
+  difficulty: z.enum(['BEGINNER', 'INTERMEDIATE', 'ADVANCED']).default('BEGINNER'),
+  topic: z.string().trim().max(300).nullish(),
+  order_number: z.coerce.number().int().positive().optional(),
+});
+
+export const updateQuestionSchema = createQuestionSchema.partial();
+
+export const createOptionSchema = z.object({
+  option_text: trimmed(1, 5000),
+  is_correct: z.coerce.boolean().default(false),
+  order_number: z.coerce.number().int().positive().optional(),
+  explanation: z.string().trim().max(10000).nullish(),
+});
+
+export const updateOptionSchema = createOptionSchema.partial();
+
+export const submitQuizAttemptSchema = z.object({
+  answers: z.array(z.object({
+    question_id: uuid,
+    answer: z.any(),
+  })).min(1, 'At least one answer is required').max(500),
+  started_at: z.coerce.date().optional(),
+});
+
+export const createAssessmentSchema = z.object({
+  module_id: uuid.nullish(),
+  title: trimmed(2, 300),
+  description: z.string().trim().max(10000).nullish(),
+  instructions: z.string().trim().max(20000).nullish(),
+  assessment_type: z.enum(['FINAL_EXAM', 'MODULE_EXAM', 'PLACEMENT', 'PRACTICE']).default('FINAL_EXAM'),
+  passing_score: z.coerce.number().int().min(0).max(100).default(70),
+  time_limit_minutes: z.coerce.number().int().positive().nullish(),
+  max_attempts: z.coerce.number().int().positive().nullish(),
+  order_number: z.coerce.number().int().positive().optional(),
+  status: z.enum(['DRAFT', 'IN_REVIEW', 'APPROVED', 'PUBLISHED', 'UNPUBLISHED', 'ARCHIVED']).default('DRAFT'),
+});
+
+export const updateAssessmentSchema = createAssessmentSchema.partial();
+
+export const publishCourseSchema = z.object({
+  publish: z.coerce.boolean().default(true),
+  include_quizzes: z.coerce.boolean().default(false),
+  include_assignments: z.coerce.boolean().default(false),
+  include_assessments: z.coerce.boolean().default(false),
+});
+
+export const completionRulesSchema = z.object({
+  required_lesson_completion_percentage: z.coerce.number().int().min(0).max(100).default(80),
+  minimum_quiz_score: z.coerce.number().int().min(0).max(100).nullish(),
+  assignment_required: z.coerce.boolean().default(false),
+  final_project_required: z.coerce.boolean().default(false),
+  final_assessment_score: z.coerce.number().int().min(0).max(100).nullish(),
+});
+
+export const updateCourseMetaSchema = z.object({
+  learning_outcomes: z.array(z.string().trim().max(500)).max(50).optional(),
+  prerequisites: z.array(z.string().trim().max(500)).max(50).optional(),
+  learning_objectives: z.array(z.string().trim().max(500)).max(50).optional(),
+});

@@ -68,7 +68,7 @@ export const adminListCourses = asyncHandler(async (req, res) => {
   });
 });
 
-/** GET /api/admin/courses/:idOrSlug — full course incl. modules+lessons */
+/** GET /api/admin/courses/:idOrSlug — full course incl. modules, topics, lessons, contents */
 export const adminGetCourse = asyncHandler(async (req, res) => {
   const course = await loadCourse(req.params.idOrSlug);
 
@@ -80,6 +80,8 @@ export const adminGetCourse = asyncHandler(async (req, res) => {
 
   const moduleIds = (modules || []).map((m) => m.id);
   let lessons = [];
+  let topics = [];
+  let contents = [];
   if (moduleIds.length > 0) {
     const { data } = await supabaseAdmin
       .from('lessons')
@@ -87,7 +89,31 @@ export const adminGetCourse = asyncHandler(async (req, res) => {
       .in('module_id', moduleIds)
       .order('order_number', { ascending: true });
     lessons = data || [];
+
+    // Topics + contents degrade gracefully on pre-migration-014 databases.
+    const { data: topicRows, error: topicErr } = await supabaseAdmin
+      .from('course_topics')
+      .select('*')
+      .in('module_id', moduleIds)
+      .order('order_number', { ascending: true });
+    if (!topicErr) topics = topicRows || [];
+
+    const lessonIds = lessons.map((l) => l.id);
+    if (lessonIds.length > 0) {
+      const { data: contentRows, error: contentErr } = await supabaseAdmin
+        .from('lesson_contents')
+        .select('*')
+        .in('lesson_id', lessonIds)
+        .order('order_number', { ascending: true });
+      if (!contentErr) contents = contentRows || [];
+    }
   }
+
+  const [{ data: quizzes }, { data: assignments }, { data: assessments }] = await Promise.all([
+    supabaseAdmin.from('quizzes').select('id, title, scope, status, lesson_id, module_id').eq('course_id', course.id),
+    supabaseAdmin.from('assignments').select('id, title, status, lesson_id, module_id').eq('course_id', course.id),
+    supabaseAdmin.from('course_assessments').select('id, title, assessment_type, status').eq('course_id', course.id),
+  ]);
 
   res.json({
     success: true,
@@ -96,8 +122,14 @@ export const adminGetCourse = asyncHandler(async (req, res) => {
         ...course,
         modules: (modules || []).map((m) => ({
           ...m,
-          lessons: lessons.filter((l) => l.module_id === m.id),
+          topics: topics.filter((t) => t.module_id === m.id),
+          lessons: lessons
+            .filter((l) => l.module_id === m.id)
+            .map((l) => ({ ...l, contents: contents.filter((c) => c.lesson_id === l.id) })),
         })),
+        quizzes: quizzes || [],
+        assignments: assignments || [],
+        assessments: assessments || [],
       },
     },
   });

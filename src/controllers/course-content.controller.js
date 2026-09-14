@@ -66,7 +66,7 @@ export const getCourseContent = asyncHandler(async (req, res) => {
   const { page, limit, offset } = parsePagination(req, 50, 100);
 
   let modulesQuery = supabaseAdmin.from('course_modules').select('id, title, description, order_number', { count: 'exact' }).eq('course_id', course.id).order('order_number');
-  if (!includeSet || includeSet.has('modules') || includeSet.has('lessons')) {
+  if (!includeSet || includeSet.has('modules') || includeSet.has('lessons') || includeSet.has('topics')) {
     modulesQuery = modulesQuery.range(offset, offset + limit - 1);
   } else {
     modulesQuery = modulesQuery.limit(20);
@@ -75,9 +75,17 @@ export const getCourseContent = asyncHandler(async (req, res) => {
   const moduleIds = (modules || []).map(m => m.id);
 
   let lessons = [];
-  if (moduleIds.length > 0 && (!includeSet || includeSet.has('lessons'))) {
-    const { data } = await supabaseAdmin.from('lessons').select('id, module_id, title, description, lesson_type, duration, order_number, is_published').in('module_id', moduleIds).eq('is_published', true).order('order_number').limit(isMobile ? 50 : 100);
-    lessons = data || [];
+  let topics = [];
+  if (moduleIds.length > 0 && (!includeSet || includeSet.has('lessons') || includeSet.has('topics'))) {
+    const [lessonRes, topicRes] = await Promise.all([
+      supabaseAdmin.from('lessons').select('id, module_id, topic_id, title, description, lesson_type, duration, order_number, is_published, is_free_preview').in('module_id', moduleIds).eq('is_published', true).order('order_number').limit(isMobile ? 50 : 100),
+      (!includeSet || includeSet.has('topics') || includeSet.has('lessons'))
+        ? supabaseAdmin.from('course_topics').select('id, module_id, title, description, order_number, is_published').in('module_id', moduleIds).order('order_number').limit(100)
+        : { data: [], error: null },
+    ]);
+    lessons = lessonRes.data || [];
+    // course_topics degrades to [] on pre-migration-014 databases.
+    topics = topicRes.error ? [] : (topicRes.data || []);
   }
 
   let aiContent = [], resources = [], practicals = [], projects = [], quizzes = [], completionRules = null;
@@ -101,15 +109,25 @@ export const getCourseContent = asyncHandler(async (req, res) => {
     projects = data || [];
   }
   if (includeSet && (includeSet.has('quizzes') || includeSet.has('all'))) {
-    const { data } = await supabaseAdmin.from('quizzes').select('id, lesson_id, module_id, title, passing_score').eq('course_id', course.id).in('status', ['APPROVED', 'PUBLISHED']).limit(isMobile ? 10 : 50);
+    const { data } = await supabaseAdmin.from('quizzes').select('id, lesson_id, module_id, topic_id, title, scope, passing_score').eq('course_id', course.id).in('status', ['APPROVED', 'PUBLISHED']).limit(isMobile ? 10 : 50);
     quizzes = data || [];
+  }
+  let assessments = [];
+  if (includeSet && (includeSet.has('assessments') || includeSet.has('all'))) {
+    const { data, error } = await supabaseAdmin.from('course_assessments').select('id, module_id, title, description, assessment_type, passing_score, time_limit_minutes, max_attempts').eq('course_id', course.id).in('status', ['APPROVED', 'PUBLISHED']).limit(20);
+    assessments = error ? [] : (data || []);
   }
   if (includeSet && (includeSet.has('completion_rules') || includeSet.has('all'))) {
     const { data } = await supabaseAdmin.from('course_completion_rules').select('*').eq('course_id', course.id).maybeSingle();
     completionRules = data;
   }
 
-  const outline = (modules || []).map(m => ({ ...m, lessons: lessons.filter(l => l.module_id === m.id) }));
+  const outline = (modules || []).map(m => ({
+    ...m,
+    topics: topics.filter(t => t.module_id === m.id),
+    lessons: lessons.filter(l => l.module_id === m.id),
+  }));
+  const totalTopics = outline.reduce((n, m) => n + m.topics.length, 0);
 
   res.json({
     success: true,
@@ -118,14 +136,25 @@ export const getCourseContent = asyncHandler(async (req, res) => {
       has_access: hasAccess,
       modules: outline,
       total_lessons: lessons.length,
+      total_topics: totalTopics,
       modules_total: modulesTotal || modules.length,
       ...(aiContent.length > 0 ? { ai_content: aiContent } : {}),
       ...(resources.length > 0 ? { resources } : {}),
       ...(practicals.length > 0 ? { practicals } : {}),
       ...(projects.length > 0 ? { projects } : {}),
       ...(quizzes.length > 0 ? { quizzes } : {}),
+      ...(assessments.length > 0 ? { assessments } : {}),
       ...(completionRules ? { completion_rules: completionRules } : { completion_rules: { required_lesson_completion_percentage: 80, minimum_quiz_score: 70, assignment_required: false, final_project_required: false } }),
       curriculum_complete: outline.length > 0 && lessons.length > 0,
+      curriculum_status: {
+        complete: outline.length > 0 && lessons.length > 0,
+        modules_count: outline.length,
+        topics_count: totalTopics,
+        published_lessons_count: lessons.length,
+        message: outline.length > 0 && lessons.length > 0
+          ? `Curriculum ready — ${outline.length} module(s), ${lessons.length} lesson(s)`
+          : 'Curriculum incomplete — this course has no published lessons yet.',
+      },
       _meta: {
         mobile_optimized: true,
         pagination: modulesTotal > limit ? { total: modulesTotal, limit, has_more: modulesTotal > limit + offset } : null,
@@ -171,13 +200,13 @@ export const getLessonDetail = asyncHandler(async (req, res) => {
   let moduleId = null;
   let courseId = null;
 
-  const { data: lessonBackend } = await supabaseAdmin.from('lessons').select('id, module_id, title, description, lesson_type, content, video_url, resource_url, duration, is_published').eq('id', lessonId).maybeSingle();
+  const { data: lessonBackend } = await supabaseAdmin.from('lessons').select('id, module_id, topic_id, title, description, lesson_type, content, video_url, resource_url, duration, is_published').eq('id', lessonId).maybeSingle();
 
   if (lessonBackend) {
     lesson = lessonBackend;
     moduleId = lessonBackend.module_id;
     const { data: mod } = await supabaseAdmin.from('course_modules').select('course_id').eq('id', moduleId).maybeSingle();
-    courseId = mod?.course_id;
+    courseId = lessonBackend.course_id || mod?.course_id;
   } else {
     const { data: lessonFrontend } = await supabaseAdmin.from('course_lessons').select('id, module_id, course_id, title, description, content, video_url, duration, published, is_published').eq('id', lessonId).maybeSingle();
     if (lessonFrontend) {
@@ -204,7 +233,29 @@ export const getLessonDetail = asyncHandler(async (req, res) => {
   const { include } = req.query;
   const includeSet = include ? new Set(include.split(',').map(s => s.trim())) : new Set(['video', 'resources', 'practicals', 'quizzes']);
 
-  let aiContent = [], videos = [], resources = [], practicals = [], quizzes = [], quizQuestions = [], assignments = [], ragChunks = [];
+  let aiContent = [], videos = [], resources = [], practicals = [], quizzes = [], quizQuestions = [], assignments = [], ragChunks = [], contents = [], topic = null, mySubmissions = [];
+
+  if (includeSet.has('topic') || includeSet.has('all') || lesson.topic_id) {
+    if (lesson.topic_id) {
+      const { data, error } = await supabaseAdmin.from('course_topics').select('id, module_id, title, description, order_number').eq('id', lesson.topic_id).maybeSingle();
+      if (!error) topic = data || null;
+    }
+  }
+
+  if (includeSet.has('contents') || includeSet.has('all')) {
+    const { data, error } = await supabaseAdmin.from('lesson_contents').select('id, block_type, title, body, url, storage_path, duration_seconds, order_number').eq('lesson_id', lessonId).eq('is_published', true).order('order_number').limit(50);
+    if (!error) {
+      contents = await Promise.all((data || []).map(async c => {
+        if (c.storage_path && !/^https?:\/\//i.test(c.storage_path)) {
+          try {
+            const { data: signed } = await supabaseAdmin.storage.from('course-resources').createSignedUrl(c.storage_path, 3600);
+            return { ...c, signed_url: signed?.signedUrl || null, expires_in: 3600 };
+          } catch { return c; }
+        }
+        return c;
+      }));
+    }
+  }
 
   if (includeSet.has('ai_content') || includeSet.has('all')) {
     const { data } = await supabaseAdmin.from('ai_generated_content').select('id, content_type, content, version, status').eq('lesson_id', lessonId).in('status', ['APPROVED', 'PUBLISHED']).order('version', { ascending: false }).limit(5);
@@ -247,8 +298,13 @@ export const getLessonDetail = asyncHandler(async (req, res) => {
   }
 
   if (includeSet.has('assignments') || includeSet.has('all')) {
-    const { data } = await supabaseAdmin.from('assignments').select('id, title, description, difficulty, estimated_time').eq('lesson_id', lessonId).in('status', ['APPROVED', 'PUBLISHED']);
+    const { data } = await supabaseAdmin.from('assignments').select('id, title, description, difficulty, estimated_time, max_score, pass_score, due_date').eq('lesson_id', lessonId).in('status', ['APPROVED', 'PUBLISHED']);
     assignments = data || [];
+  }
+
+  if ((includeSet.has('submissions') || includeSet.has('all')) && assignments.length > 0 && req.profile?.role === 'student') {
+    const { data, error } = await supabaseAdmin.from('assignment_submissions').select('id, assignment_id, status, score, feedback, submitted_at').in('assignment_id', assignments.map(a => a.id)).eq('student_id', req.profile.id).order('submitted_at', { ascending: false });
+    if (!error) mySubmissions = data || [];
   }
 
   if (includeSet.has('rag') || includeSet.has('all')) {
@@ -262,25 +318,31 @@ export const getLessonDetail = asyncHandler(async (req, res) => {
       lesson,
       course_id: courseId,
       module_id: moduleId,
+      topic_id: lesson.topic_id || null,
+      ...(topic ? { topic } : {}),
       ...(aiContent.length > 0 ? { ai_content: aiContent } : {}),
+      ...(contents.length > 0 ? { contents } : {}),
       video: videos?.[0] || null,
       resources,
       practicals,
       quizzes,
       ...(quizQuestions.length > 0 ? { quiz_questions: quizQuestions } : {}),
       assignments,
+      ...(mySubmissions.length > 0 ? { my_submissions: mySubmissions } : {}),
       ...(ragChunks.length > 0 ? { rag_chunks: ragChunks } : {}),
       teaching_standard: {
         has_objectives: !!lesson.description,
-        has_examples: aiContent.some(c => c.content?.examples?.length > 0),
+        has_examples: aiContent.some(c => c.content?.examples?.length > 0) || contents.some(c => c.block_type === 'EXAMPLE'),
+        has_theory: contents.some(c => ['THEORY', 'TEXT'].includes(c.block_type)) || !!lesson.content,
         has_practical: practicals.length > 0,
         has_quiz: quizzes.length > 0,
+        has_assignment: assignments.length > 0,
         has_resources: resources.length > 0,
         has_video: !!videos?.[0],
       },
       _meta: {
         mobile_optimized: true,
-        hint: 'Use ?include=video,resources,practicals,quizzes,assignments,ai_content,rag to lazy load',
+        hint: 'Use ?include=video,resources,practicals,quizzes,assignments,contents,topic,submissions,ai_content,rag to lazy load',
       },
     },
   });

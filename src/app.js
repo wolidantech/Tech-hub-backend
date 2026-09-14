@@ -25,6 +25,8 @@ import occupationsRoutes from './routes/occupations.routes.js';
 import aiChatRoutes from './routes/ai-chat.routes.js';
 import mobileRoutes from './routes/mobile.routes.js';
 import mobileUploadsRoutes from './routes/mobile-uploads.routes.js';
+import classroomRoutes from './routes/classroom.routes.js';
+import adminCurriculumRoutes from './routes/admin-curriculum.routes.js';
 
 const app = express();
 
@@ -87,10 +89,12 @@ app.use('/api/dantech', aiChatRoutes); // /api/dantech/chat, /api/dantech/chat/s
 app.use('/api/mobile', mobileRoutes); // /api/mobile/courses, /api/mobile/courses/:id/modules, /api/mobile/lessons/:id/video (mobile-optimized pagination, field selection, lazy loading)
 app.use('/api/mobile/uploads', mobileUploadsRoutes); // /api/mobile/uploads/single, /init, /chunk, /session/:id (resumable, progress, retry, timeout handling)
 app.use('/api/learning', learningRoutes);
+app.use('/api/classroom', classroomRoutes); // unified classroom: outline, gated classroom, quizzes, assignments, assessments
 app.use('/api/certificates', certificatesRoutes);
 app.use('/api/notifications', notificationsRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/admin', adminContentRoutes); // /api/admin/content, /api/admin/resources (admin review pipeline)
+app.use('/api/admin', adminCurriculumRoutes); // /api/admin topics, contents, assignments, quizzes, assessments, publish
 app.use('/api/admin/subjects', subjectsRoutes); // admin subjects management re-uses same router with auth
 app.use('/api/public', publicRoutes);
 

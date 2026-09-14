@@ -19,6 +19,8 @@
     "storage:setup": "node scripts/setup-storage.js",
     "check": "node scripts/check.js",
     "check:catalog": "node scripts/check-catalog.js",
+    "check:classroom": "node scripts/check-classroom.js",
+    "validate:sql": "node scripts/validate-sql.mjs",
     "test": "npm run check && npm run test:gateway && npm run test:payments && npm run test:ai-content && npm run test:cv && npm run test:mobile",
     "test:gateway": "node scripts/test-gateway.mjs",
     "test:payments": "node scripts/test-payments.mjs",

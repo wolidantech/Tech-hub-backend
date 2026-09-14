@@ -133,6 +133,55 @@ export const getDiagnostics = asyncHandler(async (_req, res) => {
   const catalogStatus = publishedCourses > 0 ? 'PASS' : totalCourses > 0 ? 'FAIL_DRAFTS_ONLY' : 'FAIL_EMPTY';
   const adminStatus = totalAdmins > 0 ? 'PASS' : 'FAIL_NO_ADMIN';
 
+  // ---- curriculum health: why would a classroom be empty? ----
+  const { data: courses } = await supabaseAdmin
+    .from('courses')
+    .select('id, title, slug, is_published')
+    .order('created_at', { ascending: false })
+    .limit(100);
+
+  const { data: allModules } = await supabaseAdmin
+    .from('course_modules')
+    .select('id, course_id');
+  const moduleCourseIds = new Set((allModules || []).map((m) => m.course_id));
+  const { data: allLessons } = await supabaseAdmin
+    .from('lessons')
+    .select('id, module_id, is_published')
+    .limit(5000);
+  const lessonsByModule = new Map();
+  for (const l of allLessons || []) {
+    if (!lessonsByModule.has(l.module_id)) lessonsByModule.set(l.module_id, { total: 0, published: 0 });
+    const entry = lessonsByModule.get(l.module_id);
+    entry.total += 1;
+    if (l.is_published) entry.published += 1;
+  }
+
+  const emptyCourses = (courses || [])
+    .map((c) => {
+      const modules = (allModules || []).filter((m) => m.course_id === c.id);
+      const publishedLessons = modules.reduce(
+        (n, m) => n + (lessonsByModule.get(m.id)?.published || 0),
+        0
+      );
+      return {
+        id: c.id,
+        title: c.title,
+        slug: c.slug,
+        is_published: c.is_published,
+        modules_count: modules.length,
+        published_lessons_count: publishedLessons,
+        classroom_empty: modules.length === 0 || publishedLessons === 0,
+      };
+    })
+    .filter((c) => c.classroom_empty);
+
+  const curriculumStatus =
+    (courses || []).length === 0
+      ? 'FAIL_EMPTY'
+      : emptyCourses.length === 0
+        ? 'PASS'
+        : 'WARN_EMPTY_CLASSROOMS';
+
   res.json({
     success: true,
     data: {
@@ -161,6 +210,22 @@ export const getDiagnostics = asyncHandler(async (_req, res) => {
             ? `${totalAdmins} admin account(s) exist`
             : 'No admin account — signup creates student role only. Run supabase/seed/make_admin.sql with your email after registering',
         fix: adminStatus === 'PASS' ? null : 'Register on site first, then run supabase/seed/make_admin.sql with your email',
+      },
+      curriculum: {
+        status: curriculumStatus,
+        courses_checked: (courses || []).length,
+        empty_classrooms: emptyCourses.length,
+        courses_needing_curriculum: emptyCourses,
+        message:
+          curriculumStatus === 'PASS'
+            ? 'Every course has published lessons — classrooms can open.'
+            : curriculumStatus === 'FAIL_EMPTY'
+              ? 'No courses in database — nothing to teach yet.'
+              : `${emptyCourses.length} course(s) will show an EMPTY classroom (no modules or no published lessons). Build curriculum via /api/admin modules/lessons/topics or POST /api/admin/courses/:id/publish.`,
+        fix:
+          curriculumStatus === 'PASS'
+            ? null
+            : 'For each listed course: add modules → topics → lessons, publish them (POST /api/admin/courses/:slug/publish), then verify GET /api/classroom/:slug/outline shows curriculum_complete=true.',
       },
     },
   });
