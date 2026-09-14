@@ -1,0 +1,359 @@
+{
+  "slug": "biology",
+  "title": "Biology — Complete Secondary & Foundation Course",
+  "category": "Science",
+  "short_description": "A complete biology course from the characteristics of life to genetics, ecology, human and plant biology — with practicals, quizzes and a final examination.",
+  "description": "This is a complete, classroom-ready biology course for secondary, senior secondary and foundation-level students. It covers the full scheme of work: foundations of biology, cell biology, biological molecules, cell division, genetics, evolution, ecology, human biology, plant biology and practical biology, followed by structured revision and a final examination. Every lesson contains original WOLI DAN TECH HUB teaching material — theory, worked examples, key concepts and summaries — plus verified videos and open textbooks. Each module includes a hands-on practical activity, a written assignment, a quiz and a module examination. To complete the course and earn a certificate, students must finish at least 80% of lessons, keep a quiz average of 60% or above, pass every assignment and pass the final examination.",
+  "level": "Secondary / Senior Secondary / Foundation",
+  "difficulty": "BEGINNER",
+  "duration": "12 weeks",
+  "study_hours": 120,
+  "price": 5000,
+  "thumbnail": null,
+  "icon": "microscope",
+  "subcategory": "Life Sciences",
+  "prerequisites": [
+    "Basic English reading and writing",
+    "Primary-school mathematics (fractions, percentages, simple graphs)",
+    "No previous biology required — Module 1 starts from zero"
+  ],
+  "target_audience": [
+    "Junior and senior secondary school students",
+    "Students preparing for WAEC, NECO and JAMB biology",
+    "Foundation and pre-degree science students",
+    "Adult learners starting a science pathway"
+  ],
+  "learning_objectives": [
+    "Describe the characteristics of living things and levels of biological organisation",
+    "Explain cell structure, transport processes and cell division",
+    "Classify biological molecules and explain enzyme action",
+    "Solve Mendelian genetics problems including monohybrid crosses",
+    "Explain natural selection and the evidence for evolution",
+    "Analyse ecosystems, food chains, nutrient cycles and human impact",
+    "Describe the major human body systems and how they stay balanced",
+    "Explain photosynthesis, transport and reproduction in flowering plants",
+    "Carry out safe biology practicals including microscopy and food tests",
+    "Interpret biological data, graphs and examination questions accurately"
+  ],
+  "learning_outcomes": [
+    "Define and apply the seven characteristics of living organisms",
+    "Label plant and animal cells and state the function of each organelle",
+    "Test foods for starch, sugar, protein and fats and explain each test",
+    "Describe mitosis and meiosis and compare their outcomes",
+    "Use Punnett squares to predict genotypes and phenotypes",
+    "Explain how natural selection produces adaptation over generations",
+    "Construct food chains and pyramids and explain energy loss",
+    "Trace digestion, circulation and gaseous exchange in humans",
+    "Write the photosynthesis equation and explain limiting factors",
+    "Use a light microscope safely and calculate total magnification",
+    "Plan, record and evaluate a simple biological investigation",
+    "Score at least 60% in the final biology examination"
+  ],
+  "skills_gained": [
+    "Scientific observation and classification",
+    "Microscopy and biological drawing",
+    "Safe laboratory practice",
+    "Data handling: tables, graphs and magnification calculations",
+    "Genetic problem solving with Punnett squares",
+    "Experimental design and conclusion writing",
+    "Examination technique for science papers"
+  ],
+  "requirements": [
+    "A notebook or device for study notes",
+    "Pen, pencil and ruler for biological drawings",
+    "Access to the internet for videos and quizzes (low-bandwidth friendly)",
+    "For practicals: household-safe materials listed in each activity (no dangerous chemicals)"
+  ],
+  "instructor_name": "WOLI DAN TECH HUB Science Faculty",
+  "publish": true,
+  "completion_rules": {
+    "required_lesson_completion_percentage": 80,
+    "minimum_quiz_score": 60,
+    "assignment_required": true,
+    "final_project_required": false,
+    "final_assessment_score": 60
+  },
+  "final_exam": {
+    "key": "final",
+    "title": "Biology — Final Examination",
+    "description": "The final examination for the complete biology course. It tests every module: foundations, cells, molecules, division, genetics, evolution, ecology, human biology, plant biology and practical skills.",
+    "instructions": "Answer ALL 30 questions. Each question carries equal marks. You have 90 minutes and a maximum of 3 attempts — your best attempt counts. The pass mark is 60%. Read each question carefully, eliminate wrong options first, and check flagged questions before submitting. Calculators are NOT required; magnification and percentage questions use simple numbers.",
+    "passing_score": 60,
+    "time_limit_minutes": 90,
+    "max_attempts": 3,
+    "time_limit": 90,
+    "attempt_limit": 3,
+    "questions": [
+      {
+        "type": "multiple_choice",
+        "question": "A student observes that yeast produces bubbles in warm sugar water, but the same mixture with boiled yeast produces nothing. Which characteristic of living things does this BEST demonstrate?",
+        "options": ["Organisation into cells", "Metabolism (respiration releasing gas)", "Response to stimuli", "Growth and development"],
+        "correct": [1],
+        "explanation": "Live yeast respires anaerobically, fermenting sugar and releasing carbon dioxide (the bubbles). Boiled (dead) yeast cannot respire, so nothing happens — showing that metabolism is a property of living cells.",
+        "points": 1,
+        "topic": "Foundations"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Which sequence shows the correct order of biological organisation from simplest to most complex?",
+        "options": ["Organ → tissue → cell → system → organism", "Cell → tissue → organ → system → organism", "Tissue → cell → system → organ → organism", "Cell → organ → tissue → organism → system"],
+        "correct": [1],
+        "explanation": "Cells group into tissues, tissues into organs, organs into systems, and systems make up the organism.",
+        "points": 1,
+        "topic": "Foundations"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "A student uses a microscope with a x10 eyepiece and a x40 objective lens. The total magnification is:",
+        "options": ["x40", "x50", "x400", "x4000"],
+        "correct": [2],
+        "explanation": "Total magnification = eyepiece × objective = 10 × 40 = x400.",
+        "points": 1,
+        "topic": "Cell Biology"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Which organelle is correctly matched with its function?",
+        "options": ["Ribosome — packaging proteins for export", "Mitochondrion — releasing energy from glucose", "Chloroplast — controlling what enters the cell", "Nucleus — producing lipids for membranes"],
+        "correct": [1],
+        "explanation": "Mitochondria carry out aerobic respiration, releasing energy (ATP) from glucose. Packaging is the Golgi body, entry control is the cell membrane, and the nucleus stores genetic instructions.",
+        "points": 1,
+        "topic": "Cell Biology"
+      },
+      {
+        "type": "true_false",
+        "question": "True or False: Bacterial cells are prokaryotic because they lack a membrane-bound nucleus and membrane-bound organelles.",
+        "options": ["True", "False"],
+        "correct": [0],
+        "explanation": "True. Prokaryotic cells (bacteria) have DNA free in the cytoplasm and no membrane-bound organelles, unlike eukaryotic plant and animal cells.",
+        "points": 1,
+        "topic": "Cell Biology"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "A food sample stays brown with iodine solution but gives a purple colour with biuret solution. The sample contains:",
+        "options": ["Starch but no protein", "Protein but no starch", "Reducing sugar but no protein", "Starch and reducing sugar"],
+        "correct": [1],
+        "explanation": "Iodine stays brown-yellow when starch is absent, and biuret turns purple in the presence of protein. So the sample has protein but no starch.",
+        "points": 1,
+        "topic": "Biological Molecules"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Why does a high temperature (e.g. 80°C) permanently stop most human enzymes from working?",
+        "options": ["The substrate runs out", "The enzyme is denatured — its active site loses shape", "The enzyme dissolves completely", "The pH becomes neutral"],
+        "correct": [1],
+        "explanation": "Excess heat breaks the weak bonds holding the enzyme's shape, so the active site no longer fits the substrate. This denaturation is usually irreversible.",
+        "points": 1,
+        "topic": "Biological Molecules"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Which row correctly links each food to its main nutrient and test result?",
+        "options": ["Bread + iodine → blue-black; egg white + biuret → purple", "Bread + biuret → purple; oil + iodine → blue-black", "Glucose + iodine → blue-black; starch + Benedict's (heated) → brick red", "Egg white + iodine → blue-black; bread + biuret → purple"],
+        "correct": [0],
+        "explanation": "Bread is rich in starch (iodine → blue-black) and egg white is protein (biuret → purple). Benedict's tests reducing sugars, not starch.",
+        "points": 1,
+        "topic": "Biological Molecules"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "During which phase of mitosis do chromosomes line up along the cell equator?",
+        "options": ["Prophase", "Metaphase", "Anaphase", "Telophase"],
+        "correct": [1],
+        "explanation": "In metaphase, spindle fibres pull chromosomes into a single line at the equator before sister chromatids separate in anaphase.",
+        "points": 1,
+        "topic": "Cell Division"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "A human body cell (46 chromosomes) divides by meiosis. Each gamete produced will contain:",
+        "options": ["46 chromosomes, genetically identical to the parent", "23 chromosomes, genetically different due to crossing over and independent assortment", "92 chromosomes after DNA doubling", "23 pairs of chromosomes"],
+        "correct": [1],
+        "explanation": "Meiosis halves the chromosome number (46 → 23) and crossing over plus independent assortment make each gamete genetically unique.",
+        "points": 1,
+        "topic": "Cell Division"
+      },
+      {
+        "type": "true_false",
+        "question": "True or False: Mitosis produces two genetically identical diploid cells and is used for growth and repair, while meiosis produces gametes.",
+        "options": ["True", "False"],
+        "correct": [0],
+        "explanation": "True. Mitosis conserves chromosome number for growth/repair; meiosis halves it to form gametes for sexual reproduction.",
+        "points": 1,
+        "topic": "Cell Division"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "In pea plants, tall (T) is dominant over short (t). A cross between two heterozygous tall plants (Tt × Tt) is expected to produce short offspring with probability:",
+        "options": ["0", "1/4", "1/2", "3/4"],
+        "correct": [1],
+        "explanation": "The Punnett square gives genotypes TT, Tt, Tt, tt — only tt (1 out of 4) is short.",
+        "points": 1,
+        "topic": "Genetics"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "A woman who is a carrier for haemophilia (XHXh) has children with a normal man (XHY). What is the probability that a SON is affected?",
+        "options": ["0", "1/4", "1/2", "1"],
+        "correct": [2],
+        "explanation": "Sons get Y from the father and either XH or Xh from the mother, so half the sons (XhY) are affected. Sex-linked recessive traits show up more in males.",
+        "points": 1,
+        "topic": "Genetics"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Which statement BEST distinguishes genotype from phenotype?",
+        "options": ["Genotype is observable; phenotype is hidden", "Genotype is the allele combination; phenotype is the observable trait produced with the environment", "Genotype changes daily; phenotype is fixed at birth", "They mean exactly the same thing"],
+        "correct": [1],
+        "explanation": "Genotype (e.g. Tt) is the inherited allele pair; phenotype (e.g. tall) is the expressed trait resulting from genotype plus environment.",
+        "points": 1,
+        "topic": "Genetics"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Antibiotic-resistant bacteria become common in a hospital after years of antibiotic use. The BEST Darwinian explanation is:",
+        "options": ["The antibiotic created resistant mutants on purpose", "Resistant variants already present survived and reproduced while others died — natural selection", "Bacteria learned to eat the antibiotic", "All bacteria merged into one resistant super-cell"],
+        "correct": [1],
+        "explanation": "Variation already exists; the antibiotic is a selection pressure. Resistant cells survive and pass on their alleles, so resistance spreads — natural selection in action.",
+        "points": 1,
+        "topic": "Evolution"
+      },
+      {
+        "type": "multiple_answer",
+        "question": "Which of the following are lines of evidence for evolution? (Select ALL that apply)",
+        "options": ["Fossils showing gradual change over rock layers", "Homologous structures (e.g. pentadactyl limbs) with common ancestry", "Identical DNA in every species on Earth", "Observed natural selection such as pesticide resistance"],
+        "correct": [0, 1, 3],
+        "explanation": "Fossils, homologies (anatomical, developmental, molecular) and directly observed selection all support evolution. DNA is similar between related species but never identical across all species.",
+        "points": 2,
+        "topic": "Evolution"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Grass → grasshopper → frog → snake → hawk. If a pesticide accumulates at each feeding level, which organism will have the HIGHEST concentration?",
+        "options": ["Grass", "Grasshopper", "Snake", "Hawk"],
+        "correct": [3],
+        "explanation": "Biomagnification: persistent toxins concentrate up the food chain, so the top predator (hawk) carries the highest load.",
+        "points": 1,
+        "topic": "Ecology"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Only about 10% of energy passes from one trophic level to the next. The rest is mainly:",
+        "options": ["Stored permanently in bones", "Lost through respiration, movement, excretion and uneaten parts", "Reflected back to the Sun", "Converted to nitrogen gas"],
+        "correct": [1],
+        "explanation": "Most energy is used for life processes (respiration), lost as heat, or never eaten — which is why food chains rarely exceed 4–5 levels.",
+        "points": 1,
+        "topic": "Ecology"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Which pair of processes keeps atmospheric carbon dioxide cycling between organisms and the air?",
+        "options": ["Osmosis and diffusion", "Photosynthesis and respiration (plus combustion)", "Mitosis and meiosis", "Filtration and distillation"],
+        "correct": [1],
+        "explanation": "Photosynthesis removes CO2 while respiration and combustion return it — the core of the carbon cycle, balanced over time.",
+        "points": 1,
+        "topic": "Ecology"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Bile plays an important role in fat digestion because it:",
+        "options": ["Contains enzymes that digest fat to glycerol", "Emulsifies fats into tiny droplets, increasing surface area for lipase", "Makes the stomach strongly acidic", "Absorbs fatty acids into the blood directly"],
+        "correct": [1],
+        "explanation": "Bile has no enzymes; it emulsifies fat (physical digestion) and neutralises stomach acid, giving lipase huge surface area to work on.",
+        "points": 1,
+        "topic": "Human Biology"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Why is the left ventricle wall of the heart much thicker than the right ventricle wall?",
+        "options": ["It stores extra blood for emergencies", "It must pump blood all the way round the body at high pressure", "It receives blood from the lungs", "It prevents backflow into the atria"],
+        "correct": [1],
+        "explanation": "The left ventricle drives the systemic circulation (whole body), needing far more pressure than the right ventricle's short trip to the lungs.",
+        "points": 1,
+        "topic": "Human Biology"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Which adaptations make alveoli efficient at gas exchange? (best single answer)",
+        "options": ["Thick walls and dry surfaces", "Large total surface area, thin one-cell walls, moist lining and dense capillaries", "Muscular walls that pump air", "A waterproof coating that blocks germs"],
+        "correct": [1],
+        "explanation": "Millions of thin-walled, moist alveoli wrapped in capillaries give a huge surface for fast diffusion of O2 in and CO2 out.",
+        "points": 1,
+        "topic": "Human Biology"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "A potted plant is kept in the dark for 48 hours, then one leaf is covered with foil except a star shape, and the plant is placed in sunlight. After testing the leaf for starch, starch appears ONLY in the star. This proves that:",
+        "options": ["Chlorophyll is needed for photosynthesis", "Light is needed for photosynthesis", "Carbon dioxide is needed for photosynthesis", "Oxygen is released by leaves"],
+        "correct": [1],
+        "explanation": "Destarching removes prior starch. Only the part of the leaf that received light forms new starch, proving light is necessary for photosynthesis.",
+        "points": 1,
+        "topic": "Plant Biology"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Which row correctly states the transport tissues and what they carry?",
+        "options": ["Xylem carries sugars down; phloem carries water up", "Xylem carries water and minerals up; phloem carries sugars (translocation) both ways", "Xylem carries oxygen; phloem carries carbon dioxide", "Both xylem and phloem carry only water"],
+        "correct": [1],
+        "explanation": "Xylem vessels move water/minerals upward (transpiration pull); phloem sieve tubes translocate sugars from sources to sinks in any direction.",
+        "points": 1,
+        "topic": "Plant Biology"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "An onion cell viewed at x100 appears 40 mm wide in the drawing. The real cell width is approximately:",
+        "options": ["0.4 mm", "4 mm", "40 mm", "4000 mm"],
+        "correct": [0],
+        "explanation": "Real size = image size ÷ magnification = 40 mm ÷ 100 = 0.4 mm (400 micrometres — a realistic plant cell width).",
+        "points": 1,
+        "topic": "Practical Biology"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "A student heats Benedict's solution with a sample and gets a brick-red precipitate. The correct conclusion and safety note are:",
+        "options": ["Starch present; Benedict's can be tasted to confirm", "Protein present; heat with an open flame for speed", "A high concentration of reducing sugar is present; wear eye protection and point the tube away when heating", "No sugar present; the test failed"],
+        "correct": [2],
+        "explanation": "Brick-red with Benedict's (heated) means abundant reducing sugar. Safe practice: goggles on, and never point a heated tube at anyone.",
+        "points": 1,
+        "topic": "Practical Biology"
+      },
+      {
+        "type": "multiple_answer",
+        "question": "A student investigates how light intensity affects photosynthesis using pondweed bubbles per minute. Which features make this a fair, valid experiment? (Select ALL that apply)",
+        "options": ["Only the lamp distance changes; temperature, CO2 and pondweed amount stay constant", "Each distance is repeated and a mean is calculated", "The student counts bubbles for the same fixed time at each distance", "The student uses a different pondweed species at each distance for variety"],
+        "correct": [0, 1, 2],
+        "explanation": "Fair test = one independent variable (light), controlled variables, repeats with means, and fixed counting time. Changing species adds an uncontrolled variable.",
+        "points": 2,
+        "topic": "Experiments"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "In an osmosis experiment, a yam strip in concentrated salt solution loses mass while one in distilled water gains mass. The BEST explanation is:",
+        "options": ["Salt actively pumps water out of cells", "Water moves by osmosis from high to low water concentration across the partially permeable cell membranes", "The yam respires faster in salt", "Distilled water dissolves the cell walls"],
+        "correct": [1],
+        "explanation": "Osmosis moves water down its concentration gradient: out of cells into the salty solution (mass loss), and into cells from distilled water (mass gain, turgor).",
+        "points": 1,
+        "topic": "Cell Biology"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Sickle-cell anaemia persists in malaria regions because heterozygotes (HbAHbS) resist malaria while homozygotes suffer. This is an example of:",
+        "options": ["Artificial selection", "Balanced polymorphism maintained by heterozygote advantage", "Genetic drift in a small population", "A acquired characteristic passed to offspring"],
+        "correct": [1],
+        "explanation": "Heterozygote advantage keeps both alleles in the population: carriers survive malaria better than HbAHbA and avoid sickle-cell disease unlike HbSHbS.",
+        "points": 1,
+        "topic": "Genetics"
+      },
+      {
+        "type": "true_false",
+        "question": "True or False: In a pyramid of biomass for a typical grassland, the producer level is the widest because producers capture the ecosystem's energy input.",
+        "options": ["True", "False"],
+        "correct": [0],
+        "explanation": "True. Producers hold the most biomass since all ecosystem energy enters through them; each higher level keeps only ~10%.",
+        "points": 1,
+        "topic": "Ecology"
+      }
+    ]
+  }
+}

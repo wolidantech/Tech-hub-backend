@@ -1,0 +1,373 @@
+{
+  "key": "mod01",
+  "order": 1,
+  "title": "Foundations of Biology",
+  "description": "What biology studies, the characteristics that separate living things from non-living things, levels of organisation, and how scientists classify and identify organisms.",
+  "objectives": [
+    "Define biology and its main branches",
+    "List and apply the seven characteristics of living things",
+    "Order the levels of biological organisation",
+    "Classify organisms into the five kingdoms and use a simple identification key"
+  ],
+  "duration_text": "1 week",
+  "topics": [
+    {
+      "key": "top01",
+      "order": 1,
+      "title": "What Is Biology?",
+      "description": "The science of life: what biologists study, the characteristics of living things, and how life is organised from cells to ecosystems.",
+      "objectives": ["Define biology", "Apply the characteristics of life to real specimens"],
+      "lessons": [
+        {
+          "key": "les01",
+          "title": "The Science of Life",
+          "description": "What biology is, its major branches, and the seven characteristics shared by all living things.",
+          "duration": 35,
+          "objectives": [
+            "Define biology and name its major branches",
+            "List the seven characteristics of living things",
+            "Decide whether borderline cases (viruses, seeds, fire) are alive, with reasons"
+          ],
+          "introduction": "Biology is the scientific study of life — from a single bacterial cell to a whole rainforest. Before we study cells, genes and ecosystems, we must answer one question precisely: what does it mean to be alive?",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "Biology and its branches",
+              "body": "Biology comes from the Greek bios (life) and logos (study). It asks how living things are built, how they work, where they came from, and how they interact. Because life is so broad, biology splits into branches. Zoology studies animals; botany studies plants; microbiology studies organisms too small to see, such as bacteria; genetics studies inheritance; ecology studies how organisms relate to each other and their environment; anatomy studies body structures; and physiology studies how those structures function. Modern biology connects all of these: a doctor treating malaria uses microbiology (the Plasmodium parasite), ecology (mosquito breeding sites), genetics (drug resistance) and physiology (how the human body responds). Like all sciences, biology works through observation, hypotheses, controlled experiments and peer-reviewed evidence — not opinion. Throughout this course you will practise thinking like a biologist: observe carefully, measure where possible, and change your mind when the evidence demands it."
+            },
+            {
+              "block": "THEORY",
+              "title": "The seven characteristics of living things",
+              "body": "Biologists recognise seven characteristics shared by all known living things. A useful memory aid is MRS GREN: Movement (all living things can move — animals walk, plants turn leaves toward light, cells stream their cytoplasm); Respiration (releasing energy from food, aerobically or anaerobically); Sensitivity (detecting and responding to stimuli, such as a seedling bending toward light); Growth (permanent increase in size through cell division); Reproduction (producing offspring, sexually or asexually); Excretion (removing toxic waste products of metabolism, such as carbon dioxide and urea); and Nutrition (taking in and using food for energy and building materials). No single characteristic proves life — a car moves and uses fuel but does not grow, reproduce or excrete. An object is considered living only when it shows ALL seven. This strict rule is why viruses are usually called non-living: outside a host cell they show none of the seven, even though they carry genetic material."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: is a dry bean seed alive?",
+              "body": "Question: A dry bean seed shows no movement, no growth and no gas exchange. Is it alive? Answer step by step. Step 1 — List what we observe: the seed is dormant; metabolism is nearly stopped. Step 2 — Ask whether ALL seven characteristics are potentially present: given water, warmth and air, the seed germinates — it respires, grows, responds to gravity and light, and eventually reproduces. Its cells are organised and contain the full genetic programme. Step 3 — Conclude: the seed IS alive but dormant. Dormancy is a survival state with metabolism slowed almost to zero, not death. Contrast this with a boiled bean seed: its proteins are denatured and its cells destroyed, so it can never germinate — it is dead. Examination tip: always argue from evidence — state the observation, link it to a characteristic of life, then conclude."
+            },
+            {
+              "block": "VIDEO",
+              "title": "Watch: Characteristics of Life",
+              "url": "https://www.youtube.com/watch?v=cQPVXrV0GNA",
+              "body": "Watch 'Characteristics of Life' by the Amoeba Sisters (streamed from their official channel). As you watch, write one example from YOUR home or compound for each of the seven characteristics — for instance, the family goat for movement, or bean seedlings for growth."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Biology = the scientific study of life, built on evidence from observation and experiment.\nMRS GREN = Movement, Respiration, Sensitivity, Growth, Reproduction, Excretion, Nutrition.\nAll seven characteristics must be present (actually or potentially) for something to count as living.\nDormant is not dead: seeds and spores are alive with metabolism paused.\nViruses are borderline: genetic material without independent metabolism — usually classified non-living."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Biology studies life through its branches — zoology, botany, microbiology, genetics, ecology, anatomy and physiology — united by the scientific method. Living things show all seven MRS GREN characteristics; non-living things fail at least one. Judging borderline cases (seeds, viruses, fire) by evidence rather than feeling is your first skill as a biologist."
+            }
+          ],
+          "videos": [
+            {
+              "title": "Characteristics of Life",
+              "url": "https://www.youtube.com/watch?v=cQPVXrV0GNA",
+              "source": "Amoeba Sisters",
+              "license": "Standard YouTube License (official stream — no copy made)",
+              "attribution": "© Amoeba Sisters — streamed from the official channel https://www.youtube.com/@AmoebaSisters",
+              "description": "The seven characteristics of life explained with animations and everyday examples."
+            }
+          ],
+          "resources": [],
+          "key_points": ["MRS GREN lists the seven characteristics of life", "Evidence, not appearance, decides borderline cases", "Biology advances through testable, repeatable evidence"],
+          "references": ["OpenStax Biology 2e — Chapter 1, The Study of Life (themes and characteristics of living things)"]
+        },
+        {
+          "key": "les02",
+          "title": "Levels of Organisation",
+          "description": "How life builds up from atoms to ecosystems, and why each level has new properties.",
+          "duration": 30,
+          "objectives": [
+            "Order the levels of organisation from atom to ecosystem",
+            "Explain why new properties emerge at each level",
+            "Place familiar examples (blood, leaf, pond) at the correct level"
+          ],
+          "introduction": "A single atom of carbon is not alive — yet arranged with other atoms into cells, it becomes part of a living mango tree. Organisation is what turns chemistry into biology.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "From atoms to ecosystems",
+              "body": "Living things are organised in a hierarchy, and each level is built from the one below: atoms join into molecules (such as water, proteins and DNA); molecules assemble into organelles (tiny cell structures like the nucleus and mitochondria); organelles work inside cells, the basic units of life; similar cells group into tissues (muscle tissue, leaf epidermis); tissues form organs (heart, leaf, root); organs cooperate in organ systems (circulatory system, shoot system); systems make an organism (a goat, a maize plant); organisms of one species form a population; populations of different species sharing a habitat form a community; and the community plus its non-living environment (soil, water, air, sunlight) forms an ecosystem. Learn this chain in order: atom, molecule, organelle, cell, tissue, organ, system, organism, population, community, ecosystem."
+            },
+            {
+              "block": "THEORY",
+              "title": "Emergent properties",
+              "body": "Each level of organisation shows emergent properties — new behaviours that the parts alone do not have. A single nerve cell cannot feel pain, but billions wired together produce sensation. One water molecule is not wet; trillions together flow and dissolve. Emergence is why biologists study every level: you cannot fully explain a fever by staring at one white blood cell, nor predict a fishpond's harvest from one tilapia. Reduction (studying parts) and systems thinking (studying wholes) must work together. This idea returns throughout the course — for example, consciousness emerging from brain cells, or an epidemic emerging from individual infections."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: placing specimens at the right level",
+              "body": "Question: Place each item at its level — (a) blood, (b) a cassava leaf, (c) all the tilapia in a pond, (d) the pond with its water, mud and sunlight. Step 1 — Recall definitions: tissue = similar cells working together; organ = tissues working together; population = one species in an area; ecosystem = community + environment. Step 2 — Match: (a) blood is a tissue (red cells, white cells, platelets in plasma working together); (b) a leaf is an organ (epidermis, mesophyll, veins); (c) all tilapia of one pond are a population; (d) the pond with everything living and non-living is an ecosystem. Common examination trap: blood is a TISSUE, not an organ or system — memorise this."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Atom → molecule → organelle → cell → tissue → organ → system → organism → population → community → ecosystem.\nThe cell is the basic unit of life — the simplest level that shows ALL characteristics of life.\nEmergent properties appear at each new level and cannot be predicted from parts alone.\nBlood is a tissue; a leaf is an organ."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Life is a hierarchy from atoms to ecosystems. The cell is the lowest level that is fully alive, and every level above it gains emergent properties. Placing structures at the correct level is a favourite examination skill — practise with objects around you."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Order the eleven levels without hesitation", "Cells are the basic units of life", "Emergence explains why wholes exceed their parts"],
+          "references": ["OpenStax Biology 2e — Chapter 1, The Study of Life (levels of organisation)"]
+        }
+      ]
+    },
+    {
+      "key": "top02",
+      "order": 2,
+      "title": "Classification of Living Things",
+      "description": "Why biologists classify organisms, the five kingdoms, and how identification keys work.",
+      "objectives": ["Justify classification", "Assign organisms to kingdoms", "Use a dichotomous key"],
+      "lessons": [
+        {
+          "key": "les01",
+          "title": "The Five Kingdoms",
+          "description": "How millions of species are sorted into five great kingdoms, and where viruses fit.",
+          "duration": 35,
+          "objectives": [
+            "Explain why classification is necessary",
+            "State the features of the five kingdoms with two examples each",
+            "Explain why viruses fit in none of the kingdoms"
+          ],
+          "introduction": "Scientists have named about two million species, and millions more await discovery. Without a filing system, biology would be chaos — classification is that filing system.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "Why classify?",
+              "body": "Classification groups organisms by shared features so that knowledge transfers: learn how one mammal's heart works and you understand all mammals' hearts approximately. It reveals evolutionary relationships — lions and house cats share the order Carnivora because they share a recent ancestor. It also makes communication precise: the two-part scientific name (binomial nomenclature) gives every species exactly one global identity. Humans are Homo sapiens everywhere on Earth — no confusion from the thousands of local names. Names are written in italics (or underlined by hand), with the genus capitalised and the species lowercase: Mangifera indica (mango), Plasmodium falciparum (the malaria parasite)."
+            },
+            {
+              "block": "THEORY",
+              "title": "The five kingdoms",
+              "body": "The five-kingdom system sorts life by cell type, cell number and nutrition. (1) Monera (bacteria): prokaryotic, single-celled; some make food by photosynthesis or chemosynthesis, others absorb it — examples: Escherichia coli, Rhizobium in bean root nodules. (2) Protista: eukaryotic, mostly single-celled; plant-like (Euglena, diatoms), animal-like (Amoeba, Plasmodium) or fungus-like (slime moulds). (3) Fungi: eukaryotic, mostly multicellular; feed saprophytically by digesting dead matter externally — examples: mushroom, Rhizopus (bread mould), yeast. (4) Plantae: eukaryotic, multicellular, autotrophic (photosynthesis), with cell walls of cellulose — examples: maize, mango, mosses. (5) Animalia: eukaryotic, multicellular, heterotrophic (must eat), no cell walls, usually mobile — examples: goat, tilapia, earthworm, humans. Viruses belong to NO kingdom: they are particles of nucleic acid in protein, reproduce only inside host cells, and show no metabolism — the classic borderline case from Lesson 1."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: kingdom of bread mould",
+              "body": "Question: Bread left in a damp place grows grey-black fuzz with tiny round heads. Which kingdom, and why? Step 1 — Observe: fuzzy threads (hyphae) spreading over the bread, round spore heads (sporangia). Step 2 — Check kingdom features: the threads are eukaryotic cells without chlorophyll; it digests the bread externally and absorbs nutrients (saprophytic); it reproduces with spores. Step 3 — Conclude: Kingdom Fungi — specifically a mould like Rhizopus. It is NOT a plant (no photosynthesis, no true roots/stems/leaves) and NOT a bacterium (eukaryotic, visible threads). Examination tip: justify with at least two features, and always say what rules the alternatives OUT."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Classification transfers knowledge, reveals ancestry and gives each species one scientific name.\nBinomial names: Genus species — italic, genus capitalised (Homo sapiens).\nFive kingdoms: Monera, Protista, Fungi, Plantae, Animalia — separated by cell type, cell number and nutrition.\nViruses fit no kingdom: no cells, no independent metabolism."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "With millions of species, biology needs classification to stay organised and predictive. The five kingdoms divide life by cell structure and feeding, scientific names keep communication exact, and viruses remind us that nature does not always fit our boxes."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Five kingdoms and their distinguishing features", "Binomial nomenclature rules", "Viruses are acellular and kingdom-less"],
+          "references": ["OpenStax Biology 2e — Chapters 21–23 (viruses, prokaryotes and protists)"]
+        },
+        {
+          "key": "les02",
+          "title": "Identification Keys",
+          "description": "How biologists identify unknown specimens step by step using dichotomous keys.",
+          "duration": 30,
+          "objectives": [
+            "Explain how a dichotomous key works",
+            "Use a key to identify unknown specimens",
+            "Construct a simple key for four specimens"
+          ],
+          "introduction": "You find an insect you have never seen. Is it a pest, a pollinator, or harmless? A dichotomous key answers such questions with a chain of either-or choices.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "How dichotomous keys work",
+              "body": "A dichotomous key is a series of paired statements (a couplet) where exactly one fits your specimen; each answer sends you to the next couplet until only one identity remains. Good couplets use observable, unambiguous features — number of legs, presence of wings, leaf shape — never vague words like 'big' or 'pretty'. Keys exist for plants, insects, fish, animal tracks and even bacteria (using staining and biochemical tests). Following a key trains the same skill doctors use in diagnosis and mechanics use in fault-finding: eliminate possibilities systematically instead of guessing."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: keying out four insects",
+              "body": "Specimens: housefly, mosquito, butterfly, beetle. Key: 1a. Wings covered in tiny coloured scales → butterfly. 1b. Wings without scales → go to 2. 2a. Front wings hardened into covers (elytra) → beetle. 2b. Front wings membranous → go to 3. 3a. One pair of wings + halteres (balancing knobs) → housefly. 3b. One pair of wings, long legs, piercing mouthparts → mosquito. Now identify: your specimen has one pair of clear wings, long dangling legs and a needle-like mouth. Path: 1b → 2b → 3b = mosquito. Notice the discipline: at each step you commit to ONE branch based on OBSERVED features. If a specimen fits neither branch, the key does not cover it — report that honestly rather than forcing a wrong answer."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Dichotomous = branching in twos; each couplet offers exactly two contrasting choices.\nUse observable features (legs, wings, scales), not opinions (beautiful, scary).\nOne wrong turn gives a wrong identity — re-check each step when the answer looks odd.\nKeys identify only what they cover; out-of-key specimens must be reported as unknown."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Dichotomous keys turn identification into reliable step-by-step elimination. Master them and you gain a method used across biology, medicine and engineering — plus easy marks in practical examinations."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Couplets must be observable and mutually exclusive", "Trace every step; never skip ahead", "Unknown specimens stay unknown — never guess"],
+          "references": ["WOLI DAN TECH HUB original notes — identification keys worksheet (see assignment)"]
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "type": "BOOK",
+      "title": "OpenStax Biology 2e — full textbook (free PDF + web)",
+      "url": "https://openstax.org/details/books/biology-2e",
+      "description": "Module 1 reading: Chapter 1 (The Study of Life) for characteristics of life and levels of organisation; Chapters 21–23 for viruses, prokaryotes and protists. Download the free PDF from the publisher page.",
+      "source": "OpenStax, Rice University",
+      "license": "CC BY-NC-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "attribution": "Biology 2e by Mary Ann Clark, Matthew Douglas and Jung Choi (OpenStax, Rice University), licensed CC BY-NC-SA 4.0."
+    }
+  ],
+  "practical": {
+    "title": "Living or Non-Living? A Home Survey",
+    "objective": "Apply the seven characteristics of life to ten real objects and classify each as living, dormant, dead or never-alive.",
+    "scenario": "Your compound is a field site. You will survey it like an ecologist and record evidence for each characteristic.",
+    "instructions": "1. Choose 10 items: include at least one plant, one animal (observe without harming), one seed, one man-made object and one thing you are unsure about. 2. Draw a table with columns: Item | M | R | S | G | R | E | N | Verdict. 3. For each item, observe or recall evidence for every MRS GREN characteristic and tick or cross each column — you may research briefly (e.g. do banana plants reproduce?). 4. Give a verdict: LIVING (all seven, actually or potentially), DORMANT (alive, paused), DEAD (was alive, now none) or NEVER-ALIVE. 5. Write two sentences justifying your two hardest verdicts. SAFETY: do not touch unknown animals, sharp objects or stagnant water; wash hands afterwards.",
+    "requirements": "Notebook, pen, phone camera (optional, for evidence photos).",
+    "expected_output": "A completed 10-row table plus two written justifications (4–6 sentences total).",
+    "difficulty": "BEGINNER",
+    "estimated_time": 60,
+    "submission_type": "TEXT",
+    "evaluation_criteria": ["All 10 rows completed with honest ticks/crosses", "Correct verdicts with evidence (seeds dormant, fire never-alive)", "Justifications reference specific characteristics, not feelings"]
+  },
+  "assignment": {
+    "title": "Build a Key for Five Local Organisms",
+    "description": "Construct an original dichotomous key that identifies five organisms found in your area.",
+    "instructions": "1. Select FIVE different organisms you can observe (e.g. mango tree, housefly, earthworm, mushroom, tilapia from the market). 2. List at least six observable features for each. 3. Build a numbered dichotomous key (1a/1b, 2a/2b...) that separates all five — every branch must end in exactly one organism. 4. Test your key: give it to a friend or sibling with the five names hidden and record whether they identify all five correctly. 5. Submit the key plus a short paragraph on what you changed after testing. Minimum 300 words plus the key.",
+    "requirements": "Observations must be your own; keys copied from the internet score zero for originality.",
+    "expected_output": "A working 5-organism key and a test report paragraph.",
+    "difficulty": "BEGINNER",
+    "estimated_time": 90,
+    "submission_type": "TEXT",
+    "evaluation_criteria": ["Five distinct local organisms with real observable features", "Key is strictly dichotomous and identifies all five uniquely", "Test report shows honest testing and at least one improvement"],
+    "max_score": 100,
+    "pass_score": 50
+  },
+  "quiz": {
+    "title": "Module 1 Quiz — Foundations",
+    "description": "Quick check on the characteristics of life, levels of organisation and classification.",
+    "passing_score": 70,
+    "time_limit": 15,
+    "attempt_limit": 3,
+    "questions": [
+      {
+        "type": "multiple_choice",
+        "question": "Which set lists ONLY characteristics of living things?",
+        "options": ["Movement, respiration, sensitivity, growth, reproduction, excretion, nutrition", "Movement, hardness, colour, growth, weight, excretion, nutrition", "Respiration, photosynthesis, digestion, circulation, coordination, support, movement", "Growth, development, evolution, digestion, absorption, transport, coordination"],
+        "correct": [0],
+        "explanation": "MRS GREN is the complete set: Movement, Respiration, Sensitivity, Growth, Reproduction, Excretion, Nutrition. The other lists mix in non-characteristics (hardness, colour) or processes that are not universal (photosynthesis).",
+        "points": 1,
+        "topic": "Characteristics of life"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Fire moves, grows and releases energy. Why is it NOT alive?",
+        "options": ["It is too hot to touch", "It is not made of cells and shows no organisation, reproduction or excretion", "It has no colour", "It cannot be seen at night"],
+        "correct": [1],
+        "explanation": "Fire fails most MRS GREN tests: no cells, no true growth by cell division, no reproduction, no sensitivity or excretion. Resembling one or two characteristics is not enough.",
+        "points": 1,
+        "topic": "Characteristics of life"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Arrange these levels from simplest to most complex: population, cell, ecosystem, organ.",
+        "options": ["Cell, organ, population, ecosystem", "Cell, population, organ, ecosystem", "Organ, cell, ecosystem, population", "Ecosystem, population, organ, cell"],
+        "correct": [0],
+        "explanation": "Cells build organs; organisms of one species form populations; communities plus environment form ecosystems. So: cell → organ → population → ecosystem.",
+        "points": 1,
+        "topic": "Organisation"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Bread mould belongs to Kingdom Fungi because it:",
+        "options": ["Is green and photosynthesises", "Is a prokaryote that fixes nitrogen", "Is a eukaryotic saprophyte that digests food externally and absorbs it", "Moves around hunting smaller cells"],
+        "correct": [2],
+        "explanation": "Fungi are eukaryotic, non-photosynthetic decomposers: they secrete enzymes onto dead matter and absorb the digested nutrients. Bread mould (Rhizopus) is a classic example.",
+        "points": 1,
+        "topic": "Kingdoms"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "In a dichotomous key, couplet 4 reads: 4a. Has six legs → insect. 4b. Has eight legs → arachnid. A specimen has six legs and wings. The correct action is:",
+        "options": ["Choose 4a and record it as an insect", "Choose 4b because it has wings", "Skip to couplet 5", "Declare it unknown since wings are not mentioned"],
+        "correct": [0],
+        "explanation": "Follow the OBSERVED feature the couplet asks about (leg count = six → 4a). Extra features like wings do not change this step; they may matter in later couplets.",
+        "points": 1,
+        "topic": "Keys"
+      }
+    ]
+  },
+  "assessment": {
+    "key": "exam",
+    "title": "Module 1 Examination — Foundations of Biology",
+    "description": "End-of-module examination covering the science of life, organisation and classification.",
+    "instructions": "Answer ALL 6 questions in 25 minutes. Pass mark is 60%. This examination counts toward your final assessment gate, so take it seriously: no notes, one sitting, and review the lessons for any question you miss.",
+    "passing_score": 60,
+    "time_limit_minutes": 25,
+    "max_attempts": 3,
+    "time_limit": 25,
+    "attempt_limit": 2,
+    "questions": [
+      {
+        "type": "multiple_choice",
+        "question": "A student claims a moped is alive because it moves, uses fuel and produces exhaust. The strongest scientific rebuttal is:",
+        "options": ["Mopeds are too expensive to be alive", "The moped shows no cellular organisation, growth, reproduction, sensitivity or true excretion — it fails most MRS GREN tests", "Only green things are alive", "Mopeds do not breathe through lungs"],
+        "correct": [1],
+        "explanation": "Life requires ALL seven characteristics in an organised cellular system. Machines mimic movement and energy use but fail growth, reproduction, sensitivity and the rest.",
+        "points": 1,
+        "topic": "Characteristics of life"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Which level of organisation is the SMALLEST that displays all characteristics of life?",
+        "options": ["Atom", "Molecule", "Cell", "Tissue"],
+        "correct": [2],
+        "explanation": "The cell is the basic unit of life. Atoms and molecules show no metabolism or reproduction; tissues are already multicellular.",
+        "points": 1,
+        "topic": "Organisation"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "The scientific name of the mango is Mangifera indica. Which rule is correctly applied?",
+        "options": ["Both words capitalised and underlined twice", "Genus capitalised, species lowercase, italicised (or underlined once by hand)", "Species first, then genus, in bold", "Common name in brackets after the genus"],
+        "correct": [1],
+        "explanation": "Binomial nomenclature: Genus (capitalised) + species (lowercase), italic in print or underlined singly in handwriting.",
+        "points": 1,
+        "topic": "Classification"
+      },
+      {
+        "type": "true_false",
+        "question": "True or False: Mushrooms are plants because they grow in soil and do not move.",
+        "options": ["True", "False"],
+        "correct": [1],
+        "explanation": "False. Mushrooms are fungi: eukaryotic saprophytes without chlorophyll that digest dead matter externally. Plants are photosynthetic autotrophs.",
+        "points": 1,
+        "topic": "Kingdoms"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "A key ends with two branches: 7a. Fins present → fish. 7b. Fins absent → tetrapod. A tadpole keys out as a fish at this step. The best conclusion is:",
+        "options": ["Tadpoles are fish", "The key lacks a tadpole/larval branch — the specimen is out of the key's scope at this step", "All keys are useless", "Fins prove nothing"],
+        "correct": [1],
+        "explanation": "Keys only identify what they cover. A key written for adults misfires on larvae — the honest result is 'not covered by this key', a vital scientific habit.",
+        "points": 1,
+        "topic": "Keys"
+      },
+      {
+        "type": "multiple_answer",
+        "question": "Which features distinguish Kingdom Plantae from Kingdom Animalia? (Select ALL that apply)",
+        "options": ["Plants are autotrophic (photosynthetic); animals are heterotrophic", "Plant cells have cellulose walls; animal cells have none", "All plants are single-celled; all animals are multicellular", "Plants respond to the environment; animals never do"],
+        "correct": [0, 1],
+        "explanation": "Nutrition (autotroph vs heterotroph) and cell walls (present vs absent) are the core distinctions. Both kingdoms are multicellular eukaryotes and both respond to stimuli.",
+        "points": 2,
+        "topic": "Kingdoms"
+      }
+    ]
+  }
+}

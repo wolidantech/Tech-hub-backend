@@ -1,0 +1,362 @@
+{
+  "key": "mod11",
+  "order": 11,
+  "title": "Revision and Exam Technique",
+  "description": "High-yield review of the whole course plus the exam skills that convert knowledge into marks.",
+  "objectives": [
+    "Recall the highest-yield facts from every module",
+    "Answer command words precisely",
+    "Handle data, graph and timing pressure"
+  ],
+  "duration_text": "1 week",
+  "topics": [
+    {
+      "key": "top01",
+      "order": 1,
+      "title": "High-Yield Review",
+      "description": "The most-examined ideas from Modules 1–10, compressed and connected.",
+      "objectives": ["Retrieve core facts fast", "Link modules together"],
+      "lessons": [
+        {
+          "key": "les01",
+          "title": "Cells to Genetics Express",
+          "description": "One-pass review: life, cells, molecules, division and inheritance.",
+          "duration": 40,
+          "objectives": [
+            "State the MRS GREN set, cell trio and transport trio",
+            "Reproduce the food-test colours and enzyme curves",
+            "Solve a monohybrid and a sex-linked cross from scratch"
+          ],
+          "introduction": "Five modules, one lesson: the facts that earn half the marks in any biology paper. Retrieve each from memory BEFORE reading on.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "The non-negotiables (Modules 1–5)",
+              "body": "MODULE 1: MRS GREN (all seven for life); cell = smallest living unit; five kingdoms by cell type/number/nutrition. MODULE 2: plant trio (wall, chloroplasts, big vacuole); prokaryote = no nucleus; diffusion (down gradient), osmosis (water + membrane), active transport (ATP, uphill); I = M × A. MODULE 3: starch/glycogen/cellulose roles; condensation out, hydrolysis in; enzyme curves (temperature cliff, pH optimum, substrate plateau); food colours — iodine blue-black (starch), Benedict's brick-red (sugar), biuret purple (protein), emulsion milky (fat). MODULE 4: PMAT + cytokinesis → 2 identical diploid; meiosis → 4 unique haploid; homologues part in anaphase I; variation = crossing over + assortment + random fertilisation. MODULE 5: five-step crosses; 3:1 and 1:2:1; ABO genotypes; X-linked males show single copies; normal parents + affected child = recessive. If any line above feels fuzzy, re-open that module NOW — Module 12 assumes mastery."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: the chain question",
+              "body": "Question: 'Using cells, enzymes and genes, explain why a child with cystic fibrosis struggles to digest food.' (Chain across modules!) Step 1 — GENES (M5): the child is homozygous recessive for a faulty CFTR-channel allele. Step 2 — CELLS (M2): faulty channels trap chloride in cells; mucus dehydrates and thickens. Step 3 — ENZYMES (M3): thick mucus blocks pancreatic ducts, so lipase/trypsin never reach the gut — fats and proteins pass undigested. Step 4 — Conclude: one allele → broken transport → blocked enzymes → malnutrition. Examiners LOVE cross-module chains — practise building them: gene → protein → cell → system → symptom."
+            },
+            {
+              "block": "VIDEO",
+              "title": "Watch: Mega Genetics Review (again, actively)",
+              "url": "https://www.youtube.com/watch?v=jLmoJPxihjA",
+              "body": "Rewatch 'Mega Genetics Review' by the Amoeba Sisters (official channel stream) — this time PAUSE before every solution and solve on paper. Active rewatching beats passive rereading."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Retrieve before rereading: cover, recall, then check.\nColours, curves, ratios and equations must be WRITTEN from memory, not recognised.\nChain answers across modules: gene → protein → cell → system → symptom.\nRevisit fuzzy modules immediately — gaps compound."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Modules 1–5 compress to: life's seven signs, cells' structures and traffic, molecules' colours and curves, divisions' precision and shuffling, and inheritance's ratios. Own them cold."
+            }
+          ],
+          "videos": [
+            {
+              "title": "Mega Genetics Review: Mendelian and non-Mendelian Genetics",
+              "url": "https://www.youtube.com/watch?v=jLmoJPxihjA",
+              "source": "Amoeba Sisters",
+              "license": "Standard YouTube License (official stream — no copy made)",
+              "attribution": "© Amoeba Sisters — streamed from the official channel https://www.youtube.com/@AmoebaSisters",
+              "description": "Active-review pass: pause and solve every problem before the reveal."
+            }
+          ],
+          "resources": [],
+          "key_points": ["Memory-first revision", "Colours/curves/ratios written cold", "Cross-module chaining"],
+          "references": ["OpenStax Biology 2e — Chapters 1–13 (Modules 1–5 review)"]
+        },
+        {
+          "key": "les02",
+          "title": "Ecology to Practicals Express",
+          "description": "One-pass review: evolution, ecology, humans, plants and practical skills.",
+          "duration": 40,
+          "objectives": [
+            "Recite selection steps, cycles and circulation traces",
+            "Reproduce photosynthesis/respiration equations",
+            "State microscope drill and fair-test rules"
+          ],
+          "introduction": "The second half of the course, same deal: retrieve first, read second. Ten modules down — finish the sweep.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "The non-negotiables (Modules 6–10)",
+              "body": "MODULE 6: selection = variation + competition + survival + inheritance; populations evolve; homologous (same build) vs analogous (same job); speciation = isolation → divergence → sterility. MODULE 7: arrows = energy flow; 10% transfers (respiration first); carbon in by photosynthesis, out by respiration/decay/combustion; nitrogen via Rhizobium → Nitrosomonas/Nitrobacter → plants → decay → denitrifiers; eutrophication chain; relationships scored +/−. MODULE 8: gut order + enzymes (amylase/pepsin/trypsin/lipase, bile emulsifies); heart trace (right=pulmonary, left=systemic, left ventricle thickest); breathe in = ribs up, diaphragm flat; aerobic ~30 ATP vs anaerobic ~2 + debt; insulin down/glucagon up; reflex arc five stations. MODULE 9: photosynthesis equation + five leaf adaptations + limiting factors; xylem up (transpiration pull), phloem any direction; germination = water + oxygen + warmth (no light). MODULE 10: microscope drill (low→high, fine-only); drawing rules (large, pencil, no shade, ruled labels); safety (goggles, water baths, report all); design (one IV, repeats, controls)."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: the synoptic chain",
+              "body": "Question: 'Explain how deforestation can raise global temperatures AND reduce rainfall.' Step 1 — CARBON (M7): fewer trees = less CO2 absorbed + burning releases stored carbon → stronger greenhouse effect → warming. Step 2 — WATER (M9): fewer leaves = less TRANSPIRATION → less atmospheric moisture → fewer clouds → less rain downwind (the flying-rivers effect). Step 3 — FEEDBACK: drought kills more trees → cycle worsens. One question, three modules (ecology, plants, cycles) — synoptic answers name each link explicitly. Practise spotting which modules a question raids."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Second-half spine: selection steps, cycles, traces, equations, drills.\nSynoptic questions raid 2–3 modules — name every link.\nDeforestation links carbon AND water cycles — learn it as the model synoptic answer.\nTeach-back test: explain each line aloud simply."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Modules 6–10 compress to mechanisms you can recite: selection, cycles, traces, equations and drills. Link them synoptically and no question can ambush you."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Retrieve-then-read discipline", "Synoptic linking habit", "Teach-back as mastery test"],
+          "references": ["OpenStax Biology 2e — Chapters 18–44 selected (Modules 6–10 review)"]
+        }
+      ]
+    },
+    {
+      "key": "top02",
+      "order": 2,
+      "title": "Exam Technique",
+      "description": "Command words, marking logic, data questions and timing under pressure.",
+      "objectives": ["Decode command words", "Attack data questions systematically"],
+      "lessons": [
+        {
+          "key": "les01",
+          "title": "Command Words and Marking",
+          "description": "What STATE, DESCRIBE, EXPLAIN, EVALUATE and SUGGEST actually demand.",
+          "duration": 30,
+          "objectives": [
+            "Respond correctly to six command words",
+            "Write to the mark allocation (points = marks)",
+            "Avoid the five classic mark-losers"
+          ],
+          "introduction": "Students lose 20% of marks knowing the biology but missing the COMMAND. Technique is free marks — collect them.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "The six commands",
+              "body": "STATE/GIVE/NAME (1 mark each): bare facts, no explanation — 'Name the bond joining amino acids' → 'peptide bond.' Full stop. DESCRIBE: say WHAT happens (patterns, sequences) — no reasons. 'Describe the temperature curve' → 'rises to 37°C then falls steeply.' EXPLAIN: say WHY — mechanisms required. 'Explain the fall' → 'heat denatures the enzyme; the active site loses shape.' COMPARE: similarities AND differences, paired point-by-point (use 'both... whereas...' — one-sided answers halve marks). EVALUATE/DISCUSS: strengths + weaknesses + judgement with evidence. SUGGEST: apply knowledge to NEW situations — reason from first principles aloud; there is no memorised answer. MARK MATHS: 3 marks = 3 distinct points (number them); 'explain' chains need because-links; never contradict yourself (examiners mark wrong science even beside right science)."
+            },
+            {
+              "block": "THEORY",
+              "title": "Five classic mark-losers",
+              "body": "(1) VAGUE AGENTS — 'it goes up the plant' (WHAT goes? water? sugar? name it). (2) MISSING COMPARISONS — describing one side of a compare question. (3) UNITS ABSENT — numbers without mm/°C/min bleed marks. (4) CONTRADICTIONS — 'diffusion needs no energy because ATP drives it' scores ZERO for the point. (5) ANSWERING ANOTHER QUESTION — restating the question's data instead of explaining it. Bonus time rule: minutes ≈ marks × 1.2 — a 5-mark question gets ~6 minutes, then MOVE ON; unfinished easy marks beat perfected hard ones. Always attempt everything: blank = zero, attempt ≥ zero."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: describe vs explain",
+              "body": "Data: enzyme rate 10 (20°C), 25 (37°C), 2 (60°C). (a) DESCRIBE (2): 'Rate rises from 10 to 25 between 20–37°C, then falls sharply to 2 at 60°C.' — pattern + numbers, zero reasons. (b) EXPLAIN the fall from 37–60°C (2): 'Above the optimum, heat breaks the weak bonds holding the active site's tertiary shape (denaturation), so substrate no longer fits and few complexes form.' — mechanism + consequence. Notice: (a) with reasons wastes time; (b) without because-links scores 1 of 2. Match the command, count your points, stop."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "State = facts. Describe = what. Explain = why (because-links). Compare = both + whereas. Evaluate = pros + cons + judgement. Suggest = reason from principles.\nPoints = marks: number them. Never contradict. Units always.\nMinutes ≈ marks × 1.2; attempt everything."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Commands are contracts: deliver exactly what each demands, in as many points as marks allow, with units and agents named. Technique turns B biology into A results."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Six commands, six responses", "Mark maths discipline", "Five losers avoided"],
+          "references": ["WOLI DAN TECH HUB original — exam technique guide (WAEC/NECO/JAMB conventions)"]
+        },
+        {
+          "key": "les02",
+          "title": "Data Questions and Timing",
+          "description": "Tables, graphs and practical scenarios — a systematic attack plan plus paper strategy.",
+          "duration": 30,
+          "objectives": [
+            "Apply the READ-PLAN-ANSWER routine to data questions",
+            "Calculate percentages, means and rates correctly",
+            "Execute a full-paper timing plan"
+          ],
+          "introduction": "Data questions panic students who memorised notes but never practised thinking. A routine replaces panic — read, plan, answer, check.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "The data routine",
+              "body": "READ (1 min): read the STEM fully — underline the IV, DV and units; study EVERY table row and axis before touching questions. PLAN (30 s): note which module each sub-question raids; jot the 2–3 points each mark needs. ANSWER: calculations show FORMULA → SUBSTITUTION → ANSWER + UNITS (method marks survive arithmetic slips); % change = (change ÷ original) × 100; means exclude ANOMALIES (circle and note them — never silently delete); rates = quantity ÷ time. GRAPHS: axes (IV-X, DV-Y, units), 3/4-page scales, small precise plots, best-fit line/curve, title. CHECK (last 5 min of paper): units, contradictions, unanswered parts, candidate details. PAPER STRATEGY: first pass — all confident questions; second pass — hard ones with fresh eyes; never leave blanks; if stuck >3 min, mark and move."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: the full routine",
+              "body": "Table: light distance 10/20/30/40 cm → bubbles 42/24/11/6 per min. (a) Describe the trend (2): 'As distance increases from 10 to 40 cm, bubble rate falls steeply from 42 to 6 per minute — fastest drop between 10–20 cm.' (b) Explain using limiting factors (2): 'Greater distance lowers light intensity (limiting factor), slowing the light-dependent reactions, so less oxygen evolves per minute.' (c) Suggest why 10 cm might be anomalous-friendly (1): 'Lamp heat warms the tube — temperature confounds the light effect; a heat shield/water bath would control it.' Three sub-questions, three modules (M9 rate, M9 factors, M10 design) — the routine handles all."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "READ (IV/DV/units) → PLAN (modules, points) → ANSWER (formula-sub-answer-units) → CHECK.\n% change, anomaly-circling means, rate = quantity/time.\nTwo passes: confident first, hard second. Blanks forbidden.\nStuck >3 min: mark, move, return."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Data questions yield to routine: read precisely, plan by module, calculate with shown working, check at the end. Two passes and zero blanks maximise every paper."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Four-step routine", "Calculation presentation", "Two-pass paper strategy"],
+          "references": ["WOLI DAN TECH HUB original — data-question workbook (see practical)"]
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "type": "BOOK",
+      "title": "OpenStax Biology 2e — full textbook (free PDF + web)",
+      "url": "https://openstax.org/details/books/biology-2e",
+      "description": "Module 11 reading: revisit YOUR weakest chapters (use module-exam scores to choose). Download the free PDF from the publisher page.",
+      "source": "OpenStax, Rice University",
+      "license": "CC BY-NC-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "attribution": "Biology 2e by Mary Ann Clark, Matthew Douglas and Jung Choi (OpenStax, Rice University), licensed CC BY-NC-SA 4.0."
+    }
+  ],
+  "practical": {
+    "title": "Timed Drill — 20 Questions in 25 Minutes",
+    "objective": "Practise full exam pace: read, calculate, write and move on under time pressure.",
+    "scenario": "Use any 20 quiz/exam questions you previously missed (or the module quizzes below) as your drill paper.",
+    "instructions": "1. Collect 20 questions you got wrong before (or re-take Module 1–3 quizzes fresh). 2. Set a 25-minute timer, phone away, desk clear — exam conditions. 3. Answer in order; mark-and-move any question exceeding 90 seconds. 4. Mark harshly against the explanations (half-understood = wrong). 5. Log every miss in three columns: question | correct concept | WHY I missed it (knowledge/technique/panic). 6. Re-study the top 3 miss-reasons for 30 minutes, then re-attempt those questions untimed. SAFETY: none — but sleep properly; cramming past midnight destroys recall.",
+    "requirements": "Timer, quiet space, notebook miss-log.",
+    "expected_output": "Score + miss-log table + 30-minute repair notes on top 3 reasons.",
+    "difficulty": "INTERMEDIATE",
+    "estimated_time": 60,
+    "submission_type": "TEXT",
+    "evaluation_criteria": ["Genuine timed conditions described honestly", "Miss-log categorises every miss by reason", "Repair notes show the corrected concepts in own words"]
+  },
+  "assignment": {
+    "title": "Weakness Clinic Report",
+    "description": "Diagnose your three weakest areas from module-exam history, re-study them, and prove the gains.",
+    "instructions": "1. List your scores on all module quizzes/exams taken so far (honest numbers). 2. Identify your THREE weakest topics (lowest scores or slowest answers). 3. For each: state the topic, quote one question you missed with YOUR wrong answer, explain the correct concept in your own words (100+ words each), and re-take that module's quiz — record old vs new score. 4. Build a 7-day revision timetable (topics × days × minutes) targeting the weaknesses first. 5. Submit scores table + three repairs + timetable (450–550 words plus tables).",
+    "requirements": "Real scores from your attempts; invented gains are obvious and score zero.",
+    "expected_output": "Score history + 3 concept repairs with re-take evidence + 7-day timetable.",
+    "difficulty": "INTERMEDIATE",
+    "estimated_time": 150,
+    "submission_type": "TEXT",
+    "evaluation_criteria": ["Honest score history with correctly identified weakest three", "Each repair explains the concept accurately in own words with re-take evidence", "Timetable is specific, weakness-first and realistic"],
+    "max_score": 100,
+    "pass_score": 50
+  },
+  "quiz": {
+    "title": "Module 11 Quiz — Mixed Review 1",
+    "description": "Mixed questions across Modules 1–5.",
+    "passing_score": 70,
+    "time_limit": 15,
+    "attempt_limit": 3,
+    "questions": [
+      {
+        "type": "multiple_choice",
+        "question": "Which is found in plant cells but not animal cells?",
+        "options": ["Ribosome", "Large permanent vacuole", "Mitochondrion", "Cell membrane"],
+        "correct": [1],
+        "explanation": "The large permanent vacuole (with wall and chloroplasts) is plant-only. The rest occur in both.",
+        "points": 1,
+        "topic": "Review"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Biuret solution turns purple in the presence of:",
+        "options": ["Starch", "Reducing sugar", "Protein", "Vitamin C"],
+        "correct": [2],
+        "explanation": "Purple/violet with biuret = protein. (Starch: iodine blue-black. Sugar: Benedict's brick-red.)",
+        "points": 1,
+        "topic": "Review"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Sister chromatids separate during:",
+        "options": ["Prophase", "Metaphase", "Anaphase", "Interphase"],
+        "correct": [2],
+        "explanation": "Anaphase (mitosis and meiosis II). In meiosis I, whole homologues separate instead.",
+        "points": 1,
+        "topic": "Review"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "A couple are both carriers (Aa) for a recessive condition. The probability of an affected child is:",
+        "options": ["1/2", "1/4", "3/4", "0"],
+        "correct": [1],
+        "explanation": "Aa × Aa gives AA, Aa, Aa, aa — 1 in 4 affected (aa).",
+        "points": 1,
+        "topic": "Review"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "'Explain' as a command word requires you to:",
+        "options": ["List facts with no reasons", "Give mechanisms and reasons (because-links)", "Draw a diagram only", "Repeat the question"],
+        "correct": [1],
+        "explanation": "Explain = WHY. Describe = WHAT. State = bare facts. Match the command to earn full marks.",
+        "points": 1,
+        "topic": "Technique"
+      }
+    ]
+  },
+  "assessment": {
+    "key": "exam",
+    "title": "Module 11 Examination — Mixed Review",
+    "description": "Mixed examination across Modules 6–10 plus technique.",
+    "instructions": "Answer ALL 6 questions in 25 minutes. Pass mark is 60%. Counts toward your final assessment gate.",
+    "passing_score": 60,
+    "time_limit_minutes": 25,
+    "max_attempts": 3,
+    "time_limit": 25,
+    "attempt_limit": 2,
+    "questions": [
+      {
+        "type": "multiple_choice",
+        "question": "Populations evolve by natural selection when there is:",
+        "options": ["No variation and no competition", "Variation, competition, differential survival and inheritance", "Only mutation with no selection", "Only migration"],
+        "correct": [1],
+        "explanation": "All four ingredients are required; remove any and allele frequencies cannot shift adaptively.",
+        "points": 1,
+        "topic": "Review"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "The nitrogen-fixing bacterium in bean root nodules is:",
+        "options": ["Nitrobacter", "Rhizobium", "Pseudomonas", "E. coli"],
+        "correct": [1],
+        "explanation": "Rhizobium fixes N2 in legume nodules (mutualism). Nitrobacter nitrifies; Pseudomonas denitrifies.",
+        "points": 1,
+        "topic": "Review"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Oxygenated blood reaches the aorta from the:",
+        "options": ["Right ventricle", "Left ventricle", "Right atrium", "Vena cava"],
+        "correct": [1],
+        "explanation": "Left ventricle → aorta → body. (Right ventricle → pulmonary artery → lungs.)",
+        "points": 1,
+        "topic": "Review"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Germination requires:",
+        "options": ["Light, fertiliser and soil", "Water, oxygen and warmth", "Darkness and drought", "Chlorophyll and sunlight"],
+        "correct": [1],
+        "explanation": "Water activates enzymes, oxygen fuels respiration, warmth optimises it. Light is unnecessary.",
+        "points": 1,
+        "topic": "Review"
+      },
+      {
+        "type": "true_false",
+        "question": "True or False: On high power, focusing must use the fine knob only.",
+        "options": ["True", "False"],
+        "correct": [0],
+        "explanation": "True. Coarse moves on high power crash the lens into the slide.",
+        "points": 1,
+        "topic": "Review"
+      },
+      {
+        "type": "multiple_answer",
+        "question": "Which lose marks in examinations? (Select ALL that apply)",
+        "options": ["Naming vague agents ('it goes up')", "Omitting units from calculated answers", "Contradicting yourself within an answer", "Numbering points to match the marks"],
+        "correct": [0, 1, 2],
+        "explanation": "Vagueness, missing units and contradictions all bleed marks. Numbering points to the mark count is GOOD technique.",
+        "points": 2,
+        "topic": "Technique"
+      }
+    ]
+  }
+}

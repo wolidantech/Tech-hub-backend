@@ -1,0 +1,472 @@
+{
+  "key": "mod08",
+  "order": 8,
+  "title": "Human Biology",
+  "description": "How the human body feeds, pumps, breathes, senses and balances itself — digestion, circulation, respiration, nerves and homeostasis.",
+  "objectives": [
+    "Trace food through digestion to absorption",
+    "Explain the double circulation and gas exchange",
+    "Describe nervous control and homeostasis"
+  ],
+  "duration_text": "2 weeks",
+  "topics": [
+    {
+      "key": "top01",
+      "order": 1,
+      "title": "Nutrition and Digestion",
+      "description": "Balanced diet and the journey of food from mouth to bloodstream.",
+      "objectives": ["Define balanced diet", "Trace digestion with enzymes"],
+      "lessons": [
+        {
+          "key": "les01",
+          "title": "Food and a Balanced Diet",
+          "description": "Nutrient groups, deficiency diseases, and what 'balanced' actually means.",
+          "duration": 30,
+          "objectives": [
+            "State the seven food components and one role each",
+            "Link deficiencies (kwashiorkor, anaemia, scurvy, rickets) to missing nutrients",
+            "Judge whether a diet is balanced using energy needs"
+          ],
+          "introduction": "A labourer needs twice the energy of an office worker; a pregnant mother needs extra iron and folate. 'Balanced diet' is not one menu — it is matching intake to need.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "Seven components",
+              "body": "CARBOHYDRATES (yam, rice, cassava): cheap energy. PROTEINS (beans, soya, fish, eggs, milk): growth and repair — children and mothers need most. FATS/OILS (palm oil, groundnuts): concentrated energy, insulation, vitamin carriers. VITAMINS (fruits, vegetables): regulators in tiny doses — C (oranges, mango) prevents scurvy and aids iron uptake; D (sunlight, fish) builds bone with calcium; A (palm oil, liver, orange sweet potato) protects vision and immunity. MINERALS: iron (blood haemoglobin — deficiency causes ANAEMIA: fatigue, pale gums); calcium + phosphorus (bones/teeth — deficiency causes RICKETS in children); iodine (thyroid — deficiency causes GOITRE). FIBRE (vegetables, whole grains): prevents constipation and feeds gut flora. WATER: solvent, coolant (sweat), transport — 2+ litres daily in our climate. Deficiency diseases are diagnosable: kwashiorkor (protein), marasmus (total energy), night blindness (vitamin A), scurvy (vitamin C)."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: diagnosing from symptoms",
+              "body": "Question: A 3-year-old has swollen belly and legs, thin arms, reddish hair and slow healing. Diagnose and prescribe foods. Step 1 — Match symptoms: oedema (swelling) + muscle wasting + hair changes = KWASHIOKROR (protein deficiency), not mere hunger (marasmus wastes uniformly without oedema). Step 2 — Explain: without protein, blood albumin falls so fluid leaks into tissues; growth and immunity stall. Step 3 — Prescribe: beans, soya milk, groundnuts, eggs, dried fish — affordable local proteins — plus medical care (severe cases need hospital feeding). Prevention moral: exclusive breastfeeding then protein-rich weaning foods. Examination tip: kwashiorkor = protein lack (swelling); marasmus = energy lack (matchstick, no swelling)."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Seven components: carbs, protein, fats, vitamins, minerals, fibre, water.\nKwashiorkor = protein (swelling); marasmus = energy (wasting); anaemia = iron; rickets = D/calcium; scurvy = C; goitre = iodine.\nBalanced = right amounts for age, activity, pregnancy and climate.\nLocal affordable proteins: beans, soya, groundnuts, eggs, dried fish."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Every nutrient has jobs and every shortage has symptoms. Read bodies like case notes — swelling, pallor, bleeding gums and bent bones each name their missing nutrient — then prescribe from local foods."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Seven components + one role each", "Four deficiency diagnoses", "Balance depends on the person"],
+          "references": ["OpenStax Biology 2e — Chapter 41 (animal nutrition), WHO nutrition guidance (general knowledge)"]
+        },
+        {
+          "key": "les02",
+          "title": "Digestion from Mouth to Blood",
+          "description": "Mechanical and chemical digestion, the enzyme line-up, and absorption in the ileum.",
+          "duration": 40,
+          "objectives": [
+            "Order the gut regions and state what happens in each",
+            "Name the digestive enzymes, substrates and products",
+            "Explain how villi are adapted for absorption"
+          ],
+          "introduction": "A pounded-yam meal becomes blood glucose in hours. Follow it down 9 metres of gut — chewed, churned, dissolved and absorbed with industrial efficiency.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "The journey",
+              "body": "MOUTH: teeth CHEW (mechanical — bigger surface); salivary AMYLASE starts starch → maltose (alkaline pH). OESOPHAGUS: PERISTALSIS (muscular waves) pushes the bolus down — swallowing works upside-down. STOMACH: acid (pH ~2, kills germs) + PEPSIN (protein → peptides) + churning → chyme; mucus shields the wall (failure = ulcer). SMALL INTESTINE (duodenum + ileum): the main event — PANCREATIC juice brings AMYLASE (starch → maltose), TRYPSIN (protein → peptides), LIPASE (fats → fatty acids + glycerol); BILE from the liver (stored in gall bladder) EMULSIFIES fats and neutralises acid (no enzymes in bile); intestinal enzymes finish maltose → glucose, peptides → amino acids. ILEUM: millions of VILLI (+ microvilli) absorb glucose/amino acids into blood capillaries and fatty acids/glycerol into lacteals. LARGE INTESTINE: absorbs WATER and salts; gut bacteria make vitamin K; faeces (fibre, dead cells, bacteria) egested — EGESTION removes undigested waste, EXCRETION removes metabolic waste (never confuse them)."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: tracing groundnuts",
+              "body": "Question: Trace a groundnut's fat from mouth to bloodstream. Step 1 — Mouth/stomach: chewing and churning break pieces; NO fat digestion (no lipase yet). Step 2 — Duodenum: bile EMULSIFIES the fat into droplets (surface area soars); pancreatic LIPASE hydrolyses droplets → fatty acids + glycerol (alkaline pH). Step 3 — Ileum: products diffuse into villi — into LACTEALS (not blood capillaries) — then to lymph and blood. Step 4 — Note the checkpoints: emulsification is PHYSICAL (no enzymes), lipase is CHEMICAL, lacteals are the FAT route. Examination sentence: 'Bile emulsifies fats, increasing surface area for lipase' — write it exactly."
+            },
+            {
+              "block": "VIDEO",
+              "title": "Watch: Digestive System",
+              "url": "https://www.youtube.com/watch?v=1UvuBYUbFk0",
+              "body": "Watch 'Digestive System' by the Amoeba Sisters (official channel stream). Afterwards, list every gut region with its pH and enzymes from memory."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Amylase: starch → maltose (mouth, pancreas). Pepsin/trypsin: protein → peptides → amino acids. Lipase: fats → fatty acids + glycerol. Bile: emulsifies, neutralises — NO enzymes.\nPeristalsis pushes; villi absorb (blood for sugars/amino acids, lacteals for fats).\nEgestion (undigested waste) ≠ excretion (metabolic waste)."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Digestion is disassembly: mechanical breaking, enzymatic hydrolysis, then absorption through vast villi. Bile prepares, lipase dissolves, lacteals collect — and the large intestine reclaims the water."
+            }
+          ],
+          "videos": [
+            {
+              "title": "Digestive System",
+              "url": "https://www.youtube.com/watch?v=1UvuBYUbFk0",
+              "source": "Amoeba Sisters",
+              "license": "Standard YouTube License (official stream — no copy made)",
+              "attribution": "© Amoeba Sisters — streamed from the official channel https://www.youtube.com/@AmoebaSisters",
+              "description": "Full digestive journey with organs, enzymes and absorption."
+            }
+          ],
+          "resources": [],
+          "key_points": ["Enzyme-substrate-product triples", "Bile has no enzymes", "Villi routes: blood vs lacteals"],
+          "references": ["OpenStax Biology 2e — Chapter 41 (digestive system)"]
+        }
+      ]
+    },
+    {
+      "key": "top02",
+      "order": 2,
+      "title": "Circulation and Respiration",
+      "description": "The double circulation, blood, breathing and how cells release energy.",
+      "objectives": ["Trace blood through the heart", "Explain gas exchange and breathing"],
+      "lessons": [
+        {
+          "key": "les01",
+          "title": "The Heart and Blood",
+          "description": "Double circulation, vessels, blood cells and what goes wrong (hypertension, anaemia).",
+          "duration": 40,
+          "objectives": [
+            "Trace blood through the heart naming chambers, vessels and valves",
+            "Compare arteries, veins and capillaries structurally",
+            "State the functions of red cells, white cells, platelets and plasma"
+          ],
+          "introduction": "Your heart beats 100,000 times a day, pushing 7,000 litres through 100,000 km of vessels. It is two pumps in one — and understanding it explains blood pressure, heart attacks and why exercise matters.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "Double circulation",
+              "body": "Mammals run TWO circuits. PULMONARY (lungs): right atrium → right ventricle → PULMONARY ARTERY (carries DEOXYGENATED blood — the great exception) → lungs (CO2 out, O2 in) → PULMONARY VEIN (OXYGENATED — the other exception) → left atrium. SYSTEMIC (body): left atrium → LEFT VENTRICLE (thickest wall — pumps body-wide at high pressure) → AORTA → body tissues (O2/glucose out, CO2/waste in) → VENA CAVA → right atrium. VALVES enforce one-way flow: bicuspid/mitral (left), tricuspid (right), and semilunar valves at artery exits (their snap shut makes the heartbeat's 'lub-dub'). Coronary arteries feed the heart muscle itself — their blockage causes heart attacks. VESSELS: arteries (thick muscle/elastic, small lumen, high pressure, pulse); veins (thin walls, wide lumen, VALVES, low pressure); capillaries (ONE cell thick, narrow — exchange only, white cells squeeze through)."
+            },
+            {
+              "block": "THEORY",
+              "title": "Blood and pressure",
+              "body": "RED CELLS: biconcave discs, NO nucleus, packed with HAEMOGLOBIN — maximum oxygen loading; made in bone marrow, living 120 days (malaria and sickle cell destroy them). WHITE CELLS: larger, with nuclei — PHAGOCYTES engulf germs, LYMPHOCYTES make ANTIBODIES (vaccination trains them). PLATELETS: cell fragments triggering CLOTTING (fibrin mesh seals wounds; haemophilia breaks this). PLASMA: pale fluid carrying dissolved glucose, amino acids, hormones, urea, antibodies and heat. BLOOD PRESSURE: force on artery walls (~120/80 mmHg normal). HYPERTENSION (persistent high pressure — salt, obesity, stress, genetics) silently damages heart, brain (stroke), kidneys and eyes: the 'silent killer' — preventable by less salt, healthy weight, exercise and prescribed drugs taken faithfully."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: tracing an oxygen molecule",
+              "body": "Question: Trace O2 from lung air to a leg muscle cell. Step 1 — Diffuses across alveolus + capillary walls into red cells (haemoglobin loads). Step 2 — Pulmonary vein → left atrium → left ventricle → aorta → leg artery → arteriole → capillary. Step 3 — Unloads (respiring muscle is low-O2, high-CO2 — haemoglobin releases there), diffuses into the muscle cell's mitochondria. Step 4 — Return trip: CO2 reverses the path to the right heart and lungs. Examination rule: name EVERY chamber and vessel in order — skipping the atria loses marks."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Right heart = pulmonary (lungs); left heart = systemic (body). Pulmonary artery/vein break the oxygen rule.\nLeft ventricle thickest; valves stop backflow; coronaries feed the heart.\nRed cells carry O2 (no nucleus); white cells fight (phagocytes, lymphocytes); platelets clot; plasma transports.\nHypertension is silent, serious and largely preventable."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Two circuits, four chambers, one-way valves and three vessel types keep every cell supplied. Blood's four components transport, defend and seal — while blood pressure quietly reports the system's health."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Full heart trace without skipping", "Pulmonary exceptions", "Blood component functions"],
+          "references": ["OpenStax Biology 2e — Chapter 34 (circulatory system)"]
+        },
+        {
+          "key": "les02",
+          "title": "Breathing and Gas Exchange",
+          "description": "The breathing mechanism, alveoli, and aerobic vs anaerobic respiration.",
+          "duration": 40,
+          "objectives": [
+            "Describe inhalation and exhalation using ribs, diaphragm and pressure",
+            "Explain alveolar adaptations for gas exchange",
+            "Compare aerobic and anaerobic respiration with equations"
+          ],
+          "introduction": "You breathe 20,000 times a day without thinking. Behind each breath: pressure physics, 300 million alveoli, and the respiration equation that powers Module 2's active transport.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "Ventilation",
+              "body": "INHALATION (active): external intercostal muscles contract → ribs move UP and OUT; diaphragm contracts and FLATTENS → chest volume INCREASES → pressure FALLS below outside → air rushes in. EXHALATION (passive at rest): muscles relax → ribs fall, diaphragm domes → volume DECREASES → pressure RISES → air pushed out (forced exhalation recruits internal intercostals and abdominal muscles). Air's path: nose/mouth (warmed, moistened, filtered by hairs/mucus) → trachea (C-shaped cartilage rings hold it open) → bronchi → bronchioles → ALVEOLI. Gas exchange at alveoli: O2 diffuses into blood, CO2 diffuses out — driven by concentration gradients maintained by breathing (ventilation) and heartbeat (perfusion). Adaptations: enormous surface (~100 m²), ONE-cell-thin walls, moist lining (gases dissolve), dense capillary nets."
+            },
+            {
+              "block": "THEORY",
+              "title": "Respiration equations",
+              "body": "AEROBIC respiration (mitochondria, with oxygen): glucose + oxygen → carbon dioxide + water + LARGE energy (about 30 ATP per glucose). Word equation compulsory; symbol equation C6H12O6 + 6O2 → 6CO2 + 6H2O + energy earns bonus. ANAEROBIC respiration (no oxygen): in MUSCLE — glucose → lactic acid + SMALL energy (fast but weak; lactic acid causes cramp/fatigue, repaid later by deep breathing — oxygen debt); in YEAST/PLANTS — glucose → ethanol + carbon dioxide + small energy (FERMENTATION — brewing, baking, the Module 1 yeast bubbles). Smoking destroys this system: tar (carcinogen), carbon monoxide (binds haemoglobin 250x tighter than O2 — starving tissues), nicotine (addictive, narrows vessels) — causing bronchitis, emphysema (burst alveoli), lung cancer and heart disease."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: the sprinter's debt",
+              "body": "Question: After a 100 m sprint, an athlete breathes hard for minutes though the race is over. Explain. Step 1 — During the sprint, muscles needed ATP faster than blood could deliver O2 → ANAEROBIC respiration topped up supply, making LACTIC ACID. Step 2 — Afterward, the body must oxidise the lactate (in the liver) and repay the OXYGEN DEBT — hence sustained deep breathing and high heart rate. Step 3 — Contrast: a marathoner runs aerobically (steady O2 supply, no debt spike) — sprinting borrows energy anaerobically and repays with interest. Examination phrase: 'oxygen debt repaid by continued rapid breathing after exercise'."
+            },
+            {
+              "block": "VIDEO",
+              "title": "Watch: Cellular Respiration (UPDATED)",
+              "url": "https://www.youtube.com/watch?v=eJ9Zjc-jdys",
+              "body": "Watch 'Cellular Respiration (UPDATED)' by the Amoeba Sisters (official channel stream). Write both respiration equations from memory afterwards, with the ATP comparison."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Inhale: ribs up/out + diaphragm flat → volume up → pressure down → air in. Exhale reverses passively.\nAlveoli: huge area, thin, moist, bloody — diffusion maximised.\nAerobic: CO2 + water + ~30 ATP. Anaerobic: lactate (muscle) or ethanol + CO2 (yeast) + ~2 ATP.\nSmoking's trio: tar, carbon monoxide, nicotine."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Breathing ventilates, alveoli exchange, blood delivers, mitochondria burn. Aerobic respiration pays ~30 ATP per glucose; anaerobic loans ~2 and charges oxygen debt. Keep the system clean — it cannot be replaced."
+            }
+          ],
+          "videos": [
+            {
+              "title": "Cellular Respiration (UPDATED)",
+              "url": "https://www.youtube.com/watch?v=eJ9Zjc-jdys",
+              "source": "Amoeba Sisters",
+              "license": "Standard YouTube License (official stream — no copy made)",
+              "attribution": "© Amoeba Sisters — streamed from the official channel https://www.youtube.com/@AmoebaSisters",
+              "description": "Glycolysis, Krebs cycle and electron transport made visual."
+            }
+          ],
+          "resources": [],
+          "key_points": ["Pressure-volume breathing logic", "Two respiration equations + ATP", "Oxygen debt explanation"],
+          "references": ["OpenStax Biology 2e — Chapters 7 (cellular respiration), 34 (respiratory system)"]
+        }
+      ]
+    },
+    {
+      "key": "top03",
+      "order": 3,
+      "title": "Control and Balance",
+      "description": "Nerves, hormones and homeostasis — how the body senses change and stays constant.",
+      "objectives": ["Describe reflex arcs", "Explain temperature and glucose control"],
+      "lessons": [
+        {
+          "key": "les01",
+          "title": "Nerves and Reflexes",
+          "description": "Neurones, synapses and the reflex arcs that protect you before you think.",
+          "duration": 30,
+          "objectives": [
+            "Label a motor neurone and state the function of its parts",
+            "Trace a reflex arc in order",
+            "Compare nervous and hormonal control"
+          ],
+          "introduction": "Your hand jerks from a hot pot before you feel pain. That reflex — sense, decide, act in milliseconds — is your nervous system at full speed.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "Neurones and the arc",
+              "body": "NEURONES carry electrical impulses. SENSORY neurones run receptor → CNS (brain/spinal cord); RELAY neurones (in the CNS) connect; MOTOR neurones run CNS → effector (muscle/gland). A motor neurone has dendrites (collect signals), a long AXON wrapped in MYELIN (fatty insulation speeding impulses ~100x), and synaptic terminals. SYNAPSES (gaps between neurones) pass signals CHEMICALLY: vesicles release neurotransmitters that diffuse across and trigger the next neurone (drugs, venoms and insecticides often target synapses). REFLEX ARC order: stimulus → receptor (skin pain endings) → sensory neurone → relay neurone (spinal cord) → motor neurone → effector (arm muscle contracts) — response WITHOUT waiting for the brain (the brain is informed after, for learning). Reflexes are fast, involuntary and protective: blinking, coughing, pupil changes, knee-jerk."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: the hot pot",
+              "body": "Question: Order the events when a hand touches a hot pot. Step 1 — Receptor: pain endings in finger skin fire. Step 2 — Sensory neurone carries the impulse to the spinal cord. Step 3 — Relay neurone passes it (within the cord) to a motor neurone. Step 4 — Motor neurone fires the biceps; the hand withdraws. Step 5 — Meanwhile a branch ascends to the brain — you feel pain AFTER acting. Full marks need all five stations in order with the brain's late arrival noted. Contrast VOLUNTARY actions (picking up a cup): receptor → brain DECIDES → motor response — slower but flexible."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Three neurones: sensory (in), relay (link), motor (out). Myelin speeds; synapses bridge chemically.\nReflex arc: receptor → sensory → relay → motor → effector — brain bypassed for speed.\nReflexes: fast, involuntary, protective. Voluntary acts route via the brain.\nHormones are slower, broader and longer-lasting than nerves."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Nerves wire fast, precise control: impulses race insulated axons, hop chemical synapses, and shortcut through reflex arcs when speed saves skin. Hormones handle the slow, body-wide messages."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Five reflex stations in order", "Synapses are chemical gaps", "Reflex vs voluntary routing"],
+          "references": ["OpenStax Biology 2e — Chapter 39 (nervous system)"]
+        },
+        {
+          "key": "les02",
+          "title": "Homeostasis",
+          "description": "Keeping temperature, water and glucose constant — the body's balancing act.",
+          "duration": 40,
+          "objectives": [
+            "Define homeostasis and negative feedback",
+            "Explain temperature control (skin, sweat, shivering)",
+            "Explain blood-glucose control (insulin, glucagon) and diabetes"
+          ],
+          "introduction": "Desert noon or rainy night, your core stays near 37°C and your blood glucose near normal. Stray far and enzymes fail, brains fog, lives end — homeostasis is survival.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "Temperature and water",
+              "body": "HOMEOSTASIS = keeping internal conditions constant; NEGATIVE FEEDBACK = corrections opposing the change (like a thermostat). TOO HOT: hypothalamus detects warm blood → sweat glands release sweat (evaporation cools), skin arterioles VASODILATE (more blood near surface radiates heat), hair lies flat. TOO COLD: shivering (muscles respire → heat), VASOCONSTRICTION (blood kept deep — pale skin), hair stands (traps air — goosebumps), adrenaline boosts metabolism. WATER BALANCE: kidneys filter blood and reabsorb needed water (ADH hormone from the pituitary raises reabsorption when dehydrated — small, dark urine; excess water gives large, pale urine). Kidney failure is fatal without dialysis/transplant — drink water generously in our heat, and never ignore swelling or blood in urine."
+            },
+            {
+              "block": "THEORY",
+              "title": "Blood glucose and diabetes",
+              "body": "The PANCREAS guards glucose. HIGH glucose (after eating): beta cells release INSULIN → liver/muscles convert glucose → GLYCOGEN (storage), cells absorb glucose → level falls. LOW glucose (exercise, hunger): alpha cells release GLUCAGON → liver converts glycogen → glucose → level rises. TYPE 1 DIABETES: beta cells destroyed (autoimmune) — no insulin; treated with INSULIN INJECTIONS for life (usually starts young). TYPE 2 DIABETES: cells resist insulin (linked to obesity, inactivity, age) — managed with diet, exercise, tablets, sometimes insulin. Uncontrolled diabetes damages eyes, kidneys, nerves and feet (amputations) — yet it is largely manageable: healthy weight, daily movement, less sugar, prescribed drugs, regular checks. Nigeria's diabetes burden is rising fast with urban diets — prevention starts on your plate."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: the marathon runner",
+              "body": "Question: During a marathon in heat, a runner sweats heavily, skin reddens, then later shivers at the finish. Explain both phases. Step 1 — Running phase: muscles generate heat → hypothalamus triggers SWEATING (evaporative cooling) + VASODILATION (red skin radiates heat) — negative feedback against rising core temperature. Step 2 — Finish phase: sweat-soaked and still, evaporation + breeze now OVERCOOL → shivering (respiratory heat) + vasoconstriction restore 37°C. Step 3 — Note the principle: opposite responses to opposite deviations, all automatic — homeostasis in one race. (Runners must also replace water AND salts — hyponatraemia kills.)"
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Homeostasis = constancy via negative feedback (oppose the change).\nHot: sweat + vasodilate. Cold: shiver + vasoconstrict. ADH tunes kidney water reabsorption.\nInsulin lowers glucose (→ glycogen); glucagon raises it (→ glucose).\nType 1 = no insulin (inject). Type 2 = resistant (lifestyle + drugs). Both damage eyes/kidneys/nerves if ignored."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Skin, kidneys and pancreas hold your inner world steady while the outer world swings. Negative feedback corrects every drift — and diabetes shows what happens when one loop breaks."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Negative feedback logic", "Hot/cold response pairs", "Insulin/glucagon + two diabetes types"],
+          "references": ["OpenStax Biology 2e — Chapters 33 (animal organisation/homeostasis), 37 (endocrine)"]
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "type": "BOOK",
+      "title": "OpenStax Biology 2e — full textbook (free PDF + web)",
+      "url": "https://openstax.org/details/books/biology-2e",
+      "description": "Module 8 reading: Chapters 33–41 selected (body organisation, circulation, respiration, nerves, hormones, nutrition). Download the free PDF from the publisher page.",
+      "source": "OpenStax, Rice University",
+      "license": "CC BY-NC-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "attribution": "Biology 2e by Mary Ann Clark, Matthew Douglas and Jung Choi (OpenStax, Rice University), licensed CC BY-NC-SA 4.0."
+    }
+  ],
+  "practical": {
+    "title": "Pulse, Breath and Recovery",
+    "objective": "Measure how exercise changes pulse and breathing rates and how fitness speeds recovery.",
+    "scenario": "You are comparing your own recovery before and after two weeks of daily brisk walking (or comparing two volunteers).",
+    "instructions": "1. REST: sit 5 minutes, then count your radial pulse for 30 seconds (×2 = bpm) and breaths for 30 seconds (×2). Record. 2. EXERCISE: step up/down a stair or march briskly for EXACTLY 2 minutes. 3. Immediately count pulse + breaths (0 min), then sit and repeat at 1, 2, 3, 4, 5 minutes. 4. Plot recovery curves (time vs bpm) on graph paper or described axes. 5. Repeat the whole test after 2 weeks of daily 20-minute brisk walks (or test a second person) and compare recovery times. 6. Conclude: why do rates rise (oxygen/glucose delivery, CO2/heat removal) and why does recovery quicken with fitness? SAFETY: stop for chest pain, dizziness or breathlessness; asthmatics keep inhalers handy and exercise gently; stay hydrated.",
+    "requirements": "Watch/phone timer, stairs or stepping space, notebook.",
+    "expected_output": "Two data tables + recovery curves + physiological conclusion.",
+    "difficulty": "BEGINNER",
+    "estimated_time": 60,
+    "submission_type": "TEXT",
+    "evaluation_criteria": ["Standardised exercise (same 2 minutes both tests)", "Complete time-series tables with recovery times identified", "Conclusion links rate rises to respiration demands and recovery to fitness"]
+  },
+  "assignment": {
+    "title": "Diabetes Case File",
+    "description": "Advise a newly diagnosed Type 2 diabetic uncle using homeostasis science.",
+    "instructions": "Your 55-year-old uncle (okada rider, loves soft drinks and late eba) is diagnosed with Type 2 diabetes. Write him a 400–500 word letter: (1) explain in KIND, SIMPLE words what is happening to his blood glucose and insulin; (2) explain THREE dangers of ignoring it (eyes, kidneys/feet, heart) without terrifying him; (3) prescribe a realistic weekly plan — food swaps (keep eba but smaller + more vegetables?), daily movement fitting his job, drink rules, drug/faithful-checkup habits; (4) end with encouragement and ONE myth to ignore (e.g. 'bitter leaf cures diabetes' — it doesn't replace treatment). Tone: loving family member, not lecturer.",
+    "requirements": "Medically accurate (no fake cures); culturally realistic for a Nigerian rider.",
+    "expected_output": "400–500 word advice letter covering mechanism, dangers, plan and myth-busting.",
+    "difficulty": "INTERMEDIATE",
+    "estimated_time": 100,
+    "submission_type": "TEXT",
+    "evaluation_criteria": ["Correct insulin-resistance mechanism in simple words", "Three real complications named", "Realistic affordable plan + one myth corrected with the treatment message intact"],
+    "max_score": 100,
+    "pass_score": 50
+  },
+  "quiz": {
+    "title": "Module 8 Quiz — Human Biology",
+    "description": "Quick check on digestion, circulation, breathing and control.",
+    "passing_score": 70,
+    "time_limit": 15,
+    "attempt_limit": 3,
+    "questions": [
+      {
+        "type": "multiple_choice",
+        "question": "Bile helps fat digestion by:",
+        "options": ["Digesting fat with enzymes", "Emulsifying fats and neutralising acid — it contains no enzymes", "Absorbing fatty acids into blood", "Making the gut acidic"],
+        "correct": [1],
+        "explanation": "Bile's roles are physical (emulsification → surface area) and chemical (neutralisation). Lipase does the enzymatic digestion.",
+        "points": 1,
+        "topic": "Digestion"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "The left ventricle wall is thickest because it:",
+        "options": ["Receives blood from the lungs", "Pumps oxygenated blood around the whole body at high pressure", "Prevents backflow to the atrium", "Stores blood between beats"],
+        "correct": [1],
+        "explanation": "Systemic circulation demands the highest pressure; the right ventricle only reaches the nearby lungs.",
+        "points": 1,
+        "topic": "Heart"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "During inhalation:",
+        "options": ["Ribs fall, diaphragm domes, pressure rises", "Ribs rise, diaphragm flattens, volume rises and pressure falls", "Muscles all relax completely", "Air is pushed out by the lungs"],
+        "correct": [1],
+        "explanation": "Active inhalation expands the chest (intercostals + diaphragm), dropping pressure so outside air flows in.",
+        "points": 1,
+        "topic": "Breathing"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "After a sugary meal, blood glucose is lowered mainly by:",
+        "options": ["Glucagon converting glycogen to glucose", "Insulin promoting glucose uptake and glycogen storage", "Adrenaline raising the heart rate", "Sweating out the sugar"],
+        "correct": [1],
+        "explanation": "Insulin (pancreatic beta cells) drives glucose into cells and storage. Glucagon does the reverse when glucose is low.",
+        "points": 1,
+        "topic": "Homeostasis"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "A reflex arc runs:",
+        "options": ["Brain → sensory → motor → receptor", "Receptor → sensory → relay → motor → effector", "Effector → motor → brain → sensory", "Receptor → brain → relay → muscle only"],
+        "correct": [1],
+        "explanation": "The five-station shortcut bypasses conscious decision for speed; the brain learns of it afterwards.",
+        "points": 1,
+        "topic": "Nerves"
+      }
+    ]
+  },
+  "assessment": {
+    "key": "exam",
+    "title": "Module 8 Examination — Human Biology",
+    "description": "End-of-module examination covering digestion, circulation, respiration and homeostasis.",
+    "instructions": "Answer ALL 6 questions in 25 minutes. Pass mark is 60%. Counts toward your final assessment gate.",
+    "passing_score": 60,
+    "time_limit_minutes": 25,
+    "max_attempts": 3,
+    "time_limit": 25,
+    "attempt_limit": 2,
+    "questions": [
+      {
+        "type": "multiple_choice",
+        "question": "Fatty acids and glycerol from digestion are absorbed into:",
+        "options": ["Blood capillaries directly", "Lacteals of the villi, then lymph", "The stomach wall", "The large intestine only"],
+        "correct": [1],
+        "explanation": "Fats take the lacteal-lymph route; glucose and amino acids enter blood capillaries.",
+        "points": 1,
+        "topic": "Digestion"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "The pulmonary artery is unusual because it carries:",
+        "options": ["Oxygenated blood to the lungs", "Deoxygenated blood — arteries usually carry oxygenated blood", "Blood with no cells", "Only plasma"],
+        "correct": [1],
+        "explanation": "Arteries are defined by direction (away from heart), not oxygen: the pulmonary artery leaves the right ventricle for the lungs, deoxygenated.",
+        "points": 1,
+        "topic": "Heart"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Anaerobic respiration in muscle produces:",
+        "options": ["Carbon dioxide + water + ~30 ATP", "Lactic acid + ~2 ATP", "Ethanol + carbon dioxide", "Only oxygen debt with no ATP"],
+        "correct": [1],
+        "explanation": "Muscle goes glucose → lactate (+2 ATP). Ethanol + CO2 is yeast/plant fermentation; ~30 ATP is aerobic.",
+        "points": 1,
+        "topic": "Respiration"
+      },
+      {
+        "type": "true_false",
+        "question": "True or False: Vasodilation (widening skin blood vessels) helps cool the body by radiating more heat from the surface.",
+        "options": ["True", "False"],
+        "correct": [0],
+        "explanation": "True. More warm blood near the skin surface loses more heat (flushed skin); vasoconstriction does the reverse in cold.",
+        "points": 1,
+        "topic": "Homeostasis"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Type 1 diabetes differs from Type 2 mainly in that Type 1:",
+        "options": ["Is caused by eating too much sugar alone", "Results from autoimmune destruction of insulin-making beta cells and needs insulin for life", "Never needs any treatment", "Only affects the elderly"],
+        "correct": [1],
+        "explanation": "Type 1 = no insulin production (usually young onset, insulin-dependent). Type 2 = insulin resistance (lifestyle-linked, managed stepwise).",
+        "points": 1,
+        "topic": "Diabetes"
+      },
+      {
+        "type": "multiple_answer",
+        "question": "Which adaptations make alveoli efficient? (Select ALL that apply)",
+        "options": ["Huge total surface area", "One-cell-thin walls", "Dense capillary network", "Thick muscular walls for pumping"],
+        "correct": [0, 1, 2],
+        "explanation": "Area, thinness and blood supply maximise diffusion. Alveoli do not pump — breathing muscles move the air.",
+        "points": 2,
+        "topic": "Gas exchange"
+      }
+    ]
+  }
+}

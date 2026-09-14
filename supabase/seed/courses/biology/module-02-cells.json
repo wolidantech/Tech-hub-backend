@@ -1,0 +1,378 @@
+{
+  "key": "mod02",
+  "order": 2,
+  "title": "Cell Biology",
+  "description": "The cell as the basic unit of life: plant and animal cell structure, prokaryotic versus eukaryotic cells, and how substances move across membranes.",
+  "objectives": [
+    "Label plant and animal cells and state organelle functions",
+    "Compare prokaryotic and eukaryotic cells",
+    "Explain diffusion, osmosis and active transport with examples",
+    "Calculate magnification and real cell sizes"
+  ],
+  "duration_text": "1 week",
+  "topics": [
+    {
+      "key": "top01",
+      "order": 1,
+      "title": "Cell Structure",
+      "description": "What cells are made of: organelles of plant and animal cells, and how prokaryotic cells differ.",
+      "objectives": ["Label cell diagrams", "Contrast cell types"],
+      "lessons": [
+        {
+          "key": "les01",
+          "title": "Plant and Animal Cells",
+          "description": "The organelles every student must know, and the three structures that separate plant cells from animal cells.",
+          "duration": 40,
+          "objectives": [
+            "Label the organelles of plant and animal cells",
+            "State the function of each major organelle",
+            "Name the three structures found in plant but not animal cells"
+          ],
+          "introduction": "Every organism you studied in Module 1 is built from cells. This lesson opens the cell and names its working parts — the vocabulary for the rest of biology.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "Organelles and their jobs",
+              "body": "Both plant and animal cells share these parts. The cell membrane (a thin, partially permeable skin of lipid and protein) controls what enters and leaves. The cytoplasm is the jelly-like fluid where most reactions happen. The nucleus stores DNA — the instructions for building and running the cell — and controls cell activities; inside it, the nucleolus makes ribosomes. Mitochondria release energy from glucose during respiration, so active cells (muscle, root hair) contain many. Ribosomes build proteins from amino acids. The endoplasmic reticulum (ER) is a folded membrane network: rough ER (studded with ribosomes) folds new proteins, smooth ER makes lipids. The Golgi body receives, packages and ships proteins in vesicles. Lysosomes contain digestive enzymes that break down waste (common in animal cells). Vacuoles store substances — animal cells have small temporary ones. Plant cells add three extras: a rigid cellulose cell wall for support, chloroplasts containing chlorophyll for photosynthesis, and one large permanent central vacuole that keeps the cell turgid with cell sap."
+            },
+            {
+              "block": "THEORY",
+              "title": "How to learn cells for examinations",
+              "body": "Examiners test cells through labelled diagrams and function questions. Learn each organelle as a pair: STRUCTURE + FUNCTION + ADAPTATION. Example: mitochondrion — folded inner membrane (cristae) gives a large surface area for respiration enzymes; muscle cells pack in thousands. Exam traps to avoid: (1) the cell wall and cell membrane are different structures — do not swap them; (2) chloroplasts trap light energy, mitochondria release energy — opposite jobs; (3) the large permanent vacuole belongs to mature plant cells only. When drawing cells, use a sharp pencil, single (not sketchy) lines, no shading, and straight label lines that touch the structure — biological drawing rules are marked strictly in practical papers."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: identifying cell X",
+              "body": "Question: Cell X has a cell wall, chloroplasts and a large vacuole. Cell Y has no wall, many mitochondria and small vacuoles. Identify each and justify. Step 1 — Match diagnostic features: wall + chloroplasts + large vacuole occur together ONLY in plant cells, so X is a plant cell (likely a leaf mesophyll cell). Step 2 — Y lacks all three plant extras and is rich in mitochondria, fitting an active animal cell (such as muscle). Step 3 — State what each does with its specialisation: X photosynthesises and stays rigid through turgor; Y contracts using ATP from its mitochondria. Full marks need the identification PLUS at least two justified features each."
+            },
+            {
+              "block": "VIDEO",
+              "title": "Watch: Cell Organelles and Structures Review",
+              "url": "https://www.youtube.com/watch?v=6mgkoqcm6Sg",
+              "body": "Watch 'Cell Organelles and Structures Review' by the Amoeba Sisters (official channel stream). Pause after each organelle and say its function aloud before the video reveals it — active recall doubles retention."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Membrane controls entry; nucleus holds DNA; mitochondria release energy; ribosomes build proteins; ER folds/makes molecules; Golgi packages; lysosomes digest waste.\nPlant-only trio: cellulose wall, chloroplasts, large permanent vacuole.\nLearn organelles as structure + function + adaptation triples.\nBiological drawings: pencil, single lines, no shading, label lines touching structures."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Cells are organised teams of organelles. Plant and animal cells share the core machinery for life; plants add a wall, chloroplasts and a large vacuole for support, photosynthesis and turgor. Knowing what each part does — and proving it in labelled diagrams — unlocks every later module."
+            }
+          ],
+          "videos": [
+            {
+              "title": "Cell Organelles and Structures Review",
+              "url": "https://www.youtube.com/watch?v=6mgkoqcm6Sg",
+              "source": "Amoeba Sisters",
+              "license": "Standard YouTube License (official stream — no copy made)",
+              "attribution": "© Amoeba Sisters — streamed from the official channel https://www.youtube.com/@AmoebaSisters",
+              "description": "Rapid-fire organelle review in a Name-That-Structure format — ideal for self-testing."
+            }
+          ],
+          "resources": [],
+          "key_points": ["Plant-only trio: wall, chloroplasts, large vacuole", "Mitochondria release energy; chloroplasts trap it", "Draw cells with clean pencil lines and touching labels"],
+          "references": ["OpenStax Biology 2e — Chapter 4, Cell Structure (eukaryotic cells and organelles)"]
+        },
+        {
+          "key": "les02",
+          "title": "Prokaryotic versus Eukaryotic Cells",
+          "description": "Why bacteria are built differently, and what the size difference means for how cells work.",
+          "duration": 30,
+          "objectives": [
+            "State three differences between prokaryotic and eukaryotic cells",
+            "Label a bacterial cell",
+            "Explain why cells stay microscopic (surface area to volume)"
+          ],
+          "introduction": "A bacterium and a human cheek cell are both alive, but one is a studio apartment and the other a mansion. Size and internal organisation change everything about how a cell lives.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "Two cell designs",
+              "body": "Prokaryotic cells (bacteria and archaea) are small — typically 1 to 5 micrometres — with DNA in a single circular chromosome free in the cytoplasm (the nucleoid region, not a true nucleus), no membrane-bound organelles, small 70S ribosomes, and often a cell wall, slime capsule, plasmids (small DNA rings carrying bonus genes such as antibiotic resistance) and flagella for movement. Eukaryotic cells (plants, animals, fungi, protists) are larger — typically 10 to 100 micrometres — with DNA in linear chromosomes inside a membrane-bound nucleus, membrane-bound organelles (mitochondria, ER, Golgi), larger 80S ribosomes, and complex internal transport. The word roots help: pro = before (no nucleus), eu = true (true nucleus). Mitochondria and chloroplasts probably began as engulfed bacteria — the endosymbiotic theory — which is why they still carry their own small circular DNA."
+            },
+            {
+              "block": "THEORY",
+              "title": "Why cells are microscopic",
+              "body": "As a cell grows, its volume (which demands food and produces waste) grows as the CUBE of its radius, while its surface area (which supplies and removes) grows only as the SQUARE. Double a cell's width and it needs 8x the supplies through only 4x the membrane — it starves. This surface-area-to-volume crisis forces cells to stay small, divide, or fold their membranes (root hairs, villi, cristae all do this). Bacteria exploit smallness brilliantly: huge surface area per volume means blistering-fast exchange, letting E. coli divide every 20 minutes in warm food — which is also why food poisoning strikes so fast."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: magnification calculation",
+              "body": "Question: A cheek cell image is 60 mm wide in your drawing. The magnification is x400. What is the real width in micrometres? Step 1 — Formula: real size = image size ÷ magnification. Step 2 — Substitute: 60 mm ÷ 400 = 0.15 mm. Step 3 — Convert: 1 mm = 1000 micrometres, so 0.15 × 1000 = 150 micrometres. Answer: 150 µm (a realistic cheek-cell width). Examination format: always show the formula, substitution and units — method marks are awarded even if arithmetic slips. Triangle memory aid: cover what you want — I = image, M = magnification, A = actual (I = M × A)."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Prokaryotic: small, no true nucleus, circular DNA, no membrane-bound organelles, 70S ribosomes.\nEukaryotic: larger, true nucleus, linear chromosomes, membrane-bound organelles, 80S ribosomes.\nVolume grows faster than surface area — so cells stay small or fold membranes.\nReal size = image size ÷ magnification; convert mm to µm (×1000)."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Life uses two cell designs: simple, speedy prokaryotes and compartmentalised eukaryotes. Both obey the same physics — exchange happens at surfaces, so smallness wins. Magnification maths turns microscope images into real measurements."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Pro = no nucleus; eu = true nucleus", "Surface area to volume limits cell size", "I = M × A triangle for magnification"],
+          "references": ["OpenStax Biology 2e — Chapter 4 (prokaryotic vs eukaryotic cells), Chapter 22 (bacteria)"]
+        }
+      ]
+    },
+    {
+      "key": "top02",
+      "order": 2,
+      "title": "Movement Across Membranes",
+      "description": "Diffusion, osmosis and active transport — the three ways substances cross cell membranes.",
+      "objectives": ["Explain the three transport processes", "Predict osmosis direction", "Link transport to real organs"],
+      "lessons": [
+        {
+          "key": "les01",
+          "title": "Diffusion and Osmosis",
+          "description": "Passive transport down concentration gradients, and the special case of water.",
+          "duration": 35,
+          "objectives": [
+            "Define diffusion and state four factors that speed it up",
+            "Define osmosis precisely",
+            "Predict whether cells gain or lose water in any solution"
+          ],
+          "introduction": "Your lungs load oxygen and dump carbon dioxide without any pumping by you. Smell from the kitchen reaches your room with no fan. Both are diffusion — physics doing biology's delivery work for free.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "Diffusion",
+              "body": "Diffusion is the net movement of particles from a region of higher concentration to a region of lower concentration, down the concentration gradient, until evenly spread. It needs no energy from the cell — particle motion (kinetic energy) drives it. Four factors speed it up: (1) a steeper concentration gradient, (2) higher temperature (faster particles), (3) larger surface area, and (4) shorter distance (thinner membranes). Examples: oxygen diffusing from alveoli into blood, carbon dioxide diffusing out of leaf cells into air spaces, perfume spreading across a room. Once concentrations equalise, particles still move but there is no NET movement — dynamic equilibrium."
+            },
+            {
+              "block": "THEORY",
+              "title": "Osmosis",
+              "body": "Osmosis is the net movement of WATER molecules from a region of higher water concentration (dilute solution) to a region of lower water concentration (concentrated solution) across a partially permeable membrane. Learn this definition word-perfect — examiners reject 'movement of water from high to low concentration' without mentioning the membrane. Consequences: animal cells in pure water swell and burst (lyse) because they have no wall; in concentrated solution they shrivel (crenate). Plant cells in pure water become turgid (firm — the vacuole pushes the membrane against the wall, supporting soft stems); in concentrated solution the membrane pulls away from the wall — plasmolysis — and the plant wilts. Root hairs absorb soil water by osmosis; kidney tubules reabsorb it."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: yam strips in salt solutions",
+              "body": "Question: Three identical yam strips are placed in distilled water, 5% salt and 20% salt for 30 minutes. Predict the mass change of each. Step 1 — Identify water concentrations: distilled water has the HIGHEST water concentration; 20% salt the LOWEST; yam cells sit between. Step 2 — Apply osmosis: water enters the strip in distilled water (cells become turgid → mass GAIN); water leaves the strip in 20% salt (plasmolysis → mass LOSS); 5% salt is close to cell concentration so little change. Step 3 — State the pattern: mass change follows the water-concentration gradient across the yam cell membranes. This exact experiment is your module practical — predictions first, then measurement."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Diffusion: net particle movement down a concentration gradient; no cell energy needed.\nFaster diffusion: steeper gradient, higher temperature, larger area, shorter distance.\nOsmosis: water, high → low water concentration, ACROSS a partially permeable membrane.\nPlant cells: pure water → turgid; salty water → plasmolysed and wilted."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Diffusion delivers gases and dissolved substances for free; osmosis is diffusion of water through membranes. Turgor, wilting, bursting and shrivelling are all osmosis in action — predict them by comparing water concentrations on the two sides."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Osmosis definition must name the membrane", "Turgid = firm plant cell; plasmolysed = membrane pulled away", "Gradients, temperature, area and distance control diffusion rate"],
+          "references": ["OpenStax Biology 2e — Chapter 5, Structure and Function of Plasma Membranes"]
+        },
+        {
+          "key": "les02",
+          "title": "Active Transport and Exchange Surfaces",
+          "description": "How cells pump substances uphill using energy, and how organs maximise exchange.",
+          "duration": 30,
+          "objectives": [
+            "Contrast active transport with diffusion and osmosis",
+            "Give two examples of active transport in plants and animals",
+            "Explain how root hairs, villi and alveoli are adapted for exchange"
+          ],
+          "introduction": "Roots absorb minerals from soil even when the soil holds LESS mineral than the root already has — swimming upstream against the gradient. That takes energy, and it is worth it.",
+          "contents": [
+            {
+              "block": "THEORY",
+              "title": "Active transport",
+              "body": "Active transport moves substances from lower to higher concentration — AGAINST the gradient — using energy from respiration (ATP) and carrier proteins in the membrane. It is the only transport process that needs the cell's own energy, so it stops when respiration is blocked (e.g. by cyanide or lack of oxygen). Examples: root hair cells pumping mineral ions (nitrates, phosphates) from dilute soil water; kidney tubule cells reabsorbing all glucose from the filtrate; gut villi absorbing glucose and amino acids into blood after digestion. Comparison table for examinations: diffusion — down gradient, no energy, small molecules/gases; osmosis — water only, down water gradient, needs membrane, no energy; active transport — against gradient, NEEDS energy and carriers, ions and nutrients."
+            },
+            {
+              "block": "THEORY",
+              "title": "Exchange surfaces",
+              "body": "Multicellular life needs specialised exchange surfaces, all sharing four adaptations: LARGE surface area, THIN barrier (short diffusion distance), GOOD blood supply or ventilation (to maintain gradients), and MOIST surfaces (gases dissolve before diffusing). Root hairs: millions of tiny extensions giving enormous area for water/mineral uptake. Small-intestine villi: finger-like folds (with microvilli on top) absorbing digested food into dense capillaries. Alveoli: ~300 million air sacs with one-cell-thick walls wrapped in capillaries for gas exchange. Leaves: broad, thin, with stomata and air spaces for CO2 entry. Examination sentence pattern: NAME the adaptation → STATE the feature → EXPLAIN the effect ('Villi increase surface area, so more glucose diffuses into blood per minute')."
+            },
+            {
+              "block": "EXAMPLE",
+              "title": "Worked example: why do roots need oxygen?",
+              "body": "Question: Waterlogged soil (no air spaces) stunts plant growth even though water is plentiful. Explain using transport processes. Step 1 — Recall: roots absorb mineral ions by ACTIVE transport, which needs ATP from aerobic respiration. Step 2 — Link: waterlogging removes soil oxygen, so root cells cannot respire aerobically and ATP runs out. Step 3 — Conclude: mineral uptake stops, the plant starves of nitrates/phosphates despite sitting in water, so growth stunts and leaves yellow. Bonus: this is why farmers drain waterlogged fields and why overwatering kills potted plants — roots drown, not drink."
+            },
+            {
+              "block": "KEY_CONCEPTS",
+              "title": "Key concepts",
+              "body": "Active transport: against the gradient, needs ATP + carrier proteins; poisoned by respiration blockers.\nRoot hairs, villi, alveoli: large area + thin barrier + rich supply + moisture.\nAdaptation answers follow: feature → effect on exchange rate.\nWaterlogged roots starve because active transport loses its energy supply."
+            },
+            {
+              "block": "SUMMARY",
+              "title": "Lesson summary",
+              "body": "Cells pay energy to pump vital substances uphill by active transport, and whole organs are sculpted into vast, thin, well-supplied exchange surfaces. Diffusion, osmosis and active transport together explain breathing, feeding, excretion and farming."
+            }
+          ],
+          "videos": [],
+          "resources": [],
+          "key_points": ["Only active transport uses the cell's ATP", "Exchange surfaces: area, thinness, supply, moisture", "Answer adaptations as feature → exchange effect"],
+          "references": ["OpenStax Biology 2e — Chapter 5 (bulk and active transport), Chapter 31 (plant nutrition)"]
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "type": "BOOK",
+      "title": "OpenStax Biology 2e — full textbook (free PDF + web)",
+      "url": "https://openstax.org/details/books/biology-2e",
+      "description": "Module 2 reading: Chapter 4 (Cell Structure) and Chapter 5 (Plasma Membranes: diffusion, osmosis, active transport). Download the free PDF from the publisher page.",
+      "source": "OpenStax, Rice University",
+      "license": "CC BY-NC-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "attribution": "Biology 2e by Mary Ann Clark, Matthew Douglas and Jung Choi (OpenStax, Rice University), licensed CC BY-NC-SA 4.0."
+    }
+  ],
+  "practical": {
+    "title": "Osmosis in Yam Strips",
+    "objective": "Measure how solution concentration affects water movement into and out of plant tissue.",
+    "scenario": "You are testing the lesson prediction from Topic 2 with real measurements.",
+    "instructions": "1. Cut THREE identical yam (or potato) strips about 5 cm long. Blot dry and weigh or measure each (a ruler + photo works if no scale: measure length to the nearest mm). 2. Place one strip in each: cup A (clean water), cup B (mild salt water — 1 teaspoon per cup), cup C (strong salt water — 4 tablespoons per cup). 3. Leave 30 minutes. Predict first, then observe: remove, blot gently, re-measure. 4. Record results in a table (solution | start | end | change | texture: firm/limp). 5. Write a conclusion linking each result to osmosis and turgor/plasmolysis. SAFETY: wash hands; do not taste the salt solutions; clean spills to avoid slips.",
+    "requirements": "Yam or Irish potato, knife (adult help if needed), 3 cups, salt, water, ruler, notebook.",
+    "expected_output": "A results table with measurements, texture notes, and a 4–6 sentence osmosis conclusion.",
+    "difficulty": "BEGINNER",
+    "estimated_time": 60,
+    "submission_type": "TEXT",
+    "evaluation_criteria": ["Fair test: identical strips, same time, only concentration changed", "Table complete with start/end/change for all three cups", "Conclusion correctly uses osmosis, water concentration gradient, turgor and plasmolysis"]
+  },
+  "assignment": {
+    "title": "Build and Explain a Cell",
+    "description": "Construct a 3D or labelled model of a plant OR animal cell and explain how three organelles depend on each other.",
+    "instructions": "1. Choose a plant or animal cell. 2. Build a model from household materials (clay, paper, bottle caps, grains of rice for ribosomes...) OR draw a large, fully labelled diagram (minimum 8 labels). 3. Write 300–400 words explaining how THREE organelles cooperate in one real task — e.g. how nucleus + ribosomes + Golgi make and ship an enzyme. 4. Photograph or scan your model/diagram and submit the image description plus your explanation as text (describe colours and materials used). Your explanation must use all three organelle names correctly and show the sequence of events.",
+    "requirements": "Original work; models copied from the internet score zero.",
+    "expected_output": "Model/diagram description + 300–400 word cooperation explanation.",
+    "difficulty": "BEGINNER",
+    "estimated_time": 90,
+    "submission_type": "TEXT",
+    "evaluation_criteria": ["Correct structures for the chosen cell type (plant trio present/absent as appropriate)", "Three organelles with accurate functions in a logical sequence", "Clear writing with correct biological terms"],
+    "max_score": 100,
+    "pass_score": 50
+  },
+  "quiz": {
+    "title": "Module 2 Quiz — Cells and Transport",
+    "description": "Quick check on organelles, cell types and membrane transport.",
+    "passing_score": 70,
+    "time_limit": 15,
+    "attempt_limit": 3,
+    "questions": [
+      {
+        "type": "multiple_choice",
+        "question": "Which structure is found in plant cells but NEVER in animal cells?",
+        "options": ["Mitochondrion", "Cell membrane", "Chloroplast", "Ribosome"],
+        "correct": [2],
+        "explanation": "Chloroplasts (with the cell wall and large permanent vacuole) are plant-only. Membranes, mitochondria and ribosomes occur in both.",
+        "points": 1,
+        "topic": "Cell structure"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "A bacterial cell differs from a cheek cell because the bacterial cell:",
+        "options": ["Is larger and has a nucleus", "Has circular DNA free in the cytoplasm and no membrane-bound organelles", "Has chloroplasts for photosynthesis", "Cannot reproduce"],
+        "correct": [1],
+        "explanation": "Bacteria are prokaryotic: small, no true nucleus, single circular chromosome, 70S ribosomes, no membrane-bound organelles.",
+        "points": 1,
+        "topic": "Cell types"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Osmosis is best defined as the net movement of:",
+        "options": ["Any particles from high to low concentration", "Water from high to low water concentration across a partially permeable membrane", "Salts from low to high concentration using energy", "Water from low to high water concentration across any barrier"],
+        "correct": [1],
+        "explanation": "Osmosis concerns WATER specifically, moving down its concentration gradient through a partially permeable membrane. Missing the membrane loses the mark.",
+        "points": 1,
+        "topic": "Osmosis"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Root hairs absorb nitrate ions from very dilute soil water. This requires:",
+        "options": ["Diffusion only", "Osmosis only", "Active transport using ATP from respiration", "No energy at all"],
+        "correct": [2],
+        "explanation": "Moving ions AGAINST their gradient needs active transport powered by ATP — which is why waterlogged (oxygen-free) roots stop absorbing minerals.",
+        "points": 1,
+        "topic": "Active transport"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "An image measures 50 mm at magnification x250. The real size is:",
+        "options": ["0.2 mm", "2 mm", "12.5 mm", "12500 mm"],
+        "correct": [0],
+        "explanation": "Real = image ÷ magnification = 50 ÷ 250 = 0.2 mm (200 µm).",
+        "points": 1,
+        "topic": "Magnification"
+      }
+    ]
+  },
+  "assessment": {
+    "key": "exam",
+    "title": "Module 2 Examination — Cell Biology",
+    "description": "End-of-module examination covering cell structure, cell types and transport.",
+    "instructions": "Answer ALL 6 questions in 25 minutes. Pass mark is 60%. Counts toward your final assessment gate.",
+    "passing_score": 60,
+    "time_limit_minutes": 25,
+    "max_attempts": 3,
+    "time_limit": 25,
+    "attempt_limit": 2,
+    "questions": [
+      {
+        "type": "multiple_choice",
+        "question": "A cell has many mitochondria and folded membranes but no chloroplasts or wall. It is most likely:",
+        "options": ["A leaf mesophyll cell", "A muscle cell", "A root hair cell", "A bacterial cell"],
+        "correct": [1],
+        "explanation": "No wall/chloroplasts rules out plant cells; abundant mitochondria fit an energy-hungry animal cell like muscle. (Root hairs are plant cells with walls.)",
+        "points": 1,
+        "topic": "Cell structure"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Plasmids are important in medicine because they:",
+        "options": ["Carry genes such as antibiotic resistance between bacteria", "Produce insulin in the human pancreas", "Form the bacterial cell wall", "Digest food in the gut"],
+        "correct": [0],
+        "explanation": "Plasmids are small DNA rings that bacteria swap, spreading traits like antibiotic resistance — a major reason to complete antibiotic courses.",
+        "points": 1,
+        "topic": "Cell types"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Red blood cells placed in pure water will:",
+        "options": ["Shrivel (crenate)", "Swell and burst (lyse), since water enters by osmosis and there is no wall", "Stay exactly the same", "Divide by mitosis"],
+        "correct": [1],
+        "explanation": "Water enters down its gradient; animal cells lack walls to resist the pressure, so they lyse. Plant cells would instead become turgid.",
+        "points": 1,
+        "topic": "Osmosis"
+      },
+      {
+        "type": "true_false",
+        "question": "True or False: Cyanide stops active transport because it blocks respiration, cutting off the ATP supply.",
+        "options": ["True", "False"],
+        "correct": [0],
+        "explanation": "True. Active transport is the only membrane process needing the cell's own ATP, so respiration poisons stop it while diffusion continues.",
+        "points": 1,
+        "topic": "Active transport"
+      },
+      {
+        "type": "multiple_choice",
+        "question": "Which adaptation does NOT increase the rate of exchange across a surface?",
+        "options": ["Folding to increase surface area", "Thinning the barrier", "Rich blood supply maintaining gradients", "Thickening the barrier to trap substances"],
+        "correct": [3],
+        "explanation": "Thicker barriers slow diffusion (longer distance). Area, thinness, supply and moisture all speed exchange.",
+        "points": 1,
+        "topic": "Exchange surfaces"
+      },
+      {
+        "type": "multiple_answer",
+        "question": "Which organelles form the protein production-and-delivery chain? (Select ALL that apply, in any order)",
+        "options": ["Nucleus (DNA instructions)", "Ribosomes (assembly)", "Golgi body (packaging and shipping)", "Central vacuole (main water store)"],
+        "correct": [0, 1, 2],
+        "explanation": "DNA instructions (nucleus) → protein assembly (ribosomes, often on rough ER) → packaging/shipping (Golgi). The vacuole stores water, not proteins.",
+        "points": 2,
+        "topic": "Cell structure"
+      }
+    ]
+  }
+}
