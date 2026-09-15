@@ -3,7 +3,8 @@
  *
  * Exposes exactly three routes:
  *   GET  /health              (public, Railway healthcheck)
- *   POST /api/ai/generate     (admin only)
+ *   POST /api/ai/generate     (Study Tools kinds for any authenticated user,
+ *                              every other kind admin only — see auth.js)
  *   POST /api/dantech/chat    (any authenticated student)
  */
 import { createHash } from 'node:crypto';
@@ -106,7 +107,7 @@ export function createApp(deps) {
       assistant: DANTECH_NAME,
       endpoints: [
         'GET /health',
-        'POST /api/ai/generate (admin) — legacy 10 kinds',
+        'POST /api/ai/generate (students: flashcards/notes/summary/exercise; all other kinds admin-only)',
         'POST /api/ai/courses/generate (admin) — full curriculum DRAFT',
         'POST /api/ai/courses/:courseId/populate (admin)',
         'POST /api/ai/lessons/generate (admin)',
@@ -147,7 +148,7 @@ export function createApp(deps) {
   app.post(
     '/api/ai/generate',
     auth.requireAuth(),
-    auth.requireAdmin,
+    auth.requireAdminForProtectedKind,
     generateLimiter,
     asyncHandler(generate)
   );

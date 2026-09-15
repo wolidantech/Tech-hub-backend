@@ -10,6 +10,7 @@
  * are never trusted for authorisation.
  */
 import { createHash } from 'node:crypto';
+import { isKnownKind, isStudentKind } from './kinds.js';
 
 const CACHE_TTL_MS = 60_000;
 const CACHE_MAX = 500;
@@ -117,14 +118,31 @@ export function createAuth({ supabaseUrl, serviceKey, supabase, fetchImpl = glob
     };
   }
 
+  /**
+   * Express middleware for POST /api/ai/generate: students may use the Study
+   * Tools kinds (flashcards, notes, summary, exercise); every other KNOWN kind
+   * requires profiles.role === 'admin'. Unknown/missing kinds pass through so
+   * the handler returns its uniform 400 (no role probing via status codes).
+   * Must run after requireAuth (needs req.userId for the role lookup).
+   */
+  function requireAdminForProtectedKind(req, res, next) {
+    const kind = req.body?.kind;
+    if (isStudentKind(kind)) return next();
+    if (!isKnownKind(kind)) return next(); // handler answers 400 for everyone
+    return requireAdmin(req, res, next,
+      `The "${kind}" generator is restricted to administrators. ` +
+      'Students can use Study Tools: flashcards, study notes, summary and practice.'
+    );
+  }
+
   /** Express middleware: requires profiles.role === 'admin'. */
-  function requireAdmin(req, res, next) {
+  function requireAdmin(req, res, next, message) {
     resolveRole(req.userId)
       .then(({ role, profile }) => {
         if (role !== 'admin') {
           return res.status(403).json({
             error: 'Forbidden',
-            message: 'AI Studio generation is restricted to administrators.',
+            message: message || 'AI Studio generation is restricted to administrators.',
           });
         }
         req.profile = profile;
@@ -136,7 +154,7 @@ export function createAuth({ supabaseUrl, serviceKey, supabase, fetchImpl = glob
       );
   }
 
-  return { verifyToken, resolveRole, requireAuth, requireAdmin, extractBearer };
+  return { verifyToken, resolveRole, requireAuth, requireAdmin, requireAdminForProtectedKind, extractBearer };
 }
 
 export default createAuth;

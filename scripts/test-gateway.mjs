@@ -258,8 +258,18 @@ try {
   ok('no token -> 401', (await post('/api/ai/generate', { kind: 'quiz', input: {} })).status === 401);
   ok('garbage token -> 401', (await post('/api/ai/generate', { kind: 'quiz', input: {} }, { token: 'nope' })).status === 401);
   const studentGen = await post('/api/ai/generate', { kind: 'quiz', input: { topic: 'useState' } }, { token: STUDENT_TOKEN });
-  ok('student on /api/ai/generate -> 403', studentGen.status === 403);
+  ok('student on protected kind (quiz) -> 403', studentGen.status === 403);
   ok('403 explains the restriction', /administrator/i.test(studentGen.body?.message || ''));
+  ok('403 points students at Study Tools', /Study Tools/i.test(studentGen.body?.message || ''));
+  const studentAssignment = await post('/api/ai/generate', { kind: 'assignment', input: { topic: 'x' } }, { token: STUDENT_TOKEN });
+  ok('student on protected kind (assignment) -> 403', studentAssignment.status === 403);
+  for (const kind of ['flashcards', 'notes', 'summary', 'exercise']) {
+    const r = await post('/api/ai/generate', { kind, input: { topic: 'useState' } }, { token: STUDENT_TOKEN });
+    ok(`student on Study Tools kind (${kind}) -> 200`, r.status === 200);
+    ok(`student ${kind} returns { output, provider }`, r.body && typeof r.body.output === 'object' && typeof r.body.provider === 'string');
+  }
+  const studentUnknown = await post('/api/ai/generate', { kind: 'launch_missiles', input: {} }, { token: STUDENT_TOKEN });
+  ok('student on unknown kind -> 400 (same as admin)', studentUnknown.status === 400);
   ok('student on /api/dantech/chat is allowed (not 403)', (await post('/api/dantech/chat', { message: 'hi' }, { token: STUDENT_TOKEN })).status === 200);
 
   section('[3/7] CORS');

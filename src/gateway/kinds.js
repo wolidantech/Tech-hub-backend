@@ -233,6 +233,21 @@ export function isKnownKind(kind) {
   return Object.prototype.hasOwnProperty.call(KIND_SCHEMAS, kind);
 }
 
+/**
+ * Kinds any authenticated user (including students) may generate.
+ * These power the frontend's Study Tools panel: FLASHCARDS, STUDY NOTES,
+ * SUMMARY and PRACTICE. They produce study aids on a topic — never graded
+ * answers or publishable course content — so they are safe for students.
+ * Every other known kind (quiz, assignment, course_outline, lesson_text,
+ * video_script, voiceover, lesson_content, course_description, practical,
+ * project, resource, ...) stays restricted to administrators.
+ */
+export const STUDENT_ALLOWED_KINDS = ['flashcards', 'notes', 'summary', 'exercise'];
+
+export function isStudentKind(kind) {
+  return typeof kind === 'string' && STUDENT_ALLOWED_KINDS.includes(kind);
+}
+
 /** Models sometimes wrap the payload; dig it out before validating. */
 export function unwrapPayload(kind, parsed) {
   if (parsed === null || typeof parsed !== 'object' || Array.isArray(parsed)) return parsed;

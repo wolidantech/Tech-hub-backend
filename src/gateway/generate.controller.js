@@ -1,5 +1,8 @@
 /**
- * POST /api/ai/generate — admin-only AI Studio generation.
+ * POST /api/ai/generate — AI Studio generation.
+ * Students may use the Study Tools kinds (flashcards, notes, summary,
+ * exercise); all other kinds are admin-only (enforced by
+ * auth.requireAdminForProtectedKind before this handler runs).
  *
  * Contract (wolidantech/Tech-hub-frontend `src/lib/ai.js`):
  *   request  { kind, input, options }
