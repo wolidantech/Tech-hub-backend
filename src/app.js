@@ -27,6 +27,8 @@ import mobileRoutes from './routes/mobile.routes.js';
 import mobileUploadsRoutes from './routes/mobile-uploads.routes.js';
 import classroomRoutes from './routes/classroom.routes.js';
 import adminCurriculumRoutes from './routes/admin-curriculum.routes.js';
+import jambRoutes from './routes/jamb.routes.js';
+import adminJambRoutes from './routes/admin-jamb.routes.js';
 
 const app = express();
 
@@ -90,6 +92,8 @@ app.use('/api/mobile', mobileRoutes); // /api/mobile/courses, /api/mobile/course
 app.use('/api/mobile/uploads', mobileUploadsRoutes); // /api/mobile/uploads/single, /init, /chunk, /session/:id (resumable, progress, retry, timeout handling)
 app.use('/api/learning', learningRoutes);
 app.use('/api/classroom', classroomRoutes); // unified classroom: outline, gated classroom, quizzes, assignments, assessments
+app.use('/api/jamb', jambRoutes); // paid JAMB/UTME practice and mock CBT
+app.use('/api/admin/jamb', adminJambRoutes); // protected JAMB content, syllabus and exam review
 app.use('/api/certificates', certificatesRoutes);
 app.use('/api/notifications', notificationsRoutes);
 app.use('/api/admin', adminRoutes);

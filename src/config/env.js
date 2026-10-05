@@ -52,6 +52,9 @@ export const env = {
   adminInitialPassword: optional('ADMIN_INITIAL_PASSWORD'),
 
   autoConfirmEmail: optional('AUTO_CONFIRM_EMAIL', 'false') === 'true',
+  requireAdminMfa: optional('REQUIRE_ADMIN_MFA', 'false') === 'true',
+  jambAccessMode: optional('JAMB_ACCESS_MODE', 'bundle'),
+  jambAccessBundleTitle: optional('JAMB_ACCESS_BUNDLE_TITLE', 'JAMB CBT pass'),
 
   maxReceiptSizeMb: Number(optional('MAX_RECEIPT_SIZE_MB', '5')),
   maxResourceSizeMb: Number(optional('MAX_RESOURCE_SIZE_MB', '20')),
@@ -60,6 +63,10 @@ export const env = {
 // ---------------------------------------------------------------------------
 // Fail fast, but with a message that tells you exactly what to do.
 // ---------------------------------------------------------------------------
+if (!['course', 'bundle'].includes(env.jambAccessMode)) {
+  problems.push('JAMB_ACCESS_MODE must be either "course" or "bundle".');
+}
+
 if (!isTest) {
   // Normalise the project URL (no trailing slash) before anything uses it.
   if (env.supabaseUrl) {

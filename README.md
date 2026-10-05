@@ -324,6 +324,7 @@ scripts/
   test-db.mjs           legacy LMS schema test (embedded Postgres)
 docs/
   legacy-lms-backend.md documentation for the dormant LMS backend
+  DIGITAL_SCHOOL_UPGRADE_HANDOFF.md JAMB, ID-card, Auth and frontend handoff; live-schema preflight notes
 ```
 
 ### About the dormant LMS backend
@@ -340,7 +341,7 @@ That code is **not deployed** and is not reachable from `npm start`. It is
 kept for reference and still parse-checked by `npm run check`. Do not point
 Railway at it: its endpoints do not match the live tables. Its docs live in
 [`docs/legacy-lms-backend.md`](docs/legacy-lms-backend.md) and it can still be
-run locally with `npm run start:lms`.
+run locally with `npm run start:lms`. The digital-school upgrade and frontend schema adapter are documented in [`docs/DIGITAL_SCHOOL_UPGRADE_HANDOFF.md`](docs/DIGITAL_SCHOOL_UPGRADE_HANDOFF.md). For the frontend Supabase schema, use only `npm run migrate:frontend` after migrations 001–011; never run the full legacy `npm run migrate` chain against it.
 
 ## 10. Troubleshooting
 

@@ -27,13 +27,26 @@ async function main() {
     process.exit(1);
   }
 
-  const client = new Client({
-    connectionString: databaseUrl,
-    ssl: { rejectUnauthorized: false },
-  });
+  const ssl = process.env.DATABASE_SSL === 'disable' ? false : { rejectUnauthorized: false };
+  const client = new Client({ connectionString: databaseUrl, ssl });
 
   await client.connect();
-  console.log('Connected to the database.\n');
+  const { rows: [schema] } = await client.query(`
+    select to_regclass('public.profiles') is not null as has_profiles,
+           to_regclass('public.course_categories') is not null as has_legacy_categories,
+           exists (select 1 from information_schema.columns where table_schema='public' and table_name='profiles' and column_name='user_id') as has_legacy_user_id,
+           exists (select 1 from information_schema.columns where table_schema='public' and table_name='profiles' and column_name='profile_photo_url') as has_legacy_photo,
+           exists (select 1 from information_schema.columns where table_schema='public' and table_name='courses' and column_name='is_published') as has_legacy_course_publish
+  `);
+  if (schema.has_profiles && (!schema.has_legacy_categories || !schema.has_legacy_user_id
+      || !schema.has_legacy_photo || !schema.has_legacy_course_publish)) {
+    throw new Error(
+      'Target schema does not match this legacy migration chain. No SQL was applied. ' +
+      'For the frontend schema, apply frontend migrations 001-011 and use npm run migrate:frontend; ' +
+      'do not run the full legacy npm run migrate chain there.'
+    );
+  }
+  console.log('Connected to a compatible legacy-schema target.\n');
 
   await client.query(`
     create table if not exists public._migrations (

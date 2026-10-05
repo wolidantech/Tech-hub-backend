@@ -140,7 +140,7 @@ async function main() {
   });
   await client.connect();
 
-  console.log('\n[1/7] Installing schema + stubbing Supabase platform...');
+  console.log('\n[1/8] Installing schema + stubbing Supabase platform...');
   await client.query(SUPABASE_STUB_SQL);
   for (const file of readdirSync(MIGRATIONS_DIR).filter((f) => f.endsWith('.sql')).sort()) {
     await client.query(readFileSync(join(MIGRATIONS_DIR, file), 'utf8'));
@@ -148,7 +148,7 @@ async function main() {
   }
 
   // ---------------- registration trigger ----------------
-  console.log('\n[2/7] Registration trigger & welcome notification');
+  console.log('\n[2/8] Registration trigger & welcome notification');
   const { rows: [studentAuth] } = await client.query(
     `insert into auth.users (email, raw_user_meta_data)
      values ('student1@example.com', '{"full_name":"Ada Student","phone":"+2348000000001"}') returning id`
@@ -176,9 +176,19 @@ async function main() {
 
   // seed sanity
   const { rows: cats } = await client.query(`select count(*)::int as n from course_categories`);
-  ok('7 categories seeded', cats[0].n === 7);
+  ok('11 categories seeded after catalogue expansion', cats[0].n === 11);
   const { rows: courses } = await client.query(`select count(*)::int as n, min(price) as p from courses`);
-  ok('12 courses seeded at NGN 5000', courses[0].n === 12 && Number(courses[0].p) === 5000);
+  ok('32 courses seeded at NGN 5000 baseline', courses[0].n === 32 && Number(courses[0].p) === 5000);
+  const { rows: draftCourses } = await client.query(
+    `select count(*)::int as n from courses where slug in (
+       'quality-assurance-laboratories-manufacturing', 'quality-control-testing-methods',
+       'molecular-biology-laboratory-techniques', 'laboratory-analysis-instrumentation',
+       'technical-drawing-cad-industrial-design', '3d-product-modelling-rendering',
+       'product-prototyping-materials-fabrication', 'digital-illustration-vector-art',
+       'business-administration', 'jamb-cbt-practice-mock-exams'
+     ) and is_published = false`
+  );
+  ok('requested course and paid JAMB shells remain unpublished', draftCourses[0].n === 10);
   const { rows: bank } = await client.query(`select value from platform_settings where key='bank_details'`);
   ok('bank details seeded (MONIEPOINT)', bank[0].value.bank_name === 'MONIEPOINT');
   const { rows: capcut } = await client.query(
@@ -189,7 +199,7 @@ async function main() {
   const { rows: [course] } = await client.query(`select * from courses where slug='video-editing-with-capcut'`);
 
   // ---------------- RLS isolation ----------------
-  console.log('\n[3/7] Row Level Security');
+  console.log('\n[3/8] Row Level Security');
   let r = await asUser(client, studentAuth.id, `select count(*)::int as n from profiles`);
   ok('student sees only own profile (RLS)', r.rows[0].n === 1);
 
@@ -206,7 +216,7 @@ async function main() {
   ok('unenrolled student sees 0 lesson rows via RLS', r.rows[0].n === 0);
 
   // ---------------- payment submission rules ----------------
-  console.log('\n[4/7] Manual payment flow');
+  console.log('\n[4/8] Manual payment flow');
   const payment = await asUser(client, studentAuth.id,
     `insert into payments (student_id, course_id, amount, transaction_reference, transaction_date)
      values ($1, $2, 5000, 'TRX-0001', '2026-09-10') returning *`,
@@ -261,7 +271,7 @@ async function main() {
   ok('owner can read own receipt row (RLS)', r.rows[0].n === 1);
 
   // ---------------- atomic approval ----------------
-  console.log('\n[5/7] Atomic APPROVE -> enrollment ACTIVE');
+  console.log('\n[5/8] Atomic APPROVE -> enrollment ACTIVE');
   const { rows: [approveRes] } = await client.query(
     `select approve_payment($1, $2) as r`, [payment.rows[0].id, admin.id]
   );
@@ -302,7 +312,7 @@ async function main() {
   ok('enrolled student sees lessons via RLS', r.rows[0].n === 1); // 1 seed lesson
 
   // ---------------- course completion -> certificate ----------------
-  console.log('\n[6/7] Completion, certificates, rejection, statistics');
+  console.log('\n[6/8] Completion, certificates, rejection, statistics');
   const { rows: seedLessons } = await client.query(
     `select l.id, m.course_id from lessons l join course_modules m on m.id=l.module_id where m.course_id=$1 and l.is_published`,
     [course.id]
@@ -383,7 +393,7 @@ async function main() {
     stats.s.completed_courses === 1);
 
   // ---------------- curriculum engine (migration 014) ----------------
-  console.log('\n[7/7] Curriculum engine: topics, contents, quizzes, assignments, RPCs');
+  console.log('\n[7/8] Curriculum engine: topics, contents, quizzes, assignments, RPCs');
 
   const { rows: [mod1] } = await client.query(
     `select * from course_modules where course_id=$1 order by order_number limit 1`, [course.id]
@@ -597,6 +607,176 @@ async function main() {
   const { rows: [stats2] } = await client.query(`select admin_statistics() as s`);
   ok('admin_statistics includes curriculum keys',
     stats2.s.total_topics >= 2 && stats2.s.live_quizzes >= 1 && stats2.s.live_assignments >= 1);
+
+  // ---------------- JAMB CBT + student ID security ----------------
+  console.log('\n[8/8] JAMB CBT, paid access, answer privacy and student IDs');
+  ok('student number is automatically assigned', /^WDTH-\d{4}-\d{6}$/.test(student.student_number));
+  const { rows: [studentCard] } = await client.query(
+    `select status, student_number from student_id_cards where profile_id=$1`, [student.id]
+  );
+  ok('ID-card row is created pending photo at signup',
+    studentCard.status === 'PENDING_PHOTO' && studentCard.student_number === student.student_number);
+
+  r = await asUser(client, studentAuth.id,
+    `select status from student_id_cards where profile_id=$1`, [student.id]);
+  ok('student can read their own ID-card status', r.rows[0]?.status === 'PENDING_PHOTO');
+  r = await asUser(client, studentAuth.id,
+    `select count(*)::int as n from student_id_cards where profile_id=$1`, [student2.id]);
+  ok('student cannot read another student ID-card row', r.rows[0].n === 0);
+  await expectError(
+    () => asUser(client, studentAuth.id,
+      `update profiles set student_number='WDTH-2026-999999' where id=$1`, [student.id]),
+    'FORBIDDEN',
+    'student cannot change their server-assigned student number'
+  );
+  await asUser(client, studentAuth.id,
+    `update profiles set profile_photo_url='https://example.supabase.co/storage/v1/object/public/avatars/student/avatar.png' where id=$1`,
+    [student.id]);
+  const { rows: [photoCard] } = await client.query(
+    `select status from student_id_cards where profile_id=$1`, [student.id]
+  );
+  ok('adding a profile photo moves the ID card to pending generation', photoCard.status === 'PENDING_GENERATION');
+
+  const { rows: [jambCourse] } = await client.query(
+    `select id, price, is_published from courses where slug='jamb-cbt-practice-mock-exams'`
+  );
+  ok('paid JAMB access course is seeded unpublished',
+    !!jambCourse && Number(jambCourse.price) === 5000 && jambCourse.is_published === false);
+
+  await expectError(
+    () => asUser(client, studentAuth.id, `select count(*)::int as n from quiz_questions`),
+    'permission denied',
+    'direct quiz answer-key table reads are revoked'
+  );
+  await expectError(
+    () => asUser(client, studentAuth.id, `select count(*)::int as n from jamb_questions`),
+    'permission denied',
+    'direct JAMB question-bank reads are revoked'
+  );
+
+  // Configure a complete mock in the isolated test database. No past-paper
+  // content is used; the five questions below are synthetic test fixtures.
+  await client.query(`update courses set is_published=true where id=$1`, [jambCourse.id]);
+  const { rows: [exam] } = await client.query(
+    `insert into jamb_exams
+       (slug, title, mode, syllabus_year, time_limit_minutes, mock_elective_count,
+        status, access_course_id, created_by, reviewed_by, reviewed_at)
+     values ('test-utme-mock-2026', 'Test UTME Mock 2026', 'MOCK', 2026, 60, 3,
+             'DRAFT', $1, $2, $2, now()) returning *`,
+    [jambCourse.id, admin.id]
+  );
+  const mockSubjects = [
+    { code: 'USE-OF-ENGLISH', required: true },
+    { code: 'BIOLOGY', required: false },
+    { code: 'CHEMISTRY', required: false },
+    { code: 'MATHEMATICS', required: false },
+    { code: 'PHYSICS', required: false },
+  ];
+  for (const [index, selection] of mockSubjects.entries()) {
+    const { rows: [subjectRow] } = await client.query(
+      `select id from jamb_subjects where code=$1`, [selection.code]
+    );
+    const { rows: [syllabus] } = await client.query(
+      `select id from jamb_syllabus_versions where subject_id=$1 and exam_year=2026`, [subjectRow.id]
+    );
+    await client.query(
+      `insert into jamb_exam_sections (exam_id, subject_id, syllabus_version_id, question_count, is_required, order_number)
+       values ($1, $2, $3, 1, $4, $5)`,
+      [exam.id, subjectRow.id, syllabus.id, selection.required, index + 1]
+    );
+  }
+  await expectError(
+    () => client.query(`update jamb_exams set status='PUBLISHED' where id=$1`, [exam.id]),
+    'JAMB_EXAM_QUESTION_BANK_INCOMPLETE',
+    'exam publishing is blocked until every section has enough reviewed questions'
+  );
+
+  for (const selection of mockSubjects) {
+    const { rows: [subjectRow] } = await client.query(
+      `select id from jamb_subjects where code=$1`, [selection.code]
+    );
+    const { rows: [syllabus] } = await client.query(
+      `select id from jamb_syllabus_versions where subject_id=$1 and exam_year=2026`, [subjectRow.id]
+    );
+    const { rows: [questionRow] } = await client.query(
+      `insert into jamb_questions
+         (subject_id, syllabus_version_id, question, explanation, source_type, rights_verified, status, created_by)
+       values ($1, $2, $3, 'This is an original test-fixture explanation.', 'ORIGINAL', true, 'DRAFT', $4)
+       returning id`,
+      [subjectRow.id, syllabus.id, `Synthetic test question for ${selection.code}?`, admin.id]
+    );
+    for (let index = 0; index < 4; index += 1) {
+      await client.query(
+        `insert into jamb_question_options (question_id, option_text, is_correct, order_number)
+         values ($1, $2, $3, $4)`,
+        [questionRow.id, `Option ${index + 1} for ${selection.code}`, index === 0, index + 1]
+      );
+    }
+    await client.query(
+      `update jamb_questions set status='PUBLISHED', reviewed_by=$2, reviewed_at=now() where id=$1`,
+      [questionRow.id, admin.id]
+    );
+  }
+
+  await client.query(`update jamb_exams set status='IN_REVIEW' where id=$1`, [exam.id]);
+  await client.query(`update jamb_exams set status='APPROVED' where id=$1`, [exam.id]);
+  await client.query(`update jamb_exams set status='PUBLISHED' where id=$1`, [exam.id]);
+  const { rows: [publishedExam] } = await client.query(
+    `select status from jamb_exams where id=$1`, [exam.id]
+  );
+  ok('complete paid mock publishes after review', publishedExam.status === 'PUBLISHED');
+
+  await expectError(
+    () => client.query(
+      `select start_jamb_exam_attempt($1, $2, $3::text[])`,
+      [exam.id, student2.id, ['USE-OF-ENGLISH', 'BIOLOGY', 'CHEMISTRY', 'MATHEMATICS']]
+    ),
+    'JAMB_PAID_ACCESS_REQUIRED',
+    'student without paid JAMB enrollment cannot start a mock'
+  );
+  await client.query(
+    `insert into enrollments (student_id, course_id, status) values ($1, $2, 'ACTIVE')`,
+    [student.id, jambCourse.id]
+  );
+  const { rows: [attemptResult] } = await client.query(
+    `select start_jamb_exam_attempt($1, $2, $3::text[]) as a`,
+    [exam.id, student.id, ['USE-OF-ENGLISH', 'BIOLOGY', 'CHEMISTRY', 'MATHEMATICS']]
+  );
+  const activeAttempt = attemptResult.a;
+  ok('paid student starts a mock with required English + three electives',
+    activeAttempt.total_questions === 4 && activeAttempt.selected_subject_codes.length === 4);
+  const { rows: attemptItems } = await client.query(
+    `select id, subject_id, options_snapshot, correct_option_id_snapshot
+       from jamb_exam_attempt_items where attempt_id=$1 order by order_number`,
+    [activeAttempt.attempt_id]
+  );
+  ok('attempt snapshots expose option text but no answer flags',
+    attemptItems.length === 4 && attemptItems.every((item) =>
+      item.options_snapshot.length === 4 &&
+      item.options_snapshot.every((option) => !Object.hasOwn(option, 'is_correct'))));
+
+  const submittedAnswers = attemptItems.map((item, index) => {
+    const wrongOption = item.options_snapshot.find((option) => option.id !== item.correct_option_id_snapshot);
+    return {
+      attempt_item_id: item.id,
+      option_id: index === 0 ? wrongOption.id : item.correct_option_id_snapshot,
+    };
+  });
+  const { rows: [saved] } = await client.query(
+    `select save_jamb_exam_answers($1, $2, $3::jsonb) as s`,
+    [activeAttempt.attempt_id, student.id, JSON.stringify(submittedAnswers)]
+  );
+  ok('attempt answers save through the server-side RPC', saved.s.saved_count === 4);
+  const { rows: [score] } = await client.query(
+    `select submit_jamb_exam_attempt($1, $2) as s`, [activeAttempt.attempt_id, student.id]
+  );
+  ok('server-side grading returns 75 percent and three correct',
+    score.s.status === 'SUBMITTED' && score.s.correct_count === 3 && Number(score.s.score) === 75);
+  await expectError(
+    () => asUser(client, studentAuth.id, `select count(*)::int as n from jamb_exam_attempt_items`),
+    'permission denied',
+    'students cannot read private attempt/correct-answer snapshots directly'
+  );
 
   console.log(`\nAll ${passed} database checks passed.`);
   await client.end();

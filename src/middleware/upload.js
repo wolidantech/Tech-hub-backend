@@ -38,9 +38,9 @@ export const avatarUpload = multer({
   storage: multer.memoryStorage(),
   limits: { fileSize: 2 * 1024 * 1024 },
   fileFilter: (_req, file, cb) => {
-    const allowed = new Set(['image/jpeg', 'image/png', 'image/webp']);
+    const allowed = new Set(['image/jpeg', 'image/png']);
     if (allowed.has(file.mimetype)) cb(null, true);
-    else cb(ApiError.badRequest(`Unsupported avatar type: ${file.mimetype}`, 'UNSUPPORTED_TYPE'));
+    else cb(ApiError.badRequest(`Student photos must be JPEG or PNG: ${file.mimetype}`, 'UNSUPPORTED_TYPE'));
   },
 });
 
