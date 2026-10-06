@@ -1,8 +1,8 @@
-# WOLI DAN TECH HUB — Global Knowledge Platform + CV Builder + Advanced DanTECH AI
+# DANQEL DIGITAL INSTITUTE — Global Knowledge Platform + CV Builder + Advanced DANQEL AI
 
 ## Overview
 
-Scalable global learning platform: GLOBAL COURSE LIBRARY + PROFESSIONAL CV BUILDER + CAREER TOOLS + COMPLETE LMS + DANTECH AI + AI COURSE GENERATOR + AI LESSON GENERATOR + PRACTICAL TRAINING + QUIZZES + PROJECTS + CERTIFICATES + GLOBAL EDUCATIONAL RESOURCES
+Scalable global learning platform: GLOBAL COURSE LIBRARY + PROFESSIONAL CV BUILDER + CAREER TOOLS + COMPLETE LMS + DANQEL AI + AI COURSE GENERATOR + AI LESSON GENERATOR + PRACTICAL TRAINING + QUIZZES + PROJECTS + CERTIFICATES + GLOBAL EDUCATIONAL RESOURCES
 
 ## 1. Public CV Builder API (Unauthenticated)
 
@@ -92,14 +92,14 @@ Response: { success: true, data: { improved, original, sectionType } }
 - No overlapping, correct pagination (adds page when y>700)
 - Header: name, title, contact line
 - Sections: summary, experience (title at company, duration, description, achievements bullets), education, skills, projects
-- Footer: "Generated via WOLI DAN TECH HUB"
+- Footer: "Generated via DANQEL DIGITAL INSTITUTE"
 - Stored in `cv-exports` bucket private, guest expires 24h, signed URL 600s guest / 3600s user, download_count tracked, temporary cleanup via expires_at
 
 **AI CV Writing — No Fabrication:**
 
 System prompt:
 ```
-You are a professional CV writing assistant for WOLI DAN TECH HUB.
+You are a professional CV writing assistant for DANQEL DIGITAL INSTITUTE.
 CRITICAL RULES — NEVER FABRICATE:
 - Do NOT invent degrees, employment, certifications, job titles, companies, achievements, skills, or dates
 - Only transform, rephrase, and improve the information the user has already provided
@@ -198,7 +198,7 @@ Statuses QUEUED/PROCESSING/COMPLETED/FAILED/CANCELLED, never fake URLs.
 
 Service `ai-video.service.js`, table `lesson_videos`, storage `course-videos` private 500MB.
 
-## 10. Advanced DanTECH AI
+## 10. Advanced DANQEL AI
 
 General-purpose educational AI assistant supporting: general questions, technical, programming, mathematics, science, writing, study assistance, career questions, course tutoring, research assistance, problem solving, document analysis, lesson explanations.
 
@@ -221,7 +221,7 @@ data: {"type":"done","mode":"GENERAL"}
 
 Provider `chatStream` async generator for OpenAI streaming. Fallback simulates streaming by chunking non-stream reply.
 
-## 12. DanTECH AI Modes
+## 12. DANQEL AI Modes
 
 GENERAL, STUDY, CODING, RESEARCH, CAREER, DEEP_EXPLANATION — different system prompts/model params sharing same core service.
 
@@ -239,7 +239,7 @@ Example: Course Python Programming, Module Functions, Lesson Function Parameters
 
 RAG-ready: indexes approved Courses, Modules, Lessons, FAQs, Resources, Documentation. Does NOT index unpublished AI content for student responses.
 
-Priority: 1 Current lesson, 2 Current course, 3 WOLI DAN TECH HUB approved content, 4 Approved external educational sources, 5 General AI knowledge.
+Priority: 1 Current lesson, 2 Current course, 3 DANQEL DIGITAL INSTITUTE approved content, 4 Approved external educational sources, 5 General AI knowledge.
 
 Implementation: `lesson_content` chunks (is_approved=true), `ai_generated_content` APPROVED/PUBLISHED, `course_resources` is_approved, `fetchApprovedAiContent`, `fetchRagChunks`, `buildContext` with boost moduleId+12, isApproved+10, LESSON_TEXT+5.
 
@@ -251,7 +251,7 @@ Endpoint `POST /api/dantech/research` { query, maxResults } → searches `course
 
 ## 16. AI File Analysis
 
-Authenticated students upload supported learning files, DanTECH AI can summarize, explain, extract concepts, generate quizzes, flashcards, answer questions about document.
+Authenticated students upload supported learning files, DANQEL AI can summarize, explain, extract concepts, generate quizzes, flashcards, answer questions about document.
 
 - File-size limits 20MB, MIME validation (pdf, txt, csv, doc, docx, jpeg, png, markdown), access controls (user_id), private storage `ai-uploads` bucket
 - Student can only access own files via RLS
@@ -342,7 +342,7 @@ Scripts: `npm run check`, `test:gateway`, `test:payments`, `test:ai-content`, `t
 
 ## 28. Final Product
 
-WOLI DAN TECH HUB scalable global learning platform: GLOBAL COURSE LIBRARY + PROFESSIONAL CV BUILDER + CAREER TOOLS + COMPLETE LMS + DANTECH AI + AI COURSE GENERATOR + AI LESSON GENERATOR + PRACTICAL TRAINING + QUIZZES + PROJECTS + CERTIFICATES + GLOBAL EDUCATIONAL RESOURCES
+DANQEL DIGITAL INSTITUTE scalable global learning platform: GLOBAL COURSE LIBRARY + PROFESSIONAL CV BUILDER + CAREER TOOLS + COMPLETE LMS + DANQEL AI + AI COURSE GENERATOR + AI LESSON GENERATOR + PRACTICAL TRAINING + QUIZZES + PROJECTS + CERTIFICATES + GLOBAL EDUCATIONAL RESOURCES
 
 Architecture allows growth to thousands of courses, millions of lessons/resources, large student population without redesign.
 

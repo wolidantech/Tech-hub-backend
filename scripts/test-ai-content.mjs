@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
- * WOLI DAN TECH HUB — AI Content System Validation per spec 31-32
+ * DANQEL DIGITAL INSTITUTE — AI Content System Validation per spec 31-32
  * Checks: course/module/lesson/quiz/assignment/practical/video/resource storage,
  * external metadata, admin approval/publishing/unpublishing, student access,
- * progress, DanTECH AI context, RLS, storage security, unpublished not accessible
+ * progress, DANQEL AI context, RLS, storage security, unpublished not accessible
  */
 
 import { readFileSync, existsSync } from 'fs';
@@ -27,7 +27,7 @@ function check(name, condition, hint = '') {
   }
 }
 
-console.log('🔍 WOLI DAN TECH HUB — AI Content System Tests\n');
+console.log('🔍 DANQEL DIGITAL INSTITUTE — AI Content System Tests\n');
 
 // 1. Migration 010 exists and has required enums/tables
 const mig010 = read('supabase/migrations/20260910000010_ai_course_content_system.sql');

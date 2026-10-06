@@ -108,7 +108,10 @@ create table public.enrollments (
   id uuid primary key default gen_random_uuid(),
   user_id uuid not null references public.profiles(id),
   course_id uuid not null references public.courses(id),
-  status text default 'active'
+  status text default 'active',
+  method text,
+  coupon_code text,
+  unique (user_id, course_id)
 );
 create table public.bundles (
   id uuid primary key default gen_random_uuid(),
@@ -139,6 +142,61 @@ create table public.student_id_cards (
   issued_at timestamptz not null default now(),
   status text not null default 'active' check (status in ('active', 'revoked')),
   revoked_at timestamptz
+);
+create table public.site_settings (
+  id int primary key default 1,
+  site_name text,
+  tagline text,
+  whatsapp text,
+  support_email text,
+  bank_name text,
+  account_number text,
+  account_name text,
+  dantech_enabled boolean,
+  allow_registration boolean,
+  socials jsonb,
+  meta_description text,
+  updated_at timestamptz
+);
+create table public.certificate_issues (
+  id uuid primary key default gen_random_uuid(),
+  certificate_id text unique not null,
+  verification_code text unique not null,
+  user_id uuid not null,
+  student_name text,
+  course_id uuid not null,
+  course_name text,
+  status text default 'valid',
+  issued_by text,
+  issue_date timestamptz default now(),
+  revoked_at timestamptz
+);
+create table public.student_notifications (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null,
+  type text,
+  title text not null,
+  message text not null,
+  course_id uuid,
+  read boolean default false,
+  created_at timestamptz default now()
+);
+create table public.coupons (
+  id uuid primary key default gen_random_uuid(),
+  code text, active boolean, expires_at timestamptz, course_id uuid,
+  max_uses integer, restricted_user_id uuid, restricted_email text,
+  restricted_phone text, min_purchase integer, discount_type text,
+  discount_value numeric, used_count integer default 0
+);
+create table public.coupon_redemptions (
+  id uuid primary key default gen_random_uuid(),
+  coupon_id uuid not null references public.coupons(id),
+  coupon_code text not null,
+  user_id uuid not null references public.profiles(id),
+  course_id uuid not null references public.courses(id),
+  discount integer not null,
+  amount_due integer not null,
+  created_at timestamptz default now()
 );
 create table public.audit_logs (
   id uuid primary key default gen_random_uuid(),
@@ -189,15 +247,38 @@ async function main() {
 
   try {
     await client.query(FRONTEND_SCHEMA_FIXTURE);
+    await client.query(`
+      insert into site_settings
+        (id, site_name, tagline, whatsapp, support_email, bank_name, account_number,
+         account_name, dantech_enabled, allow_registration, socials, meta_description)
+      values
+        (1, 'WOLI DAN TECH HUB', 'Learn • Build • Grow', '08150000000',
+         'wolidantech@gmail.com', 'MONIEPOINT', '00000000000',
+         'LUNA ENTRY SERVICES- WOLI DAN TECH HUB', true, true, '{}'::jsonb,
+         'Welcome to WOLI DAN TECH HUB');
+      insert into certificate_issues
+        (certificate_id, verification_code, user_id, student_name, course_id, course_name,
+         status, issued_by, issue_date, revoked_at)
+      values
+        ('WDTH-2026-ABC123', 'WDTH-ABCD-1234', '11111111-1111-4111-8111-111111111111',
+         'Ada Student', '22222222-2222-4222-8222-222222222222', 'Digital Skills',
+         'valid', 'WOLI DAN TECH HUB', '2026-01-02T03:04:05Z', null);
+      insert into student_notifications (user_id, type, title, message, read, created_at)
+      values
+        ('11111111-1111-4111-8111-111111111111', 'payment_approved', 'Payment approved',
+         'WOLI DAN TECH HUB approved your payment. Learn • Build • Grow', false, '2026-02-03T04:05:06Z');
+    `);
     const runnerOutput = runFrontendMigrationRunner();
-    ok('frontend migration runner preflights the schema and applies catalogue + JAMB migrations',
+    ok('frontend migration runner preflights the schema and applies catalogue, JAMB and brand migrations',
       runnerOutput.includes('Frontend schema preflight passed.')
         && runnerOutput.includes('frontend-012_catalogue_expansion.sql')
-        && runnerOutput.includes('frontend-013_jamb_cbt_engine.sql'));
+        && runnerOutput.includes('frontend-013_jamb_cbt_engine.sql')
+        && runnerOutput.includes('frontend-014_danqel_brand_identity.sql'));
     const rerunOutput = runFrontendMigrationRunner();
     ok('frontend migration runner safely skips migrations already recorded',
       rerunOutput.includes('frontend-012_catalogue_expansion.sql already applied')
-        && rerunOutput.includes('frontend-013_jamb_cbt_engine.sql already applied'));
+        && rerunOutput.includes('frontend-013_jamb_cbt_engine.sql already applied')
+        && rerunOutput.includes('frontend-014_danqel_brand_identity.sql already applied'));
     const legacyGuard = runLegacyMigrationGuard();
     ok('legacy migration runner refuses the frontend-shaped schema before applying SQL',
       legacyGuard.status !== 0 && legacyGuard.output.includes('No SQL was applied'));
@@ -221,6 +302,51 @@ async function main() {
 
     ok('JAMB migration applies after frontend schema + migration 011');
 
+    const { rows: [siteSettings] } = await client.query(`select * from site_settings where id=1`);
+    ok('brand migration updates the institution and tagline while preserving operational settings',
+      siteSettings.site_name === 'DANQEL DIGITAL INSTITUTE'
+        && siteSettings.tagline === 'Technology • Science • Digital Learning'
+        && siteSettings.meta_description === 'Welcome to DANQEL DIGITAL INSTITUTE'
+        && siteSettings.support_email === 'wolidantech@gmail.com'
+        && siteSettings.account_name === 'LUNA ENTRY SERVICES- WOLI DAN TECH HUB'
+        && siteSettings.dantech_enabled === true);
+    const { rows: [legacyCertificate] } = await client.query(`
+      select certificate_id, verification_code, user_id, course_id, status, issued_by, issue_date, revoked_at
+      from certificate_issues where certificate_id='WDTH-2026-ABC123'
+    `);
+    ok('certificate issuer is rebranded without changing identifiers or validity',
+      legacyCertificate.certificate_id === 'WDTH-2026-ABC123'
+        && legacyCertificate.verification_code === 'WDTH-ABCD-1234'
+        && legacyCertificate.status === 'valid'
+        && legacyCertificate.issued_by === 'DANQEL DIGITAL INSTITUTE'
+        && legacyCertificate.issue_date.toISOString() === '2026-01-02T03:04:05.000Z'
+        && legacyCertificate.revoked_at === null);
+    const { rows: [verifiedCertificate] } = await client.query(
+      `select public.verify_certificate('WDTH-2026-ABC123') as value`
+    );
+    ok('public certificate verification keeps its shape and returns the new issuer',
+      verifiedCertificate.value.found === true
+        && verifiedCertificate.value.certificateId === 'WDTH-2026-ABC123'
+        && verifiedCertificate.value.verificationCode === 'WDTH-ABCD-1234'
+        && verifiedCertificate.value.issuedBy === 'DANQEL DIGITAL INSTITUTE');
+    const { rows: [notification] } = await client.query(`select * from student_notifications`);
+    ok('stored notification keeps its row and read state while changing display copy',
+      notification.title === 'Payment approved'
+        && notification.message === 'DANQEL DIGITAL INSTITUTE approved your payment. Technology • Science • Digital Learning'
+        && notification.read === false
+        && notification.created_at.toISOString() === '2026-02-03T04:05:06.000Z');
+    const { rows: brandingFunctions } = await client.query(`
+      select proname, pg_get_functiondef(oid) as definition
+      from pg_proc where pronamespace = 'public'::regnamespace
+        and proname = any($1::text[])
+    `, [['approve_payment', 'reject_payment', 'maybe_issue_certificate', 'issue_certificate_manual', 'redeem_coupon']]);
+    ok('future payment, certificate, and coupon RPC messages use the current issuer',
+      brandingFunctions.length === 5
+        && brandingFunctions.every((fn) => fn.definition.includes('DANQEL DIGITAL INSTITUTE')
+          && !fn.definition.includes('WOLI DAN TECH HUB'))
+        && brandingFunctions.filter((fn) => ['approve_payment', 'redeem_coupon'].includes(fn.proname))
+          .every((fn) => fn.definition.includes('Technology • Science • Digital Learning')));
+
     const { rows: subjects } = await client.query(`select count(*)::int as n from jamb_subjects`);
     ok('2026 subject baseline seeded without question content', subjects[0].n === 25);
     ok('bundle foreign key references existing migration-011 table',
@@ -236,6 +362,32 @@ async function main() {
        ($3, 'School Admin', 'admin@example.com', 'admin')`,
       [studentId, otherStudentId, adminId]
     );
+    await client.query(`update profiles set phone=$2 where id=$1`, [studentId, '+234 801 234 5678']);
+    const { rows: [couponCourse] } = await client.query(
+      `select id from courses where price > 0 order by created_at limit 1`
+    );
+    await client.query(`
+      insert into coupons (code, active, restricted_phone, min_purchase, discount_type, discount_value, used_count)
+      values ('DANQEL-TEST', true, '0801-234-5678', 0, 'free', 0, 0)
+    `);
+    await client.query(`select set_config('request.jwt.claim.sub', $1, false)`, [studentId]);
+    const { rows: [couponRedemption] } = await client.query(
+      `select public.redeem_coupon('DANQEL-TEST', $1) as value`, [couponCourse.id]
+    );
+    const { rows: [couponEnrollment] } = await client.query(
+      `select e.method, e.coupon_code, n.message
+       from enrollments e join student_notifications n on n.user_id=e.user_id and n.type='coupon_approved'
+       where e.user_id=$1 and e.course_id=$2`, [studentId, couponCourse.id]
+    );
+    ok('coupon redemption keeps phone normalization and uses the current brand',
+      couponRedemption.value.valid === true
+        && couponRedemption.value.isFree === true
+        && couponEnrollment.method === 'coupon'
+        && couponEnrollment.coupon_code === 'DANQEL-TEST'
+        && couponEnrollment.message.includes('DANQEL DIGITAL INSTITUTE')
+        && couponEnrollment.message.includes('Technology • Science • Digital Learning'));
+    await client.query(`select set_config('request.jwt.claim.sub', '', false)`);
+
     const { rows: [bundle] } = await client.query(
       `update bundles set is_published=true where id=$1 returning id`, [draftPass.id]
     );

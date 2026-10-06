@@ -7,7 +7,7 @@
  *
  * Two methods:
  *   complete({ system, user })  -> strict JSON text (AI Studio generation)
- *   chat({ system, messages })  -> plain markdown text (DanTECH AI)
+ *   chat({ system, messages })  -> plain markdown text (DANQEL AI)
  */
 
 class ProviderError extends Error {

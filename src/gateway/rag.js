@@ -1,8 +1,8 @@
 /**
- * Retrieval for DanTECH AI — PUBLISHED, non-archived course content only.
+ * Retrieval for DANQEL AI — PUBLISHED, non-archived course content only.
  * Upgraded per spec sections 22-23 to be course-aware and RAG-ready:
  * - Accepts studentId, courseId, moduleId, lessonId
- * - Prefers approved WOLI DAN TECH HUB content (ai_generated_content + lesson_content) over general knowledge
+ * - Prefers approved DANQEL DIGITAL INSTITUTE content (ai_generated_content + lesson_content) over general knowledge
  * - Uses approved educational material for grounding
  *
  * Mirrors the scoring the frontend's offline engine uses (keyword hits with a
@@ -38,7 +38,7 @@ export function retrieve(docs, query, context = {}, topK = 3) {
       if (context.lessonId && doc.lessonId === context.lessonId) score += 20;
       else if (context.courseId && doc.courseId === context.courseId) score += 8;
       if (context.moduleId && doc.moduleId === context.moduleId) score += 12;
-      // Boost approved WOLI DAN TECH HUB content per spec 23
+      // Boost approved DANQEL DIGITAL INSTITUTE content per spec 23
       if (doc.isApprovedContent) score += 10;
       if (doc.contentType === 'LESSON_TEXT' || doc.contentType === 'LESSON') score += 5;
       return { doc, score };

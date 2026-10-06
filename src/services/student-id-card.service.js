@@ -3,6 +3,7 @@ import { PassThrough } from 'node:stream';
 import { supabaseAdmin } from '../config/supabase.js';
 import { BUCKETS, env } from '../config/env.js';
 import { ApiError } from '../utils/errors.js';
+import { INSTITUTION_NAME } from '../config/brand.js';
 import { createSignedUrl } from './storage.service.js';
 
 const ID_CARD_BUCKET = 'student-id-cards';
@@ -35,7 +36,7 @@ async function getAvatarBuffer(photoUrl) {
 export async function renderStudentIdCardPdf(profile, photoBuffer) {
   const stream = new PassThrough();
   const chunks = [];
-  const doc = new PDFDocument({ size: [360, 225], margin: 0, info: { Title: 'Student ID Card', Author: 'WOLI DAN TECH HUB' } });
+  const doc = new PDFDocument({ size: [360, 225], margin: 0, info: { Title: 'Student ID Card', Author: INSTITUTION_NAME } });
   const bufferReady = new Promise((resolve, reject) => {
     stream.on('data', (chunk) => chunks.push(Buffer.from(chunk)));
     stream.on('end', () => resolve(Buffer.concat(chunks)));
@@ -46,7 +47,7 @@ export async function renderStudentIdCardPdf(profile, photoBuffer) {
 
   doc.rect(0, 0, 360, 225).fill('#f6f8fb');
   doc.rect(0, 0, 360, 48).fill('#12325a');
-  doc.fillColor('#ffffff').font('Helvetica-Bold').fontSize(15).text('WOLI DAN TECH HUB', 18, 13, { width: 324, align: 'center' });
+  doc.fillColor('#ffffff').font('Helvetica-Bold').fontSize(15).text(INSTITUTION_NAME, 18, 13, { width: 324, align: 'center' });
   doc.fillColor('#c9ddf6').font('Helvetica').fontSize(8).text('STUDENT IDENTIFICATION CARD', 18, 31, { width: 324, align: 'center', characterSpacing: 1 });
 
   doc.roundedRect(17, 62, 104, 128, 5).fill('#d9e3ef');
@@ -61,7 +62,7 @@ export async function renderStudentIdCardPdf(profile, photoBuffer) {
   doc.fillColor('#26384d').font('Helvetica').fontSize(9).text(new Date().toLocaleDateString('en-NG', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'Africa/Lagos' }), textX, 175);
 
   doc.moveTo(18, 202).lineTo(342, 202).strokeColor('#d5dce5').lineWidth(0.7).stroke();
-  doc.fillColor('#64748b').font('Helvetica').fontSize(7).text('This card is the property of WOLI DAN TECH HUB.', 18, 208, { width: 324, align: 'center' });
+  doc.fillColor('#64748b').font('Helvetica').fontSize(7).text(`This card is the property of ${INSTITUTION_NAME}.`, 18, 208, { width: 324, align: 'center' });
   doc.end();
   return bufferReady;
 }

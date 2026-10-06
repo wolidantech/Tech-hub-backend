@@ -1,7 +1,8 @@
 /**
- * Applies only the migrations designed for the live frontend schema:
+ * Applies only the additive migrations designed for the live frontend schema:
  *   1. supabase/frontend-migrations/012_catalogue_expansion.sql
  *   2. supabase/migrations/20261005000017_jamb_cbt_engine.sql
+ *   3. supabase/frontend-migrations/014_danqel_brand_identity.sql
  *
  * It deliberately does NOT replay the legacy 001-018 chain and does not apply
  * the legacy student-ID migration 018 (frontend migration 011 owns that table).
@@ -24,6 +25,10 @@ const STEPS = [
   {
     name: 'frontend-013_jamb_cbt_engine.sql',
     path: join(ROOT, 'supabase/migrations/20261005000017_jamb_cbt_engine.sql'),
+  },
+  {
+    name: 'frontend-014_danqel_brand_identity.sql',
+    path: join(ROOT, 'supabase/frontend-migrations/014_danqel_brand_identity.sql'),
   },
 ];
 const TRACKING_TABLE = 'public._techhub_frontend_feature_migrations';
@@ -50,6 +55,9 @@ async function preflight(client) {
   await requireColumns(client, 'bundles', ['id', 'title', 'course_ids', 'price', 'is_published', 'kind']);
   await requireColumns(client, 'manual_payments', ['user_id', 'bundle_id', 'status']);
   await requireColumns(client, 'student_id_cards', ['user_id', 'card_number', 'photo_path', 'status']);
+  await requireColumns(client, 'site_settings', ['id', 'site_name', 'tagline', 'meta_description', 'support_email', 'account_name', 'dantech_enabled']);
+  await requireColumns(client, 'certificate_issues', ['certificate_id', 'verification_code', 'user_id', 'course_id', 'status', 'issued_by', 'issue_date']);
+  await requireColumns(client, 'student_notifications', ['user_id', 'type', 'title', 'message', 'read', 'created_at']);
   const { rows: [isAdmin] } = await client.query(`select to_regprocedure('public.is_admin()') is not null as ready`);
   if (!isAdmin.ready) fail('Schema preflight failed: public.is_admin() is unavailable. Apply frontend migrations 001-011 first.');
   const { rows: [roles] } = await client.query(
@@ -98,7 +106,7 @@ async function main() {
         console.log(`✓ ${step.name}`);
       }
       await client.query('commit');
-      console.log('Frontend catalogue + JAMB migrations applied. JAMB pass and exams remain unpublished until reviewed.');
+      console.log('Frontend catalogue, JAMB and brand migrations applied. JAMB pass and exams remain unpublished until reviewed.');
     } catch (error) {
       await client.query('rollback').catch(() => {});
       throw error;

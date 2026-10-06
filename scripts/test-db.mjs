@@ -1,5 +1,5 @@
 /**
- * Functional test of the WOLI DAN TECH HUB database layer against a
+ * Functional test of the DANQEL DIGITAL INSTITUTE database layer against a
  * REAL PostgreSQL (embedded), with Supabase's auth/storage internals
  * stubbed faithfully (auth.users, auth.uid(), storage.buckets...).
  *
@@ -162,7 +162,11 @@ async function main() {
   const { rows: welcomes } = await client.query(
     `select * from notifications where user_id = $1`, [student.id]
   );
-  ok('WELCOME notification created', welcomes.length === 1 && welcomes[0].type === 'WELCOME');
+  ok('DANQEL welcome notification uses the current tagline',
+    welcomes.length === 1
+      && welcomes[0].type === 'WELCOME'
+      && welcomes[0].title === 'Welcome to DANQEL DIGITAL INSTITUTE'
+      && welcomes[0].message.includes('Technology • Science • Digital Learning'));
 
   // admin user (created like scripts/create-admin.js would)
   const { rows: [adminAuth] } = await client.query(
@@ -191,6 +195,21 @@ async function main() {
   ok('requested course and paid JAMB shells remain unpublished', draftCourses[0].n === 10);
   const { rows: bank } = await client.query(`select value from platform_settings where key='bank_details'`);
   ok('bank details seeded (MONIEPOINT)', bank[0].value.bank_name === 'MONIEPOINT');
+  const { rows: platformRows } = await client.query(`select value from platform_settings where key='platform'`);
+  ok('institution name and tagline are rebranded without changing support contact',
+    platformRows[0].value.name === 'DANQEL DIGITAL INSTITUTE'
+      && platformRows[0].value.tagline === 'Technology • Science • Digital Learning'
+      && platformRows[0].value.support_email === 'wolidantech@gmail.com');
+  const { rows: [welcomeLesson] } = await client.query(`
+    select l.description, l.content from lessons l
+    join course_modules m on m.id=l.module_id
+    join courses c on c.id=m.course_id
+    where c.slug='video-editing-with-capcut' and m.order_number=1 and l.title='Welcome to the course'
+  `);
+  ok('seeded CapCut preview lesson uses the new tagline',
+    welcomeLesson?.content?.includes('Technology • Science • Digital Learning')
+      && !welcomeLesson?.content?.includes('LEARN • BUILD • GROW')
+      && !welcomeLesson?.description?.includes('WOLI DAN TECH HUB'));
   const { rows: capcut } = await client.query(
     `select count(*)::int as n from course_modules m join courses c on c.id=m.course_id where c.slug='video-editing-with-capcut'`
   );
@@ -333,6 +352,7 @@ async function main() {
     `select * from certificates where student_id=$1 and course_id=$2`, [student.id, course.id]
   );
   ok('certificate auto-issued with WDTH number', /^WDTH-\d{4}-000001$/.test(cert.certificate_number));
+  ok('legacy certificate PDF is marked for one-time rebranding', cert.pdf_brand_version === 0);
 
   const { rows: certNotes } = await client.query(
     `select type from notifications where user_id=$1 and type in ('COURSE_COMPLETED','CERTIFICATE_ISSUED')`,
@@ -343,10 +363,10 @@ async function main() {
   // public verification
   const { rows: [verify] } = await client.query(`select verify_certificate($1) as v`, [cert.certificate_number]);
   ok('verify_certificate: valid', verify.v.valid === true);
-  ok('verify_certificate: returns name/course/org only',
+  ok('verify_certificate: returns name/course/new issuer only',
     verify.v.student_name === 'Ada Student' &&
     verify.v.course_name === 'Video Editing with CapCut' &&
-    verify.v.issued_by === 'WOLI DAN TECH HUB' &&
+    verify.v.issued_by === 'DANQEL DIGITAL INSTITUTE' &&
     verify.v.email === undefined);
   const { rows: [verifyMissing] } = await client.query(`select verify_certificate('WDTH-2099-999999') as v`);
   ok('verify_certificate: unknown id -> null', verifyMissing.v === null);

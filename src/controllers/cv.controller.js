@@ -1,5 +1,5 @@
 /**
- * WOLI DAN TECH HUB — CV Builder Controller
+ * DANQEL DIGITAL INSTITUTE — CV Builder Controller
  * Public CV generation (guest + authenticated)
  * Per spec: unauthenticated can create/edit/preview/AI improve/export PDF
  */

@@ -1,5 +1,5 @@
 /**
- * WOLI DAN TECH HUB — AI Content Generation Handlers for Gateway (Railway)
+ * DANQEL DIGITAL INSTITUTE — AI Content Generation Handlers for Gateway (Railway)
  * Production-ready course-content generation per spec sections 2-27
  * Uses same auth as existing gateway (requireAuth + requireAdmin)
  * All generated content is DRAFT for admin review, never auto-published

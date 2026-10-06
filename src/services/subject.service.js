@@ -1,5 +1,5 @@
 /**
- * WOLI DAN TECH HUB — Global Subject Taxonomy Service
+ * DANQEL DIGITAL INSTITUTE — Global Subject Taxonomy Service
  * Hierarchical: FIELD → SUBJECT → SPECIALIZATION → COURSE → MODULE → LESSON
  */
 

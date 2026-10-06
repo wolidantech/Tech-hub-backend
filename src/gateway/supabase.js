@@ -190,7 +190,7 @@ export function createSupabase({ url, serviceKey, fetchImpl = globalThis.fetch, 
     return searchLessonsFallback(keywords, limit);
   }
 
-  /** Fetch approved AI generated content for RAG (spec 22-23) — prefers WOLI DAN TECH HUB content */
+  /** Fetch approved AI generated content for RAG (spec 22-23) — prefers DANQEL DIGITAL INSTITUTE content */
   async function fetchApprovedAiContent({ courseId, lessonId, moduleId, maxDocs = 10 } = {}) {
     try {
       const query = {

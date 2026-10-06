@@ -1,5 +1,5 @@
 /**
- * WOLI DAN TECH HUB — External Educational Resources Service
+ * DANQEL DIGITAL INSTITUTE — External Educational Resources Service
  * Per spec sections 8-12: research open educational resources, avoid copyrighted copying
  */
 

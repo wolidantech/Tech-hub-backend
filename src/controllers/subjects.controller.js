@@ -1,5 +1,5 @@
 /**
- * WOLI DAN TECH HUB — Subject Taxonomy Controller
+ * DANQEL DIGITAL INSTITUTE — Subject Taxonomy Controller
  * Global subject/category structure FIELD → SUBJECT → SPECIALIZATION → COURSE → MODULE → LESSON
  */
 

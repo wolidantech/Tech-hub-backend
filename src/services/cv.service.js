@@ -1,11 +1,12 @@
 /**
- * WOLI DAN TECH HUB — CV Builder Service
+ * DANQEL DIGITAL INSTITUTE — CV builder service
  * Public CV generation, preview, PDF export, AI improve (no fabrication)
  */
 
 import { supabaseAdmin } from '../config/supabase.js';
 import PDFDocument from 'pdfkit';
 import { randomUUID } from 'crypto';
+import { INSTITUTION_NAME } from '../config/brand.js';
 
 // ------------------------------------------------------------------
 // Helpers
@@ -206,7 +207,7 @@ export async function generateCvPdf({ cvId, userId = null, guestSessionId = null
   const config = template?.config || { font: 'Helvetica', colors: { primary: '#1E40AF', secondary: '#64748B' }, layout: 'single-column' };
 
   // Create PDF A4
-  const doc = new PDFDocument({ size: 'A4', margin: 50, info: { Title: cv.title, Author: cv.personal_info?.fullName || 'WOLI DAN TECH HUB' } });
+  const doc = new PDFDocument({ size: 'A4', margin: 50, info: { Title: cv.title, Author: cv.personal_info?.fullName || INSTITUTION_NAME } });
   const chunks = [];
   doc.on('data', c => chunks.push(c));
   const done = new Promise(resolve => doc.on('end', () => resolve(Buffer.concat(chunks))));
@@ -316,7 +317,7 @@ export async function generateCvPdf({ cvId, userId = null, guestSessionId = null
 
   // Footer
   const footerY = doc.page.height - 30;
-  doc.fontSize(7).fillColor('#9CA3AF').font('Helvetica').text('Generated via WOLI DAN TECH HUB — Global Knowledge Platform', 50, footerY, { align: 'center', width: pageWidth });
+  doc.fontSize(7).fillColor('#9CA3AF').font('Helvetica').text('Generated via DANQEL DIGITAL INSTITUTE', 50, footerY, { align: 'center', width: pageWidth });
 
   doc.end();
   const pdfBuffer = await done;
@@ -363,7 +364,7 @@ export async function generateCvPdf({ cvId, userId = null, guestSessionId = null
 // AI Improve — transform, never fabricate
 // ------------------------------------------------------------------
 export const AI_IMPROVE_PROMPT = `
-You are a professional CV writing assistant for WOLI DAN TECH HUB.
+You are a professional CV writing assistant for DANQEL DIGITAL INSTITUTE.
 
 CRITICAL RULES — NEVER FABRICATE:
 - Do NOT invent degrees, employment, certifications, job titles, companies, achievements, skills, or dates

@@ -1,5 +1,5 @@
 -- =====================================================================
--- WOLI DAN TECH HUB
+-- DANQEL DIGITAL INSTITUTE
 -- Seed: 12 initial courses (as DRAFTS)
 -- Run this in Supabase SQL Editor FIRST.
 -- Then run publish_courses.sql to make them visible to students.
@@ -22,7 +22,7 @@ on conflict (key) do nothing;
 insert into public.platform_settings (key, value, is_public)
 values (
   'platform',
-  '{"name": "WOLI DAN TECH HUB", "tagline": "LEARN • BUILD • GROW", "support_email": "wolidantech@gmail.com", "currency": "NGN"}'::jsonb,
+  '{"name": "DANQEL DIGITAL INSTITUTE", "tagline": "Technology • Science • Digital Learning", "support_email": "wolidantech@gmail.com", "currency": "NGN"}'::jsonb,
   true
 )
 on conflict (key) do nothing;
@@ -91,9 +91,9 @@ on conflict do nothing;
 insert into public.lessons (module_id, title, description, lesson_type, content, duration, order_number, is_published)
 select m.id,
        'Welcome to the course',
-       'Course overview, what you will learn, and how to get the most out of WOLI DAN TECH HUB.',
+       'Course overview, what you will learn, and how to get the most out of DANQEL DIGITAL INSTITUTE.',
        'TEXT',
-       'Welcome to Video Editing with CapCut! In this course you will move from complete beginner to confidently editing professional videos. Download CapCut (mobile or desktop) and get ready to LEARN • BUILD • GROW.',
+       'Welcome to Video Editing with CapCut! In this course you will move from complete beginner to confidently editing professional videos. Download CapCut (mobile or desktop) and get ready to learn new skills. Technology • Science • Digital Learning.',
        5,
        1,
        true

@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+import { INSTITUTION_NAME } from './brand.js';
 
 dotenv.config();
 
@@ -98,7 +99,7 @@ if (!isTest) {
   if (missing.length > 0 || problems.length > 0) {
     const lines = [];
     lines.push('');
-    lines.push('✗ WOLI DAN TECH HUB API failed to start — invalid environment configuration.');
+    lines.push(`✗ ${INSTITUTION_NAME} API failed to start — invalid environment configuration.`);
     lines.push('');
     if (missing.length > 0) {
       lines.push(`  Missing required environment variable${missing.length > 1 ? 's' : ''}:`);

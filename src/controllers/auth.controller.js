@@ -1,6 +1,7 @@
 import { supabaseAdmin, supabaseAnon } from '../config/supabase.js';
 import { BUCKETS, env } from '../config/env.js';
 import { ApiError, asyncHandler } from '../utils/errors.js';
+import { INSTITUTION_NAME } from '../config/brand.js';
 import { extensionForMime } from '../utils/helpers.js';
 import { uploadObject, getPublicUrl } from '../services/storage.service.js';
 import { logAudit } from '../services/audit.service.js';
@@ -107,7 +108,7 @@ export const register = asyncHandler(async (req, res) => {
   res.status(201).json({
     success: true,
     message: session
-      ? 'Registration successful. Welcome to WOLI DAN TECH HUB!'
+      ? `Registration successful. Welcome to ${INSTITUTION_NAME}!`
       : 'Registration successful. Please check your email to confirm your account, then log in.',
     data: {
       profile: publicProfile(profile),

@@ -1,5 +1,6 @@
 import { supabaseAdmin } from '../config/supabase.js';
 import { env } from '../config/env.js';
+import { INSTITUTION_NAME } from '../config/brand.js';
 import { ApiError } from '../utils/errors.js';
 import { findJambPaperTemplate, mapJambResult } from './jamb-template.js';
 
@@ -385,7 +386,7 @@ export async function importQuestions(questionRows, adminProfile) {
         explanation: row.explanation,
         difficulty: row.difficulty,
         source_type: row.source_type,
-        source_name: row.source_name || (row.source_type === 'ORIGINAL' ? 'WOLI DAN TECH HUB' : null),
+        source_name: row.source_name || (row.source_type === 'ORIGINAL' ? INSTITUTION_NAME : null),
         source_url: row.source_url || null,
         license_name: row.license_name || null,
         rights_verified: row.source_type === 'ORIGINAL' ? true : row.rights_verified,

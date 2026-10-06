@@ -8,7 +8,7 @@
  * This is a deterministic filter, not a security boundary on its own: the
  * chat system prompt carries the same rules, and both must hold.
  */
-import { DANTECH_NAME } from './config.js';
+import { ASSISTANT_NAME } from './config.js';
 
 /**
  * STRONG requests: an explicit demand that assessed work be completed.
@@ -73,7 +73,7 @@ export function checkIntegrity(message) {
 
 export function refusalMessage() {
   return [
-    `I can't complete assessed work *for* you — that's the one thing ${DANTECH_NAME} won't do, because the skill has to end up in **your** hands. 💪`,
+    `I can't complete assessed work *for* you — that's the one thing ${ASSISTANT_NAME} won't do, because the skill has to end up in **your** hands. 💪`,
     '',
     'Here is how I *can* help you finish it strong:',
     '',

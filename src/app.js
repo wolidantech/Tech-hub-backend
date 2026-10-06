@@ -3,9 +3,11 @@ import helmet from 'helmet';
 import cors from 'cors';
 import morgan from 'morgan';
 import { env } from './config/env.js';
+import { INSTITUTION_NAME, TAGLINE } from './config/brand.js';
 import { ApiError } from './utils/errors.js';
 import { apiLimiter } from './middleware/rateLimiter.js';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler.js';
+import { mountBrandAssetRoutes } from './utils/brand-assets.js';
 
 import authRoutes from './routes/auth.routes.js';
 import profileRoutes from './routes/profile.routes.js';
@@ -64,14 +66,16 @@ else app.use(morgan('combined'));
 
 app.use('/api', apiLimiter);
 
+mountBrandAssetRoutes(app);
+
 // Health + root
 app.get('/health', (_req, res) => {
-  res.json({ status: 'ok', service: 'woli-dan-tech-hub-backend', time: new Date().toISOString() });
+  res.json({ status: 'ok', service: 'danqel-digital-institute-backend', time: new Date().toISOString() });
 });
 app.get('/', (_req, res) => {
   res.json({
-    name: 'WOLI DAN TECH HUB API',
-    tagline: 'LEARN • BUILD • GROW',
+    name: `${INSTITUTION_NAME} API`,
+    tagline: TAGLINE,
     version: '1.0.0',
     docs: 'See README.md for the full API reference',
   });

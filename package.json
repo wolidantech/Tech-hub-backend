@@ -1,7 +1,7 @@
 {
-  "name": "woli-dan-tech-hub-backend",
+  "name": "danqel-digital-institute-backend",
   "version": "1.0.0",
-  "description": "Secure AI gateway + LMS backend for WOLI DAN TECH HUB (Supabase + PostgreSQL + Express)",
+  "description": "Secure AI gateway + LMS backend for DANQEL DIGITAL INSTITUTE (Supabase + PostgreSQL + Express)",
   "main": "src/gateway/server.js",
   "type": "module",
   "license": "UNLICENSED",
@@ -22,14 +22,14 @@
     "check:catalog": "node scripts/check-catalog.js",
     "check:classroom": "node scripts/check-classroom.js",
     "validate:sql": "node scripts/validate-sql.mjs",
-    "test": "npm run check && npm run test:gateway && npm run test:payments && npm run test:ai-content && npm run test:cv && npm run test:mobile && npm run test:jamb && npm run test:id-card",
+    "test": "npm run check && npm run test:gateway && npm run test:payments && npm run test:ai-content && npm run test:cv && npm run test:mobile && npm run test:jamb && npm run test:id-card && npm run test:certificate",
     "test:gateway": "node scripts/test-gateway.mjs",
     "test:payments": "node scripts/test-payments.mjs",
     "test:ai-content": "node scripts/test-ai-content.mjs",
     "test:cv": "node scripts/test-cv.mjs",
     "test:mobile": "node scripts/test-mobile.mjs",
     "test:db": "node scripts/test-db.mjs",
-    "test:seed": "node scripts/test-seed.mjs",
+    "test:seed": "node scripts/verify-seed-sql.mjs",
     "test:db:all": "npm run test:db && npm run test:seed",
     "seed": "node scripts/seed.mjs",
     "seed:export": "node scripts/seed.mjs --export-sql=supabase/seed/science_courses.sql",
@@ -37,7 +37,8 @@
     "populate:ai": "node scripts/populate-ai-content.mjs",
     "test:jamb": "node scripts/test-jamb-validation.mjs",
     "test:jamb:frontend": "node scripts/test-jamb-frontend-schema.mjs",
-    "test:id-card": "node scripts/test-id-card.mjs"
+    "test:id-card": "node scripts/test-id-card.mjs",
+    "test:certificate": "node scripts/test-certificate.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.105.0",
@@ -49,6 +50,7 @@
     "morgan": "^1.10.0",
     "multer": "^2.0.2",
     "pdfkit": "^0.15.1",
+    "svg-to-pdfkit": "^0.1.8",
     "ws": "^8.18.0",
     "zod": "^3.23.8"
   },

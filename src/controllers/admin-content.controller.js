@@ -1,5 +1,5 @@
 /**
- * WOLI DAN TECH HUB — Admin Content Review Pipeline
+ * DANQEL DIGITAL INSTITUTE — Admin Content Review Pipeline
  * Per spec sections 19-21, 30
  * Statuses: DRAFT, IN_REVIEW, APPROVED, PUBLISHED, UNPUBLISHED, ARCHIVED
  * Never auto-publish unreviewed AI content

@@ -1,5 +1,5 @@
 -- =====================================================================
--- WOLI DAN TECH HUB
+-- DANQEL DIGITAL INSTITUTE
 -- Publish all courses — makes them visible to students
 -- Run this AFTER seed_12_courses.sql in Supabase SQL Editor
 --

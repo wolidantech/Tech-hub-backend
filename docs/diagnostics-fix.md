@@ -1,5 +1,8 @@
 # Why students saw backend diagnostics — and how we fixed it
 
+
+> **Historical deployment record:** the origin, project URL, and account guidance below describe the former deployment. Keep these values only for diagnostics/history; do not use them as current DANQEL DIGITAL INSTITUTE origins or contacts without verification.
+
 **Reported:** 2026-09-13  
 Origin: https://wolidantechhub.netlify.app  
 Backend: https://vlfgnuxacprjeauqyvig.supabase.co

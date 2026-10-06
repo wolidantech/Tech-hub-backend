@@ -35,7 +35,7 @@ Frontend migration 011 is the canonical student-ID implementation for the fronte
 
 ## Frontend handoff prompt
 
-> Build the WOLI DAN TECH HUB digital-school frontend against this existing Express/Supabase backend. Keep every new course and CBT exam hidden unless its API status is `PUBLISHED`. Use only the Supabase anon key in browser code; never use the service-role key. Attach the signed-in Supabase access token as `Authorization: Bearer <access_token>` to protected `/api/*` requests.
+> Build the DANQEL DIGITAL INSTITUTE digital-school frontend against this existing Express/Supabase backend. Keep every new course and CBT exam hidden unless its API status is `PUBLISHED`. Use only the Supabase anon key in browser code; never use the service-role key. Attach the signed-in Supabase access token as `Authorization: Bearer <access_token>` to protected `/api/*` requests.
 >
 > **Catalogue and learning:** render categories and course pages from the frontend Supabase schema. Migration `supabase/frontend-migrations/012_catalogue_expansion.sql` adds 19 unpublished Science & Laboratory, Art & Industrial Design, and Business/Commercial shells. These are not yet complete courses: do not publish them until administrators add reviewed lessons, real videos/PDFs, and rights-cleared learning materials. Do not invent media URLs. Keep new content hidden while `published=false`; render private course files only through the existing signed-resource flow.
 >
@@ -76,7 +76,7 @@ No historical question bank, syllabus-topic corpus, video files or course PDFs w
 Supabase documents passkeys as experimental and requires `@supabase/supabase-js` 2.105.0 or later plus an explicit client opt-in. The backend dependency minimum has been raised to 2.105.0. Configure **Authentication → Passkeys** in the Supabase project:
 
 - Enable passkey authentication.
-- Set a stable RP display name such as `WOLI DAN TECH HUB`.
+- Set a stable RP display name such as `DANQEL DIGITAL INSTITUTE`.
 - Set RP ID to the production frontend's bare domain (no scheme, port or path).
 - Set RP origins to the exact HTTPS production frontend origins (up to five). Add localhost only for local development. An RP-ID change invalidates existing passkeys.
 

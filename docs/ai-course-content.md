@@ -1,4 +1,4 @@
-# WOLI DAN TECH HUB — AI Course Content Generation & Delivery
+# DANQEL DIGITAL INSTITUTE — AI Course Content Generation & Delivery
 
 Production-ready AI course content pipeline per 32-section spec.
 
@@ -166,7 +166,7 @@ Final completion per `course_completion_rules`:
 - final score
 Only then COMPLETED
 
-### 9. DanTECH AI Upgrade
+### 9. DANQEL AI Upgrade
 
 `src/gateway/rag.js` course-aware:
 - Boost moduleId +12, isApprovedContent +10, LESSON_TEXT +5
@@ -209,7 +209,7 @@ Per spec 31:
 - Admin approval/publishing/unpublishing
 - Student access (enrollment gated)
 - Progress tracking
-- DanTECH AI context (course-aware RAG)
+- DANQEL AI context (course-aware RAG)
 - RLS (unpublished not accessible)
 - Storage security (private + signed URLs)
 
@@ -268,7 +268,7 @@ Admin review:
 - `GET /api/admin/resources`
 - `POST /api/admin/resources/:id/approve`
 
-DanTECH:
+DANQEL AI:
 - `POST /api/dantech/chat` { message, courseId?, moduleId?, lessonId?, studentId?, level? }
 
 All admin routes require `requireAuth+requireAdmin`, jobs list/get allow creator.

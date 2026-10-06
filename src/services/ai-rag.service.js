@@ -1,6 +1,6 @@
 /**
- * WOLI DAN TECH HUB — RAG-Ready Architecture per spec 23
- * Indexes approved educational material for retrieval by DanTECH AI
+ * DANQEL DIGITAL INSTITUTE — RAG-Ready Architecture per spec 23
+ * Indexes approved educational material for retrieval by DANQEL AI
  * Stores metadata: course_id, module_id, lesson_id, content_type, chunk, embedding ref
  */
 

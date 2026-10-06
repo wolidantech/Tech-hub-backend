@@ -1,18 +1,18 @@
-# WOLI DAN TECH HUB — Secure AI Gateway (Railway backend)
+# DANQEL DIGITAL INSTITUTE — Secure AI Gateway (Railway backend)
 
-The backend service behind **AI Studio** and **DanTECH AI** for the WOLI DAN
-TECH HUB LMS. It holds every AI API key server-side, verifies Supabase
+The backend service behind **AI Studio** and **DANQEL AI** for the DANQEL
+DIGITAL INSTITUTE LMS. It holds every AI API key server-side, verifies Supabase
 sessions, grounds the student assistant in published course content, and
 enforces academic integrity where the frontend cannot.
 
 ```
-WOLI DAN TECH HUB FRONTEND (Vite / React, talks to Supabase directly for LMS data)
+DANQEL DIGITAL INSTITUTE FRONTEND (Vite / React, talks to Supabase directly for LMS data)
         │  HTTPS  +  Authorization: Bearer <supabase access token>
         ▼
 RAILWAY  ── this service ──────────────────────────────
    GET  /health              public, Railway healthcheck
    POST /api/ai/generate     Study Tools: students, rest: admin → AI generation
-   POST /api/dantech/chat    authenticated   → DanTECH AI assistant
+   POST /api/dantech/chat    authenticated   → DANQEL AI assistant
         │
         ├──► LLM provider (OpenAI | Anthropic | Gemini)
         └──► SUPABASE (service role, server-side only)
@@ -72,7 +72,7 @@ git-ignored). Nothing here is ever returned to a client or written to a log.
 | `ALLOWED_ORIGINS` | ✅ | — | Comma-separated CORS allow-list of frontend origins |
 | `PORT` | Railway-set | `5000` | Injected by Railway — do not set it there |
 | `NODE_ENV` | | `development` | `production` on Railway |
-| `CHAT_RATE_LIMIT` | | `30` | DanTECH requests per user per window |
+| `CHAT_RATE_LIMIT` | | `30` | DANQEL AI requests per user per window |
 | `GENERATE_RATE_LIMIT` | | `10` | AI Studio generations per admin per window |
 | `RATE_WINDOW_MS` | | `60000` | Rate-limit window |
 | `MAX_MESSAGE_CHARS` | | `4000` | Chat message cap |
@@ -96,7 +96,7 @@ git-ignored). Nothing here is ever returned to a client or written to a log.
 
    ```bash
    curl https://<your-app>.up.railway.app/health
-   # {"ok":true,"service":"woli-dan-tech-hub-ai-gateway", ...}
+   # {"ok":true,"service":"danqel-ai-gateway", ...}
    ```
 6. Put the public origin into `ALLOWED_ORIGINS` (comma-separated with any
    other frontend domain), then redeploy.
@@ -111,7 +111,7 @@ VITE_DANTECH_ENDPOINT=https://<your-app>.up.railway.app/api/dantech/chat
 ```
 
 Until they are set, the frontend keeps using its offline template provider
-and on-device DanTECH tutor — nothing breaks in the meantime.
+and on-device DANQEL AI tutor — nothing breaks in the meantime.
 
 ### Required frontend change (auth header)
 
@@ -199,7 +199,7 @@ API=https://<your-app>.up.railway.app
 
 # health — no auth
 curl -s $API/health
-# {"ok":true,"service":"woli-dan-tech-hub-ai-gateway","time":"…","provider":"openai"}
+# {"ok":true,"service":"danqel-ai-gateway","time":"…","provider":"openai"}
 
 # 401 without a token
 curl -s -o /dev/null -w "%{http_code}\n" -X POST $API/api/ai/generate \
@@ -235,7 +235,7 @@ curl -s -X POST $API/api/ai/generate -H 'Content-Type: application/json' \
   -d '{"kind":"lesson_text","input":{"topic":"useState","objective":"Use state safely","level":"Beginner"},"options":{}}'
 # {"output":{"markdown":"# useState\n\n…"},"provider":"openai"}
 
-# DanTECH AI chat turn with sources
+# DANQEL AI chat turn with sources
 curl -s -X POST $API/api/dantech/chat -H 'Content-Type: application/json' \
   -H "Authorization: Bearer $STUDENT_TOKEN" \
   -d '{"message":"Explain useState like I am a beginner","context":{"courseId":"<uuid>","lessonId":"<uuid>","level":"Beginner"},"history":[]}'
@@ -313,7 +313,7 @@ src/gateway/            the deployed service
   rag.js                retrieval over published lessons
   integrity.js          server-side academic-integrity guard
   kinds.js              zod contracts for all 10 AI kinds
-  prompts.js            per-kind system prompts + DanTECH chat prompt
+  prompts.js            per-kind system prompts + DANQEL AI chat prompt
   json.js               JSON extract/repair + validate-and-retry loop
   ratelimit.js          per-user fixed-window limiter
   providers/index.js    OpenAI | Anthropic | Gemini abstraction
