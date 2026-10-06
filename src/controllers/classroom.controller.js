@@ -1,5 +1,5 @@
 /**
- * WOLI DAN TECH HUB — Unified Classroom API (student-facing)
+ * DANQEL DIGITAL INSTITUTE — Unified Classroom API (student-facing)
  *
  * ONE integration surface for the classroom. Frontend flow:
  *

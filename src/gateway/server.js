@@ -1,8 +1,8 @@
 /**
- * Composition root for the WOLI DAN TECH HUB Secure AI Gateway.
+ * Composition root for the DANQEL DIGITAL INSTITUTE secure AI gateway.
  * Railway runs this file (`npm start`).
  */
-import { config, PLATFORM, DANTECH_NAME } from './config.js';
+import { config, INSTITUTION_NAME, ASSISTANT_NAME, TAGLINE } from './config.js';
 import { createProvider } from './providers/index.js';
 import { createSupabase } from './supabase.js';
 import { createAuth } from './auth.js';
@@ -27,12 +27,13 @@ const app = createApp({ config, provider, supabase, auth, logger });
 
 const server = app.listen(config.port, '0.0.0.0', () => {
   console.log('');
-  console.log(`  ${PLATFORM} — SECURE AI GATEWAY`);
+  console.log(`  ${INSTITUTION_NAME} — SECURE AI GATEWAY`);
+  console.log(`  ${TAGLINE}`);
   console.log('  ----------------------------------------');
   console.log(`  Listening on  http://0.0.0.0:${config.port}`);
   console.log(`  Environment   ${config.nodeEnv}`);
   console.log(`  AI provider   ${provider.name} / ${provider.model}`);
-  console.log(`  Assistant     ${DANTECH_NAME}`);
+  console.log(`  Assistant     ${ASSISTANT_NAME}`);
   console.log(`  Health        http://0.0.0.0:${config.port}/health`);
   console.log(`  CORS origins  ${config.allowedOrigins.join(', ') || '(none)'}`);
   console.log('');

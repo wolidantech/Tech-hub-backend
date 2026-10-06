@@ -1,5 +1,5 @@
 /**
- * WOLI DAN TECH HUB — Secure AI Gateway configuration.
+ * DANQEL DIGITAL INSTITUTE — secure AI gateway configuration.
  *
  * Self-contained on purpose: the gateway is the ONLY service deployed to
  * Railway, so it validates exactly the variables it needs and nothing else.
@@ -7,6 +7,7 @@
  * responses.
  */
 import dotenv from 'dotenv';
+import { ASSISTANT_NAME, INSTITUTION_NAME, TAGLINE } from '../config/brand.js';
 
 dotenv.config();
 
@@ -106,7 +107,7 @@ if (!isTest) {
 
   if (missing.length > 0 || problems.length > 0) {
     const lines = [''];
-    lines.push('✗ WOLI DAN TECH HUB AI gateway failed to start — invalid configuration.');
+    lines.push(`✗ ${INSTITUTION_NAME} AI gateway failed to start — invalid configuration.`);
     lines.push('');
     if (missing.length > 0) {
       lines.push(`  Missing required variable${missing.length > 1 ? 's' : ''}:`);
@@ -125,7 +126,6 @@ if (!isTest) {
   }
 }
 
-export const DANTECH_NAME = 'DanTECH AI';
-export const PLATFORM = 'WOLI DAN TECH HUB';
+export { ASSISTANT_NAME, INSTITUTION_NAME, TAGLINE };
 
 export default config;

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * WOLI DAN TECH HUB — Payment verification system tests (offline + logic checks)
+ * DANQEL DIGITAL INSTITUTE — Payment verification system tests (offline + logic checks)
  * Tests the payment flow without needing live Supabase, plus validates
  * the new migrations and RLS expectations.
  *

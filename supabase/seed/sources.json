@@ -1,5 +1,5 @@
 {
-  "_comment": "WOLI DAN TECH HUB — verified source/license registry. EVERY external URL in course seeds MUST appear here (exact match) or the seed gate fails. Verification: OpenStax pages fetched 2026-09-14 (license CC BY-NC-SA 4.0 confirmed on-page); every YouTube video confirmed live via YouTube oEmbed (exact title + author recorded). Nothing here is invented.",
+  "_comment": "DANQEL DIGITAL INSTITUTE — verified source/license registry. EVERY external URL in course seeds MUST appear here (exact match) or the seed gate fails. Verification: OpenStax pages fetched 2026-09-14 (license CC BY-NC-SA 4.0 confirmed on-page); every YouTube video confirmed live via YouTube oEmbed (exact title + author recorded). Nothing here is invented.",
   "sources": [
     {
       "name": "OpenStax Biology 2e",
@@ -40,7 +40,7 @@
       "publisher": "Amoeba Sisters (official YouTube channel)",
       "base_url": "https://www.youtube.com/@AmoebaSisters",
       "type": "VIDEO",
-      "description": "Free biology explainer videos by a US high-school biology teacher. Used ONLY as official YouTube embeds/streams — no copy is made or stored by WOLI DAN TECH HUB.",
+      "description": "Free biology explainer videos by a US high-school biology teacher. Used ONLY as official YouTube embeds/streams — no copy is made or stored by DANQEL DIGITAL INSTITUTE.",
       "license_note": "Standard YouTube License — streamed from the creator's official channel via youtube.com/watch or embed. No download, copy, or redistribution.",
       "urls": [
         { "url": "https://www.youtube.com/watch?v=cQPVXrV0GNA", "title": "Characteristics of Life", "license": "Standard YouTube License (official stream — no copy made)", "attribution": "© Amoeba Sisters — streamed from the official channel https://www.youtube.com/@AmoebaSisters" },

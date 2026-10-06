@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 925" role="img" aria-labelledby="danqel-logo-title danqel-logo-description">
+  <title id="danqel-logo-title">DANQEL Digital Institute</title>
+  <desc id="danqel-logo-description">A blue pixel-inspired letter D surrounding a graduation cap, with the DANQEL DIGITAL INSTITUTE wordmark and the tagline Technology • Science • Digital Learning.</desc>
+  <defs>
+    <linearGradient id="danqel-blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2453ed" />
+      <stop offset="1" stop-color="#1d45df" />
+    </linearGradient>
+  </defs>
+
+  <!-- Pixel-inspired D with an academic cap at its centre. The even-odd path
+       keeps the counter transparent; the grouped mark is optically centered. -->
+  <g transform="matrix(0.8 0 0 1 92 0)">
+  <path fill="url(#danqel-blue)" fill-rule="evenodd" d="
+    M 255 28
+    H 500
+    C 705 28 850 137 850 282
+    C 850 427 705 545 500 545
+    H 255
+    V 28
+    Z
+    M 345 118
+    V 455
+    H 500
+    C 650 455 755 385 755 282
+    C 755 179 650 118 500 118
+    H 345
+    Z
+    M 255 166 H 345 V 238 H 255 Z
+    M 255 414 L 345 350 V 397 L 255 461 Z
+  "/>
+
+  <!-- Four pixel tiles sit just outside and across the left stroke. -->
+  <g fill="url(#danqel-blue)">
+    <rect x="155" y="112" width="56" height="56" rx="5" />
+    <rect x="83" y="184" width="46" height="46" rx="5" />
+    <rect x="222" y="207" width="82" height="82" rx="6" />
+    <rect x="126" y="296" width="53" height="53" rx="5" />
+  </g>
+
+  <!-- Graduation cap and tassel. -->
+  <g fill="#171925" stroke="#171925" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 363 275 L 520 201 L 678 275 L 520 350 Z" />
+    <path d="M 426 291 L 520 337 L 614 291 V 358 Q 520 414 426 358 Z" />
+    <path d="M 678 275 V 337" fill="none" stroke-width="9" />
+    <circle cx="678" cy="350" r="11" stroke="none" />
+    <path d="M 678 361 V 405" fill="none" stroke-width="8" />
+  </g>
+  </g>
+
+  <!-- Wordmark. textLength keeps the lockup balanced across platforms. -->
+  <text x="500" y="716" text-anchor="middle" textLength="900" lengthAdjust="spacingAndGlyphs"
+        fill="#171925" font-family="Arial Black, Montserrat, Arial, sans-serif"
+        font-size="165" font-weight="900" letter-spacing="-3">DANQEL</text>
+  <!-- Blue Q tail from the original wordmark treatment. -->
+  <path d="M 603 664 L 636 664 L 688 716 L 654 716 Z" fill="url(#danqel-blue)" />
+
+  <text x="500" y="795" text-anchor="middle" textLength="900" lengthAdjust="spacingAndGlyphs"
+        fill="url(#danqel-blue)" font-family="Arial Black, Montserrat, Arial, sans-serif"
+        font-size="75" font-weight="900" letter-spacing="1">DIGITAL INSTITUTE</text>
+
+  <text x="500" y="875" text-anchor="middle" textLength="890" lengthAdjust="spacingAndGlyphs"
+        fill="#1c2340" font-family="Arial, Montserrat, sans-serif"
+        font-size="34" font-weight="600" letter-spacing="2">Technology • Science • Digital Learning</text>
+</svg>

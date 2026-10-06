@@ -1,5 +1,5 @@
 /**
- * WOLI DAN TECH HUB — Curriculum service (single source of truth)
+ * DANQEL DIGITAL INSTITUTE — Curriculum service (single source of truth)
  *
  * Assembles the complete classroom chain for enrolled students:
  *

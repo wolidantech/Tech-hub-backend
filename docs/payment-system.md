@@ -1,4 +1,4 @@
-# WOLI DAN TECH HUB — Manual Payment Verification System
+# DANQEL DIGITAL INSTITUTE — Manual Payment Verification System
 
 Production-ready implementation for manual bank-transfer payments with receipt upload, admin review, enrollment activation, and coupon support.
 
@@ -512,7 +512,7 @@ STUDENT
 
 | Status | Meaning | Example |
 |--------|---------|---------|
-| 200 | Success, or integrity refusal (DanTECH) | Payment list |
+| 200 | Success, or integrity refusal (DANQEL AI) | Payment list |
 | 201 | Created | Payment submitted, free enrollment |
 | 400 | Invalid request | Invalid coupon, amount mismatch, receipt required, invalid receipt |
 | 401 | Unauthenticated | Missing/invalid token |

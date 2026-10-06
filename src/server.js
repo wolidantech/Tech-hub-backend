@@ -1,9 +1,10 @@
 import app from './app.js';
 import { env } from './config/env.js';
+import { INSTITUTION_NAME, TAGLINE } from './config/brand.js';
 
 const server = app.listen(env.port, '0.0.0.0', () => {
   console.log('');
-  console.log('  WOLI DAN TECH HUB — LEARN • BUILD • GROW');
+  console.log(`  ${INSTITUTION_NAME} — ${TAGLINE}`);
   console.log('  ----------------------------------------');
   console.log(`  API listening on http://0.0.0.0:${env.port}`);
   console.log(`  Environment: ${env.nodeEnv}`);

@@ -1,5 +1,5 @@
 /**
- * WOLI DAN TECH HUB — AI Course Generation Service
+ * DANQEL DIGITAL INSTITUTE — AI Course Generation Service
  * Production-ready curriculum pipeline per spec sections 2-5, 18-27
  *
  * Pipeline:

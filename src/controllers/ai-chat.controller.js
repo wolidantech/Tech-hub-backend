@@ -1,10 +1,11 @@
 /**
- * WOLI DAN TECH HUB — Advanced DanTECH AI Controller
+ * DANQEL DIGITAL INSTITUTE — DANQEL AI controller
  * Modes: GENERAL, STUDY, CODING, RESEARCH, CAREER, DEEP_EXPLANATION
  * Features: streaming (SSE), course-aware, RAG, file analysis, conversations, rate limiting, cost control
  */
 
 import { supabaseAdmin } from '../config/supabase.js';
+import { ASSISTANT_NAME } from '../config/brand.js';
 import { ApiError, asyncHandler } from '../utils/errors.js';
 import * as convService from '../services/ai-conversation.service.js';
 import { getSystemPromptForMode, checkRateLimit } from '../services/ai-conversation.service.js';
@@ -115,7 +116,7 @@ export const chat = asyncHandler(async (req, res) => {
   const openaiKey = process.env.OPENAI_API_KEY;
   if (!openaiKey) {
     // Fallback: echo with RAG
-    const fallbackAnswer = `DanTECH AI (${mode}) — AI key not configured. Based on approved content:\n\n${ragDocs.length > 0 ? ragDocs[0].content.slice(0, 500) : 'No approved content found for this course. Please configure OPENAI_API_KEY for full AI responses.'}\n\nYour question: ${message}`;
+    const fallbackAnswer = `${ASSISTANT_NAME} (${mode}) — AI key not configured. Based on approved content:\n\n${ragDocs.length > 0 ? ragDocs[0].content.slice(0, 500) : 'No approved content found for this course. Please configure OPENAI_API_KEY for full AI responses.'}\n\nYour question: ${message}`;
     await convService.addMessage({ conversationId: convId, userId, role: 'assistant', content: fallbackAnswer, metadata: { mode, rag: ragDocs } });
     return res.json({ success: true, data: { conversationId: convId, message: fallbackAnswer, mode, sources: ragDocs } });
   }
@@ -200,7 +201,7 @@ export const chatStream = asyncHandler(async (req, res) => {
 
   const openaiKey = process.env.OPENAI_API_KEY;
   if (!openaiKey) {
-    const fallback = `DanTECH AI (${mode}) — AI key not configured. Fallback answer for: ${message}`;
+    const fallback = `${ASSISTANT_NAME} (${mode}) — AI key not configured. Fallback answer for: ${message}`;
     res.write(`data: ${JSON.stringify({ type: 'token', content: fallback })}\n\n`);
     res.write(`data: ${JSON.stringify({ type: 'done', conversationId: convId })}\n\n`);
     await convService.addMessage({ conversationId: convId, userId, role: 'assistant', content: fallback, metadata: { mode } });
@@ -379,7 +380,7 @@ export const analyzeFile = asyncHandler(async (req, res) => {
       body: JSON.stringify({
         model: process.env.OPENAI_MODEL || 'gpt-4o-mini',
         messages: [
-          { role: 'system', content: `You are DanTECH AI. ${prompt}` },
+          { role: 'system', content: `You are ${ASSISTANT_NAME}. ${prompt}` },
           { role: 'user', content: `Document: ${file.file_name}\n\nContent:\n${file.extracted_text.slice(0, 10000)}` },
         ],
         max_tokens: 1500,

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * WOLI DAN TECH HUB — Classroom chain tracer.
+ * DANQEL DIGITAL INSTITUTE — Classroom chain tracer.
  *
  * Traces the exact path a student takes and reports where it breaks:
  *

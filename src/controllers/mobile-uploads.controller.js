@@ -1,5 +1,5 @@
 /**
- * WOLI DAN TECH HUB — Mobile-Optimized File Uploads
+ * DANQEL DIGITAL INSTITUTE — Mobile-Optimized File Uploads
  * Supports: Receipts, Assignments, CV-related files, Learning documents
  * Features: progress (via chunked upload), reasonable limits, resume/retry, timeout handling, clear errors, server-side validation
  */

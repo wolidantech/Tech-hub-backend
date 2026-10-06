@@ -1,6 +1,6 @@
 /**
- * POST /api/dantech/chat — DanTECH AI, the platform's learning assistant.
- * Upgraded to Advanced DanTECH AI:
+ * POST /api/dantech/chat — DANQEL AI, the platform's learning assistant.
+ * Upgraded to DANQEL AI:
  * - Modes: GENERAL, STUDY, CODING, RESEARCH, CAREER, DEEP_EXPLANATION
  * - Streaming SSE: POST /api/dantech/chat/stream
  * - Course-aware RAG, context: studentId, courseId, moduleId, lessonId
@@ -17,7 +17,7 @@ import { chatSystemPrompt } from './prompts.js';
 import { buildContext, toSources } from './rag.js';
 import { checkIntegrity } from './integrity.js';
 import { sanitizeHistory } from './providers/index.js';
-import { DANTECH_NAME } from './config.js';
+import { ASSISTANT_NAME, INSTITUTION_NAME } from './config.js';
 
 const MODE_ENUM = z.enum(['GENERAL', 'STUDY', 'CODING', 'RESEARCH', 'CAREER', 'DEEP_EXPLANATION']);
 
@@ -43,12 +43,12 @@ const streamSchema = requestSchema.extend({
 });
 
 const MODE_PROMPTS = {
-  GENERAL: 'You are DanTECH AI, a helpful general assistant for WOLI DAN TECH HUB. Be FAST, HELPFUL, DEEP, CONTEXT-AWARE, CONVERSATIONAL.',
-  STUDY: 'You are DanTECH AI in STUDY mode. Help students understand concepts, explain clearly, provide examples, and guide learning. Be patient and structured.',
-  CODING: 'You are DanTECH AI in CODING mode. Help with programming, debugging, code review, best practices, with clear examples. Use code blocks with language tags.',
-  RESEARCH: 'You are DanTECH AI in RESEARCH mode. Help with research, provide citations where possible, authoritative sources, structured analysis. Return citations/source references where applicable.',
-  CAREER: 'You are DanTECH AI in CAREER mode. Help with career advice, CV, interviews, job search, professional development. Never fabricate credentials.',
-  DEEP_EXPLANATION: 'You are DanTECH AI in DEEP EXPLANATION mode. Provide thorough, structured, progressive explanations with examples, common mistakes, best practices, summary.',
+  GENERAL: `You are ${ASSISTANT_NAME}, a helpful general assistant for ${INSTITUTION_NAME}. Be FAST, HELPFUL, DEEP, CONTEXT-AWARE, CONVERSATIONAL.`,
+  STUDY: `You are ${ASSISTANT_NAME} in STUDY mode. Help students understand concepts, explain clearly, provide examples, and guide learning. Be patient and structured.`,
+  CODING: `You are ${ASSISTANT_NAME} in CODING mode. Help with programming, debugging, code review, best practices, with clear examples. Use code blocks with language tags.`,
+  RESEARCH: `You are ${ASSISTANT_NAME} in RESEARCH mode. Help with research, provide citations where possible, authoritative sources, structured analysis. Return citations/source references where applicable.`,
+  CAREER: `You are ${ASSISTANT_NAME} in CAREER mode. Help with career advice, CV, interviews, job search, professional development. Never fabricate credentials.`,
+  DEEP_EXPLANATION: `You are ${ASSISTANT_NAME} in DEEP EXPLANATION mode. Provide thorough, structured, progressive explanations with examples, common mistakes, best practices, summary.`,
 };
 
 function getModePrompt(mode) {
@@ -137,7 +137,7 @@ export function createChatHandler({ provider, supabase, config, logger = console
       });
       return res.status(502).json({
         error: 'Assistant unavailable',
-        message: `${DANTECH_NAME} could not answer just now. Please try again in a moment.`,
+        message: `${ASSISTANT_NAME} could not answer just now. Please try again in a moment.`,
         code: 'AI_CHAT_FAILED',
       });
     } finally {

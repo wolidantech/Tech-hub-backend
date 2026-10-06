@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * WOLI DAN TECH HUB — CV Builder + Global Taxonomy + Advanced AI Tests
+ * DANQEL DIGITAL INSTITUTE — CV Builder + Global Taxonomy + Advanced AI Tests
  */
 
 import { readFileSync, existsSync } from 'fs';

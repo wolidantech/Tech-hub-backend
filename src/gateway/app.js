@@ -1,5 +1,5 @@
 /**
- * WOLI DAN TECH HUB — Secure AI Gateway (Express app).
+ * DANQEL DIGITAL INSTITUTE — secure AI gateway (Express app).
  *
  * Exposes exactly three routes:
  *   GET  /health              (public, Railway healthcheck)
@@ -14,7 +14,8 @@ import { createRateLimiter } from './ratelimit.js';
 import { createGenerateHandler } from './generate.controller.js';
 import { createChatHandler, createChatStreamHandler } from './chat.controller.js';
 import { createAiContentHandlers } from './ai-content.controller.js';
-import { DANTECH_NAME, PLATFORM } from './config.js';
+import { ASSISTANT_NAME, INSTITUTION_NAME, TAGLINE } from './config.js';
+import { mountBrandAssetRoutes } from '../utils/brand-assets.js';
 
 const asyncHandler = (fn) => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
 
@@ -96,17 +97,23 @@ export function createApp(deps) {
     next();
   });
 
+  // ---- Public institutional logo assets ----
+  mountBrandAssetRoutes(app);
+
   // ---- Health (public) ----
   app.get('/health', (_req, res) => {
-    res.json({ ok: true, service: 'woli-dan-tech-hub-ai-gateway', time: new Date().toISOString(), provider: provider.name });
+    res.json({ ok: true, service: 'danqel-ai-gateway', time: new Date().toISOString(), provider: provider.name });
   });
 
   app.get('/', (_req, res) => {
     res.json({
-      name: `${PLATFORM} — Secure AI Gateway + Course Content Engine + CV Builder + Advanced DanTECH AI`,
-      assistant: DANTECH_NAME,
+      name: `${INSTITUTION_NAME} — Secure AI Gateway + Course Content Engine + CV Builder + ${ASSISTANT_NAME}`,
+      tagline: TAGLINE,
+      assistant: ASSISTANT_NAME,
       endpoints: [
         'GET /health',
+        'GET /brand/logo.svg (public full institute logo)',
+        'GET /brand/mark.svg (public compact brand mark)',
         'POST /api/ai/generate (students: flashcards/notes/summary/exercise; all other kinds admin-only)',
         'POST /api/ai/courses/generate (admin) — full curriculum DRAFT',
         'POST /api/ai/courses/:courseId/populate (admin)',
@@ -144,7 +151,7 @@ export function createApp(deps) {
   const aiContent = createAiContentHandlers({ logger });
 
   // ---- Routes ----
-  // Existing AI Studio + DanTECH
+  // Existing AI Studio + DANQEL AI
   app.post(
     '/api/ai/generate',
     auth.requireAuth(),
@@ -160,7 +167,7 @@ export function createApp(deps) {
     asyncHandler(chat)
   );
 
-  // Advanced DanTECH AI — streaming, modes, course-aware
+  // DANQEL AI — streaming, modes, course-aware
   app.post(
     '/api/dantech/chat/stream',
     auth.requireAuth(),

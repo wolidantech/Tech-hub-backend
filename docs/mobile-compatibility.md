@@ -1,4 +1,4 @@
-# WOLI DAN TECH HUB — Mobile/API Compatibility
+# DANQEL DIGITAL INSTITUTE — Mobile/API Compatibility
 
 Per spec 33: backend must fully support mobile clients (Android, iPhone) over mobile networks, 4G/5G, slower/intermittent connections.
 
@@ -95,7 +95,7 @@ For mobile networks, 4G/5G, slower, intermittent:
 
 Client can show upload progress via XHR progress events for single upload, or chunk progress for resumable.
 
-## DanTECH AI Mobile Performance
+## DANQEL AI Mobile Performance
 
 Optimize for mobile connections: streaming responses, request cancellation, timeouts, retry handling, rate limiting, connection interruption.
 

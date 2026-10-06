@@ -1,5 +1,5 @@
 /**
- * WOLI DAN TECH HUB — AI Video Generation Service
+ * DANQEL DIGITAL INSTITUTE — AI Video Generation Service
  * Provider-independent architecture per spec sections 6-7
  *
  * Never creates fake video URLs — if generation fails, status=FAILED and error stored

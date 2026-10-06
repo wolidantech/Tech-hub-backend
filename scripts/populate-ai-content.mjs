@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * WOLI DAN TECH HUB — Initial AI Content Population
+ * DANQEL DIGITAL INSTITUTE — Initial AI Content Population
  * Per spec: Use actual existing courses (not fake hundreds), generate professional curriculum DRAFT
  * This script queues jobs for 12 published courses, admin must approve via /api/admin/content
  * 
@@ -144,7 +144,7 @@ async function queueJobsForCourse(course) {
 }
 
 async function main() {
-  console.log('🚀 WOLI DAN TECH HUB — AI Content Population');
+  console.log('🚀 DANQEL DIGITAL INSTITUTE — AI Content Population');
   console.log(`   Mode: ${dryRun ? 'DRY-RUN' : 'LIVE'}`);
   console.log(`   Date: ${new Date().toISOString()}`);
 

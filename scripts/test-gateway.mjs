@@ -1,5 +1,5 @@
 /**
- * End-to-end test of the WOLI DAN TECH HUB Secure AI Gateway.
+ * End-to-end test of the DANQEL DIGITAL INSTITUTE Secure AI Gateway.
  *
  * ONLY the network is stubbed (Supabase Auth, PostgREST and the LLM API).
  * Everything else — auth middleware, role lookup, RAG, integrity guard, rate
@@ -246,13 +246,40 @@ const get = async (path) => {
   const res = await fetch(`${base}${path}`);
   return { status: res.status, body: await res.json().catch(() => null) };
 };
+const getText = async (path) => {
+  const res = await fetch(`${base}${path}`);
+  return {
+    status: res.status,
+    contentType: res.headers.get('content-type') || '',
+    cacheControl: res.headers.get('cache-control') || '',
+    body: await res.text(),
+  };
+};
 
 // ==================================================================== TESTS
 try {
-  section('[1/7] Health');
+  section('[1/7] Health & public identity');
   const health = await get('/health');
   ok('GET /health -> 200', health.status === 200);
   ok('health body includes { ok: true }', health.body?.ok === true);
+  ok('health retains its service field with the DANQEL AI gateway identity', health.body?.service === 'danqel-ai-gateway');
+  const root = await get('/');
+  ok('root metadata includes the institution, tagline, and DANQEL AI',
+    root.body?.name?.includes('DANQEL DIGITAL INSTITUTE')
+      && root.body?.tagline === 'Technology • Science • Digital Learning'
+      && root.body?.assistant === 'DANQEL AI');
+  const logo = await getText('/brand/logo.svg');
+  ok('public brand endpoint serves the full SVG logo and exact tagline',
+    logo.status === 200
+      && logo.contentType.includes('image/svg+xml')
+      && logo.cacheControl.includes('max-age=86400')
+      && logo.body.includes('DANQEL DIGITAL INSTITUTE')
+      && logo.body.includes('Technology • Science • Digital Learning'));
+  const mark = await getText('/brand/mark.svg');
+  ok('public brand endpoint serves the compact SVG mark',
+    mark.status === 200
+      && mark.contentType.includes('image/svg+xml')
+      && mark.body.includes('DANQEL Digital Institute mark'));
 
   section('[2/7] Authentication & authorisation');
   ok('no token -> 401', (await post('/api/ai/generate', { kind: 'quiz', input: {} })).status === 401);
@@ -311,7 +338,7 @@ try {
   ok('upstream 500 -> 502', (await post('/api/ai/generate', { kind: 'quiz', input: { topic: 'x' } }, { token: ADMIN_TOKEN })).status === 502);
   llmBehaviour = 'ok';
 
-  section('[7/7] DanTECH AI chat');
+  section('[7/7] DANQEL AI chat');
   const chat = await post('/api/dantech/chat', { message: 'Explain useState to me', context: { courseId: COURSE_ID, lessonId: LESSON_ID, level: 'Beginner' }, history: [{ role: 'user', text: 'earlier question' }, { role: 'assistant', text: 'earlier answer' }] }, { token: STUDENT_TOKEN });
   ok('chat -> 200', chat.status === 200);
   ok('response has { reply, sources }', typeof chat.body.reply === 'string' && Array.isArray(chat.body.sources));
@@ -324,7 +351,7 @@ try {
   ok('refusal declines assessed work', /can't complete assessed work/i.test(refusal.body.reply));
   ok('refusal offers help instead', /feedback/i.test(refusal.body.reply));
   ok('refusal carries no sources', refusal.body.sources.length === 0);
-  ok('refusal names DanTECH AI', /DanTECH AI/.test(refusal.body.reply));
+  ok('refusal names DANQEL AI', /DANQEL AI/.test(refusal.body.reply));
 
   ok('quiz-answers request also refused', (await post('/api/dantech/chat', { message: 'give me the answers to the quiz' }, { token: STUDENT_TOKEN })).body.reply.includes("can't"));
 

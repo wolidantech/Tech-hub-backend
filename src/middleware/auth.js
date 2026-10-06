@@ -1,5 +1,6 @@
 import { supabaseAdmin, supabaseAnon, supabaseForUser } from '../config/supabase.js';
 import { ApiError, asyncHandler } from '../utils/errors.js';
+import { env } from '../config/env.js';
 
 function extractToken(req) {
   const header = req.headers.authorization || '';
@@ -7,15 +8,49 @@ function extractToken(req) {
   return null;
 }
 
+// The caller only trusts this claim after Supabase Auth has verified the token
+// with getUser(token) below.
+function readAalClaim(token) {
+  try {
+    const payload = token.split('.')[1];
+    const claims = JSON.parse(Buffer.from(payload, 'base64url').toString('utf8'));
+    return claims.aal === 'aal2' ? 'aal2' : 'aal1';
+  } catch {
+    return 'aal1';
+  }
+}
+
 async function loadProfile(userId) {
-  const { data, error } = await supabaseAdmin
+  const legacy = await supabaseAdmin
     .from('profiles')
-    .select('id, user_id, full_name, email, phone, profile_photo_url, role, created_at, updated_at')
+    .select('id, user_id, full_name, email, phone, profile_photo_url, student_number, role, created_at, updated_at')
     .eq('user_id', userId)
     .maybeSingle();
 
-  if (error) throw ApiError.internal('Unable to load user profile');
-  return data;
+  if (!legacy.error && legacy.data) return legacy.data;
+  const legacyColumnsMissing = legacy.error
+    && /column|schema cache|user_id|profile_photo_url|student_number/i.test(String(legacy.error.message || ''));
+  if (legacy.error && !legacyColumnsMissing) {
+    throw ApiError.internal('Unable to load user profile');
+  }
+
+  // The live frontend project uses profiles.id = auth.uid() and avatar_url,
+  // not the dormant backend's user_id/profile_photo_url columns. Normalize
+  // this schema to the same internal shape without changing role authority.
+  const frontend = await supabaseAdmin
+    .from('profiles')
+    .select('id, full_name, email, phone, avatar_url, role, created_at')
+    .eq('id', userId)
+    .maybeSingle();
+  if (frontend.error) throw ApiError.internal('Unable to load user profile');
+  if (!frontend.data) return null;
+  return {
+    ...frontend.data,
+    user_id: frontend.data.id,
+    profile_photo_url: frontend.data.avatar_url || null,
+    student_number: null,
+    updated_at: frontend.data.updated_at || frontend.data.created_at,
+  };
 }
 
 /**
@@ -39,6 +74,7 @@ export const authenticate = asyncHandler(async (req, _res, next) => {
   }
 
   req.accessToken = token;
+  req.authAal = readAalClaim(token);
   req.user = data.user;
   req.profile = profile;
   req.supabase = supabaseForUser(token);
@@ -55,6 +91,7 @@ export const optionalAuth = asyncHandler(async (req, _res, next) => {
     if (!error && data?.user) {
       const profile = await loadProfile(data.user.id);
       req.accessToken = token;
+      req.authAal = readAalClaim(token);
       req.user = data.user;
       req.profile = profile;
       req.supabase = supabaseForUser(token);
@@ -76,6 +113,9 @@ export function requireRole(...roles) {
           'UNAUTHORIZED_ADMIN_ACTION'
         )
       );
+    }
+    if (req.profile.role === 'admin' && env.requireAdminMfa && req.authAal !== 'aal2') {
+      return next(ApiError.forbidden('Verify your Google Authenticator code before using administrator tools', 'MFA_REQUIRED'));
     }
     next();
   };

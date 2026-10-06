@@ -1,5 +1,5 @@
 /**
- * WOLI DAN TECH HUB — Mobile/API Compatibility Middleware
+ * DANQEL DIGITAL INSTITUTE — Mobile/API Compatibility Middleware
  * Per spec 33: support mobile networks, 4G/5G, slower/intermittent connections
  * Features: pagination, field selection, response size optimization, caching, compression hints
  */

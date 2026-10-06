@@ -1,4 +1,6 @@
-# WOLI DAN TECH HUB — Supabase Seed & Fix Scripts
+# DANQEL DIGITAL INSTITUTE — Supabase Seed & Fix Scripts
+
+> **Legacy deployment note:** the Netlify origin and repository links below are historical compatibility references. Do not use them as current DANQEL origins until a replacement domain is verified.
 
 These three SQL files fix the `[FAIL] Course catalog` and `[WARN] Admin account`
 diagnostics that students were seeing on https://wolidantechhub.netlify.app

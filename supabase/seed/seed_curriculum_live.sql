@@ -1,5 +1,5 @@
 -- =====================================================================
--- WOLI DAN TECH HUB — Seed curriculum (modules + lessons) for LIVE project
+-- DANQEL DIGITAL INSTITUTE — Seed curriculum (modules + lessons) for LIVE project
 -- Your courses show 0 lessons because course_modules / course_lessons are empty
 -- This seeds 3 modules + 3 lessons per course (36 modules, 36 lessons total)
 -- Works for both frontend schema (course_modules, course_lessons) and backend schema

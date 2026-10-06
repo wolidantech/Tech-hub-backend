@@ -1,5 +1,5 @@
 /**
- * WOLI DAN TECH HUB — Admin Curriculum Management
+ * DANQEL DIGITAL INSTITUTE — Admin Curriculum Management
  *
  * CRUD for the complete curriculum chain:
  *   topics → lesson contents → assignments (+ grading) →

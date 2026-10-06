@@ -1,5 +1,5 @@
 -- =====================================================================
--- WOLI DAN TECH HUB — Clone curriculum from seed courses into their
+-- DANQEL DIGITAL INSTITUTE — Clone curriculum from seed courses into their
 -- published custom twins (LIVE database, Supabase SQL Editor).
 --
 -- WHY: 5 seed courses were deleted and re-created under renamed slugs

@@ -1,4 +1,4 @@
-# WOLI DAN TECH HUB — Production LMS Curriculum Engine
+# DANQEL DIGITAL INSTITUTE — Production LMS Curriculum Engine
 
 The backend/database work that turns course **previews** into a real, complete,
 gated **classroom**. Nothing was rebuilt, Supabase was kept, no feature was

@@ -1,5 +1,5 @@
 /**
- * WOLI DAN TECH HUB — Mobile-Optimized Course Delivery
+ * DANQEL DIGITAL INSTITUTE — Mobile-Optimized Course Delivery
  * Per spec 33: pagination, field selection, lazy loading, separate metadata from detailed content
  * Supports: Course → Modules → Lessons → Individual lesson
  * Avoids sending thousands of lessons/resources in one response

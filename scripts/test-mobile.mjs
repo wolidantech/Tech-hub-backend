@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * WOLI DAN TECH HUB — Mobile/API Compatibility Tests per spec 33
+ * DANQEL DIGITAL INSTITUTE — Mobile/API Compatibility Tests per spec 33
  */
 
 import { readFileSync, existsSync } from 'fs';

@@ -1,5 +1,5 @@
 /**
- * WOLI DAN TECH HUB — Course Content Delivery (Student-facing)
+ * DANQEL DIGITAL INSTITUTE — Course Content Delivery (Student-facing)
  * Per spec sections 30, 32 + Mobile compatibility (spec 33)
  * - Pagination, field selection, lazy loading, separate metadata from detailed content
  * - Avoids sending thousands of lessons/resources in one response

@@ -1,9 +1,11 @@
 import { supabaseAdmin, supabaseAnon } from '../config/supabase.js';
 import { BUCKETS, env } from '../config/env.js';
 import { ApiError, asyncHandler } from '../utils/errors.js';
+import { INSTITUTION_NAME } from '../config/brand.js';
 import { extensionForMime } from '../utils/helpers.js';
 import { uploadObject, getPublicUrl } from '../services/storage.service.js';
 import { logAudit } from '../services/audit.service.js';
+import { generateStudentIdCard } from '../services/student-id-card.service.js';
 
 function publicProfile(profile) {
   return {
@@ -13,6 +15,7 @@ function publicProfile(profile) {
     email: profile.email,
     phone: profile.phone,
     profile_photo_url: profile.profile_photo_url,
+    student_number: profile.student_number,
     role: profile.role,
     created_at: profile.created_at,
     updated_at: profile.updated_at,
@@ -85,6 +88,18 @@ export const register = asyncHandler(async (req, res) => {
     if (updated) Object.assign(profile, updated);
   }
 
+  // The profile trigger assigns a student number and creates a pending ID-card row.
+  // If signup included a photo, render a private PDF immediately; generation failure
+  // is non-fatal and the authenticated card endpoint can retry later.
+  let idCard = { status: profile.profile_photo_url ? 'PENDING_GENERATION' : 'PENDING_PHOTO', student_number: profile.student_number };
+  if (profile.profile_photo_url) {
+    try {
+      idCard = await generateStudentIdCard(profile.id);
+    } catch (error) {
+      console.warn('[student-id-card] signup generation deferred', error?.message);
+    }
+  }
+
   // Sign the user in immediately when confirmations are disabled
   let session = null;
   const { data: loginData } = await supabaseAnon.auth.signInWithPassword({ email, password });
@@ -93,10 +108,11 @@ export const register = asyncHandler(async (req, res) => {
   res.status(201).json({
     success: true,
     message: session
-      ? 'Registration successful. Welcome to WOLI DAN TECH HUB!'
+      ? `Registration successful. Welcome to ${INSTITUTION_NAME}!`
       : 'Registration successful. Please check your email to confirm your account, then log in.',
     data: {
       profile: publicProfile(profile),
+      id_card: idCard,
       requires_email_confirmation: !session,
       session: session
         ? {
@@ -233,7 +249,20 @@ export const updateProfile = asyncHandler(async (req, res) => {
 
   if (error) throw ApiError.internal('Unable to update profile');
 
-  res.json({ success: true, message: 'Profile updated successfully', data: { profile: publicProfile(data) } });
+  let idCard = null;
+  if (req.file || Object.hasOwn(updates, 'full_name')) {
+    try {
+      idCard = await generateStudentIdCard(req.profile.id);
+    } catch (cardError) {
+      console.warn('[student-id-card] profile update generation deferred', cardError?.message);
+    }
+  }
+
+  res.json({
+    success: true,
+    message: 'Profile updated successfully',
+    data: { profile: publicProfile(data), ...(idCard ? { id_card: idCard } : {}) },
+  });
 });
 
 /** GET /api/settings/bank-details (authenticated) */

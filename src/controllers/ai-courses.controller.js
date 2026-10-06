@@ -1,5 +1,5 @@
 /**
- * WOLI DAN TECH HUB — AI Course Content Generation Controller
+ * DANQEL DIGITAL INSTITUTE — AI Course Content Generation Controller
  * Production-ready implementation per spec sections 3-5, 22-27
  */
 

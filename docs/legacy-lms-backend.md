@@ -1,5 +1,8 @@
 # WOLI DAN TECH HUB — Backend API
 
+
+> **Archived reference:** This guide describes the former WOLI DAN TECH HUB deployment. Its URLs, contacts, bank-beneficiary text, IDs, and response examples are historical/operational records, not current public branding. Use the DANQEL DIGITAL INSTITUTE identity in current runtime output.
+
 **LEARN • BUILD • GROW**
 
 Production-ready backend for the WOLI DAN TECH HUB online learning platform.

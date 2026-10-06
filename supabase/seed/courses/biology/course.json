@@ -3,7 +3,7 @@
   "title": "Biology — Complete Secondary & Foundation Course",
   "category": "Science",
   "short_description": "A complete biology course from the characteristics of life to genetics, ecology, human and plant biology — with practicals, quizzes and a final examination.",
-  "description": "This is a complete, classroom-ready biology course for secondary, senior secondary and foundation-level students. It covers the full scheme of work: foundations of biology, cell biology, biological molecules, cell division, genetics, evolution, ecology, human biology, plant biology and practical biology, followed by structured revision and a final examination. Every lesson contains original WOLI DAN TECH HUB teaching material — theory, worked examples, key concepts and summaries — plus verified videos and open textbooks. Each module includes a hands-on practical activity, a written assignment, a quiz and a module examination. To complete the course and earn a certificate, students must finish at least 80% of lessons, keep a quiz average of 60% or above, pass every assignment and pass the final examination.",
+  "description": "This is a complete, classroom-ready biology course for secondary, senior secondary and foundation-level students. It covers the full scheme of work: foundations of biology, cell biology, biological molecules, cell division, genetics, evolution, ecology, human biology, plant biology and practical biology, followed by structured revision and a final examination. Every lesson contains original DANQEL DIGITAL INSTITUTE teaching material — theory, worked examples, key concepts and summaries — plus verified videos and open textbooks. Each module includes a hands-on practical activity, a written assignment, a quiz and a module examination. To complete the course and earn a certificate, students must finish at least 80% of lessons, keep a quiz average of 60% or above, pass every assignment and pass the final examination.",
   "level": "Secondary / Senior Secondary / Foundation",
   "difficulty": "BEGINNER",
   "duration": "12 weeks",
@@ -64,7 +64,7 @@
     "Access to the internet for videos and quizzes (low-bandwidth friendly)",
     "For practicals: household-safe materials listed in each activity (no dangerous chemicals)"
   ],
-  "instructor_name": "WOLI DAN TECH HUB Science Faculty",
+  "instructor_name": "DANQEL DIGITAL INSTITUTE Science Faculty",
   "publish": true,
   "completion_rules": {
     "required_lesson_completion_percentage": 80,

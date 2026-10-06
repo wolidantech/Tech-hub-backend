@@ -25,7 +25,7 @@ export const getCertificate = asyncHandler(async (req, res) => {
     .from('certificates')
     .select(
       `id, student_id, course_id, certificate_number, certificate_url, verification_code,
-       issued_at, status, courses ( id, title, slug )`
+       issued_at, status, pdf_brand_version, courses ( id, title, slug )`
     )
     .eq('id', req.validatedParams.id)
     .maybeSingle();
