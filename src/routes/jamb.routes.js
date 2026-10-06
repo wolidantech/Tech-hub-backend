@@ -7,6 +7,7 @@ import {
   jambExamIdParams,
   jambAttemptIdParams,
   listJambExamsQuery,
+  listPastQuestionsQuery,
   startJambAttemptSchema,
   startJambPaperSchema,
   submitJambPaperSchema,
@@ -19,6 +20,15 @@ const startAttemptParams = z.object({ examId: z.string().uuid('Invalid exam iden
 // Public catalogue metadata and published mock/practice exam templates.
 router.get('/subjects', jamb.listSubjects);
 router.get('/exams', validate({ query: listJambExamsQuery }), jamb.listExams);
+
+// Released past questions for revision browsing. Holds the same paid-pass gate
+// as starting an exam, and never returns answer keys or explanations.
+router.get(
+  '/past-questions',
+  authenticate,
+  validate({ query: listPastQuestionsQuery }),
+  jamb.listPastQuestions
+);
 
 // Attempts require an authenticated student. The backend re-checks paid
 // entitlement and never accepts a client-supplied student/profile ID.

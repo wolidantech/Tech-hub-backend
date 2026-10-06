@@ -147,6 +147,9 @@ const importedQuestionSchema = z.object({
   source_url: z.string().trim().url().max(2000).optional(),
   license_name: z.string().trim().min(2).max(300).optional(),
   rights_verified: z.boolean().default(false),
+  // Opt-in release to the student past-question library. Stays false unless the
+  // importer states it, and only ever applies once the question is PUBLISHED.
+  study_visible: z.boolean().default(false),
   options: z.array(z.object({
     text: z.string().trim().min(1).max(3000),
     is_correct: z.boolean().default(false),
@@ -177,12 +180,26 @@ export const updateJambQuestionSchema = z.object({
   source_url: z.string().trim().url().max(2000).nullish(),
   license_name: z.string().trim().min(2).max(300).nullish(),
   rights_verified: z.boolean().optional(),
+  study_visible: z.boolean().optional(),
 }).refine((value) => Object.keys(value).length > 0, { message: 'Provide at least one field to update' });
 
 export const listJambQuestionsQuery = z.object({
   subject: code.optional(),
   syllabus_year: year.optional(),
   status: z.enum(['DRAFT', 'IN_REVIEW', 'APPROVED', 'PUBLISHED', 'UNPUBLISHED', 'ARCHIVED']).optional(),
+  search: z.string().trim().max(200).optional(),
+  study_visible: z.enum(['true', 'false']).transform((value) => value === 'true').optional(),
+  page: z.coerce.number().int().positive().optional(),
+  limit: z.coerce.number().int().positive().max(100).optional(),
+});
+
+// Student past-question library. Answers are never part of this contract, so
+// there is deliberately no flag that could request them.
+export const listPastQuestionsQuery = z.object({
+  subject: code.transform((value) => value.toUpperCase()).optional(),
+  subject_id: uuid.optional(),
+  exam_year: year.optional(),
+  topic: z.string().trim().max(300).optional(),
   search: z.string().trim().max(200).optional(),
   page: z.coerce.number().int().positive().optional(),
   limit: z.coerce.number().int().positive().max(100).optional(),

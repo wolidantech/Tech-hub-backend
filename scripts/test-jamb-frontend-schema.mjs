@@ -469,6 +469,35 @@ async function main() {
     ok('approved exam_access payment starts a timed paper',
       !!started.attempt.attempt_id && !!started.attempt.expires_at && started.attempt.total_questions === 4);
 
+    // Past-question study library add-on (backend migration 020, runner step 015).
+    const { rows: [studyColumn] } = await client.query(`
+      select column_default, is_nullable from information_schema.columns
+       where table_schema='public' and table_name='jamb_questions'
+         and column_name='study_visible'
+    `);
+    ok('frontend target gains the past-question release flag, hidden by default',
+      !!studyColumn && studyColumn.is_nullable === 'NO' && studyColumn.column_default === 'false');
+
+    const libraryQuery = `
+      select q.id, q.exam_year, js.code as subject_code
+        from jamb_questions q join jamb_subjects js on js.id = q.subject_id
+       where q.status = 'PUBLISHED' and q.study_visible = true
+       order by q.exam_year desc nulls last`;
+    const { rows: unreleasedLibrary } = await client.query(libraryQuery);
+    ok('frontend-schema bank is not exposed to students until released', unreleasedLibrary.length === 0);
+
+    const { rows: [librarySubject] } = await client.query(`select id from jamb_subjects where code='BIOLOGY'`);
+    await client.query(
+      `update jamb_questions set study_visible = true, exam_year = 2023
+        where subject_id = $1 and status = 'PUBLISHED'`,
+      [librarySubject.id]
+    );
+    const { rows: releasedLibrary } = await client.query(libraryQuery);
+    ok('released past papers are queryable by paper year for the library API',
+      releasedLibrary.length === 1
+        && releasedLibrary[0].exam_year === 2023
+        && releasedLibrary[0].subject_code === 'BIOLOGY');
+
     await expectError(
       () => asUser(client, studentId, `select count(*) from jamb_questions`),
       'permission denied',

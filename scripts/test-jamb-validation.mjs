@@ -1,9 +1,15 @@
 import assert from 'node:assert/strict';
-import { findJambPaperTemplate, mapJambResult } from '../src/services/jamb-template.js';
+import {
+  buildPastQuestionFacets,
+  findJambPaperTemplate,
+  mapJambResult,
+  toStudentPastQuestion,
+} from '../src/services/jamb-template.js';
 import {
   createJambExamSchema,
   createJambSubjectSchema,
   importJambQuestionsSchema,
+  listPastQuestionsQuery,
   startJambAttemptSchema,
   startJambPaperSchema,
   submitJambPaperSchema,
@@ -163,4 +169,84 @@ assert.equal(frontendResult.passed, true);
 assert.equal(frontendResult.per_question[0].correct, false);
 assert.equal(JSON.stringify(frontendResult).includes('must-not-leak'), false, 'review result omits answer-key option IDs');
 
-console.log('✓ JAMB exam, frontend contract, template resolution and import validation checks passed');
+// ---------------------------------------------------------------------------
+// Student past-question library contract
+// ---------------------------------------------------------------------------
+assert.equal(listPastQuestionsQuery.safeParse({}).success, true, 'the library accepts an unfiltered browse request');
+assert.deepEqual(
+  listPastQuestionsQuery.safeParse({ subject: 'biology', exam_year: '2023', page: '2', limit: '25' }).data,
+  { subject: 'BIOLOGY', exam_year: 2023, page: 2, limit: 25 },
+  'library filters normalise subject codes, years and paging from query strings'
+);
+assert.equal(listPastQuestionsQuery.safeParse({ limit: 500 }).success, false, 'library pages are capped');
+assert.equal(listPastQuestionsQuery.safeParse({ subject: 'not a code' }).success, false, 'library subject filter rejects malformed codes');
+assert.equal(listPastQuestionsQuery.safeParse({ subject_id: '11111111-1111-4111-8111-111111111111' }).success, true, 'library accepts the subject UUIDs the CBT selector already holds');
+assert.equal(updateJambQuestionSchema.safeParse({ study_visible: true }).success, true, 'an administrator can release a question to the library');
+assert.equal(updateJambQuestionSchema.safeParse({ study_visible: 'true' }).success, false, 'the release flag is a strict boolean, not a query-string guess');
+assert.equal(importJambQuestionsSchema.safeParse({ questions: [question] }).data.questions[0].study_visible, false, 'imports are never released to students by default');
+assert.equal(
+  importJambQuestionsSchema.safeParse({ questions: [{ ...question, exam_year: 2023, study_visible: true }] }).success,
+  true,
+  'a rights-cleared past paper may be imported already flagged for release'
+);
+
+const bankRow = {
+  id: 'q-1',
+  subject_id: 'biology',
+  exam_year: 2023,
+  topic: 'Cell structure',
+  question: 'Which structure stores hereditary information in a eukaryotic cell?',
+  explanation: 'DNA inside the nucleus holds the hereditary information.',
+  difficulty: 'INTERMEDIATE',
+  source_type: 'LICENSED',
+  source_name: 'JAMB 2023 past paper',
+  license_name: 'Written permission',
+  rights_verified: true,
+  status: 'PUBLISHED',
+  study_visible: true,
+  reviewed_by: 'admin-1',
+  correct_option_id: 'must-not-leak',
+  subject: { id: 'biology', code: 'BIOLOGY', name: 'Biology' },
+  syllabus: { id: 'v-2026', exam_year: 2026, version_label: 'UTME 2026' },
+};
+const bankOptions = [
+  { id: 'o-2', question_id: 'q-1', option_text: 'Ribosome', order_number: 2, is_correct: false },
+  { id: 'o-1', question_id: 'q-1', option_text: 'Nucleus', order_number: 1, is_correct: true },
+  { id: 'o-9', question_id: 'other-question', option_text: 'Ignored', order_number: 1, is_correct: true },
+];
+const studentQuestion = toStudentPastQuestion(bankRow, bankOptions);
+assert.deepEqual(
+  Object.keys(studentQuestion).sort(),
+  ['difficulty', 'exam_year', 'id', 'options', 'question', 'source', 'subject', 'syllabus_label', 'syllabus_year', 'topic'].sort(),
+  'the library payload is an allow-list, so new bank columns cannot leak automatically'
+);
+assert.deepEqual(studentQuestion.options, [
+  { id: 'o-1', text: 'Nucleus', order_number: 1 },
+  { id: 'o-2', text: 'Ribosome', order_number: 2 },
+], 'library options keep display order and drop other questions\u2019 options');
+assert.equal(JSON.stringify(studentQuestion).includes('must-not-leak'), false, 'the library never exposes a correct-option ID');
+assert.equal('explanation' in studentQuestion, false, 'the library never exposes explanations');
+assert.equal(JSON.stringify(studentQuestion).includes('is_correct'), false, 'the library never exposes which option is correct');
+assert.equal(JSON.stringify(studentQuestion).includes('DNA inside the nucleus'), false, 'explanation text cannot leak through another field');
+assert.deepEqual(studentQuestion.source, { type: 'LICENSED', name: 'JAMB 2023 past paper', license: 'Written permission' }, 'students still see past-paper attribution');
+
+const facets = buildPastQuestionFacets([
+  { exam_year: 2022, topic: 'Genetics', subject: { id: 'biology', code: 'BIOLOGY', name: 'Biology' } },
+  { exam_year: 2023, topic: 'Cell structure', subject: { id: 'biology', code: 'BIOLOGY', name: 'Biology' } },
+  { exam_year: 2023, topic: 'Cell structure', subject: { id: 'chemistry', code: 'CHEMISTRY', name: 'Chemistry' } },
+  { exam_year: null, topic: 'Cell structure', subject: { id: 'biology', code: 'BIOLOGY', name: 'Biology' } },
+]);
+assert.deepEqual(facets.years.map((year) => year.exam_year), [2023, 2022, null], 'newest paper year leads and undated material sorts last');
+assert.deepEqual(facets.years[0].subjects, [
+  { code: 'BIOLOGY', name: 'Biology', count: 1 },
+  { code: 'CHEMISTRY', name: 'Chemistry', count: 1 },
+], 'each paper year lists the subjects it covers');
+assert.deepEqual(facets.subjects, [
+  { id: 'biology', code: 'BIOLOGY', name: 'Biology', count: 3 },
+  { id: 'chemistry', code: 'CHEMISTRY', name: 'Chemistry', count: 1 },
+], 'subject facets count across every year');
+assert.deepEqual(facets.topics[0], { topic: 'Cell structure', count: 3 }, 'topic facets support revision by topic');
+assert.equal(facets.total, 4);
+assert.deepEqual(buildPastQuestionFacets([]), { years: [], subjects: [], topics: [], total: 0 }, 'an unreleased bank yields empty facets instead of an error');
+
+console.log('✓ JAMB exam, frontend contract, template resolution, past-question library and import validation checks passed');

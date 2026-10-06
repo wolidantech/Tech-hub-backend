@@ -54,6 +54,13 @@ export const listMyAttempts = asyncHandler(async (req, res) => {
   res.json({ success: true, data: { attempts } });
 });
 
+/** GET /api/jamb/past-questions — released past questions for revision.
+ * Requires the paid JAMB pass; answer keys are never part of the response. */
+export const listPastQuestions = asyncHandler(async (req, res) => {
+  const data = await jambService.listPastQuestions(req.validatedQuery, req.profile);
+  res.json({ success: true, data });
+});
+
 export const adminListSubjects = asyncHandler(async (_req, res) => {
   const subjects = await jambService.listAdminSubjects();
   res.json({ success: true, data: { subjects } });

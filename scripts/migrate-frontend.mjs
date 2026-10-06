@@ -3,6 +3,7 @@
  *   1. supabase/frontend-migrations/012_catalogue_expansion.sql
  *   2. supabase/migrations/20261005000017_jamb_cbt_engine.sql
  *   3. supabase/frontend-migrations/014_danqel_brand_identity.sql
+ *   4. supabase/migrations/20261006000020_jamb_past_question_library.sql
  *
  * It deliberately does NOT replay the legacy 001-018 chain and does not apply
  * the legacy student-ID migration 018 (frontend migration 011 owns that table).
@@ -29,6 +30,10 @@ const STEPS = [
   {
     name: 'frontend-014_danqel_brand_identity.sql',
     path: join(ROOT, 'supabase/frontend-migrations/014_danqel_brand_identity.sql'),
+  },
+  {
+    name: 'frontend-015_jamb_past_question_library.sql',
+    path: join(ROOT, 'supabase/migrations/20261006000020_jamb_past_question_library.sql'),
   },
 ];
 const TRACKING_TABLE = 'public._techhub_frontend_feature_migrations';

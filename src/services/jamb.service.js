@@ -2,7 +2,12 @@ import { supabaseAdmin } from '../config/supabase.js';
 import { env } from '../config/env.js';
 import { INSTITUTION_NAME } from '../config/brand.js';
 import { ApiError } from '../utils/errors.js';
-import { findJambPaperTemplate, mapJambResult } from './jamb-template.js';
+import {
+  findJambPaperTemplate,
+  mapJambResult,
+  toStudentPastQuestion,
+  buildPastQuestionFacets,
+} from './jamb-template.js';
 
 const PAID_COURSE_SLUG = 'jamb-cbt-practice-mock-exams';
 
@@ -391,6 +396,7 @@ export async function importQuestions(questionRows, adminProfile) {
         license_name: row.license_name || null,
         rights_verified: row.source_type === 'ORIGINAL' ? true : row.rights_verified,
         status: 'DRAFT',
+        study_visible: row.study_visible === true,
         created_by: adminProfile.id,
       }).select().single();
       throwIfError(questionError, 'Unable to import JAMB question');
@@ -413,18 +419,19 @@ export async function importQuestions(questionRows, adminProfile) {
   return { imported_count: imported.length, questions: imported, status: 'DRAFT' };
 }
 
-export async function listAdminQuestions({ subject, syllabus_year, status, search, page = 1, limit = 25 } = {}) {
+export async function listAdminQuestions({ subject, syllabus_year, status, search, study_visible, page = 1, limit = 25 } = {}) {
   const from = (page - 1) * limit;
   const to = from + limit - 1;
   let query = supabaseAdmin.from('jamb_questions')
     .select('*, subject:jamb_subjects!inner(id, code, name), syllabus:jamb_syllabus_versions!inner(id, exam_year, version_label)', { count: 'exact' })
     .order('created_at', { ascending: false }).range(from, to);
   if (status) query = query.eq('status', status);
+  if (typeof study_visible === 'boolean') query = query.eq('study_visible', study_visible);
   if (syllabus_year) query = query.eq('jamb_syllabus_versions.exam_year', syllabus_year);
   if (subject) query = query.eq('jamb_subjects.code', subject.toUpperCase());
   if (search) query = query.ilike('question', `%${search.replace(/[%_]/g, '')}%`);
   const { data, error, count } = await query;
-  throwIfError(error, 'Unable to load JAMB question bank');
+  assertLibraryReadable(error, 'Unable to load JAMB question bank');
   const rows = data || [];
   const ids = rows.map((row) => row.id);
   const { data: options, error: optionError } = ids.length
@@ -447,6 +454,15 @@ export async function updateJambQuestion(questionId, updates, adminProfile) {
   const contentChanged = contentFields.some((field) => Object.hasOwn(updates, field));
   if (existing.status === 'PUBLISHED' && contentChanged) {
     throw ApiError.conflict('Unpublish this question before changing its content', 'JAMB_QUESTION_PUBLISHED_IMMUTABLE');
+  }
+  // study_visible is a release switch, not content: it may change on a published
+  // question, but only a published question can be released to students.
+  const nextStatus = updates.status || existing.status;
+  if (updates.study_visible === true && nextStatus !== 'PUBLISHED') {
+    throw ApiError.conflict(
+      'Publish this question before releasing it to the past-question library',
+      'JAMB_QUESTION_NOT_PUBLISHED'
+    );
   }
   const payload = { ...updates };
   if (contentChanged && ['IN_REVIEW', 'APPROVED'].includes(existing.status)) {
@@ -675,4 +691,166 @@ export async function listMyAttempts(profile) {
     score: attempt.status === 'IN_PROGRESS' ? null : attempt.score,
     exam: byId[attempt.exam_id] || null,
   }));
+}
+
+// ---------------------------------------------------------------------------
+// Past-question study library (student-facing browse view)
+//
+// The CBT engine only ever releases question text inside a started, timed
+// attempt. Revision browsing needs a separate read path, so it gets one that
+// keeps every migration-017 guarantee:
+//   * only PUBLISHED rows an administrator explicitly released (study_visible)
+//   * only for a profile that already holds the paid JAMB pass
+//   * answer keys, correct-option IDs and explanations are never selected
+// ---------------------------------------------------------------------------
+
+const PAST_QUESTION_MAX_LIMIT = 100;
+/** Upper bound for the facet scan so filter counts stay cheap on large banks. */
+const PAST_QUESTION_FACET_SCAN_LIMIT = 1000;
+
+function likeTerm(value) {
+  return `%${String(value || '').replace(/[%_]/g, '')}%`;
+}
+
+/** The legacy chain stores enrollments under student_id with uppercase
+ * statuses; the live frontend schema uses user_id with lowercase statuses.
+ * Accept either without guessing a column that does not exist. */
+async function hasActiveEnrollment(profileId, courseId) {
+  for (const column of ['student_id', 'user_id']) {
+    const { data, error } = await supabaseAdmin.from('enrollments')
+      .select('id, status')
+      .eq(column, profileId)
+      .eq('course_id', courseId);
+    if (!error) {
+      return (data || []).some((row) => ['active', 'completed'].includes(String(row.status || '').toLowerCase()));
+    }
+    if (!/column|schema cache|student_id|user_id/i.test(String(error.message || ''))) {
+      throwIfError(error, 'Unable to verify JAMB course access');
+    }
+  }
+  return false;
+}
+
+/** Mirrors the paid-access gate inside start_jamb_exam_attempt() so the library
+ * and the exam start agree on who has bought the JAMB pass. */
+async function hasJambPassEntitlement(profile) {
+  if (profile.role === 'admin') return true;
+
+  if (env.jambAccessMode === 'bundle') {
+    const { data: bundles, error: bundleError } = await supabaseAdmin.from('bundles')
+      .select('id')
+      .eq('kind', 'exam_access')
+      .eq('is_published', true)
+      .limit(20);
+    if (bundleError || !bundles?.length) return false;
+    const { data: payments, error: paymentError } = await supabaseAdmin.from('manual_payments')
+      .select('id, status, bundle_id')
+      .eq('user_id', profile.id)
+      .in('bundle_id', bundles.map((bundle) => bundle.id));
+    if (paymentError) return false;
+    return (payments || []).some((payment) => String(payment.status || '').toLowerCase() === 'approved');
+  }
+
+  const { data: course, error: courseError } = await supabaseAdmin.from('courses')
+    .select('id')
+    .eq('slug', PAID_COURSE_SLUG)
+    .maybeSingle();
+  if (courseError || !course) return false;
+  return hasActiveEnrollment(profile.id, course.id);
+}
+
+function applyPastQuestionFilters(queryBuilder, filters) {
+  let query = queryBuilder;
+  if (filters.subject_id) query = query.eq('subject_id', filters.subject_id);
+  if (filters.subject) query = query.eq('jamb_subjects.code', filters.subject.toUpperCase());
+  if (filters.exam_year) query = query.eq('exam_year', filters.exam_year);
+  if (filters.topic) query = query.ilike('topic', likeTerm(filters.topic));
+  if (filters.search) query = query.ilike('question', likeTerm(filters.search));
+  return query;
+}
+
+function assertLibraryReadable(error, fallback) {
+  if (error && /study_visible/i.test(String(error.message || ''))) {
+    throw ApiError.conflict(
+      'The past-question library migration has not been applied to this database yet. Run npm run migrate:frontend (frontend schema) or npm run migrate (legacy schema).',
+      'JAMB_LIBRARY_MIGRATION_REQUIRED'
+    );
+  }
+  throwIfError(error, fallback);
+}
+
+/**
+ * GET /api/jamb/past-questions
+ * Released past questions for revision, grouped by paper year and subject.
+ * Answer keys stay server-side: options arrive as display text only.
+ */
+export async function listPastQuestions(query = {}, profile) {
+  const entitled = await hasJambPassEntitlement(profile);
+  if (!entitled) {
+    throw ApiError.forbidden('Purchase the JAMB CBT pass before browsing past questions', 'JAMB_ACCESS_REQUIRED');
+  }
+
+  const page = Math.max(1, Number(query.page) || 1);
+  const limit = Math.min(Math.max(1, Number(query.limit) || 20), PAST_QUESTION_MAX_LIMIT);
+  const from = (page - 1) * limit;
+  const to = from + limit - 1;
+  const filters = {
+    subject: query.subject || null,
+    subject_id: query.subject_id || null,
+    exam_year: query.exam_year || null,
+    topic: query.topic || null,
+    search: query.search || null,
+  };
+
+  const baseSelect = 'id, subject_id, exam_year, topic, question, difficulty, source_type, source_name, license_name'
+    + ', subject:jamb_subjects!inner(id, code, name)'
+    + ', syllabus:jamb_syllabus_versions!inner(id, exam_year, version_label)';
+
+  const [{ data: rows, error, count }, { data: facetRows, error: facetError }] = await Promise.all([
+    applyPastQuestionFilters(
+      supabaseAdmin.from('jamb_questions').select(baseSelect, { count: 'exact' }),
+      filters
+    )
+      .eq('status', 'PUBLISHED')
+      .eq('study_visible', true)
+      .order('exam_year', { ascending: false, nullsFirst: false })
+      .order('created_at', { ascending: false })
+      .range(from, to),
+    applyPastQuestionFilters(
+      supabaseAdmin.from('jamb_questions')
+        .select('id, exam_year, topic, subject:jamb_subjects!inner(id, code, name)'),
+      filters
+    )
+      .eq('status', 'PUBLISHED')
+      .eq('study_visible', true)
+      .limit(PAST_QUESTION_FACET_SCAN_LIMIT),
+  ]);
+  assertLibraryReadable(error, 'Unable to load JAMB past questions');
+  assertLibraryReadable(facetError, 'Unable to summarise JAMB past questions');
+
+  const questions = rows || [];
+  const ids = questions.map((row) => row.id);
+  const { data: options, error: optionError } = ids.length
+    ? await supabaseAdmin.from('jamb_question_options')
+      // is_correct is intentionally not selected: the library never reveals answers.
+      .select('id, question_id, option_text, order_number')
+      .in('question_id', ids)
+      .order('order_number')
+    : { data: [], error: null };
+  throwIfError(optionError, 'Unable to load JAMB past-question options');
+
+  const facets = buildPastQuestionFacets(facetRows || []);
+  return {
+    filters,
+    facets,
+    questions: questions.map((row) => toStudentPastQuestion(row, options || [])),
+    pagination: {
+      page,
+      limit,
+      total: count || 0,
+      total_pages: Math.ceil((count || 0) / limit),
+    },
+    answer_keys_included: false,
+    truncated_facets: (facetRows || []).length >= PAST_QUESTION_FACET_SCAN_LIMIT,
+  };
 }

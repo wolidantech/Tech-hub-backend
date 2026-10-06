@@ -775,6 +775,43 @@ async function main() {
       item.options_snapshot.length === 4 &&
       item.options_snapshot.every((option) => !Object.hasOwn(option, 'is_correct'))));
 
+  // ---------------- past-question study library (migration 020) -------------
+  const { rows: [studyColumn] } = await client.query(`
+    select column_default, is_nullable from information_schema.columns
+     where table_schema='public' and table_name='jamb_questions'
+       and column_name='study_visible'
+  `);
+  ok('past-question release flag exists and defaults to hidden',
+    !!studyColumn && studyColumn.is_nullable === 'NO' && studyColumn.column_default === 'false');
+
+  const libraryQuery = `
+    select q.id, q.exam_year, q.topic, q.question, js.code as subject_code
+      from jamb_questions q join jamb_subjects js on js.id = q.subject_id
+     where q.status = 'PUBLISHED' and q.study_visible = true
+     order by q.exam_year desc nulls last`;
+  const { rows: unreleasedLibrary } = await client.query(libraryQuery);
+  ok('a reviewed bank stays out of the student library until an admin releases it',
+    unreleasedLibrary.length === 0);
+
+  const { rows: [librarySubject] } = await client.query(`select id from jamb_subjects where code='BIOLOGY'`);
+  await client.query(
+    `update jamb_questions
+        set study_visible = true, exam_year = 2023, topic = 'Cell structure'
+      where subject_id = $1 and status = 'PUBLISHED'`,
+    [librarySubject.id]
+  );
+  const { rows: releasedLibrary } = await client.query(libraryQuery);
+  ok('released published questions become browsable with their paper year and subject',
+    releasedLibrary.length === 1
+      && releasedLibrary[0].exam_year === 2023
+      && releasedLibrary[0].topic === 'Cell structure'
+      && releasedLibrary[0].subject_code === 'BIOLOGY');
+  await expectError(
+    () => asUser(client, studentAuth.id, `select count(*)::int as n from jamb_questions where study_visible`),
+    'permission denied',
+    'the release flag does not reopen direct browser reads of the private bank'
+  );
+
   const submittedAnswers = attemptItems.map((item, index) => {
     const wrongOption = item.options_snapshot.find((option) => option.id !== item.correct_option_id_snapshot);
     return {
