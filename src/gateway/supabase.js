@@ -42,7 +42,14 @@ export function createSupabase({ url, serviceKey, fetchImpl = globalThis.fetch, 
 
   const LESSON_SELECT =
     'id,title,duration,position,module_id,course_id,course_modules(title),course_content(body_markdown),courses!inner(id,title,slug,level,category)';
-  const PUBLISHED_ONLY = { 'courses.published': 'eq.true', 'courses.archived': 'eq.false' };
+  // Draft/archived lessons (lecturer work awaiting admin review, migration 015)
+  // must never leak into student-facing AI answers.
+  const PUBLISHED_ONLY = {
+    'courses.published': 'eq.true',
+    'courses.archived': 'eq.false',
+    status: 'eq.published',
+    archived: 'eq.false',
+  };
 
   /**
    * Fallback readers for backend-schema databases where `course_lessons`
@@ -237,7 +244,140 @@ export function createSupabase({ url, serviceKey, fetchImpl = globalThis.fetch, 
     }
   }
 
-  return { rest, getProfile, fetchLessonsByCourse, searchLessons, fetchApprovedAiContent, fetchRagChunks, baseUrl: base };
+  /**
+   * Call a SECURITY DEFINER function through PostgREST (`/rest/v1/rpc/...`).
+   * Functions run with the service role's rights but enforce their own
+   * admin/lecturer checks server-side; `p_user_id` overrides let auth.uid()-free
+   * contexts stay blocked because every new RPC validates roles explicitly.
+   */
+  async function rpc(name, args = {}) {
+    const res = await fetchImpl(`${base}/rest/v1/rpc/${name}`, {
+      method: 'POST',
+      headers: {
+        apikey: serviceKey,
+        Authorization: `Bearer ${serviceKey}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(args),
+    });
+    const text = await res.text().catch(() => '');
+    if (!res.ok) {
+      let message = text.slice(0, 200);
+      try {
+        const parsed = JSON.parse(text);
+        message = parsed?.message || parsed?.hint || message;
+      } catch {
+        // keep the textual message
+      }
+      const err = new Error(message || `RPC "${name}" failed (${res.status})`);
+      // PostgreSQL raises our validation errors as P0001 (400 from PostgREST);
+      // surface them as client errors so lecturers/admins see the real reason.
+      err.status = res.status >= 400 && res.status < 500 ? res.status : 502;
+      err.code = 'RPC_FAILED';
+      throw err;
+    }
+    try {
+      return JSON.parse(text);
+    } catch {
+      return text;
+    }
+  }
+
+  /** Encode a storage object path safely (keep "/" separators). */
+  function encodeStoragePath(objectPath) {
+    return String(objectPath)
+      .split('/')
+      .map((segment) => encodeURIComponent(segment))
+      .join('/');
+  }
+
+  /** Download a private/public storage object with the service role. */
+  async function storageDownload(bucket, objectPath) {
+    const res = await fetchImpl(
+      `${base}/storage/v1/object/${encodeURIComponent(bucket)}/${encodeStoragePath(objectPath)}`,
+      {
+        method: 'GET',
+        headers: { apikey: serviceKey, Authorization: `Bearer ${serviceKey}` },
+      }
+    );
+    if (!res.ok) {
+      const err = new Error(`Storage download failed for "${bucket}/${objectPath}" (${res.status})`);
+      err.status = res.status;
+      throw err;
+    }
+    const arrayBuffer = await res.arrayBuffer();
+    return {
+      buffer: Buffer.from(arrayBuffer),
+      contentType: res.headers?.get?.('content-type') || 'application/octet-stream',
+    };
+  }
+
+  /** Upload (or upsert) a storage object with the service role. */
+  async function storageUpload(bucket, objectPath, buffer, contentType, { upsert = true } = {}) {
+    const res = await fetchImpl(
+      `${base}/storage/v1/object/${encodeURIComponent(bucket)}/${encodeStoragePath(objectPath)}`,
+      {
+        method: 'POST',
+        headers: {
+          apikey: serviceKey,
+          Authorization: `Bearer ${serviceKey}`,
+          'Content-Type': contentType || 'application/octet-stream',
+          'x-upsert': upsert ? 'true' : 'false',
+        },
+        body: buffer,
+      }
+    );
+    if (!res.ok) {
+      const detail = await res.text().catch(() => '');
+      const err = new Error(`Storage upload failed for "${bucket}/${objectPath}" (${res.status})${detail ? `: ${detail.slice(0, 160)}` : ''}`);
+      err.status = res.status;
+      throw err;
+    }
+    return true;
+  }
+
+  /** Update columns on a row (used to attach approved files to live content). */
+  async function updateRows(table, match, patch) {
+    const qs = new URLSearchParams();
+    for (const [k, v] of Object.entries(match)) {
+      if (v === undefined || v === null || v === '') continue;
+      qs.append(k, String(v));
+    }
+    const res = await fetchImpl(`${base}/rest/v1/${table}${qs.size ? `?${qs}` : ''}`, {
+      method: 'PATCH',
+      headers: {
+        apikey: serviceKey,
+        Authorization: `Bearer ${serviceKey}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Prefer: 'return=representation',
+      },
+      body: JSON.stringify(patch),
+    });
+    if (!res.ok) {
+      const detail = await res.text().catch(() => '');
+      const err = new Error(`Supabase update failed for "${table}" (${res.status})${detail ? `: ${detail.slice(0, 160)}` : ''}`);
+      err.status = res.status;
+      throw err;
+    }
+    return res.json();
+  }
+
+  return {
+    rest,
+    rpc,
+    storageDownload,
+    storageUpload,
+    updateRows,
+    encodeStoragePath,
+    getProfile,
+    fetchLessonsByCourse,
+    searchLessons,
+    fetchApprovedAiContent,
+    fetchRagChunks,
+    baseUrl: base,
+  };
 }
 
 /** Normalise a PostgREST lesson row into a RAG document. */

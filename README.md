@@ -343,7 +343,64 @@ Railway at it: its endpoints do not match the live tables. Its docs live in
 [`docs/legacy-lms-backend.md`](docs/legacy-lms-backend.md) and it can still be
 run locally with `npm run start:lms`. The digital-school upgrade and frontend schema adapter are documented in [`docs/DIGITAL_SCHOOL_UPGRADE_HANDOFF.md`](docs/DIGITAL_SCHOOL_UPGRADE_HANDOFF.md). For the frontend Supabase schema, use only `npm run migrate:frontend` after migrations 001–011; never run the full legacy `npm run migrate` chain against it.
 
-## 10. Troubleshooting
+## 10. Lecturer workflow, grade moderation & student ID-card downloads
+
+These routes live in the **deployed gateway** and serve the live/frontend
+Supabase schema. They require **frontend migration 015**
+(`supabase/frontend-migrations/015_lecturer_workflow.sql`), applied with:
+
+```bash
+npm run migrate:frontend        # first (012–014 path, once)
+npm run migrate:frontend-lecturer  # then this, idempotent
+```
+
+Never run the legacy `npm run migrate` chain or legacy migration 018 against
+the frontend project. The test harness pins the frontend schema snapshot this
+code was built against in `scripts/fixtures/frontend/COMMIT`.
+
+### Student ID cards
+
+| Route | Who | Behaviour |
+| --- | --- | --- |
+| `GET /api/students/me/id-card/download` | student | Streams the issued card as a downloadable PDF (`Content-Disposition: attachment`). Uses the exact database-issued card number/name/photo — it never mints a new identity. `404` unissued, `410` revoked, `409` photo unavailable. |
+| `GET /api/admin/students/:userId/id-card/download` | admin | Same PDF for support/printing. |
+
+Works the same on phones and desktops: the browser handles the attachment
+(iPhone Safari offers Open In / Save to Files). Issuing remains the
+frontend's `issue_student_id_card()` RPC; this service only renders PDFs.
+
+### Lecturer authoring with mandatory admin review
+
+Lecturers (`profiles.role = 'instructor'`) only ever touch courses listed in
+`lecturer_course_assignments` (admin-managed). Content and grades are held in
+moderation tables (`lecturer_content_revisions`,
+`lecturer_grade_reviews`) and reach the live tables **only on admin
+approval** — students can never see drafts, pending changes or unreleased
+grades, and XP/certificate eligibility is evaluated at release time.
+
+| Route | Role | Purpose |
+| --- | --- | --- |
+| `GET /api/admin/lecturers` | admin | Lecturers + assigned courses. |
+| `POST /api/admin/lecturers/:lecturerId/courses` `{ courseId }` | admin | Assign a course (notifies the lecturer, audited). |
+| `DELETE /api/admin/lecturers/:lecturerId/courses/:courseId` | admin | Revoke access immediately. |
+| `GET /api/lecturer/inbox` | instructor | Assigned courses, enrolled students, submissions to mark, own review history. |
+| `POST /api/lecturer/content` | instructor | JSON or multipart (`file` ≤ 20MB). Body: `{ kind, courseId, moduleId?, lessonId?, targetId?, revisionId?, title, payload, submit }`. Kinds: `module|lesson|quiz|assignment` × `create|update|remove`. Saves a private draft; `submit: true` also sends it for review. |
+| `POST /api/lecturer/grades` | instructor | `{ submissionId, decision: "approved" \| "changes_requested", score?, feedback? }` → pending grade review. |
+| `GET /api/admin/reviews` | admin | Combined pending queue (content + grades) with course/lecturer/student context. |
+| `POST /api/admin/reviews/:revisionId/decision` | admin | `{ decision: "approve" \| "reject" \| "request_changes", notes? }`. Approval publishes the exact submitted payload; an attached pending file is copied from the private `resources-pending` bucket to the course's live `resources` bucket. |
+| `POST /api/admin/grade-reviews/:gradingId/decision` | admin | Same decisions; approval releases the grade/feedback to the student and re-evaluates completion rules. |
+
+Editing already-published work creates a new revision against the target row,
+so the approved live version stays unchanged for students until the edit is
+approved. Quiz replacements archive the old quiz and publish a new one (past
+attempts stay linked to history).
+
+Verification: `npm run test:frontend-id-card`,
+`npm run test:frontend-lecturer` (gateway HTTP E2E, 51 checks) and
+`npm run test:frontend-lecturer-schema` (real PostgreSQL with the pinned
+frontend migrations, 57 checks).
+
+## 11. Troubleshooting
 
 ### `Error: Node.js detected but native WebSocket not found` (deploy crash loop)
 
