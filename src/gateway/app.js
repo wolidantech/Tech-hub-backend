@@ -14,6 +14,10 @@ import { createRateLimiter } from './ratelimit.js';
 import { createGenerateHandler } from './generate.controller.js';
 import { createChatHandler, createChatStreamHandler } from './chat.controller.js';
 import { createAiContentHandlers } from './ai-content.controller.js';
+import { createFrontendAccess } from './frontend-access.js';
+import { createFrontendIdCardHandlers } from './frontend-idcard.js';
+import { createFrontendLecturerHandlers, contentUpload } from './frontend-lecturer.js';
+import { createFrontendReviewHandlers } from './frontend-reviews.js';
 import { ASSISTANT_NAME, INSTITUTION_NAME, TAGLINE } from './config.js';
 import { mountBrandAssetRoutes } from '../utils/brand-assets.js';
 
@@ -48,7 +52,7 @@ export function createApp(deps) {
         return callback(Object.assign(new Error('Origin not allowed'), { status: 403, code: 'CORS_BLOCKED' }));
       },
       credentials: true,
-      methods: ['GET', 'POST', 'OPTIONS'],
+      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
       allowedHeaders: ['Content-Type', 'Authorization'],
       maxAge: 600,
     })
@@ -127,8 +131,18 @@ export function createApp(deps) {
         'POST /api/ai/bulk/generate-missing (admin)',
         'POST /api/dantech/chat (authenticated) — course-aware RAG, modes GENERAL/STUDY/CODING/RESEARCH/CAREER/DEEP_EXPLANATION',
         'POST /api/dantech/chat/stream (authenticated) — SSE streaming',
+        'GET /api/students/me/id-card/download (student) — PDF of the issued ID card',
+        'GET /api/admin/students/:userId/id-card/download (admin)',
+        'GET /api/admin/lecturers (admin) / POST + DELETE /api/admin/lecturers/:lecturerId/courses',
+        'GET /api/lecturer/inbox (instructor) — assigned courses, students, submissions',
+        'POST /api/lecturer/content (instructor) — draft/submit module, lesson, quiz, assignment changes',
+        'POST /api/lecturer/grades (instructor) — propose marks for admin release',
+        'GET /api/admin/reviews (admin) — lecturer approval queue',
+        'POST /api/admin/reviews/:revisionId/decision (admin) — publish / reject / request changes',
+        'POST /api/admin/grade-reviews/:gradingId/decision (admin) — release / reject / request changes',
       ],
       pipeline: 'GENERATE → DRAFT → REVIEW → APPROVE → PUBLISH (never auto-publish)',
+      lecturerPipeline: 'Lecturer draft → pending review → admin decision → publish/release (students never see drafts, pending content or unreleased grades)',
       modes: ['GENERAL', 'STUDY', 'CODING', 'RESEARCH', 'CAREER', 'DEEP_EXPLANATION'],
     });
   });
@@ -145,10 +159,25 @@ export function createApp(deps) {
     name: 'CHAT_RATE_LIMITED',
   });
 
+  const downloadLimiter = createRateLimiter({
+    limit: config.downloadRateLimit ?? 30,
+    windowMs: config.rateWindowMs,
+    name: 'DOWNLOAD_RATE_LIMITED',
+  });
+  const lecturerLimiter = createRateLimiter({
+    limit: config.lecturerRateLimit ?? 30,
+    windowMs: config.rateWindowMs,
+    name: 'LECTURER_RATE_LIMITED',
+  });
+
   const generate = createGenerateHandler({ provider, config, logger });
   const chat = createChatHandler({ provider, supabase, config, logger });
   const chatStream = createChatStreamHandler({ provider, supabase, config, logger });
   const aiContent = createAiContentHandlers({ logger });
+  const frontendAccess = createFrontendAccess({ auth, supabase });
+  const idCards = createFrontendIdCardHandlers({ supabase, logger });
+  const lecturer = createFrontendLecturerHandlers({ supabase, access: frontendAccess, logger });
+  const reviews = createFrontendReviewHandlers({ supabase, logger });
 
   // ---- Routes ----
   // Existing AI Studio + DANQEL AI
@@ -187,6 +216,85 @@ export function createApp(deps) {
   app.get('/api/ai/jobs/:jobId', auth.requireAuth(), asyncHandler(aiContent.getJob));
   app.get('/api/ai/jobs', auth.requireAuth(), asyncHandler(aiContent.listJobs));
   app.post('/api/ai/bulk/generate-missing', auth.requireAuth(), auth.requireAdmin, generateLimiter, asyncHandler(aiContent.bulkGenerateMissing));
+
+  // --- Frontend/live-schema endpoints (lecturer workflow + ID card downloads) ---
+  // Require migration 015 on the frontend Supabase project. Roles come from
+  // profiles.role; lecturer powers additionally require per-course assignment.
+  app.get(
+    '/api/students/me/id-card/download',
+    auth.requireAuth(),
+    downloadLimiter,
+    asyncHandler(idCards.downloadMine)
+  );
+  app.get(
+    '/api/admin/students/:userId/id-card/download',
+    auth.requireAuth(),
+    frontendAccess.requireRole('admin'),
+    downloadLimiter,
+    asyncHandler(idCards.downloadForAdmin)
+  );
+
+  app.get(
+    '/api/admin/lecturers',
+    auth.requireAuth(),
+    frontendAccess.requireRole('admin'),
+    asyncHandler(reviews.listLecturers)
+  );
+  app.post(
+    '/api/admin/lecturers/:lecturerId/courses',
+    auth.requireAuth(),
+    frontendAccess.requireRole('admin'),
+    asyncHandler(reviews.assignCourse)
+  );
+  app.delete(
+    '/api/admin/lecturers/:lecturerId/courses/:courseId',
+    auth.requireAuth(),
+    frontendAccess.requireRole('admin'),
+    asyncHandler(reviews.unassignCourse)
+  );
+
+  app.get(
+    '/api/lecturer/inbox',
+    auth.requireAuth(),
+    frontendAccess.requireRole('instructor'),
+    asyncHandler(lecturer.inbox)
+  );
+  app.post(
+    '/api/lecturer/content',
+    auth.requireAuth(),
+    frontendAccess.requireRole('instructor'),
+    lecturerLimiter,
+    contentUpload,
+    asyncHandler(lecturer.saveContent)
+  );
+  app.post(
+    '/api/lecturer/grades',
+    auth.requireAuth(),
+    frontendAccess.requireRole('instructor'),
+    lecturerLimiter,
+    asyncHandler(lecturer.saveGrade)
+  );
+
+  app.get(
+    '/api/admin/reviews',
+    auth.requireAuth(),
+    frontendAccess.requireRole('admin'),
+    asyncHandler(reviews.queue)
+  );
+  app.post(
+    '/api/admin/reviews/:revisionId/decision',
+    auth.requireAuth(),
+    frontendAccess.requireRole('admin'),
+    lecturerLimiter,
+    asyncHandler(reviews.decideContent)
+  );
+  app.post(
+    '/api/admin/grade-reviews/:gradingId/decision',
+    auth.requireAuth(),
+    frontendAccess.requireRole('admin'),
+    lecturerLimiter,
+    asyncHandler(reviews.decideGrade)
+  );
 
   // ---- 404 + error handling (never leak internals) — consistent machine-readable format for mobile ----
   app.use((_req, res) => {

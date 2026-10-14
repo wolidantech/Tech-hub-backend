@@ -81,6 +81,8 @@ export const config = {
   // ---- Limits ----
   chatRateLimit: optionalNumber('CHAT_RATE_LIMIT', 30),
   generateRateLimit: optionalNumber('GENERATE_RATE_LIMIT', 10),
+  downloadRateLimit: optionalNumber('DOWNLOAD_RATE_LIMIT', 30),
+  lecturerRateLimit: optionalNumber('LECTURER_RATE_LIMIT', 30),
   rateWindowMs: optionalNumber('RATE_WINDOW_MS', 60000),
   maxMessageChars: optionalNumber('MAX_MESSAGE_CHARS', 4000),
   maxHistory: optionalNumber('MAX_HISTORY', 12),
